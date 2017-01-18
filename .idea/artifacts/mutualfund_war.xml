@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="mutualfund:war">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="mutualfund-1.0.0-BUILD-SNAPSHOT.war">
-      <element id="artifact" artifact-name="mutualfund:war exploded" />
-    </root>
-  </artifact>
-</component>
