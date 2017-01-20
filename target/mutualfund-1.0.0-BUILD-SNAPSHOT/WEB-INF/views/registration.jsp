@@ -23,20 +23,13 @@
 	<h2>Registration Form</h2>
  
 	<form:form method="POST" modelAttribute="employee">
-		<form:input type="hidden" path="id" id="id"/>
 		<table>
 			<tr>
-				<td><label for="name">Name: </label> </td>
-				<td><form:input path="name" id="name"/></td>
-				<td><form:errors path="name" cssClass="error"/></td>
+				<td><label for="userName">Name: </label> </td>
+				<td><form:input path="userName" id="userName"/></td>
+				<td><form:errors path="userName" cssClass="error"/></td>
 		    </tr>
 	    
-			<tr>
-				<td><label for="ssn">SSN: </label> </td>
-				<td><form:input path="ssn" id="ssn"/></td>
-				<td><form:errors path="ssn" cssClass="error"/></td>
-		    </tr>
-	
 			<tr>
 				<td colspan="3">
 					<c:choose>

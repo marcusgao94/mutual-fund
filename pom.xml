@@ -45,7 +45,14 @@
 			<artifactId>spring-orm</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-		
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>4.2.0.RELEASE</version>
+		</dependency>
+
+
 		<!-- jdbc -->
 		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 		<dependency>
@@ -53,8 +60,7 @@
     		<artifactId>mysql-connector-java</artifactId>
     		<version>6.0.5</version>
 		</dependency>
-		
-		
+
 		<!-- hibernate -->
 		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
 		<dependency>
@@ -68,8 +74,7 @@
     		<artifactId>hibernate-validator</artifactId>
     		<version>5.3.4.Final</version>
 		</dependency>
-		
-		
+
 		<!-- AspectJ -->
 		<dependency>
 			<groupId>org.aspectj</groupId>

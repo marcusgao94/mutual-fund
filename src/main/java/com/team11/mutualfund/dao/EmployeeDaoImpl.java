@@ -3,39 +3,33 @@ package com.team11.mutualfund.dao;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.Query;
+import org.hibernate.query.*;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.team11.mutualfund.dao.*;
 import com.team11.mutualfund.model.*;
 
-@Repository("employeeDao")
+@Repository
 public class EmployeeDaoImpl extends AbstractDao<Integer, Employee> implements EmployeeDao {
-
-	public Employee findById(int id) {
-		return getByKey(id);
-	}
 
 	public void saveEmployee(Employee employee) {
 		persist(employee);
 	}
 
-	public void deleteEmployeeBySsn(String ssn) {
-		Query query = getSession().createSQLQuery("delete from Employee where ssn = :ssn");
-		query.setString("ssn", ssn);
-		query.executeUpdate();
+	public Employee findEmployeeByUserName(String userName) {
+		Query query = getSession().createQuery(
+				"select e from Employee e where e.userName = :name")
+				.setParameter("name", userName);
+		return (Employee) query.uniqueResult();
 	}
+
 
 	@SuppressWarnings("unchecked")
 	public List<Employee> findAllEmployees() {
-		Criteria criteria = createEntityCriteria();
-		return (List<Employee>) criteria.list();
-	}
-
-	public Employee findEmployeeBySsn(String ssn) {
-		Criteria criteria = createEntityCriteria();
-		criteria.add(Restrictions.eq("ssn", ssn));
-		return (Employee) criteria.uniqueResult();
+		Query query = getSession().createQuery(
+				"from Employee "
+		);
+		return (List<Employee>) query.list();
 	}
 }

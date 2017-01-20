@@ -2,12 +2,17 @@ package com.team11.mutualfund.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
 public class Customer {
 
 	@Id
+	@GeneratedValue
+	private long id;
+
+	@Column(nullable = false)
 	private String userName;
 
 	@Column(nullable = false)
@@ -18,6 +23,18 @@ public class Customer {
 	
 	@Column(nullable = false)
 	private String lastName;
+
+	private String addr_line1;
+
+	private String addr_line2;
+
+	private String city;
+
+	private String state;
+
+	private int zip;
+
+	private double cash;
 
 	public String getUserName() {
 		return userName;

@@ -6,14 +6,10 @@ import com.team11.mutualfund.model.*;
 
 public interface EmployeeDao {
 
-	Employee findById(int id);
-
 	void saveEmployee(Employee employee);
-	
-	void deleteEmployeeBySsn(String ssn);
+
+	Employee findEmployeeByUserName(String userName);
 	
 	List<Employee> findAllEmployees();
-
-	Employee findEmployeeBySsn(String ssn);
 
 }
