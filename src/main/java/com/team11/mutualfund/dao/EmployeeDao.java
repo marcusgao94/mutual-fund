@@ -9,7 +9,8 @@ public interface EmployeeDao {
 	void saveEmployee(Employee employee);
 
 	Employee findEmployeeByUserName(String userName);
-	
+
+
 	List<Employee> findAllEmployees();
 
 }

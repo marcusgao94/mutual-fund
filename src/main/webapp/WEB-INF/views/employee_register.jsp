@@ -11,38 +11,44 @@
 <html>
 <head>
 	<title>Employee register</title>
+	<style>
+		.error {
+			color: red;
+		}
+	</style>
 </head>
 <body>
 <h5>Employee Register</h5>
 
-<form:form method="POST" modelAttribute="employee">
+<form:form method="POST" modelAttribute="employeeForm">
 	<table>
-		<c:if test="${not empty message}">
-			<tr>
-				<td style="color: red">
-						${message}
-				</td>
-			</tr>
-		</c:if>
-
 		<tr>
 			<td>First Name:</td>
 			<td>
-				<input type="text" name="firstName" value="" autofocus/>
+				<input type="text" name="firstName" value="${employeeForm.getFirstName()}" autofocus/>
+			</td>
+			<td>
+				<form:errors path="firstName" cssClass="error"/>
 			</td>
 		</tr>
 
 		<tr>
 			<td>Last Name:</td>
 			<td>
-				<input type="text" name="lastName" value=""/>
+				<input type="text" name="lastName" value="${employeeForm.getLastName()}"/>
+			</td>
+			<td>
+				<form:errors path="lastName" cssClass="error"/>
 			</td>
 		</tr>
 
 		<tr>
 			<td>User Name:</td>
 			<td>
-				<input type="text" name="userName" value=""/>
+				<input type="text" name="userName" value="${employeeForm.getUserName()}"/>
+			</td>
+			<td>
+				<form:errors path="userName" cssClass="error"/>
 			</td>
 		</tr>
 
@@ -51,12 +57,15 @@
 			<td>
 				<input type="password" name="password" value=""/>
 			</td>
+			<td>
+				<form:errors path="password" cssClass="error"/>
+			</td>
 		</tr>
 
 		<tr>
 			<td>Confirm Password:</td>
 			<td>
-				<input type="password" name="confirmpassword" value=""/>
+				<input type="password" name="confirmPassword" value=""/>
 			</td>
 		</tr>
 

@@ -12,6 +12,7 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.team11.mutualfund.utils.EmployeeForm;
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.joda.time.LocalDate;
@@ -26,11 +27,18 @@ public class Employee {
 	@Column(nullable = false)
 	private String password;
 
-	@Column(nullable = false)
 	private String firstName;
 	
-	@Column(nullable = false)
 	private String lastName;
+
+	public Employee() {}
+
+	public Employee(EmployeeForm ef) {
+		setFirstName(ef.getFirstName());
+		setLastName(ef.getLastName());
+		setUserName(ef.getUserName());
+		setPassword(ef.getPassword());
+	}
 
 	public String getUserName() {
 		return userName;

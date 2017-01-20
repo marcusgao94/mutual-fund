@@ -18,23 +18,18 @@ public class EmployeeService {
 	@Autowired
 	private EmployeeDao employeeDao;
 	
-	public Pair<Boolean, String> createEmployee(Employee employee) {
-		Pair<Boolean, String> pair = new Pair();
+	public boolean createEmployee(Employee employee) {
 		if (employeeDao.findEmployeeByUserName(employee.getUserName()) != null) {
-			pair.setLeft(false);
-			pair.setRight("user name already exists");
+			return false;
 		}
-		else {
-			employeeDao.saveEmployee(employee);
-			pair.setLeft(true);
-			pair.setRight("");
-		}
-		return pair;
+		employeeDao.saveEmployee(employee);
+		return true;
 	}
 
 	public Employee findEmployeeByUserName(String userName) {
 		return employeeDao.findEmployeeByUserName(userName);
 	}
+
 
 	/*
 	 * Since the method is running with Transaction, No need to call hibernate update explicitly.

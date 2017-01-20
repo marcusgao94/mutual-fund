@@ -25,6 +25,8 @@ public class EmployeeDaoImpl extends AbstractDao<Integer, Employee> implements E
 	}
 
 
+
+
 	@SuppressWarnings("unchecked")
 	public List<Employee> findAllEmployees() {
 		Query query = getSession().createQuery(
