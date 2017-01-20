@@ -3,6 +3,7 @@ package com.team11.mutualfund.controller;
 import java.util.List;
 
 import com.team11.mutualfund.service.EmployeeService;
+import com.team11.mutualfund.utils.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.support.SecurityContextProvider;
 import org.springframework.context.MessageSource;
@@ -24,7 +25,7 @@ import com.team11.mutualfund.model.Employee;
 public class UserController {
 
 	@Autowired
-	EmployeeService service;
+	EmployeeService employeeService;
 	
 	@Autowired
 	MessageSource messageSource;
@@ -38,23 +39,30 @@ public class UserController {
 	/*
 	 * This method will provide the medium to add a new employee.
 	 */
-	@RequestMapping(value = { "/new" }, method = RequestMethod.GET)
-	public String newEmployee(Authentication auth, Model model) {
+	@RequestMapping(value = { "/employee_register" }, method = RequestMethod.GET)
+	public String createEmployee(Authentication auth, Model model) {
+		/*
 		if (auth == null)
 			return "login";
+			*/
 		Employee employee = new Employee();
 		model.addAttribute("employee", employee);
-		model.addAttribute("edit", false);
-		return "registration";
+		return "employee_register";
 	}
 
-	/*
-	 * This method will be called on form submission, handling POST request for
-	 * saving employee in database. It also validates the user input
-	 */
-	@RequestMapping(value = { "/new" }, method = RequestMethod.POST)
-	public String saveEmployee(Employee employee, Model model) {
 
+	@RequestMapping(value = { "/employee_register" }, method = RequestMethod.POST)
+	public String saveEmployee(Authentication auth, Employee employee, Model model) {
+		/*
+		if (auth == null)
+			return "login";
+			*/
+		model.addAttribute("employee", employee);
+		Pair<Boolean, String> pair = employeeService.createEmployee(employee);
+		if (!pair.getLeft()) {
+			model.addAttribute("message", pair.getRight());
+			return "employee_register";
+		}
 		model.addAttribute("success", "Employee " + employee.getUserName() + " registered successfully");
 		return "success";
 	}
