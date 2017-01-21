@@ -18,65 +18,78 @@
 	</style>
 </head>
 <body>
-<h5>Employee Register</h5>
+<div>
+	<jsp:include page="/header"/>
+</div>
+<div class="container">
 
-<form:form method="POST" modelAttribute="employeeForm">
-	<table>
-		<tr>
-			<td>First Name:</td>
-			<td>
-				<input type="text" name="firstName" value="${employeeForm.getFirstName()}" autofocus/>
-			</td>
-			<td>
-				<form:errors path="firstName" cssClass="error"/>
-			</td>
-		</tr>
+	<h3>Employee Register</h3>
 
-		<tr>
-			<td>Last Name:</td>
-			<td>
-				<input type="text" name="lastName" value="${employeeForm.getLastName()}"/>
-			</td>
-			<td>
-				<form:errors path="lastName" cssClass="error"/>
-			</td>
-		</tr>
+	<form:form method="POST" modelAttribute="employeeForm">
+		<table>
 
-		<tr>
-			<td>User Name:</td>
-			<td>
-				<input type="text" name="userName" value="${employeeForm.getUserName()}"/>
-			</td>
-			<td>
-				<form:errors path="userName" cssClass="error"/>
-			</td>
-		</tr>
 
-		<tr>
-			<td>Password:</td>
-			<td>
-				<input type="password" name="password" value=""/>
-			</td>
-			<td>
-				<form:errors path="password" cssClass="error"/>
-			</td>
-		</tr>
+			<tr>
+				<td>User Name:</td>
+				<td>
+					<input type="text" name="userName"
+						   value="${employeeForm.getUserName()}"/>
+				</td>
+				<td>
+					<form:errors path="userName" cssClass="error"/>
+				</td>
+			</tr>
 
-		<tr>
-			<td>Confirm Password:</td>
-			<td>
-				<input type="password" name="confirmPassword" value=""/>
-			</td>
-		</tr>
+			<tr>
+				<td>Password:</td>
+				<td>
+					<input type="password" name="password" value=""/>
+				</td>
+				<td>
+					<form:errors path="password" cssClass="error"/>
+				</td>
+			</tr>
 
-		<tr>
-			<th colspan="2">
-				<input type="submit" name="button" value="register"/>
-			</th>
-		</tr>
-	</table>
-</form:form>
+			<tr>
+				<td>Confirm Password:</td>
+				<td>
+					<input type="password" name="confirmPassword" value=""/>
+				</td>
+				<td>
+					<form:errors path="confirmPassword" cssClass="error"/>
+				</td>
+			</tr>
 
+			<tr>
+				<td>First Name:</td>
+				<td>
+					<input type="text" name="firstName"
+						   value="${employeeForm.getFirstName()}" autofocus/>
+				</td>
+				<td>
+					<form:errors path="firstName" cssClass="error"/>
+				</td>
+			</tr>
+
+			<tr>
+				<td>Last Name:</td>
+				<td>
+					<input type="text" name="lastName"
+						   value="${employeeForm.getLastName()}"/>
+				</td>
+				<td>
+					<form:errors path="lastName" cssClass="error"/>
+				</td>
+			</tr>
+
+			<tr>
+				<th colspan="2">
+					<input type="submit" name="button" value="register"/>
+				</th>
+			</tr>
+		</table>
+	</form:form>
+</div>
 
 </body>
 </html>

@@ -6,7 +6,7 @@ package com.team11.mutualfund.utils;
 public class User {
     private String userName;
     private String password;
-    private int type; // customer is 0, employee is 1
+    private int type; // customer is 0, employee is 1, guest is -1
 
     public User() {}
     public User(String userName, int type) {

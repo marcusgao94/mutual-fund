@@ -14,42 +14,49 @@
 </head>
 
 <body>
+<div>
+	<jsp:include page="/header"/>
+</div>
 
-<h5>Employee Login</h5>
-<form:form method="post" modelAttribute="employeeForm">
-	<table>
-		<c:if test="${not empty error}">
+<div class="container">
+	<h3>Employee Login</h3>
+	<form:form method="post" modelAttribute="employeeForm">
+		<table>
+			<c:if test="${not empty error}">
+				<tr>
+					<td class="error">${error}</td>
+				</tr>
+			</c:if>
 			<tr>
-				<td class="error">${error}</td>
+				<td>User Name:</td>
+				<td><input type="text" name="userName"
+						   value="${employeeForm.getUserName()}" autofocus/>
+				</td>
+				<td><form:errors path="userName" cssClass="error"/></td>
 			</tr>
-		</c:if>
-		<tr>
-			<td>User Name:</td>
-			<td> <input type="text" name="userName" value="${employeeForm.getUserName()}" autofocus/> </td>
-			<td> <form:errors path="userName" cssClass="error" /> </td>
-		</tr>
 
-		<tr>
-			<td>Password:</td>
-			<td> <input type="password" name="password" value=""/> </td>
-			<td> <form:errors path="password" cssClass="error" /> </td>
-		</tr>
+			<tr>
+				<td>Password:</td>
+				<td><input type="password" name="password" value=""/></td>
+				<td><form:errors path="password" cssClass="error"/></td>
+			</tr>
 
-		<tr>
-			<td>
-				<label><input type="checkbox"> Remember me</label>
-			</td>
+			<tr>
+				<td>
+					<label><input type="checkbox"> Remember me</label>
+				</td>
 
-		</tr>
+			</tr>
 
-		<tr>
-			<th colspan="2">
-				<input type="submit" name="button" value="login"/>
-			</th>
-		</tr>
+			<tr>
+				<th colspan="2">
+					<input type="submit" name="button" value="login"/>
+				</th>
+			</tr>
 
-	</table>
-</form:form>
+		</table>
+	</form:form>
+</div>
+
 </body>
-
 </html>

@@ -34,10 +34,10 @@ public class Employee {
 	public Employee() {}
 
 	public Employee(EmployeeForm ef) {
-		setFirstName(ef.getFirstName());
-		setLastName(ef.getLastName());
 		setUserName(ef.getUserName());
 		setPassword(ef.getPassword());
+		setFirstName(ef.getFirstName());
+		setLastName(ef.getLastName());
 	}
 
 	public String getUserName() {
