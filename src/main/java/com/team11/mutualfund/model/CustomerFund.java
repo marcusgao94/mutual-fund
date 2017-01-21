@@ -4,10 +4,6 @@ import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Objects;
 
-/**
- * Created by marcusgao on 17/1/21.
- */
-
 @Embeddable
 public class CustomerFund implements Serializable {
     private long customerId;

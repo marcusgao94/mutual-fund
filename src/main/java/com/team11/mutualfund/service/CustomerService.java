@@ -1,14 +1,10 @@
 package com.team11.mutualfund.service;
 
 import com.team11.mutualfund.dao.CustomerDao;
-import com.team11.mutualfund.dao.EmployeeDao;
 import com.team11.mutualfund.model.Customer;
-import com.team11.mutualfund.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @Transactional // transaction for service layer

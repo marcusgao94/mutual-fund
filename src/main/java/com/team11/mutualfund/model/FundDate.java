@@ -7,10 +7,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
-/**
- * Created by marcusgao on 17/1/21.
- */
-
 @Embeddable
 public class FundDate implements Serializable {
     private long fundId;

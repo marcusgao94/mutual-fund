@@ -6,9 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.io.Serializable;
 
-/**
- * Created by marcusgao on 17/1/21.
- */
 @Entity
 public class Fund implements Serializable {
     @Id

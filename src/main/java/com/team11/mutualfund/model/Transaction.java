@@ -6,10 +6,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * Created by marcusgao on 17/1/21.
- */
-
 @Entity
 public class Transaction implements Serializable {
 

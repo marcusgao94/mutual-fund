@@ -1,14 +1,21 @@
 package com.team11.mutualfund.dao;
 
 import com.team11.mutualfund.model.Customer;
-import com.team11.mutualfund.model.Employee;
+import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
-/**
- * Created by marcusgao on 17/1/19.
- */
-public interface CustomerDao {
+@Repository
+public class CustomerDao extends AbstractDao<Long, Customer> {
+    public void saveCustomer(Customer customer) {
+        persist(customer);
+    }
 
-    void saveCustomer(Customer customer);
+    public Customer findCustomerByUserName(String userName) {
+        Query query = getSession().createQuery(
+                "select c from Customer c where c.userName = :name")
+                .setParameter("name", userName);
+        return (Customer) query.uniqueResult();
+    }
 
-    Customer findCustomerByUserName(String userName);
+
 }

@@ -2,11 +2,11 @@ package com.team11.mutualfund.service;
 
 import java.util.List;
 
+import com.team11.mutualfund.dao.EmployeeDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.team11.mutualfund.dao.EmployeeDao;
 import com.team11.mutualfund.model.Employee;
 
 @Service
@@ -39,11 +39,6 @@ public class EmployeeService {
 		if(entity!=null){
 			entity.setFirstName("edit success");
 		}
-	}
-
-
-	public List<Employee> findAllEmployees() {
-		return employeeDao.findAllEmployees();
 	}
 
 }

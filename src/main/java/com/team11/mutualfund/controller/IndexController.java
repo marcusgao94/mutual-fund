@@ -8,9 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-/**
- * Created by marcusgao on 17/1/20.
- */
 @Controller
 public class IndexController {
     @RequestMapping(value = {"/", "/home", "/index"})

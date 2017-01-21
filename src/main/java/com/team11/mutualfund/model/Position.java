@@ -3,10 +3,6 @@ package com.team11.mutualfund.model;
 import javax.persistence.*;
 import java.io.Serializable;
 
-/**
- * Created by marcusgao on 17/1/21.
- */
-
 @Entity
 public class Position implements Serializable {
 

@@ -1,8 +1,6 @@
 package com.team11.mutualfund.utils;
 
-/**
- * Created by marcusgao on 17/1/20.
- */
+
 public class EmployeeForm {
     private String userName;
     private String password;

@@ -3,10 +3,11 @@ package com.team11.mutualfund.dao;
 import java.io.Serializable;
 
 import java.lang.reflect.ParameterizedType;
+import java.util.List;
 
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public abstract class AbstractDao<PK extends Serializable, T> {
@@ -25,21 +26,24 @@ public abstract class AbstractDao<PK extends Serializable, T> {
 		return sessionFactory.getCurrentSession();
 	}
 
-	@SuppressWarnings("unchecked")
+	public void persist(T entity) {
+		getSession().persist(entity);
+	}
+
 	public T getByKey(PK key) {
 		return (T) getSession().get(persistentClass, key);
 	}
 
-	public void persist(T entity) {
-		getSession().persist(entity);
+	@SuppressWarnings("unchecked")
+	public List<T> listAll() {
+		Query query = getSession().createQuery(
+				"select f from " + persistentClass.getClass().getSimpleName() + " f"
+		);
+		return (List<T>) query.list();
 	}
 
 	public void delete(T entity) {
 		getSession().delete(entity);
 	}
 	
-	protected Criteria createEntityCriteria(){
-		return getSession().createCriteria(persistentClass);
-	}
-
 }

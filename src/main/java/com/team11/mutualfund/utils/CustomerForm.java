@@ -1,8 +1,5 @@
 package com.team11.mutualfund.utils;
 
-/**
- * Created by marcusgao on 17/1/20.
- */
 public class CustomerForm {
     private String userName;
     private String password;
