@@ -59,20 +59,25 @@
 					</li>
 
 
-					<li class="dropdown">
-						<a data-toggle="dropdown" class="dropdown-toggle"
-						   href="#"><span
-								class="glyphicon glyphicon-user"></span>Open an
-							Account <b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li class=""><a href="/customer_register"><span
-									class="glyphicon glyphicon-user"></span> For
-								Customers</a></li>
-							<li class=""><a href="/employee_register"><span
-									class="glyphicon glyphicon-user"></span> For
-								Employees</a></li>
-						</ul>
-					</li>
+					<c:if test="${user.type == 1}">
+						<li class="dropdown">
+							<a data-toggle="dropdown" class="dropdown-toggle"
+							   href="#"><span
+									class="glyphicon glyphicon-user"></span>Open
+								an
+								Account <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li class=""><a href="/customer_register"><span
+										class="glyphicon glyphicon-user"></span>
+									For
+									Customers</a></li>
+								<li class=""><a href="/employee_register"><span
+										class="glyphicon glyphicon-user"></span>
+									For
+									Employees</a></li>
+							</ul>
+						</li>
+					</c:if>
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">

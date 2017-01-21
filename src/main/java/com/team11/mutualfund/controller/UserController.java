@@ -97,7 +97,7 @@ public class UserController {
 	public String employeeLogin(HttpServletRequest request, Model model) {
 		String message = (String) request.getParameter("error");
 		if (message != null)
-			model.addAttribute("error", "You have not login");
+			model.addAttribute("error", "You have not login as an employee");
 		EmployeeForm employeeForm = new EmployeeForm();
 		model.addAttribute("employeeForm", employeeForm);
 		return "employee_login";
