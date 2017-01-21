@@ -6,9 +6,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 @Entity
-public class Customer {
+public class Customer implements Serializable {
 
 	@Id
 	@GeneratedValue

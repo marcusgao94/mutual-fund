@@ -15,7 +15,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "com.myapp")
+@ComponentScan(basePackages = "com.team11.mutualfund")
 public class DispatcherServlet extends WebMvcConfigurerAdapter {
 
     @Bean
