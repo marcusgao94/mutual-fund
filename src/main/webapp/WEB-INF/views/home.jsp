@@ -10,7 +10,7 @@
 </head>
 <body>
 <div>
-	<jsp:include page="/header"/>
+	<c:import url="/header" />
 </div>
 <div class="container">
 	<h1> Hello world! </h1>
@@ -26,7 +26,7 @@
 </div>
 
 <div>
-	<jsp:include page="bottom.jsp"/>
+	<c:import url="bottom.jsp" />
 </div>
 
 </body>

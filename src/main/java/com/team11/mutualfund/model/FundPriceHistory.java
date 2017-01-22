@@ -2,7 +2,6 @@ package com.team11.mutualfund.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 
 @Entity
 public class FundPriceHistory implements Serializable {

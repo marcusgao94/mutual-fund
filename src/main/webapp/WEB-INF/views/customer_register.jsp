@@ -19,7 +19,7 @@
 </head>
 <body>
 <div>
-	<jsp:include page="/header"/>
+	<c:import url="/header"/>
 </div>
 
 
@@ -126,7 +126,7 @@
 	</form:form>
 </div>
 <div>
-	<jsp:include page="bottom.jsp"/>
+	<c:import url="bottom.jsp"/>
 </div>
 
 </body>

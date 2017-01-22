@@ -15,7 +15,7 @@
 </head>
 <body>
 	<div>
-		<jsp:include page= "/header" />
+		<c:import url= "/header" />
 	</div>
 	
 	<h5>Change Password</h5>
@@ -50,6 +50,10 @@
         </tr>
 
     </table>
+    
+    <div>
+		<c:import url="bottom.jsp" />
+    </div>
     </body>
 
 </html>
