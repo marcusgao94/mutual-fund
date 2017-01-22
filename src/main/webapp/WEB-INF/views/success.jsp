@@ -10,7 +10,7 @@
 <body>
 
 <div>
-	<jsp:include page="/header"/>
+	<jsp:include page="header.jsp"/>
 </div>
 
 <div class="container">
@@ -19,6 +19,9 @@
 	<br/>
 	<br/>
 	Go back to <a href="/home">Home</a>
+</div>
+<div>
+	<jsp:include page="bottom.jsp"/>
 </div>
 
 </body>
