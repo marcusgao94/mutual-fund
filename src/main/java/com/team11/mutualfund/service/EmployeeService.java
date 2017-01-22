@@ -24,10 +24,9 @@ public class EmployeeService {
 		return true;
 	}
 
-	public Employee findEmployeeByUserName(String userName) {
+	public Employee getEmployeeByUserName(String userName) {
 		return employeeDao.findEmployeeByUserName(userName);
 	}
-
 
 	/*
 	 * Since the method is running with Transaction, No need to call hibernate update explicitly.
