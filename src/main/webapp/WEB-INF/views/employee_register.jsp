@@ -19,7 +19,7 @@
 </head>
 <body>
 <div>
-	<jsp:include page="/header"/>
+	<jsp:include page="header.jsp"/>
 </div>
 <div class="container">
 
@@ -89,6 +89,9 @@
 			</tr>
 		</table>
 	</form:form>
+</div>
+<div>
+	<jsp:include page="bottom.jsp"/>
 </div>
 
 </body>

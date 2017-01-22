@@ -10,7 +10,7 @@
 </head>
 <body>
 <div>
-	<jsp:include page="/header"/>
+	<jsp:include page="header.jsp"/>
 </div>
 <div class="container">
 	<h1> Hello world! </h1>
@@ -24,5 +24,10 @@
 	</P>
 
 </div>
+
+<div>
+	<jsp:include page="bottom.jsp"/>
+</div>
+
 </body>
 </html>
