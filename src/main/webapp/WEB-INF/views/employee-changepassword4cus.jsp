@@ -15,7 +15,7 @@
 </head>
 <body>
 	<div>
-		<jsp:include page= "header.jsp" />
+		<jsp:include page= "/header" />
 	</div>
 	
         <h5>Reset Customer Password</h5>
