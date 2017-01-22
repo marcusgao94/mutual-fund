@@ -4,18 +4,18 @@ import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.*;
 import java.util.Objects;
 
 @Embeddable
 public class FundDate implements Serializable {
     private long fundId;
-    private Date date;
+    private LocalDate date;
 
     public FundDate() {
     }
 
-    public FundDate(long fid, Date d) {
+    public FundDate(long fid, LocalDate d) {
         fundId = fid;
         date = d;
     }
@@ -23,11 +23,8 @@ public class FundDate implements Serializable {
     @Override
     public boolean equals(Object o) {
         FundDate fdp = (FundDate) o;
-        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-        String datestr1 = df.format(date);
-        String datestr2 = df.format(fdp.getDate());
         double delta = 1e-10;
-        return fundId == fdp.getFundId() && datestr1.equals(datestr2);
+        return fundId == fdp.getFundId() && date.equals(fdp.getDate());
     }
 
     @Override
@@ -43,11 +40,11 @@ public class FundDate implements Serializable {
         this.fundId = fundId;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 }

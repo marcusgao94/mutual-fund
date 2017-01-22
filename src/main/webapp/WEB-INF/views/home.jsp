@@ -6,11 +6,11 @@
 <%@ page session="false" %>
 <html>
 <head>
-	<title>Home</title>
+	<title>Singularity MutualFund</title>
 </head>
 <body>
 <div>
-	<jsp:include page="/header"/>
+	<c:import url="/header" />
 </div>
 <div class="container">
 	<h1> Hello world! </h1>
@@ -24,5 +24,10 @@
 	</P>
 
 </div>
+
+<div>
+	<c:import url="bottom.jsp" />
+</div>
+
 </body>
 </html>

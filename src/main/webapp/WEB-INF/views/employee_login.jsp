@@ -15,7 +15,7 @@
 
 <body>
 <div>
-	<jsp:include page="/header"/>
+	<c:import url="/header"/>
 </div>
 
 <div class="container">
@@ -56,6 +56,9 @@
 
 		</table>
 	</form:form>
+</div>
+<div>
+	<c:import url="bottom.jsp"/>
 </div>
 
 </body>

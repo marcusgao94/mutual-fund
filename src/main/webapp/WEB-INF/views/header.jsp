@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: marcusgao
-  Date: 17/1/20
-  Time: 下午7:00
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <body>
@@ -26,7 +19,7 @@
 
 			<div class="collapse navbar-collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-					<li class=""><a href="/home"><span
+					<li class=""><a href="<c:url value="/home" />"><span
 							class="glyphicon glyphicon-home"></span> Home</a>
 					</li>
 
@@ -67,11 +60,11 @@
 								an
 								Account <b class="caret"></b></a>
 							<ul class="dropdown-menu">
-								<li class=""><a href="/customer_register"><span
+								<li class=""><a href="<c:url value="/customer_register" />"><span
 										class="glyphicon glyphicon-user"></span>
 									For
 									Customers</a></li>
-								<li class=""><a href="/employee_register"><span
+								<li class=""><a href="<c:url value="/employee_register" />"><span
 										class="glyphicon glyphicon-user"></span>
 									For
 									Employees</a></li>
@@ -88,10 +81,10 @@
 							${user.userName} <b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<c:if test="${user.type == -1}">
-								<li><a href="/employee_login"><i
+								<li><a href="<c:url value="/employee_login" />"><i
 										class="glyphicon glyphicon-user"></i>
 									Login as employee</a></li>
-								<li><a href="/customer_login"><i
+								<li><a href="<c:url value="/customer_login" />"><i
 										class="glyphicon glyphicon-user"></i>
 									Login as customer</a></li>
 							</c:if>
