@@ -16,7 +16,7 @@ public class EmployeeService {
 	@Autowired
 	private EmployeeDao employeeDao;
 	
-	public boolean createEmployee(Employee employee) {
+	public boolean saveEmployee(Employee employee) {
 		if (employeeDao.findEmployeeByUserName(employee.getUserName()) != null) {
 			return false;
 		}

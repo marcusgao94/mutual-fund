@@ -13,7 +13,7 @@ public class CustomerService {
 	@Autowired
 	private CustomerDao customerDao;
 	
-	public boolean createCustomer(Customer customer) {
+	public boolean saveCustomer(Customer customer) {
 		if (customerDao.findCustomerByUserName(customer.getUserName()) != null) {
 			return false;
 		}
