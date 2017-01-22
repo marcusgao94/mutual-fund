@@ -6,7 +6,7 @@
 <%@ page session="false" %>
 <html>
 <head>
-	<title>Home</title>
+	<title>Singularity MutualFund</title>
 </head>
 <body>
 <div>
