@@ -1,18 +1,31 @@
 package com.team11.mutualfund.utils;
 
+
 public class User {
+    private Long id;
     private String userName;
     private String password;
-    private int type; // customer is 0, employee is 1, guest is -1
+    private int type; // customer 0, employee 1, guest -1
 
     public User() {}
-    public User(String userName, int type) {
-        this.userName = userName;
-        this.type = type;
+    public User(Long id, String userName, int type) {
+        setId(id);
+        setUserName(userName);
+        setType(type);
     }
 
     public boolean isEmployee() {
         return type == 1;
+    }
+
+    // getter and setter
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getUserName() {
