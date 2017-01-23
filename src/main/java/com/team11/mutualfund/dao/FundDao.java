@@ -8,8 +8,13 @@ import java.util.List;
 
 @Repository
 public class FundDao extends AbstractDao<Long, Fund> {
-    public void saveDao(Fund fund) {
+
+    public void saveFund(Fund fund) {
         persist(fund);
+    }
+
+    public Fund getFundById(long id) {
+        return getByKey(id);
     }
 
     public List<Fund> listFund() {

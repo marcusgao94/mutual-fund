@@ -1,6 +1,8 @@
 package com.team11.mutualfund.model;
 
 import com.sun.istack.internal.Nullable;
+import com.team11.mutualfund.utils.TransactionForm;
+import com.team11.mutualfund.utils.TransactionType;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,7 +13,7 @@ public class Transaction implements Serializable {
 
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)
@@ -21,14 +23,25 @@ public class Transaction implements Serializable {
     @JoinColumn(nullable = false)
     private Fund fund;
 
-    @Column(nullable = false)
-    private Date exectuteDate;
+    @Column(nullable = true)
+    private Date executeDate;
 
-    private int type = 0;
+    @Enumerated
+    private TransactionType type;
 
-    private double shares = 0.0;
+    private Double shares = 0.0;
 
-    private double amount = 0.0;
+    private Double amount = 0.0;
+
+    public Transaction() {}
+    public Transaction(TransactionForm tf) {
+        setId(tf.getId());
+        setExectuteDate(tf.getExecuteDate());
+        setType(tf.getType());
+        setShares(tf.getShares());
+        setAmount(tf.getAmount());
+    }
+
 
     public long getId() {
         return id;
@@ -54,35 +67,35 @@ public class Transaction implements Serializable {
         this.fund = fund;
     }
 
-    public Date getExectuteDate() {
-        return exectuteDate;
+    public Date getExectuteDate(){
+        return executeDate;
     }
 
-    public void setExectuteDate(Date exectuteDate) {
-        this.exectuteDate = exectuteDate;
+    public void setExectuteDate(Date executeDate) {
+        this.executeDate = executeDate;
     }
 
-    public double getShares() {
-        return shares;
-    }
-
-    public void setShares(double shares) {
-        this.shares = shares;
-    }
-
-    public int getType() {
+    public TransactionType getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(TransactionType type) {
         this.type = type;
     }
 
-    public double getAmount() {
+    public Double getShares() {
+        return shares;
+    }
+
+    public void setShares(Double shares) {
+        this.shares = shares;
+    }
+
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 }

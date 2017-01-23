@@ -6,11 +6,16 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class CustomerDao extends AbstractDao<Long, Customer> {
+
     public void saveCustomer(Customer customer) {
         persist(customer);
     }
 
-    public Customer findCustomerByUserName(String userName) {
+    public Customer getCustomerById(Long id) {
+        return getByKey(id);
+    }
+
+    public Customer getCustomerByUserName(String userName) {
         Query query = getSession().createQuery(
                 "select c from Customer c where c.userName = :name")
                 .setParameter("name", userName);
