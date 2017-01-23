@@ -39,6 +39,8 @@ public class Customer implements Serializable {
 	@Column(nullable=false)
 	private double cash = 0.0;
 
+	private double pendingCashDecrease = 0.0;
+
 	public Customer() {}
 	public Customer(CustomerForm cf) {
 		setUserName(cf.getUserName());
@@ -138,5 +140,13 @@ public class Customer implements Serializable {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public double getPendingCashDecrease() {
+		return pendingCashDecrease;
+	}
+
+	public void setPendingCashDecrease(double pendingCashDecrease) {
+		this.pendingCashDecrease = pendingCashDecrease;
 	}
 }

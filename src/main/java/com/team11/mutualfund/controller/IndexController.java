@@ -20,7 +20,7 @@ public class IndexController {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         if (user == null) {
-            user = new User("Guest", -1);
+            user = new User(null, "Guest", -1);
         }
         model.addAttribute("user", user);
         return "header";

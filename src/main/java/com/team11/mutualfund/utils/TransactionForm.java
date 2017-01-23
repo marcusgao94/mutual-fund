@@ -16,9 +16,22 @@ public class TransactionForm {
 
     private TransactionType type;
 
-    private double shares = 0.0;
+    private Double shares = 0.0;
 
-    private double amount = 0.0;
+    private Double amount = 0.0;
+
+    public TransactionForm() {}
+    public TransactionForm(Transaction t) {
+        setId(t.getId());
+        setCustomerId(t.getCustomer().getId());
+        if (t.getFund() != null)
+            setFundId(t.getFund().getId());
+        setExecuteDate(t.getExectuteDate());
+        setType(t.getType());
+        setShares(t.getShares());
+        setAmount(t.getAmount());
+    }
+
 
     public Long getId() {
         return id;
@@ -60,19 +73,19 @@ public class TransactionForm {
         this.type = type;
     }
 
-    public double getShares() {
+    public Double getShares() {
         return shares;
     }
 
-    public void setShares(double shares) {
+    public void setShares(Double shares) {
         this.shares = shares;
     }
 
-    public double getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 }

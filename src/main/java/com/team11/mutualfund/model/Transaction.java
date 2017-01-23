@@ -20,7 +20,7 @@ public class Transaction implements Serializable {
     private Customer customer;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(nullable = false)
+    @JoinColumn
     private Fund fund;
 
     @Column(nullable = true)
