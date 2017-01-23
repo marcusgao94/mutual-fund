@@ -21,11 +21,5 @@ public class FundDao extends AbstractDao<Long, Fund> {
         return listAll();
     }
 
-    @SuppressWarnings("unchecked")
-    public List<Fund> listFundByCustomerId(long cid) {
-        Query query = getSession().createQuery(
-                "select p from Position p where p.customer.id = :cid"
-        ).setParameter("cid", cid);
-        return (List<Fund>) query.list();
-    }
+
 }

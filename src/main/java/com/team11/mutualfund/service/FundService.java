@@ -14,6 +14,8 @@ public class FundService {
     @Autowired
     private FundDao fundDao;
 
+	/*
+	have not finished
     public boolean createFund(Fund fund, Customer customer) {
 		if (fundDao.listFundByCustomerId(customer.getId()) != null) {
 			return false;
@@ -21,4 +23,5 @@ public class FundService {
 		fundDao.saveFund(fund,customer.getId());
 		return true;
 	}
+	*/
 }
