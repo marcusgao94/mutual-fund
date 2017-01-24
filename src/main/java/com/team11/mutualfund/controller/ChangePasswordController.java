@@ -6,13 +6,17 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team11.mutualfund.model.Employee;
+import com.team11.mutualfund.form.ChangePasswordForm;
 import com.team11.mutualfund.model.Customer;
 import com.team11.mutualfund.service.CustomerService;
 import com.team11.mutualfund.service.EmployeeService;
 import com.team11.mutualfund.utils.EmployeeForm;
 import com.team11.mutualfund.utils.User;
+
+import static com.team11.mutualfund.utils.Constant.NOTLOGIN;
 
 import java.util.Locale;
 
@@ -31,6 +35,13 @@ public class ChangePasswordController {
     @Autowired
     private CustomerService customerService;
     
+    
+    public boolean checkEmployee(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        if (session.getAttribute("user") == null) return false;
+        User user = (User) session.getAttribute("user");
+        return user.isEmployee();
+    }
     
     //employee
     
@@ -139,19 +150,38 @@ public class ChangePasswordController {
     
     //employee update customer's password
     @RequestMapping(value = "/employee_changecuspassword", method = RequestMethod.GET)
-    public String employeeChangeCusPassword(HttpServletRequest request, Model model) {
-    		String message = (String)request.getParameter("error");
-    		if (message != null) {
-    			model.addAttribute("error", "You have not login as an employee");
-    		}
-    		EmployeeForm employeeForm = new EmployeeForm();
-    		model.addAttribute("customerForm", employeeForm);
+    public String employeeChangeCusPassword(HttpServletRequest request, Model model, 
+    											RedirectAttributes redirectAttributes) {
+    		
+    	    if (!checkEmployee(request)) {
+    	    		redirectAttributes.addFlashAttribute("loginError", NOTLOGIN);
+    	    		return "redirect:/employee_login";
+    	    }
+    		model.addAttribute("changePasswordForm", new ChangePasswordForm());
     		return "employee_changecuspassword";
     }
     
     @RequestMapping(value = "/employee_changecuspassword", method = RequestMethod.POST)
     public  String employeeChangeCusPassword(HttpServletRequest request, Model model,
-    										  @Valid EmployeeForm customerForm, BindingResult result) {
+    										  @Valid ChangePasswordForm changePasswordForm, BindingResult result,
+    										  RedirectAttributes redirectAttributes) {
+    	 	if (!checkEmployee(request)) {
+             redirectAttributes.addFlashAttribute("loginError", NOTLOGIN);
+             return "redirect:/employee_login";
+         }
+    	 	
+    	 	
+    	 	/**
+    	 	 * get the error from the form validation
+    	 	 */
+    	 	result.addAllErrors(changePasswordForm.getValidationErrors());
+            if (result.hasErrors()) {
+                return "employee_register";
+            }
+         
+            
+        
+       
     		if (result.hasErrors()) {
     			return "employee_changecuspassword";
     		}
