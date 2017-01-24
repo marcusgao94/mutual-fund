@@ -114,6 +114,8 @@ public class RegisterController {
         }
 
         model.addAttribute("success", "customer " + customer.getUserName() + " registered successfully");
+        
+        /*include success in the page*/
         return "success";
     }
 
