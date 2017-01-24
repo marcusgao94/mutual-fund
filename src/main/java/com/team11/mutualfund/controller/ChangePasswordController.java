@@ -43,7 +43,7 @@ public class ChangePasswordController {
         HttpSession session = request.getSession();
         if (session.getAttribute("user") == null) return false;
         User user = (User) session.getAttribute("user");
-        return user.isEmployee();
+        return (user.getType() == 1);
     }
     
     //employee
