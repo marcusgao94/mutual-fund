@@ -8,7 +8,7 @@ import javax.validation.constraints.Size;
 import static com.team11.mutualfund.utils.Constant.EMPTYPASSWORD;
 import static com.team11.mutualfund.utils.Constant.INCONSISTENTPASSWORD;
 
-public class changePasswordForm {
+public class ChangePasswordForm {
     @Size(min = 1, message = EMPTYPASSWORD)
     private String originPassword;
 

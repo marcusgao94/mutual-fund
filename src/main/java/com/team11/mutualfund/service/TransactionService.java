@@ -15,6 +15,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -35,9 +36,6 @@ public class TransactionService {
 
     @Autowired
     private PositionDao positionDao;
-
-    @Autowired
-    private MessageSource messageSource;
 
     /*
     public double getPendingCashDecreaseByCustomerId(long cid) {
@@ -130,6 +128,10 @@ public class TransactionService {
 
     public List<Transaction> listFinishTransactionByCustomerId(long cid) {
         return transactionDao.listFinishTransactionByCustomerId(cid);
+    }
+
+    public void executeDepositCheck(LocalDate date) {
+
     }
 
 }
