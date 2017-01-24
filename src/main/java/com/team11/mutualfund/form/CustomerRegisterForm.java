@@ -1,8 +1,22 @@
-package com.team11.mutualfund.utils;
+package com.team11.mutualfund.form;
 
-public class CustomerForm {
+import org.springframework.validation.DirectFieldBindingResult;
+import org.springframework.validation.Errors;
+
+import javax.validation.constraints.Size;
+
+import static com.team11.mutualfund.utils.Constant.EMPTYPASSWORD;
+import static com.team11.mutualfund.utils.Constant.EMPTYUSERNAME;
+import static com.team11.mutualfund.utils.Constant.INCONSISTENTPASSWORD;
+
+public class CustomerRegisterForm {
+
+    @Size(min = 1, message = EMPTYUSERNAME)
     private String userName;
+
+    @Size(min = 1, message = EMPTYPASSWORD)
     private String password;
+
     private String confirmPassword;
     private String firstName;
     private String lastName;
@@ -14,6 +28,14 @@ public class CustomerForm {
 
     public String sanitize(String s) {
         return s.replace("&", "&qmp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;");
+    }
+
+    public Errors getValidationErrors() {
+        Errors errors = new DirectFieldBindingResult(this, "customerRegisterForm");
+        if (!password.equals(confirmPassword)) {
+            errors.rejectValue("confirmPassword", "0", INCONSISTENTPASSWORD);
+        }
+        return errors;
     }
 
     public String getUserName() {

@@ -9,8 +9,7 @@ import com.team11.mutualfund.model.Fund;
 import com.team11.mutualfund.model.Position;
 import com.team11.mutualfund.model.Transaction;
 import com.team11.mutualfund.utils.Pair;
-import com.team11.mutualfund.utils.TransactionForm;
-import com.team11.mutualfund.utils.TransactionType;
+import javafx.scene.AmbientLight;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
@@ -57,36 +56,32 @@ public class TransactionService {
     }
     */
 
-    public Pair buyFund(TransactionForm transactionForm) {
-        Customer customer = customerDao.getCustomerById(transactionForm.getCustomerId());
-        Fund fund = fundDao.getFundById(transactionForm.getFundId());
+    public Pair buyFund(long cid, long fid, double amount) {
+        Customer customer = customerDao.getCustomerById(cid);
+        Fund fund = fundDao.getFundById(fid);
         if (customer == null)
-            return new Pair(false, "customer id " + String.valueOf(transactionForm.getCustomerId()) + " does not exist");
+            return new Pair(false, "customer id " + String.valueOf(cid) + " does not exist");
         if (fund == null)
-            return new Pair(false, "fund id " + String.valueOf(transactionForm.getFundId()) + " does not exist");
-        if (customer.getCash() < customer.getPendingCashDecrease() + transactionForm.getAmount())
+            return new Pair(false, "fund id " + String.valueOf(fid) + " does not exist");
+        if (customer.getCash() < customer.getPendingCashDecrease() + amount)
             return new Pair(false, "no enough cash");
 
-        customer.setPendingCashDecrease(customer.getPendingCashDecrease() + transactionForm.getAmount());
-        Transaction transaction = new Transaction(transactionForm);
-        transaction.setCustomer(customer);
-        transaction.setFund(fund);
-        transactionDao.saveTransaction(transaction);
         // need to check this sentence
+        customer.setPendingCashDecrease(customer.getPendingCashDecrease() + amount);
+        transactionDao.saveTransaction(new Transaction(customer, fund, BUYFUND, null, amount));
         return new Pair(true, "success");
     }
 
-    public Pair sellFund(TransactionForm transactionForm) {
-        Customer customer = customerDao.getCustomerById(transactionForm.getCustomerId());
-        Fund fund = fundDao.getFundById(transactionForm.getFundId());
-        Position position = positionDao.getPositionByCustomerIdFundId(
-                transactionForm.getCustomerId(), transactionForm.getFundId());
+    public Pair sellFund(long cid, long fid, double shares) {
+        Customer customer = customerDao.getCustomerById(cid);
+        Fund fund = fundDao.getFundById(fid);
+        Position position = positionDao.getPositionByCustomerIdFundId(cid, fid);
         if (customer == null)
             return new Pair(false, "customer id " +
-                    String.valueOf(transactionForm.getCustomerId()) + " does not exist");
+                    String.valueOf(cid) + " does not exist");
         if (fund == null)
             return new Pair(false, "fund id " +
-                    String.valueOf(transactionForm.getFundId()) + " does not exist");
+                    String.valueOf(fid) + " does not exist");
         if (position == null)
             return new Pair(false, "customer does not have fund " + String.valueOf(fund.getSymbol()));
 
@@ -100,58 +95,41 @@ public class TransactionService {
         }
         */
 
-        if (position.getShare() < position.getPendingShareDecrease() + transactionForm.getShares())
+        if (position.getShare() < position.getPendingShareDecrease() + shares)
             return new Pair(false, "no enough share");
 
-        position.setPendingShareDecrease(position.getPendingShareDecrease() + transactionForm.getShares());
-        Transaction transaction = new Transaction(transactionForm);
-        transaction.setCustomer(customer);
-        transaction.setFund(fund);
-        transactionDao.saveTransaction(transaction);
+        position.setPendingShareDecrease(position.getPendingShareDecrease() + shares);
+        transactionDao.saveTransaction(new Transaction(customer, fund, SELLFUND, shares, null));
         return new Pair(true, "success");
     }
 
-    public Pair requestCheck(TransactionForm transactionForm) {
-        Customer customer = customerDao.getCustomerById(transactionForm.getCustomerId());
+    public Pair requestCheck(long cid, double amount) {
+        Customer customer = customerDao.getCustomerById(cid);
         if (customer == null)
             return new Pair(false, "customer id " +
-                    String.valueOf(transactionForm.getCustomerId()) + " does not exist");
-        if (customer.getCash() < customer.getPendingCashDecrease() + transactionForm.getAmount())
+                    String.valueOf(cid) + " does not exist");
+        if (customer.getCash() < customer.getPendingCashDecrease() + amount)
             return new Pair(false, "no enough cash");
 
-        customer.setPendingCashDecrease(customer.getPendingCashDecrease() + transactionForm.getAmount());
-        Transaction transaction = new Transaction(transactionForm);
-        transaction.setCustomer(customer);
-        transactionDao.saveTransaction(transaction);
+        customer.setPendingCashDecrease(customer.getPendingCashDecrease() + amount);
+        transactionDao.saveTransaction(new Transaction(customer, null, REQUESTCHECK, null, amount));
         return new Pair(true, "success");
     }
 
-    public Pair depositCheck(TransactionForm transactionForm) {
-        Customer customer = customerDao.getCustomerById(transactionForm.getCustomerId());
+    public Pair depositCheck(long cid, double amount) {
+        Customer customer = customerDao.getCustomerById(cid);
         if (customer == null)
-            return new Pair(false, "customer id " +
-                    String.valueOf(transactionForm.getCustomerId()) + " does not exist");
-        Transaction transaction = new Transaction(transactionForm);
-        transaction.setCustomer(customer);
-        transactionDao.saveTransaction(transaction);
+            return new Pair(false, "customer id " + String.valueOf(cid) + " does not exist");
+        transactionDao.saveTransaction(new Transaction(customer, null, DEPOSITCHECK, null, amount));
         return new Pair(true, "success");
     }
 
-    public List<TransactionForm> listPendingTransactionByCustomerId(long cid) {
-        List<Transaction> pendingTransactionList = transactionDao.listPendingTransactionByCustomerId(cid);
-        List<TransactionForm> pendingTransactionFormList = new LinkedList<>();
-        for (Transaction t : pendingTransactionList) {
-            pendingTransactionFormList.add(new TransactionForm(t));
-        }
-        return pendingTransactionFormList;
+    public List<Transaction> listPendingTransactionByCustomerId(long cid) {
+        return transactionDao.listPendingTransactionByCustomerId(cid);
     }
 
-    public List<TransactionForm> listFinishTransactionByCustomerId(long cid) {
-        List<Transaction> finishTransactionList = transactionDao.listFinishTransactionByCustomerId(cid);
-        List<TransactionForm> finishTransactionFormList = new LinkedList<>();
-        for (Transaction t : finishTransactionList) {
-            finishTransactionFormList.add(new TransactionForm(t));
-        }
-        return finishTransactionFormList;
+    public List<Transaction> listFinishTransactionByCustomerId(long cid) {
+        return transactionDao.listFinishTransactionByCustomerId(cid);
     }
+
 }

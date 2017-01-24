@@ -1,7 +1,5 @@
 package com.team11.mutualfund.model;
 
-import com.sun.istack.internal.Nullable;
-import com.team11.mutualfund.utils.TransactionForm;
 import com.team11.mutualfund.utils.TransactionType;
 
 import javax.persistence.*;
@@ -34,6 +32,14 @@ public class Transaction implements Serializable {
     private Double amount = 0.0;
 
     public Transaction() {}
+    public Transaction(Customer customer, Fund fund, TransactionType type, Double shares, Double amount) {
+        setCustomer(customer);
+        setFund(fund);
+        setType(type);
+        setShares(shares);
+        setAmount(amount);
+    }
+    /*
     public Transaction(TransactionForm tf) {
         setId(tf.getId());
         setExectuteDate(tf.getExecuteDate());
@@ -41,6 +47,7 @@ public class Transaction implements Serializable {
         setShares(tf.getShares());
         setAmount(tf.getAmount());
     }
+    */
 
 
     public long getId() {
