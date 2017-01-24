@@ -23,6 +23,10 @@
 		%>
 	</P>
 
+
+	<%--<a href="<c:url value="/request_check" />"><button>request check</button></a>--%>
+	<%--<a href="<c:url value="/deposit_check" />"><button>deposit check</button></a>--%>
+
 </div>
 
 <div>

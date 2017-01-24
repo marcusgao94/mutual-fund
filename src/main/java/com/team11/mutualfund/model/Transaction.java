@@ -27,8 +27,10 @@ public class Transaction implements Serializable {
     @Enumerated
     private TransactionType type;
 
+    @Column(scale = 3)
     private Double shares = 0.0;
 
+    @Column(scale = 2)
     private Double amount = 0.0;
 
     public Transaction() {}

@@ -51,18 +51,6 @@
 						</ul>
 					</li>
 
-					<li class="dropdown">
-						<a data-toggle="dropdown" class="dropdown-toggle"
-						   href="#">
-							Do sth for customer <b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li class=""><a href="<c:url value="/deposit_check" />"><span
-									class="glyphicon glyphicon-search"></span>
-								Deposit Check</a></li>
-						</ul>
-					</li>
-
-
 					<c:if test="${user.type == 1}">
 						<li class="dropdown">
 							<a data-toggle="dropdown" class="dropdown-toggle"

@@ -85,10 +85,11 @@ public class LoginController {
     // customer
 
     @RequestMapping(value = "/customer_login", method = RequestMethod.GET)
-    public String customerLogin(HttpServletRequest request, Model model) {
-        String message = (String) request.getParameter("error");
-        if (message != null)
-            model.addAttribute("error", "You have not login");
+    public String customerLogin(HttpServletRequest request, Model model,
+                                @ModelAttribute("loginError") String lem) {
+        if (!lem.isEmpty()) {
+            model.addAttribute("error", lem);
+        }
         LoginForm loginForm = new LoginForm();
         model.addAttribute("loginForm", loginForm);
         return "customer_login";
@@ -99,7 +100,7 @@ public class LoginController {
                                 @Valid LoginForm loginForm, BindingResult result) {
         if (result.hasErrors())
             return "customer_login";
-        Customer c = customerService.findCustomerByUserName(loginForm.getUserName());
+        Customer c = customerService.getCustomerByUserName(loginForm.getUserName());
         if (c == null) {
             FieldError userNameExistError = new FieldError("loginForm", "userName", NOUSERNAME);
             result.addError(userNameExistError);
