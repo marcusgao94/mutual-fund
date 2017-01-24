@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-	<title>Employee view account</title>
+	<title>Customer view account</title>
 	<style>
 		.error {
 			color: red;
@@ -22,73 +22,108 @@
 </div>
 <div class="container">
 
-	<h3>Employee View Account</h3>
+	<h3>Customer View Account</h3>
 
-	<form:form method="POST" modelAttribute="employeeForm">
-		<table>
+<div class="container">
+    <div class="row-fluid">
+      <div class="col-sm-12">
+        <h2>${customer_account.username}</h2>
+            <h3>Basic Info</h3>
 
+            <div class="col-md-6">
 
-			<tr>
-				<td>User Name:</td>
-				<td>
-					<input type="text" name="userName"
-						   value="${employeeForm.getUserName()}"/>
-				</td>
-				<td>
-					<form:errors path="userName" cssClass="error"/>
-				</td>
-			</tr>
+              <table>
+                  <tbody>
+                    <tr>
+                       <td>ID</td>
+                       <td>${customer_account.id}</td>
+                    </tr>
+                 <tr>
+                    <td>FirstName</td>
+                    <td>${customer_account.firstname}</td>
+                 </tr>
+                 <tr>
+                    <td>LastName</td>
+                    <td>${customer_account.lastname}</td>
+                 </tr>
+                 <tr>
+                    <td>UserName</td>
+                    <td>customer_account.username0</td>
+                </tr>
+                </tbody>
+              </table>
+              </div><!--table-responsive close-->
+            </div><!--col-md-6 close-->
+            <div class="col-md-6">
 
-			<tr>
-				<td>Password:</td>
-				<td>
-					<input type="password" name="password" value=""/>
-				</td>
-				<td>
-					<form:errors path="password" cssClass="error"/>
-				</td>
-			</tr>
-
-			<tr>
-				<td>Confirm Password:</td>
-				<td>
-					<input type="password" name="confirmPassword" value=""/>
-				</td>
-				<td>
-					<form:errors path="confirmPassword" cssClass="error"/>
-				</td>
-			</tr>
-
-			<tr>
-				<td>First Name:</td>
-				<td>
-					<input type="text" name="firstName"
-						   value="${employeeForm.getFirstName()}" autofocus/>
-				</td>
-				<td>
-					<form:errors path="firstName" cssClass="error"/>
-				</td>
-			</tr>
-
-			<tr>
-				<td>Last Name:</td>
-				<td>
-					<input type="text" name="lastName"
-						   value="${employeeForm.getLastName()}"/>
-				</td>
-				<td>
-					<form:errors path="lastName" cssClass="error"/>
-				</td>
-			</tr>
-
-			<tr>
-				<th colspan="2">
-					<input type="submit" name="button" value="register"/>
-				</th>
-			</tr>
-		</table>
-	</form:form>
+            <div class="table-responsive responsiv-table">
+              <table class="table bio-table">
+                  <tbody>
+                 <tr>
+                     <td>Address</td>
+                     <td>${customer_account.addr_line1} ${customer_account.addr_line2}</td>
+                 </tr>
+                 <tr>
+                     <td>State</td>
+                     <td>${customer_account.state}</td>
+                  </tr>
+                  <tr>
+                     <td>City</td>
+                     <td>${customer_account.city}</td>
+                  </tr>
+                  <tr>
+                     <td>ZIP</td>
+                     <td>${customer_account.zip}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="text-right">
+  <button type="button" class="btn btn-primary">Edit</button>
 </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+
+<div class="container">
+    <div class="row-fluid">
+      <div class="col-sm-12">
+            <h3>Account Info</h3>
+                    <h4>Date of the last trading day: xxxx </h4>
+                    <h4>${customer_account.cash} </h4>
+            <div class="col-md-6">
+
+              <table>
+              	<thead>
+		<tr>
+			<th>Name of fund</th>
+			<th>Shares</th>
+			<th>value</th>
+		</tr>
+	</thead>
+	<tbody>
+                 <c:forEach var="customer_position" items="${customer_Position}">
+			<tr>
+				<td>
+	 				${customer_position.fund.name}
+				</td>
+				<td>
+	 				${customer_position.share}
+				</td>
+				<td>
+	 				price?
+				</td>
+
+			</tr>
+		</c:forEach>
+		</tbody>
+              </table>
+       </div>
+       </div>
+       </div>
+       </div>      
+
 <div>
 	<c:import url="bottom.jsp"/>
 </div>
