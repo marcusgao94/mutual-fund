@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.team11.mutualfund.model.Employee;
+import com.team11.mutualfund.model.Customer;
 import com.team11.mutualfund.service.CustomerService;
 import com.team11.mutualfund.service.EmployeeService;
 import com.team11.mutualfund.utils.EmployeeForm;
@@ -31,7 +32,7 @@ public class ChangePasswordController {
     private CustomerService customerService;
     
     
-    //employ
+    //employee
     
     @RequestMapping(value = "/employee_changepassword", method = RequestMethod.GET)
     public String employChangePassword(HttpServletRequest request, Model model) {
@@ -77,8 +78,113 @@ public class ChangePasswordController {
     			
     			e = employeeService.updatePassword(e, confirmPassword);
     			session.setAttribute("user", new User(null, e.getUserName(), 1));
-    			return "customer_viewaccount";
+    			
+    			/*add a success message*/
+    			
+    			return "employee_viewaccount";
     		
+    }
+    
+    //customer update his own password
+    @RequestMapping(value = "/customer_changepassword", method = RequestMethod.GET)
+    public String customerChangePassword(HttpServletRequest request, Model model) {
+    		String message = (String)request.getParameter("error");
+    		if (message != null) {
+    			model.addAttribute("error", "You have not login");
+    		}
+    		EmployeeForm employeeForm = new EmployeeForm();
+    		model.addAttribute("customerForm", employeeForm);
+    		return "customer_changepassword";
+    }
+    
+    @RequestMapping(value = "/employee_changepassword", method = RequestMethod.POST)
+    public  String customerChangePassword(HttpServletRequest request, Model model,
+    										  @Valid EmployeeForm customerForm, BindingResult result) {
+    		if (result.hasErrors()) {
+    			return "customer_changepassword";
+    		}
+    		/**
+    		 * get the user from session attribute
+    		 */
+    		HttpSession session = request.getSession();
+    		Customer e = (Customer) session.getAttribute("user");
+    		
+    		/**
+    		 * confirm the old password and update the new password
+    		 */
+    		if (!e.getPassword().equals(customerForm.getPassword())) {
+    			FieldError wrongPasswordError = new FieldError("customerForm", "password",
+    					messageSource.getMessage("wrongPasswordError", null, Locale.getDefault()));
+    			result.addError(wrongPasswordError);
+    			return "customer_changepassword";
+    		} 
+    			
+    			String newPassword = customerForm.getPassword();
+    			String confirmPassword = customerForm.getConfirmPassword();
+    			
+    			if (!newPassword.equals(confirmPassword)) {
+    				FieldError PasswordNotMatchError = new FieldError("customerForm", "confirm_password",
+    					messageSource.getMessage("PasswordNotMatchError", null, Locale.getDefault()));
+    				result.addError(PasswordNotMatchError);
+    			}
+    			
+    			e = customerService.updatePassword(e, confirmPassword);
+    			session.setAttribute("user", new User(null, e.getUserName(), 1));
+    			
+    			/*add a success message*/
+    			return "customer_viewaccount";
+    }
+    
+    
+    
+    //employee update customer's password
+    @RequestMapping(value = "/employee_changecuspassword", method = RequestMethod.GET)
+    public String employeeChangeCusPassword(HttpServletRequest request, Model model) {
+    		String message = (String)request.getParameter("error");
+    		if (message != null) {
+    			model.addAttribute("error", "You have not login");
+    		}
+    		EmployeeForm employeeForm = new EmployeeForm();
+    		model.addAttribute("customerForm", employeeForm);
+    		return "employee_changecuspassword";
+    }
+    
+    @RequestMapping(value = "/employee_changecuspassword", method = RequestMethod.POST)
+    public  String employeeChangeCusPassword(HttpServletRequest request, Model model,
+    										  @Valid EmployeeForm customerForm, BindingResult result) {
+    		if (result.hasErrors()) {
+    			return "customer_changepassword";
+    		}
+    		/**
+    		 * get the user from session attribute
+    		 */
+    		HttpSession session = request.getSession();
+    		Customer e = (Customer) session.getAttribute("user");
+    		
+    		/**
+    		 * confirm the old password and update the new password
+    		 */
+    		if (!e.getPassword().equals(customerForm.getPassword())) {
+    			FieldError wrongPasswordError = new FieldError("customerForm", "password",
+    					messageSource.getMessage("wrongPasswordError", null, Locale.getDefault()));
+    			result.addError(wrongPasswordError);
+    			return "customer_changepassword";
+    		} 
+    			
+    			String newPassword = customerForm.getPassword();
+    			String confirmPassword = customerForm.getConfirmPassword();
+    			
+    			if (!newPassword.equals(confirmPassword)) {
+    				FieldError PasswordNotMatchError = new FieldError("customerForm", "confirm_password",
+    					messageSource.getMessage("PasswordNotMatchError", null, Locale.getDefault()));
+    				result.addError(PasswordNotMatchError);
+    			}
+    			
+    			e = customerService.updatePassword(e, confirmPassword);
+    			session.setAttribute("user", new User(null, e.getUserName(), 1));
+    			
+    			/*add a success message*/
+    			return "customer_viewaccount";
     }
     
 }
