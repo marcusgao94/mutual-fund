@@ -22,8 +22,8 @@
 	<table>
 
 		<tr>
-			<td>Customer Email:</td>
-			<td><input type="text" name="customer-email" value="" autofocus />
+			<td>Customer ID:</td>
+			<td><input type="text" name="customer-id" value="" autofocus />
 			</td>
 		</tr>
 

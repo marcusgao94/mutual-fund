@@ -40,4 +40,9 @@ public class EmployeeService {
 		}
 	}
 
+	public Employee updatePassword(Employee e, String confirmPassword) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -36,5 +36,10 @@ public class CustomerService {
 			entity.setFirstName("edit success");
 		}
 	}
+
+	public Customer updatePassword(Customer e, String confirmPassword) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
