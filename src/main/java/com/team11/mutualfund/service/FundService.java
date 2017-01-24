@@ -16,21 +16,13 @@ public class FundService {
     @Autowired
     private FundDao fundDao;
 
-<<<<<<< HEAD
     public boolean createFund(Fund fund) {
 		if (fundDao.getFundByFundId(fund.getId()) != null) {
-=======
-	/*
-	have not finished
-    public boolean createFund(Fund fund, Customer customer) {
-		if (fundDao.listFundByCustomerId(customer.getId()) != null) {
->>>>>>> 4d8a1c1b55ac495a0aed92e9a6649ffe1caefda2
 			return false;
 		}
 		fundDao.saveFund(fund);
 		return true;
 	}
-<<<<<<< HEAD
     //list all available funds for purchasing
     public List<Fund> listFund() {
         return fundDao.listFund();
@@ -39,9 +31,4 @@ public class FundService {
     
 
 
-=======
-	*/
->>>>>>> 4d8a1c1b55ac495a0aed92e9a6649ffe1caefda2
 }
-
-
