@@ -14,10 +14,6 @@ public class User {
         setType(type);
     }
 
-    public boolean isEmployee() {
-        return type == 1;
-    }
-
     // getter and setter
 
     public Long getId() {

@@ -130,8 +130,13 @@ public class TransactionService {
         return transactionDao.listFinishTransactionByCustomerId(cid);
     }
 
-    public void executeDepositCheck(LocalDate date) {
-
+    public void executeDepositCheck(long cid, LocalDate date) {
+        List<Transaction> transactionList = transactionDao.listPendingTransactionByCustomerIdType(cid, DEPOSITCHECK);
+        for (Transaction t : transactionList) {
+            t.setExectuteDate(date);
+            Customer customer = t.getCustomer();
+            customer.setCash(customer.getCash() + t.getAmount());
+        }
     }
 
 }

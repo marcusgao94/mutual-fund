@@ -17,10 +17,23 @@ public class CustomerDao extends AbstractDao<Long, Customer> {
 
     public Customer getCustomerByUserName(String userName) {
         Query query = getSession().createQuery(
-                "select c from Customer c where c.userName = :name")
+                "select c from Customer c where c.userName = :name"
+        )
                 .setParameter("name", userName);
         return (Customer) query.uniqueResult();
     }
 
+
+    /*
+    public void decreaseCash(long cid, double amount) {
+        Query query = getSession().createQuery(
+                "update Customer c " +
+                        "set c.cash = c.cash - :amount " +
+                        "where c.id = :cid"
+        )
+                .setParameter("amount", amount)
+                .setParameter("cid", cid);
+    }
+    */
 
 }

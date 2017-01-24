@@ -14,7 +14,6 @@ public class TransactionDao extends AbstractDao<Long, Transaction> {
         persist(transaction);
     }
 
-    /*
     @SuppressWarnings("unchecked")
     public List<Transaction> listPendingTransactionByCustomerIdType(long cid, TransactionType type) {
         Query query = getSession().createQuery(
@@ -27,7 +26,6 @@ public class TransactionDao extends AbstractDao<Long, Transaction> {
                 .setParameter("type", type);
         return (List<Transaction>) query.list();
     }
-    */
 
     @SuppressWarnings("unchecked")
     public List<Transaction> listPendingTransactionByCustomerId(long cid) {
