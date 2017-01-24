@@ -17,6 +17,8 @@ public class ChangePasswordForm {
 
     private String confirmNewPassword;
 
+	private Long customerId;
+
     public Errors getValidationErrors() {
         Errors errors = new DirectFieldBindingResult(this, "changePasswordForm");
         if (!newPassword.equals(confirmNewPassword))
@@ -47,4 +49,9 @@ public class ChangePasswordForm {
     public void setConfirmNewPassword(String confirmNewPassword) {
         this.confirmNewPassword = confirmNewPassword;
     }
+
+	public Long getCustomerId() {
+		
+		return customerId;
+	}
 }

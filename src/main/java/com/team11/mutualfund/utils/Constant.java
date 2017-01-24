@@ -15,6 +15,8 @@ public class Constant {
     public static final String INCONSISTENTPASSWORD = "password inconsistent";
 
     public static final String WRONGPASSWORD = "password is wrong";
+    
+    public static final String CUSTOMERNOTEXIST = "customer does not exit";
 
 
 }

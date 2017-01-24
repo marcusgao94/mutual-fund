@@ -40,9 +40,18 @@ public class EmployeeService {
 		}
 	}
 
-	public Employee updatePassword(Employee e, String confirmPassword) {
-		// TODO Auto-generated method stub
-		return null;
+	public Boolean updatePassword(Employee e, String confirmPassword) {
+		
+		employeeDao.updatePassword(e, confirmPassword);
+		
+		return true;
+	}
+
+	public boolean matchPassword(Employee e, String confirmPassword) {
+		if (!e.getPassword().equals(confirmPassword)) {
+			return false;
+		}
+		return true;
 	}
 
 }
