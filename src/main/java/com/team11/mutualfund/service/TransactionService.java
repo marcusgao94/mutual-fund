@@ -15,11 +15,13 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.RollbackException;
 import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
 import static com.team11.mutualfund.utils.Constant.NOENOUGHCASH;
+import static com.team11.mutualfund.utils.Constant.NOENOUGHSHARE;
 import static com.team11.mutualfund.utils.TransactionType.*;
 
 @Service
@@ -55,35 +57,34 @@ public class TransactionService {
     }
     */
 
-    public Pair buyFund(long cid, long fid, double amount) {
+    public void buyFund(long cid, String ticker, double amount) throws RollbackException {
         Customer customer = customerDao.getCustomerById(cid);
-        Fund fund = fundDao.getFundById(fid);
+        Fund fund = fundDao.getFundByTicker(ticker);
         if (customer == null)
-            return new Pair(false, "customer id " + String.valueOf(cid) + " does not exist");
+            throw new RollbackException("customer id " + String.valueOf(cid) + " does not exist");
         if (fund == null)
-            return new Pair(false, "fund id " + String.valueOf(fid) + " does not exist");
+            throw new RollbackException("fund ticker " + String.valueOf(ticker) + " does not exist");
         if (customer.getCash() < customer.getPendingCashDecrease() + amount)
-            return new Pair(false, "no enough cash");
+            throw new RollbackException(NOENOUGHCASH);
 
         // need to check this sentence
         customer.setPendingCashDecrease(customer.getPendingCashDecrease() + amount);
         transactionDao.saveTransaction(new Transaction(customer, fund, BUYFUND, null, amount));
-        return new Pair(true, "success");
     }
 
-    public Pair sellFund(long cid, long fid, double shares) {
+    public void sellFund(long cid, String ticker, double shares) throws RollbackException {
         Customer customer = customerDao.getCustomerById(cid);
-        Fund fund = fundDao.getFundById(fid);
-        Position position = positionDao.getPositionByCustomerIdFundId(cid, fid);
+        Fund fund = fundDao.getFundByTicker(ticker);
         if (customer == null)
-            return new Pair(false, "customer id " +
-                    String.valueOf(cid) + " does not exist");
+            throw new RollbackException("customer id " + String.valueOf(cid) + " does not exist");
         if (fund == null)
-            return new Pair(false, "fund id " +
-                    String.valueOf(fid) + " does not exist");
+            throw new RollbackException("fund ticker " + String.valueOf(ticker) + " does not exist");
+        Position position = positionDao.getPositionByCustomerIdFundId(cid, fund.getId());
         if (position == null)
-            return new Pair(false, "customer does not have fund " + String.valueOf(fund.getSymbol()));
-
+            throw new RollbackException("customer does not have fund " +
+                    String.valueOf(fund.getTicker()));
+        if (position.getShare() < position.getPendingShareDecrease() + shares)
+            throw new RollbackException(NOENOUGHSHARE);
         /*
         // get other pending sell others
         List<Transaction> pendingSellFund = transactionDao.listPendingTransactionByCustomerIdType(
@@ -93,36 +94,28 @@ public class TransactionService {
             pendingShare += t.getShares();
         }
         */
-
-        if (position.getShare() < position.getPendingShareDecrease() + shares)
-            return new Pair(false, "no enough share");
-
         position.setPendingShareDecrease(position.getPendingShareDecrease() + shares);
         transactionDao.saveTransaction(new Transaction(customer, fund, SELLFUND, shares, null));
-        return new Pair(true, "success");
     }
 
-    public Pair requestCheck(long cid, double amount) {
+    public void requestCheck(long cid, double amount) throws RollbackException {
         Customer customer = customerDao.getCustomerById(cid);
         if (customer == null)
-            return new Pair(false, "customer id " +
-                    String.valueOf(cid) + " does not exist");
+            throw new RollbackException("customer id " + String.valueOf(cid) + " does not exist");
 
         // check enough cash
         if (customer.getCash() < customer.getPendingCashDecrease() + amount)
-            return new Pair(false, NOENOUGHCASH);
+            throw new RollbackException(NOENOUGHCASH);
 
         customer.setPendingCashDecrease(customer.getPendingCashDecrease() + amount);
         transactionDao.saveTransaction(new Transaction(customer, null, REQUESTCHECK, null, amount));
-        return new Pair(true, "success");
     }
 
-    public Pair depositCheck(long cid, double amount) {
+    public void depositCheck(long cid, double amount) throws RollbackException {
         Customer customer = customerDao.getCustomerById(cid);
         if (customer == null)
-            return new Pair(false, "customer id " + String.valueOf(cid) + " does not exist");
+            throw new RollbackException("customer id " + String.valueOf(cid) + " does not exist");
         transactionDao.saveTransaction(new Transaction(customer, null, DEPOSITCHECK, null, amount));
-        return new Pair(true, "success");
     }
 
     public List<Transaction> listPendingTransactionByCustomerId(long cid) {

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.persistence.RollbackException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -57,17 +58,15 @@ public class CheckController {
         }
         if (result.hasErrors())
             return "deposit_check";
-        Pair pair = transactionService.depositCheck(
+        try {
+            transactionService.depositCheck(
                 depositCheckForm.getCustomerId(), depositCheckForm.getAmount());
-        if (!pair.getRes()) {
-            FieldError customerIdNotExisterror = new FieldError(
-                    "depositCheckForm", "customerId", pair.getMessage());
-            result.addError(customerIdNotExisterror);
+            return "success";
+        } catch (RollbackException e) {
+            result.rejectValue("customerId", "0", e.getMessage());
             return "deposit_check";
         }
-
         //transactionService.executeDepositCheck(depositCheckForm.getCustomerId(), LocalDate.now());
-        return "success";
     }
 
     @RequestMapping("/request_check")
@@ -99,18 +98,19 @@ public class CheckController {
         if (result.hasErrors())
             return "request_check";
         User user = (User) request.getSession().getAttribute("user");
-        Pair pair = transactionService.requestCheck(
+        try {
+            transactionService.requestCheck(
                 requestCheckForm.getCustomerId(), requestCheckForm.getAmount());
-        if (!pair.getRes()) {
-            FieldError NoEnoughCashError = new FieldError(
-                    "requestCheckForm", "amount", pair.getMessage());
-            result.addError(NoEnoughCashError);
+            return "success";
+        } catch (RollbackException e) {
+            String message = e.getMessage();
+            if (message.startsWith("customer"))
+                result.rejectValue("customerId", "0", message);
+            else
+                result.rejectValue("amount", "1", message);
             return "request_check";
         }
-
-
         //transactionService.executeRequestCheck(requestCheckForm.getCustomerId(), LocalDate.now());
-        return "success";
     }
 
 }

@@ -20,9 +20,13 @@ public class Constant {
     
     public static final String CUSTOMERNOTEXIST = "customer does not exit";
 
+    public static final String NOENOUGHCASH = "cash not enough";
 
-    public static final String NOENOUGHCASH = "no enough cash";
+    public static final String NOENOUGHSHARE = "share not enough";
+
     public static final String TOOLITTLEAMOUNT = "amount must >= 0.01";
+
+    public static final String TOOLITTLESHARE = "share must >= 0.001";
 
 
 }

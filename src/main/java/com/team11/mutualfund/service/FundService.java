@@ -27,6 +27,8 @@ public class FundService {
         if (fundDao.getFundByFundId(fund.getId()) != null) {
             return false;
         }
+        if (fundDao.getFundByTicker(fund.getTicker()) != null)
+            return false;
         fundDao.saveFund(fund);
         return true;
     }

@@ -57,7 +57,7 @@ public class ViewAccountController {
                                  RedirectAttributes redirectAttributes) {
 
     	
-    	Customer c = customerService.findCustomerByUserName(customerRegisterForm.getUserName());
+    	Customer c = customerService.getCustomerByUserName(customerRegisterForm.getUserName());
     	List<Transaction> pendingTransaction = transactionService.listPendingTransactionByCustomerId(c.getId());
         request.setAttribute("employee_pendingTransaction", pendingTransaction);
         
@@ -69,7 +69,7 @@ public class ViewAccountController {
 
     // customer
 
-    @RequestMapping(value = "customer_viewaccount", method = RequestMethod.GET)
+    @RequestMapping(value = "/customer_viewaccount", method = RequestMethod.GET)
     public String customerViewAccount(HttpServletRequest request, Model model,
                                  RedirectAttributes redirectAttributes) {
 
@@ -77,7 +77,7 @@ public class ViewAccountController {
         return "customer_viewaccount";
     }
 
-    @RequestMapping(value = "/customer_transactionhistory", method = RequestMethod.POST)
+    @RequestMapping(value = "/customer_viewaccount", method = RequestMethod.POST)
     public String customerViewAccount(HttpServletRequest request, Model model,
                                  @Valid CustomerRegisterForm customerRegisterForm, BindingResult result,
                                  RedirectAttributes redirectAttributes) {

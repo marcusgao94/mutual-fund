@@ -16,7 +16,7 @@ public class Fund implements Serializable {
     private String name;
 
     @Column(unique = true, nullable = false)
-    private String symbol;
+    private String ticker;
 
     public Long getId() {
         return id;
@@ -26,12 +26,12 @@ public class Fund implements Serializable {
         this.id = id;
     }
 
-    public String getSymbol() {
-        return symbol;
+    public String getTicker() {
+        return ticker;
     }
 
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
+    public void setTicker(String ticker) {
+        this.ticker = ticker;
     }
 
     public String getName() {

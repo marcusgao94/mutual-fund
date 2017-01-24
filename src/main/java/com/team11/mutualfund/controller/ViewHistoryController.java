@@ -57,7 +57,7 @@ public class ViewHistoryController {
                                  RedirectAttributes redirectAttributes) {
 
     	
-    	Customer c = customerService.findCustomerByUserName(customerRegisterForm.getUserName());
+    	Customer c = customerService.getCustomerByUserName(customerRegisterForm.getUserName());
     	List<Transaction> pendingTransaction = transactionService.listPendingTransactionByCustomerId(c.getId());
         request.setAttribute("employee_pendingTransaction", pendingTransaction);
         
@@ -81,9 +81,7 @@ public class ViewHistoryController {
     public String customerViewHistory(HttpServletRequest request, Model model,
                                  @Valid CustomerRegisterForm customerRegisterForm, BindingResult result,
                                  RedirectAttributes redirectAttributes) {
-
-
-        Customer c = customerService.findCustomerByUserName(customerRegisterForm.getUserName());
+        Customer c = customerService.getCustomerByUserName(customerRegisterForm.getUserName());
     	List<Transaction> pendingTransaction = transactionService.listPendingTransactionByCustomerId(c.getId());
         request.setAttribute("customer_pendingTransaction", pendingTransaction);
         

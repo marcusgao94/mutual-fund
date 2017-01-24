@@ -28,4 +28,13 @@ public class FundDao extends AbstractDao<Long, Fund> {
         return (Fund) query.uniqueResult();
     }
 
+    @SuppressWarnings("unchecked")
+    public Fund getFundByTicker(String ticker) {
+        Query query = getSession().createQuery(
+                "select f from Fund f where f.ticker = :ticker"
+        )
+                .setParameter("ticker", ticker);
+        return (Fund) query.uniqueResult();
+    }
+
 }
