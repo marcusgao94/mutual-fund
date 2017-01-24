@@ -1,16 +1,15 @@
 <%--
-  Created by IntelliJ IDEA.
-  User: marcusgao
-  Date: 17/1/19
-  Time: 下午9:32
-  To change this template use File | Settings | File Templates.
+  Created by Eclipse IDEA.
+  User: JevWang
+  Date: 17/1/23
+  Time: 下午6:32
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-	<title>Customer register</title>
+	<title>Employee view account</title>
 	<style>
 		.error {
 			color: red;
@@ -21,13 +20,11 @@
 <div>
 	<c:import url="/header"/>
 </div>
-
-
 <div class="container">
 
-	<h3>Customer Register</h3>
+	<h3>Employee View Account</h3>
 
-	<form:form method="POST" modelAttribute="customerRegisterForm">
+	<form:form method="POST" modelAttribute="employeeForm">
 		<table>
 
 
@@ -35,7 +32,7 @@
 				<td>User Name:</td>
 				<td>
 					<input type="text" name="userName"
-						   value="${customerRegisterForm.getUserName()}"/>
+						   value="${employeeForm.getUserName()}"/>
 				</td>
 				<td>
 					<form:errors path="userName" cssClass="error"/>
@@ -54,7 +51,8 @@
 
 			<tr>
 				<td>Confirm Password:</td>
-				<td><input type="password" name="confirmPassword" value=""/>
+				<td>
+					<input type="password" name="confirmPassword" value=""/>
 				</td>
 				<td>
 					<form:errors path="confirmPassword" cssClass="error"/>
@@ -65,7 +63,7 @@
 				<td>First Name:</td>
 				<td>
 					<input type="text" name="firstName"
-						   value="${customerRegisterForm.getFirstName()}" autofocus/>
+						   value="${employeeForm.getFirstName()}" autofocus/>
 				</td>
 				<td>
 					<form:errors path="firstName" cssClass="error"/>
@@ -76,44 +74,10 @@
 				<td>Last Name:</td>
 				<td>
 					<input type="text" name="lastName"
-						   value="${customerRegisterForm.getLastName()}"/>
+						   value="${employeeForm.getLastName()}"/>
 				</td>
 				<td>
 					<form:errors path="lastName" cssClass="error"/>
-				</td>
-			</tr>
-
-			<tr>
-				<td>Address Line1:</td>
-				<td>
-					<input type="text" name="addr_line1"
-						   value="${customerRegisterForm.getAddr_line1()}"/>
-				</td>
-			</tr>
-
-			<tr>
-				<td>Address Line2:</td>
-				<td>
-					<input type="text" name="addr_line2"
-						   value="${customerRegisterForm.getAddr_line2()}"/>
-				</td>
-			</tr>
-
-			<tr>
-				<td>City:</td>
-				<td>
-					<input type="text" name="city"
-						   value="${customerRegisterForm.getCity()}"/>
-				</td>
-				<td>State:</td>
-				<td>
-					<input type="text" name="state"
-						   value="${customerRegisterForm.getState()}"/>
-				</td>
-				<td>Zipcode:</td>
-				<td>
-					<input type="number" name="zip"
-						   value="${customerRegisterForm.getZip()}"/>
 				</td>
 			</tr>
 

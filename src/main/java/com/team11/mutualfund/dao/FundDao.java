@@ -8,7 +8,6 @@ import java.util.List;
 
 @Repository
 public class FundDao extends AbstractDao<Long, Fund> {
-
     public void saveFund(Fund fund) {
         persist(fund);
     }
@@ -21,5 +20,12 @@ public class FundDao extends AbstractDao<Long, Fund> {
         return listAll();
     }
 
+    @SuppressWarnings("unchecked")
+    public Fund getFundByFundId(long fid) {
+        Query query = getSession().createQuery(
+                "select p from Fund p where p.id = :fid"
+        ).setParameter("fid", fid);
+        return (Fund) query.uniqueResult();
+    }
 
 }

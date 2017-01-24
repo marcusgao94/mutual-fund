@@ -142,7 +142,7 @@ public class ChangePasswordController {
     public String employeeChangeCusPassword(HttpServletRequest request, Model model) {
     		String message = (String)request.getParameter("error");
     		if (message != null) {
-    			model.addAttribute("error", "You have not login");
+    			model.addAttribute("error", "You have not login as an employee");
     		}
     		EmployeeForm employeeForm = new EmployeeForm();
     		model.addAttribute("customerForm", employeeForm);
@@ -153,13 +153,18 @@ public class ChangePasswordController {
     public  String employeeChangeCusPassword(HttpServletRequest request, Model model,
     										  @Valid EmployeeForm customerForm, BindingResult result) {
     		if (result.hasErrors()) {
-    			return "customer_changepassword";
+    			return "employee_changecuspassword";
     		}
     		/**
     		 * get the user from session attribute
     		 */
     		HttpSession session = request.getSession();
-    		Customer e = (Customer) session.getAttribute("user");
+    		
+    		/**
+    		 * confirm the customer id
+    		 */
+    		
+    		
     		
     		/**
     		 * confirm the old password and update the new password

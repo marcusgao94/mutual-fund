@@ -22,7 +22,7 @@
 
 	<h3>Customer Login</h3>
 
-	<form:form method="post" modelAttribute="customerForm">
+	<form:form method="post" modelAttribute="loginForm">
 		<table>
 			<c:if test="${not empty error}">
 				<tr>
@@ -32,7 +32,7 @@
 			<tr>
 				<td>User Name:</td>
 				<td><input type="text" name="userName"
-						   value="${customerForm.getUserName()}" autofocus/>
+						   value="${loginForm.getUserName()}" autofocus/>
 				</td>
 				<td><form:errors path="userName" cssClass="error"/></td>
 			</tr>
