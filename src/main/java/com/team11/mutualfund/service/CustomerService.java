@@ -13,8 +13,8 @@ public class CustomerService {
 	@Autowired
 	private CustomerDao customerDao;
 	
-	public boolean saveCustomer(Customer customer) {
-		if (customerDao.findCustomerByUserName(customer.getUserName()) != null) {
+	public boolean createCustomer(Customer customer) {
+		if (customerDao.getCustomerByUserName(customer.getUserName()) != null) {
 			return false;
 		}
 		customerDao.saveCustomer(customer);
@@ -22,7 +22,7 @@ public class CustomerService {
 	}
 
 	public Customer findCustomerByUserName(String userName) {
-		return customerDao.findCustomerByUserName(userName);
+		return customerDao.getCustomerByUserName(userName);
 	}
 
 	/*
@@ -31,7 +31,7 @@ public class CustomerService {
 	 * It will be updated in db once transaction ends. 
 	 */
 	public void updateCustomer(Customer customer) {
-		Customer entity = customerDao.findCustomerByUserName(customer.getUserName());
+		Customer entity = customerDao.getCustomerByUserName(customer.getUserName());
 		if(entity!=null){
 			entity.setFirstName("edit success");
 		}

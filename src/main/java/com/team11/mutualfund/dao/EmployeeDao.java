@@ -17,7 +17,7 @@ public class EmployeeDao extends AbstractDao<Integer, Employee> {
 		persist(employee);
 	}
 
-	public Employee findEmployeeByUserName(String userName) {
+	public Employee getEmployeeByUserName(String userName) {
 		Query query = getSession().createQuery(
 				"select e from Employee e where e.userName = :name")
 				.setParameter("name", userName);

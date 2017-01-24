@@ -64,7 +64,7 @@ public class LoginController {
             return "employee_login";
         }
         HttpSession session = request.getSession();
-        session.setAttribute("user", new User(e.getUserName(), 1));
+        session.setAttribute("user", new User(null, e.getUserName(), 1));
         return "redirect:/home";
     }
 
@@ -99,7 +99,7 @@ public class LoginController {
             return "customer_login";
         }
         HttpSession session = request.getSession();
-        session.setAttribute("user", new User(c.getUserName(), 0));
+        session.setAttribute("user", new User(c.getId(), c.getUserName(), 0));
         return "redirect:/home";
     }
 

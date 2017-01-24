@@ -19,6 +19,8 @@ public class Position implements Serializable {
 
     private double share;
 
+    private double pendingShareDecrease = 0.0;
+
     public CustomerFund getCustomerFund() {
         return customerFund;
     }
@@ -49,5 +51,13 @@ public class Position implements Serializable {
 
     public void setShare(double share) {
         this.share = share;
+    }
+
+    public double getPendingShareDecrease() {
+        return pendingShareDecrease;
+    }
+
+    public void setPendingShareDecrease(double pendingShareDecrease) {
+        this.pendingShareDecrease = pendingShareDecrease;
     }
 }
