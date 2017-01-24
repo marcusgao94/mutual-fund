@@ -1,11 +1,11 @@
 package com.team11.mutualfund.controller;
 
-import com.team11.mutualfund.model.Customer;
-import com.team11.mutualfund.service.CustomerService;
-import com.team11.mutualfund.service.EmployeeService;
-import com.team11.mutualfund.utils.CustomerForm;
-import com.team11.mutualfund.utils.EmployeeForm;
-import com.team11.mutualfund.utils.User;
+import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -15,12 +15,13 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.team11.mutualfund.model.Customer;
 import com.team11.mutualfund.model.Employee;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
-import java.util.Locale;
+import com.team11.mutualfund.service.CustomerService;
+import com.team11.mutualfund.service.EmployeeService;
+import com.team11.mutualfund.utils.CustomerForm;
+import com.team11.mutualfund.utils.EmployeeForm;
+import com.team11.mutualfund.utils.User;
 
 @Controller
 public class UserController {
@@ -30,7 +31,7 @@ public class UserController {
 
 	@Autowired
 	CustomerService customerService;
-	
+
 	@Autowired
 	MessageSource messageSource;
 
@@ -56,6 +57,7 @@ public class UserController {
 		}
 		return "employee_register";
 	}
+
 
 	@RequestMapping(value = "/employee_register", method = RequestMethod.POST)
 	public String createEmployee(HttpServletRequest request, Model model,
@@ -95,7 +97,7 @@ public class UserController {
 
 	@RequestMapping(value = "/employee_login", method = RequestMethod.GET)
 	public String employeeLogin(HttpServletRequest request, Model model) {
-		String message = (String) request.getParameter("error");
+		String message = request.getParameter("error");
 		if (message != null)
 			model.addAttribute("error", "You have not login as an employee");
 		EmployeeForm employeeForm = new EmployeeForm();
@@ -175,7 +177,7 @@ public class UserController {
 
 	@RequestMapping(value = "/customer_login", method = RequestMethod.GET)
 	public String customerLogin(HttpServletRequest request, Model model) {
-		String message = (String) request.getParameter("error");
+		String message = request.getParameter("error");
 		if (message != null)
 			model.addAttribute("error", "You have not login");
 		CustomerForm customerForm = new CustomerForm();
@@ -214,7 +216,7 @@ public class UserController {
 		model.addAttribute("edit", true);
 		return "registration";
 	}
-	
+
 	@RequestMapping(value = { "/edit-{userName}-employee" }, method = RequestMethod.POST)
 	public String updateEmployee( Employee employee, BindingResult result,
 			ModelMap model, @PathVariable String userName) {
