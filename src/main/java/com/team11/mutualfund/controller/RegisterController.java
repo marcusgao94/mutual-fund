@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import static com.team11.mutualfund.controller.LoginController.checkEmployee;
 import static com.team11.mutualfund.utils.Constant.DUPLICATEUSERNAME;
 import static com.team11.mutualfund.utils.Constant.NOTLOGIN;
 
@@ -36,12 +37,7 @@ public class RegisterController {
     @Autowired
     private MessageSource messageSource;
 
-    public boolean checkEmployee(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        if (session.getAttribute("user") == null) return false;
-        User user = (User) session.getAttribute("user");
-        return user.isEmployee();
-    }
+
 
     // employee
 

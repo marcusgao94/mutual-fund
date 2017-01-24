@@ -33,6 +33,19 @@ public class LoginController {
     @Autowired
     private CustomerService customerService;
 
+
+    public static boolean checkEmployee(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        return user != null && user.getType() == 1;
+    }
+
+    public static boolean checkCustomer(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        return user != null && user.getType() == 0;
+    }
+
     // employee
 
     @RequestMapping(value = "/employee_login", method = RequestMethod.GET)

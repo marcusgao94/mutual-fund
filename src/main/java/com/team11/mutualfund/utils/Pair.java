@@ -10,7 +10,7 @@ public class Pair {
         message = s;
     }
 
-    public boolean isRes() {
+    public boolean getRes() {
         return res;
     }
 
