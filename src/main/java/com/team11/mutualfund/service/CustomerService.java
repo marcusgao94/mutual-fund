@@ -2,6 +2,8 @@ package com.team11.mutualfund.service;
 
 import com.team11.mutualfund.dao.CustomerDao;
 import com.team11.mutualfund.model.Customer;
+import com.team11.mutualfund.utils.User;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,10 +42,46 @@ public class CustomerService {
 			entity.setFirstName("edit success");
 		}
 	}
+	/**
+	 * Used to tell whether the customer exist and if yes, update the password
+	 * @param c
+	 * @param confirmPassword
+	 * @return
+	 */
+	public Customer updateCustomerPassword(Long id, String confirmPassword) {
+		Customer c = findCustomerbyId(id);
 
-	public Customer updatePassword(Customer e, String confirmPassword) {
-		// TODO Auto-generated method stub
-		return null;
+		customerDao.updatePassword(c, confirmPassword);
+		return c;
+	}
+	
+	public boolean updatePassword(Customer c, String confirmPassword) {
+		customerDao.updatePassword(c, confirmPassword);
+		return true;
+	}
+	
+	public Customer findCustomerbyId(long id) {
+		return customerDao.getCustomerById(id);
+	}
+	
+	public boolean checkCustomerbyId(long id) {
+		
+		Customer c = customerDao.getCustomerById(id);
+		
+		if (c == null) {
+			return false;
+		}
+		
+		return true;
+	}
+
+	public boolean matchPassword(Customer c, String oldPassword) {
+		
+		if (!c.getPassword().equals(oldPassword)) {
+			return false;
+		}
+		
+		return true;
 	}
 	
 }

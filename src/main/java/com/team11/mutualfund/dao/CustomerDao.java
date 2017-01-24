@@ -11,8 +11,8 @@ public class CustomerDao extends AbstractDao<Long, Customer> {
         persist(customer);
     }
 
-    public Customer getCustomerById(Long id) {
-        return getByKey(id);
+    public Customer getCustomerById(Long customerId) {
+        return getByKey(customerId);
     }
 
     public Customer getCustomerByUserName(String userName) {
@@ -22,7 +22,11 @@ public class CustomerDao extends AbstractDao<Long, Customer> {
                 .setParameter("name", userName);
         return (Customer) query.uniqueResult();
     }
-
+    
+    public Customer updatePassword(Customer c, String confirmPassword){
+		return c;
+    	
+    }
 
     /*
     public void decreaseCash(long cid, double amount) {
