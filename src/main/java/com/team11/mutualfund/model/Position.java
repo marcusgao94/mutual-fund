@@ -11,14 +11,18 @@ public class Position implements Serializable {
 
     @MapsId("customerId")
     @ManyToOne
+    @JoinColumn
     private Customer customer;
 
     @MapsId("fundId")
     @ManyToOne
+    @JoinColumn
     private Fund fund;
 
+    @Column(scale = 3)
     private double share;
 
+    @Column(scale = 3)
     private double pendingShareDecrease = 0.0;
 
     public CustomerFund getCustomerFund() {

@@ -36,9 +36,10 @@ public class Customer implements Serializable {
 	@Column(nullable=true)
 	private Integer zip;
 
-	@Column(nullable=false)
+	@Column(nullable=false, scale = 2)
 	private double cash = 0.0;
 
+	@Column(scale = 2)
 	private double pendingCashDecrease = 0.0;
 
 	public Customer() {}

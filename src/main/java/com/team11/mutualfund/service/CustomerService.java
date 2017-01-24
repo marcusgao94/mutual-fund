@@ -21,7 +21,11 @@ public class CustomerService {
 		return true;
 	}
 
-	public Customer findCustomerByUserName(String userName) {
+	public Customer getCustomerById(long id) {
+		return customerDao.getCustomerById(id);
+	}
+
+	public Customer getCustomerByUserName(String userName) {
 		return customerDao.getCustomerByUserName(userName);
 	}
 

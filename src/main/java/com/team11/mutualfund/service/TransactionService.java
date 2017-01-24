@@ -19,6 +19,7 @@ import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
+import static com.team11.mutualfund.utils.Constant.NOENOUGHCASH;
 import static com.team11.mutualfund.utils.TransactionType.*;
 
 @Service
@@ -106,8 +107,10 @@ public class TransactionService {
         if (customer == null)
             return new Pair(false, "customer id " +
                     String.valueOf(cid) + " does not exist");
+
+        // check enough cash
         if (customer.getCash() < customer.getPendingCashDecrease() + amount)
-            return new Pair(false, "no enough cash");
+            return new Pair(false, NOENOUGHCASH);
 
         customer.setPendingCashDecrease(customer.getPendingCashDecrease() + amount);
         transactionDao.saveTransaction(new Transaction(customer, null, REQUESTCHECK, null, amount));
@@ -139,4 +142,13 @@ public class TransactionService {
         }
     }
 
+    public void executeRequestCheck(long cid, LocalDate date) {
+        Customer customer = customerDao.getCustomerById(cid);
+        List<Transaction> transactionList = transactionDao.listPendingTransactionByCustomerIdType(cid, REQUESTCHECK);
+        for (Transaction t : transactionList) {
+            t.setExectuteDate(date);
+            customer.setCash(customer.getCash() - t.getAmount());
+        }
+        customer.setPendingCashDecrease(0);
+    }
 }
