@@ -82,7 +82,7 @@ public class ViewAccountController {
         model.addAttribute("customer_account", c);
         
         List<Positionvalue> pv = fundService.listPositionvalueByCustomerId(user.getId());
-        model.addAttribute("customer_position", pv);
+        model.addAttribute("customer_positionvalue", pv);
         return "customer_viewaccount";
     }
 
