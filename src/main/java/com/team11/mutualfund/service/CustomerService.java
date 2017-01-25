@@ -44,7 +44,7 @@ public class CustomerService {
 	}
 	/**
 	 * Used to tell whether the customer exist and if yes, update the password
-	 * @param c
+	 * @param id
 	 * @param confirmPassword
 	 * @return
 	 */

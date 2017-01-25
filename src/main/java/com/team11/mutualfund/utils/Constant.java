@@ -18,7 +18,7 @@ public class Constant {
 
     public static final String WRONGPASSWORD = "password is wrong";
     
-    public static final String CUSTOMERNOTEXIST = "customer does not exit";
+    public static final String NOCUSTOMER = "customer does not exit";
 
     public static final String NOENOUGHCASH = "cash not enough";
 
@@ -27,6 +27,13 @@ public class Constant {
     public static final String TOOLITTLEAMOUNT = "amount must >= 0.01";
 
     public static final String TOOLITTLESHARE = "share must >= 0.001";
+
+
+    public static final String NOFUND = "fund does not exist";
+
+    public static final String NOPOSITION = "this customer does not have this fund";
+
+    public static final String NOFUNDPRICEHISTORY = "price of this fund on this date is not set";
 
 
 }

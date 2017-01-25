@@ -1,5 +1,6 @@
 package com.team11.mutualfund.model;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.text.DateFormat;
@@ -9,7 +10,10 @@ import java.util.Objects;
 
 @Embeddable
 public class FundDate implements Serializable {
-    private long fundId;
+
+    @Column(name = "fundId", insertable = false, updatable = false)
+    private Long fundId;
+
     private LocalDate date;
 
     public FundDate() {
@@ -32,11 +36,11 @@ public class FundDate implements Serializable {
         return Objects.hash(fundId, date);
     }
 
-    public long getFundId() {
+    public Long getFundId() {
         return fundId;
     }
 
-    public void setFundId(long fundId) {
+    public void setFundId(Long fundId) {
         this.fundId = fundId;
     }
 

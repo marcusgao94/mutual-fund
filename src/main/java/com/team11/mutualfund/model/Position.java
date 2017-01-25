@@ -9,6 +9,9 @@ public class Position implements Serializable {
     @EmbeddedId
     private CustomerFund customerFund;
 
+    @Column(scale = 3)
+    private double shares;
+
     @MapsId("customerId")
     @ManyToOne
     @JoinColumn
@@ -19,8 +22,7 @@ public class Position implements Serializable {
     @JoinColumn
     private Fund fund;
 
-    @Column(scale = 3)
-    private double share;
+
 
     @Column(scale = 3)
     private double pendingShareDecrease = 0.0;
@@ -49,12 +51,12 @@ public class Position implements Serializable {
         this.fund = fund;
     }
 
-    public double getShare() {
-        return share;
+    public double getShares() {
+        return shares;
     }
 
-    public void setShare(double share) {
-        this.share = share;
+    public void setShares(double shares) {
+        this.shares = shares;
     }
 
     public double getPendingShareDecrease() {

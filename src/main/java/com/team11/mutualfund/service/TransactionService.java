@@ -1,27 +1,23 @@
 package com.team11.mutualfund.service;
 
-import com.team11.mutualfund.dao.CustomerDao;
-import com.team11.mutualfund.dao.FundDao;
-import com.team11.mutualfund.dao.PositionDao;
-import com.team11.mutualfund.dao.TransactionDao;
-import com.team11.mutualfund.model.Customer;
-import com.team11.mutualfund.model.Fund;
-import com.team11.mutualfund.model.Position;
-import com.team11.mutualfund.model.Transaction;
+import com.team11.mutualfund.dao.*;
+import com.team11.mutualfund.model.*;
 import com.team11.mutualfund.utils.Pair;
+import javafx.geometry.Pos;
 import javafx.scene.AmbientLight;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import sun.jvm.hotspot.runtime.posix.POSIXSignals;
 
 import javax.persistence.RollbackException;
+import javax.swing.*;
 import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
-import static com.team11.mutualfund.utils.Constant.NOENOUGHCASH;
-import static com.team11.mutualfund.utils.Constant.NOENOUGHSHARE;
+import static com.team11.mutualfund.utils.Constant.*;
 import static com.team11.mutualfund.utils.TransactionType.*;
 
 @Service
@@ -40,6 +36,9 @@ public class TransactionService {
     @Autowired
     private PositionDao positionDao;
 
+    @Autowired
+    private FundPriceHistoryDao fundPriceHistoryDao;
+
     /*
     public double getPendingCashDecreaseByCustomerId(long cid) {
         List<Transaction> pendingBuyFund = transactionDao.listPendingTransactionByCustomerIdType(cid, BUYFUND);
@@ -57,9 +56,17 @@ public class TransactionService {
     }
     */
 
+    public List<Transaction> listPendingTransactionByCustomerId(long cid) {
+        return transactionDao.listPendingTransactionByCustomerId(cid);
+    }
+
+    public List<Transaction> listFinishTransactionByCustomerId(long cid) {
+        return transactionDao.listFinishTransactionByCustomerId(cid);
+    }
+
     public void buyFund(long cid, String ticker, double amount) throws RollbackException {
         Customer customer = customerDao.getCustomerById(cid);
-        Fund fund = fundDao.getFundByTicker(ticker);
+        Fund fund = fundDao.findByTicker(ticker);
         if (customer == null)
             throw new RollbackException("customer id " + String.valueOf(cid) + " does not exist");
         if (fund == null)
@@ -67,23 +74,24 @@ public class TransactionService {
         if (customer.getCash() < customer.getPendingCashDecrease() + amount)
             throw new RollbackException(NOENOUGHCASH);
 
-        // need to check this sentence
         customer.setPendingCashDecrease(customer.getPendingCashDecrease() + amount);
         transactionDao.saveTransaction(new Transaction(customer, fund, BUYFUND, null, amount));
     }
 
+
+
     public void sellFund(long cid, String ticker, double shares) throws RollbackException {
         Customer customer = customerDao.getCustomerById(cid);
-        Fund fund = fundDao.getFundByTicker(ticker);
+        Fund fund = fundDao.findByTicker(ticker);
         if (customer == null)
             throw new RollbackException("customer id " + String.valueOf(cid) + " does not exist");
         if (fund == null)
             throw new RollbackException("fund ticker " + String.valueOf(ticker) + " does not exist");
-        Position position = positionDao.getPositionByCustomerIdFundId(cid, fund.getId());
+        Position position = positionDao.findByCustomerIdFundId(cid, fund.getId());
         if (position == null)
             throw new RollbackException("customer does not have fund " +
                     String.valueOf(fund.getTicker()));
-        if (position.getShare() < position.getPendingShareDecrease() + shares)
+        if (position.getShares() < position.getPendingShareDecrease() + shares)
             throw new RollbackException(NOENOUGHSHARE);
         /*
         // get other pending sell others
@@ -118,12 +126,71 @@ public class TransactionService {
         transactionDao.saveTransaction(new Transaction(customer, null, DEPOSITCHECK, null, amount));
     }
 
-    public List<Transaction> listPendingTransactionByCustomerId(long cid) {
-        return transactionDao.listPendingTransactionByCustomerId(cid);
+
+    public void executeBuyFund(String ticker, LocalDate date) throws RollbackException {
+        Fund fund = fundDao.findByTicker(ticker);
+        if (fund == null)
+            throw new RollbackException(NOFUND);
+        List<Transaction> transactionList = transactionDao.listPendingBuyFundByFundTicker(ticker);
+        for (Transaction t : transactionList) {
+            // update execute date
+            t.setExectuteDate(date);
+            // substract cash in customer
+            Customer customer = t.getCustomer();
+            customer.setCash(customer.getCash() - t.getAmount());
+            customer.setPendingCashDecrease(0);
+            // calculate shares of this amount
+            FundDate fundDate = new FundDate(fund.getId(), date);
+            FundPriceHistory fundPriceHistory = fundPriceHistoryDao.findByFundDate(fundDate);
+            if (fundPriceHistory == null)
+                throw new RollbackException(NOFUNDPRICEHISTORY);
+            double price = fundPriceHistory.getPrice();
+            double shares = t.getAmount() / price;
+            // add customer shares of this fund in position
+            Position position = positionDao.findByCustomerIdFundId(customer.getId(), fund.getId());
+            if (position == null) {
+                position = new Position();
+                CustomerFund customerFund = new CustomerFund();
+                customerFund.setCustomerId(customer.getId());
+                customerFund.setFundId(t.getFund().getId());
+                position.setCustomerFund(customerFund);
+                position.setShares(shares);
+                positionDao.save(position);
+            }
+            else {
+                position.setShares(position.getShares() + shares);
+            }
+        }
     }
 
-    public List<Transaction> listFinishTransactionByCustomerId(long cid) {
-        return transactionDao.listFinishTransactionByCustomerId(cid);
+    public void executeSellFund(String ticker, LocalDate date) throws RollbackException {
+        Fund fund = fundDao.findByTicker(ticker);
+        if (fund == null)
+            throw new RollbackException(NOFUND);
+        List<Transaction> transactionList = transactionDao.listPendingBuyFundByFundTicker(ticker);
+        for (Transaction t : transactionList) {
+            // update execute date
+            t.setExectuteDate(date);
+            // substract shares in position
+            Customer customer = t.getCustomer();
+            Position position = positionDao.findByCustomerIdFundId(customer.getId(), fund.getId());
+            if (position == null)
+                throw new RollbackException(NOPOSITION);
+            position.setShares(position.getShares() - t.getShares());
+            position.setPendingShareDecrease(0);
+            if (Math.abs(position.getShares()) < 1e-10)
+                positionDao.delete(position);
+
+            // calculate amount of this share
+            FundDate fundDate = new FundDate(fund.getId(), date);
+            FundPriceHistory fundPriceHistory = fundPriceHistoryDao.findByFundDate(fundDate);
+            if (fundPriceHistory == null)
+                throw new RollbackException(NOFUNDPRICEHISTORY);
+            double price = fundPriceHistory.getPrice();
+            double amount = price * t.getShares();
+            // add customer shares of this fund in position
+            customer.setCash(customer.getCash() + amount);
+        }
     }
 
     public void executeDepositCheck(long cid, LocalDate date) {

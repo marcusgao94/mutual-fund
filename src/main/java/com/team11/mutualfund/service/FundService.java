@@ -24,10 +24,10 @@ public class FundService {
     private FundPriceHistoryDao fundPriceHistoryDao;
 
     public boolean createFund(Fund fund) {
-        if (fundDao.getFundByFundId(fund.getId()) != null) {
+        if (fundDao.findByFundId(fund.getId()) != null) {
             return false;
         }
-        if (fundDao.getFundByTicker(fund.getTicker()) != null)
+        if (fundDao.findByTicker(fund.getTicker()) != null)
             return false;
         fundDao.saveFund(fund);
         return true;

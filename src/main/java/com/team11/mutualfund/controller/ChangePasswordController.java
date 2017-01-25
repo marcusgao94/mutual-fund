@@ -22,7 +22,7 @@ import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import static com.team11.mutualfund.utils.Constant.CUSTOMERNOTEXIST;
+import static com.team11.mutualfund.utils.Constant.NOCUSTOMER;
 import static com.team11.mutualfund.utils.Constant.WRONGPASSWORD;
 
 public class ChangePasswordController {
@@ -211,7 +211,8 @@ public class ChangePasswordController {
         */
        
        if (!customerService.checkCustomerbyId(customerId)) {
-    	   		FieldError customerNotExitError = new FieldError("changePasswordForm","customerId", CUSTOMERNOTEXIST); 
+    	   		FieldError customerNotExitError = new FieldError(
+    	   				"changePasswordForm", "customerId", NOCUSTOMER);
 	   		result.addError(customerNotExitError);
        }
        

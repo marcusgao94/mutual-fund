@@ -13,7 +13,7 @@ public class FundPriceHistory implements Serializable {
     private double price;
 
     @MapsId("fundId")
-    @OneToOne
+    @ManyToOne
     @JoinColumn
     private Fund fund;
 

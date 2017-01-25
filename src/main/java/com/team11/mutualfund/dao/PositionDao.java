@@ -14,7 +14,7 @@ public class PositionDao extends AbstractDao<Long, Position> {
         persist(position);
     }
 
-    public Position getPositionByCustomerIdFundId(long cid, long fid) {
+    public Position findByCustomerIdFundId(long cid, long fid) {
         Query query = getSession().createQuery(
                 "select p from Position p where " +
                         "p.customer.id = :cid and " +
@@ -31,5 +31,9 @@ public class PositionDao extends AbstractDao<Long, Position> {
                 "select p from Position p where p.customer.id = :cid"
         ).setParameter("cid", cid);
         return (List<Fund>) query.list();
+    }
+
+    public void delete(Position position) {
+        super.delete(position);
     }
 }

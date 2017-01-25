@@ -21,7 +21,7 @@ public class FundDao extends AbstractDao<Long, Fund> {
     }
 
     @SuppressWarnings("unchecked")
-    public Fund getFundByFundId(long fid) {
+    public Fund findByFundId(long fid) {
         Query query = getSession().createQuery(
                 "select p from Fund p where p.id = :fid"
         ).setParameter("fid", fid);
@@ -29,7 +29,7 @@ public class FundDao extends AbstractDao<Long, Fund> {
     }
 
     @SuppressWarnings("unchecked")
-    public Fund getFundByTicker(String ticker) {
+    public Fund findByTicker(String ticker) {
         Query query = getSession().createQuery(
                 "select f from Fund f where f.ticker = :ticker"
         )

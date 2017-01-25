@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+import static com.team11.mutualfund.utils.TransactionType.BUYFUND;
+
 @Repository
 public class TransactionDao extends AbstractDao<Long, Transaction> {
     public void saveTransaction(Transaction transaction) {
@@ -18,8 +20,8 @@ public class TransactionDao extends AbstractDao<Long, Transaction> {
     public List<Transaction> listPendingTransactionByCustomerIdType(long cid, TransactionType type) {
         Query query = getSession().createQuery(
                 "select t from Transaction t where " +
-                        "t.customer.id = :cid and " +
                         "t.executeDate is null and " +
+                        "t.customer.id = :cid and " +
                         "t.type = :type"
         )
                 .setParameter("cid", cid)
@@ -31,10 +33,23 @@ public class TransactionDao extends AbstractDao<Long, Transaction> {
     public List<Transaction> listPendingTransactionByCustomerId(long cid) {
         Query query = getSession().createQuery(
                 "select t from Transaction t where " +
-                        "t.customer.id = :cid and " +
-                        "t.executeDate is null"
+                        "t.executeDate is null and " +
+                        "t.customer.id = :cid"
         )
                 .setParameter("cid", cid);
+        return (List<Transaction>) query.list();
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<Transaction> listPendingBuyFundByFundTicker(String ticker) {
+        Query query = getSession().createQuery(
+                "select t from Transaction t where " +
+                        "t.executeDate is null and " +
+                        "t.fund.ticker = :ticker and " +
+                        "t.type = :type"
+        )
+                .setParameter("ticker", ticker)
+                .setParameter("type", BUYFUND);
         return (List<Transaction>) query.list();
     }
 
@@ -42,8 +57,8 @@ public class TransactionDao extends AbstractDao<Long, Transaction> {
     public List<Transaction> listFinishTransactionByCustomerId(long cid) {
         Query query = getSession().createQuery(
                 "select t from Transaction t where " +
-                        "t.customer.id = :cid and " +
-                        "t.executeDate is not null"
+                        "t.executeDate is not null and " +
+                        "t.customer.id = :cid"
         )
                 .setParameter("cid", cid);
         return (List<Transaction>) query.list();
