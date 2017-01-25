@@ -52,6 +52,12 @@ public class FundService {
         fundPriceHistoryDao.save(fundPriceHistory);
     }
 
+    //get fund history by fundticker
+    public FundPriceHistory getFundPriceHistoryByTicker(String ticker){
+        FundPriceHistory fph =fundPriceHistoryDao.getFundPriceHistoryByFundTicker(ticker);
+        return fph;
+    }
+
     //list all available funds for purchasing
     public List<Fund> listFund() {
         return fundDao.listFund();
@@ -77,5 +83,7 @@ public class FundService {
         }
         return positionvalueList;
     }
+
+
 }
 

@@ -69,7 +69,7 @@ public class CreateFundController {
         }
 
         Fund fund = new Fund(createFundForm);
-        if (!FundService.createFund(fund)) {
+        if (!fundService.createFund(fund)) {
             FieldError fundNameUniqueError = new FieldError("createFundForm", "FundName",
                     messageSource.getMessage("fundNameUniqueError", new String[]{fund.getName()}, Locale.getDefault()));
             result.addError(fundNameUniqueError);

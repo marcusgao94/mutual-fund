@@ -26,8 +26,10 @@
 
 	<%--<a href="<c:url value="/request_check" />"><button>request check</button></a>--%>
 	<%--<a href="<c:url value="/deposit_check" />"><button>deposit check</button></a>--%>
+	<a href="<c:url value="/create_fund" />"><button>create fund</button></a>
 
 </div>
+
 
 <div>
 	<c:import url="bottom.jsp" />

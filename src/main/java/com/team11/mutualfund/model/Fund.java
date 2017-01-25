@@ -23,7 +23,7 @@ public class Fund implements Serializable {
 
     public Fund(CreateFundForm ff) {
         setName(ff.getName());
-        setSymbol(ff.getSymbol());
+        setTicker(ff.getSymbol());
     }
 
     public Long getId() {

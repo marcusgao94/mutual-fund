@@ -15,15 +15,13 @@ import com.team11.mutualfund.service.CustomerService;
 import com.team11.mutualfund.service.EmployeeService;
 import com.team11.mutualfund.utils.User;
 
-import static com.team11.mutualfund.utils.Constant.NOTLOGIN;
-
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import static com.team11.mutualfund.utils.Constant.CUSTOMERNOTEXIST;
-import static com.team11.mutualfund.utils.Constant.WRONGPASSWORD;
+
+import static com.team11.mutualfund.utils.Constant.*;
 
 public class ChangePasswordController {
 	
@@ -212,7 +210,8 @@ public class ChangePasswordController {
         */
        
        if (!customerService.checkCustomerbyId(cid)) {
-    	   		FieldError customerNotExitError = new FieldError("changePasswordForm","customerId", CUSTOMERNOTEXIST); 
+    	   		FieldError customerNotExitError = new FieldError("changePasswordForm",
+						"customerId", NOCUSTOMER);
 	   		result.addError(customerNotExitError);
        }
        

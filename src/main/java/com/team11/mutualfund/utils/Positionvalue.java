@@ -4,7 +4,7 @@ import com.team11.mutualfund.model.Fund;
 
 public class Positionvalue {
 
-    Fund fund;
+    private Fund fund;
 
     private double shares;
 

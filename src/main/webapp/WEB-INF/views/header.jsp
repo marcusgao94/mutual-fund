@@ -39,7 +39,7 @@
 								</a>
 							</li>
 							<li class="">
-								<a href="<c:url value="sell_fund.jsp" />">
+								<a href="<c:url value="/sell_fund" />">
 									<span class="glyphicon glyphicon-usd"></span>
 									Sell Funds
 								</a>

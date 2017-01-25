@@ -45,6 +45,7 @@ public class ResearchFundController {
         return "research_fund";
     }
 
+
     @RequestMapping(value = "/research_fund", method = RequestMethod.POST)
     public String depositCheck(HttpServletRequest request, Model model,
                                @Valid ResearchFundForm researchFundForm, BindingResult result,

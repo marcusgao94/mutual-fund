@@ -41,9 +41,6 @@ public class ViewAccountController {
     @Autowired
     private MessageSource messageSource;
 
-
-
-
     // employeeViewHistory
 
     @RequestMapping(value = "/employee_viewaccount", method = RequestMethod.GET)
@@ -53,12 +50,11 @@ public class ViewAccountController {
         if (user == null) {
             user = new User(null, "Guest", -1);
         }
-        Customer c = customerService.findCustomerByUserName(user.getUserName());
+        Customer c = customerService.getCustomerByUserName(user.getUserName());
         model.addAttribute("customer_account", c);
         
         return "employee_viewaccount";
     }
-
 
     // customer
 
@@ -69,7 +65,7 @@ public class ViewAccountController {
         if (user == null) {
             user = new User(null, "Guest", -1);
         }
-        Customer c = customerService.findCustomerByUserName(user.getUserName());
+        Customer c = customerService.getCustomerByUserName(user.getUserName());
         model.addAttribute("customer_account", c);
         
 //        Position p = 
