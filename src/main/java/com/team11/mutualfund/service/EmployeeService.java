@@ -20,7 +20,7 @@ public class EmployeeService {
 	private EmployeeDao employeeDao;
 	
 	public boolean createEmployee(Employee employee) {
-		if (employeeDao.getEmployeeByUserName(employee.getUserName()) != null) {
+		if (employeeDao.findByUserName(employee.getUserName()) != null) {
 			return false;
 		}
 		employeeDao.saveEmployee(employee);
@@ -28,7 +28,7 @@ public class EmployeeService {
 	}
 
 	public Employee getEmployeeByUserName(String userName) {
-		return employeeDao.getEmployeeByUserName(userName);
+		return employeeDao.findByUserName(userName);
 	}
 
 	/*
@@ -37,7 +37,7 @@ public class EmployeeService {
 	 * It will be updated in db once transaction ends. 
 	 */
 	public void updateEmployee(Employee employee) {
-		Employee entity = employeeDao.getEmployeeByUserName(employee.getUserName());
+		Employee entity = employeeDao.findByUserName(employee.getUserName());
 		if(entity!=null){
 			entity.setFirstName("edit success");
 		}

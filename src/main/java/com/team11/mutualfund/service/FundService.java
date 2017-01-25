@@ -16,6 +16,7 @@ import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
+import static com.team11.mutualfund.utils.Constant.DUPLICATEFUNDTICKER;
 import static com.team11.mutualfund.utils.Constant.NOCUSTOMER;
 import static com.team11.mutualfund.utils.Constant.NOFUNDPRICE;
 
@@ -35,11 +36,10 @@ public class FundService {
     @Autowired
     private CustomerDao customerDao;
 
-    public boolean createFund(Fund fund) {
+    public void createFund(Fund fund) throws RollbackException {
         if (fundDao.findByTicker(fund.getTicker()) != null)
-            return false;
+            throw new RollbackException(DUPLICATEFUNDTICKER);
         fundDao.saveFund(fund);
-        return true;
     }
 
     public void updateFundPrice(Fund fund, LocalDate date, double price) {
@@ -51,8 +51,7 @@ public class FundService {
 
     //get fund history by fundticker
     public FundPriceHistory getFundPriceHistoryByTicker(String ticker){
-        FundPriceHistory fph =fundPriceHistoryDao.getFundPriceHistoryByFundTicker(ticker);
-        return fph;
+        return fundPriceHistoryDao.findByFundTicker(ticker);
     }
 
     //list all available funds for purchasing
@@ -62,7 +61,7 @@ public class FundService {
     //list funds that a customer purchased
 
     public List<Positionvalue> listPositionvalueByCustomerId(long cid) throws RollbackException {
-        Customer customer = customerDao.getCustomerById(cid);
+        Customer customer = customerDao.findById(cid);
         if (customer == null)
             throw new RollbackException(NOCUSTOMER);
         List<Positionvalue> positionvalueList = new LinkedList();

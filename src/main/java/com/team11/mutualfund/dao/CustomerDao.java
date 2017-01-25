@@ -11,11 +11,11 @@ public class CustomerDao extends AbstractDao<Long, Customer> {
         persist(customer);
     }
 
-    public Customer getCustomerById(Long customerId) {
+    public Customer findById(Long customerId) {
         return getByKey(customerId);
     }
 
-    public Customer getCustomerByUserName(String userName) {
+    public Customer findByUserName(String userName) {
         Query query = getSession().createQuery(
                 "select c from Customer c where c.userName = :name"
         )
