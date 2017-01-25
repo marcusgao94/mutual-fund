@@ -1,5 +1,12 @@
 package com.team11.mutualfund.service;
 
+<<<<<<< HEAD
+=======
+import com.team11.mutualfund.dao.CustomerDao;
+import com.team11.mutualfund.model.Customer;
+import com.team11.mutualfund.utils.User;
+
+>>>>>>> branch 'master' of https://github.com/CMU-J2EE/Team11.git
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,15 +22,19 @@ public class CustomerService {
 	private CustomerDao customerDao;
 
 	public boolean createCustomer(Customer customer) {
-		if (customerDao.findCustomerByUserName(customer.getUserName()) != null) {
+		if (customerDao.getCustomerByUserName(customer.getUserName()) != null) {
 			return false;
 		}
 		customerDao.saveCustomer(customer);
 		return true;
 	}
 
-	public Customer findCustomerByUserName(String userName) {
-		return customerDao.findCustomerByUserName(userName);
+	public Customer getCustomerById(long id) {
+		return customerDao.getCustomerById(id);
+	}
+
+	public Customer getCustomerByUserName(String userName) {
+		return customerDao.getCustomerByUserName(userName);
 	}
 
 	/*
@@ -32,10 +43,51 @@ public class CustomerService {
 	 * It will be updated in db once transaction ends.
 	 */
 	public void updateCustomer(Customer customer) {
-		Customer entity = customerDao.findCustomerByUserName(customer.getUserName());
+		Customer entity = customerDao.getCustomerByUserName(customer.getUserName());
 		if(entity!=null){
 			entity.setFirstName("edit success");
 		}
 	}
+	/**
+	 * Used to tell whether the customer exist and if yes, update the password
+	 * @param c
+	 * @param confirmPassword
+	 * @return
+	 */
+	public Customer updateCustomerPassword(Long id, String confirmPassword) {
+		Customer c = findCustomerbyId(id);
 
+		customerDao.updatePassword(c, confirmPassword);
+		return c;
+	}
+	
+	public boolean updatePassword(Customer c, String confirmPassword) {
+		customerDao.updatePassword(c, confirmPassword);
+		return true;
+	}
+	
+	public Customer findCustomerbyId(long id) {
+		return customerDao.getCustomerById(id);
+	}
+	
+	public boolean checkCustomerbyId(long id) {
+		
+		Customer c = customerDao.getCustomerById(id);
+		
+		if (c == null) {
+			return false;
+		}
+		
+		return true;
+	}
+
+	public boolean matchPassword(Customer c, String oldPassword) {
+		
+		if (!c.getPassword().equals(oldPassword)) {
+			return false;
+		}
+		
+		return true;
+	}
+	
 }

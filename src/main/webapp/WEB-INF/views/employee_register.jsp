@@ -25,7 +25,7 @@
 
 	<h3>Employee Register</h3>
 
-	<form:form method="POST" modelAttribute="employeeForm">
+	<form:form method="POST" modelAttribute="employeeRegisterForm">
 		<table>
 
 
@@ -33,7 +33,7 @@
 				<td>User Name:</td>
 				<td>
 					<input type="text" name="userName"
-						   value="${employeeForm.getUserName()}"/>
+						   value="${employeeRegisterForm.getUserName()}"/>
 				</td>
 				<td>
 					<form:errors path="userName" cssClass="error"/>
@@ -64,7 +64,7 @@
 				<td>First Name:</td>
 				<td>
 					<input type="text" name="firstName"
-						   value="${employeeForm.getFirstName()}" autofocus/>
+						   value="${employeeRegisterForm.getFirstName()}" autofocus/>
 				</td>
 				<td>
 					<form:errors path="firstName" cssClass="error"/>
@@ -75,7 +75,7 @@
 				<td>Last Name:</td>
 				<td>
 					<input type="text" name="lastName"
-						   value="${employeeForm.getLastName()}"/>
+						   value="${employeeRegisterForm.getLastName()}"/>
 				</td>
 				<td>
 					<form:errors path="lastName" cssClass="error"/>

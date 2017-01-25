@@ -8,8 +8,12 @@ import java.util.List;
 
 @Repository
 public class FundDao extends AbstractDao<Long, Fund> {
-    public void saveDao(Fund fund) {
+    public void saveFund(Fund fund) {
         persist(fund);
+    }
+
+    public Fund getFundById(long id) {
+        return getByKey(id);
     }
 
     public List<Fund> listFund() {
@@ -17,10 +21,11 @@ public class FundDao extends AbstractDao<Long, Fund> {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Fund> listFundByCustomerId(long cid) {
+    public Fund getFundByFundId(long fid) {
         Query query = getSession().createQuery(
-                "select p from Position p where p.customer.id = :cid"
-        ).setParameter("cid", cid);
-        return (List<Fund>) query.list();
+                "select p from Fund p where p.id = :fid"
+        ).setParameter("fid", fid);
+        return (Fund) query.uniqueResult();
     }
+
 }

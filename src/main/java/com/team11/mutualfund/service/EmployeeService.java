@@ -17,17 +17,16 @@ public class EmployeeService {
 	private EmployeeDao employeeDao;
 	
 	public boolean createEmployee(Employee employee) {
-		if (employeeDao.findEmployeeByUserName(employee.getUserName()) != null) {
+		if (employeeDao.getEmployeeByUserName(employee.getUserName()) != null) {
 			return false;
 		}
 		employeeDao.saveEmployee(employee);
 		return true;
 	}
 
-	public Employee findEmployeeByUserName(String userName) {
-		return employeeDao.findEmployeeByUserName(userName);
+	public Employee getEmployeeByUserName(String userName) {
+		return employeeDao.getEmployeeByUserName(userName);
 	}
-
 
 	/*
 	 * Since the method is running with Transaction, No need to call hibernate update explicitly.
@@ -35,10 +34,24 @@ public class EmployeeService {
 	 * It will be updated in db once transaction ends. 
 	 */
 	public void updateEmployee(Employee employee) {
-		Employee entity = employeeDao.findEmployeeByUserName(employee.getUserName());
+		Employee entity = employeeDao.getEmployeeByUserName(employee.getUserName());
 		if(entity!=null){
 			entity.setFirstName("edit success");
 		}
+	}
+
+	public Boolean updatePassword(Employee e, String confirmPassword) {
+		
+		employeeDao.updatePassword(e, confirmPassword);
+		
+		return true;
+	}
+
+	public boolean matchPassword(Employee e, String confirmPassword) {
+		if (!e.getPassword().equals(confirmPassword)) {
+			return false;
+		}
+		return true;
 	}
 
 }

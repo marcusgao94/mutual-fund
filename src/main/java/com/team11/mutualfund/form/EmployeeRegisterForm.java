@@ -1,12 +1,37 @@
-package com.team11.mutualfund.utils;
+package com.team11.mutualfund.form;
 
 
-public class EmployeeForm {
+import org.springframework.validation.DirectFieldBindingResult;
+import org.springframework.validation.Errors;
+
+import javax.validation.constraints.Size;
+import java.util.Locale;
+
+import static com.team11.mutualfund.utils.Constant.EMPTYPASSWORD;
+import static com.team11.mutualfund.utils.Constant.EMPTYUSERNAME;
+import static com.team11.mutualfund.utils.Constant.INCONSISTENTPASSWORD;
+
+public class EmployeeRegisterForm {
+
+    @Size(min = 1, message = EMPTYUSERNAME)
     private String userName;
+
+    @Size(min = 1, message = EMPTYPASSWORD)
     private String password;
+
     private String confirmPassword;
+
     private String firstName;
+
     private String lastName;
+
+    public Errors getValidationErrors() {
+        Errors errors = new DirectFieldBindingResult(this, "employeeRegisterForm");
+        if (!password.equals(confirmPassword)) {
+            errors.rejectValue("confirmPassword", "2", INCONSISTENTPASSWORD);
+        }
+        return errors;
+    }
 
     public String sanitize(String s) {
         return s.replace("&", "&qmp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;");

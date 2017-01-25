@@ -27,7 +27,7 @@
 
 	<h3>Customer Register</h3>
 
-	<form:form method="POST" modelAttribute="customerForm">
+	<form:form method="POST" modelAttribute="customerRegisterForm">
 		<table>
 
 
@@ -35,7 +35,7 @@
 				<td>User Name:</td>
 				<td>
 					<input type="text" name="userName"
-						   value="${customerForm.getUserName()}"/>
+						   value="${customerRegisterForm.getUserName()}"/>
 				</td>
 				<td>
 					<form:errors path="userName" cssClass="error"/>
@@ -65,7 +65,7 @@
 				<td>First Name:</td>
 				<td>
 					<input type="text" name="firstName"
-						   value="${customerForm.getFirstName()}" autofocus/>
+						   value="${customerRegisterForm.getFirstName()}" autofocus/>
 				</td>
 				<td>
 					<form:errors path="firstName" cssClass="error"/>
@@ -76,7 +76,7 @@
 				<td>Last Name:</td>
 				<td>
 					<input type="text" name="lastName"
-						   value="${customerForm.getLastName()}"/>
+						   value="${customerRegisterForm.getLastName()}"/>
 				</td>
 				<td>
 					<form:errors path="lastName" cssClass="error"/>
@@ -87,7 +87,7 @@
 				<td>Address Line1:</td>
 				<td>
 					<input type="text" name="addr_line1"
-						   value="${customerForm.getAddr_line1()}"/>
+						   value="${customerRegisterForm.getAddr_line1()}"/>
 				</td>
 			</tr>
 
@@ -95,7 +95,7 @@
 				<td>Address Line2:</td>
 				<td>
 					<input type="text" name="addr_line2"
-						   value="${customerForm.getAddr_line2()}"/>
+						   value="${customerRegisterForm.getAddr_line2()}"/>
 				</td>
 			</tr>
 
@@ -103,17 +103,17 @@
 				<td>City:</td>
 				<td>
 					<input type="text" name="city"
-						   value="${customerForm.getCity()}"/>
+						   value="${customerRegisterForm.getCity()}"/>
 				</td>
 				<td>State:</td>
 				<td>
 					<input type="text" name="state"
-						   value="${customerForm.getState()}"/>
+						   value="${customerRegisterForm.getState()}"/>
 				</td>
 				<td>Zipcode:</td>
 				<td>
 					<input type="number" name="zip"
-						   value="${customerForm.getZip()}"/>
+						   value="${customerRegisterForm.getZip()}"/>
 				</td>
 			</tr>
 

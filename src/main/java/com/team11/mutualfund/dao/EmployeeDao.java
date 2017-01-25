@@ -12,11 +12,16 @@ public class EmployeeDao extends AbstractDao<Integer, Employee> {
 		persist(employee);
 	}
 
-	public Employee findEmployeeByUserName(String userName) {
+	public Employee getEmployeeByUserName(String userName) {
 		Query query = getSession().createQuery(
 				"select e from Employee e where e.userName = :name")
 				.setParameter("name", userName);
 		return (Employee) query.uniqueResult();
+	}
+
+	public Employee updatePassword(Employee e, String confirmPassword) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

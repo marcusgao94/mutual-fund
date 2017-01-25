@@ -51,7 +51,6 @@
 						</ul>
 					</li>
 
-
 					<c:if test="${user.type == 1}">
 						<li class="dropdown">
 							<a data-toggle="dropdown" class="dropdown-toggle"
@@ -60,11 +59,13 @@
 								an
 								Account <b class="caret"></b></a>
 							<ul class="dropdown-menu">
-								<li class=""><a href="<c:url value="/customer_register" />"><span
+								<li class=""><a
+										href="<c:url value="/customer_register" />"><span
 										class="glyphicon glyphicon-user"></span>
 									For
 									Customers</a></li>
-								<li class=""><a href="<c:url value="/employee_register" />"><span
+								<li class=""><a
+										href="<c:url value="/employee_register" />"><span
 										class="glyphicon glyphicon-user"></span>
 									For
 									Employees</a></li>

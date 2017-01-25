@@ -1,6 +1,6 @@
 package com.team11.mutualfund.model;
 
-import com.team11.mutualfund.utils.CustomerForm;
+import com.team11.mutualfund.form.CustomerRegisterForm;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,11 +36,14 @@ public class Customer implements Serializable {
 	@Column(nullable=true)
 	private Integer zip;
 
-	@Column(nullable=false)
+	@Column(nullable=false, scale = 2)
 	private double cash = 0.0;
 
+	@Column(scale = 2)
+	private double pendingCashDecrease = 0.0;
+
 	public Customer() {}
-	public Customer(CustomerForm cf) {
+	public Customer(CustomerRegisterForm cf) {
 		setUserName(cf.getUserName());
 		setPassword(cf.getPassword());
 		setFirstName(cf.getFirstName());
@@ -138,5 +141,13 @@ public class Customer implements Serializable {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public double getPendingCashDecrease() {
+		return pendingCashDecrease;
+	}
+
+	public void setPendingCashDecrease(double pendingCashDecrease) {
+		this.pendingCashDecrease = pendingCashDecrease;
 	}
 }

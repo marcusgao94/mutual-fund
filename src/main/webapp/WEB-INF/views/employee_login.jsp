@@ -20,7 +20,7 @@
 
 <div class="container">
 	<h3>Employee Login</h3>
-	<form:form method="post" modelAttribute="employeeForm">
+	<form:form method="post" modelAttribute="loginForm">
 		<table>
 			<c:if test="${not empty error}">
 				<tr>
@@ -30,7 +30,7 @@
 			<tr>
 				<td>User Name:</td>
 				<td><input type="text" name="userName"
-						   value="${employeeForm.getUserName()}" autofocus/>
+						   value="${loginForm.getUserName()}" autofocus/>
 				</td>
 				<td><form:errors path="userName" cssClass="error"/></td>
 			</tr>

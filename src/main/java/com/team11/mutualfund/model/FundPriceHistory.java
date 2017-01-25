@@ -9,6 +9,7 @@ public class FundPriceHistory implements Serializable {
     @EmbeddedId
     private FundDate fundDate;
 
+    @Column(scale = 2)
     private double price;
 
     @MapsId("fundId")
