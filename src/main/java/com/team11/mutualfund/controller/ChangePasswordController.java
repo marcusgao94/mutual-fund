@@ -1,7 +1,6 @@
 package com.team11.mutualfund.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.context.NoSuchMessageException;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -16,6 +15,8 @@ import com.team11.mutualfund.service.CustomerService;
 import com.team11.mutualfund.service.EmployeeService;
 import com.team11.mutualfund.utils.User;
 
+import static com.team11.mutualfund.utils.Constant.*;
+
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +24,6 @@ import javax.servlet.http.HttpSession;
 import javax.transaction.RollbackException;
 import javax.validation.Valid;
 
-import static com.team11.mutualfund.utils.Constant.*;
 
 public class ChangePasswordController {
 	
@@ -80,8 +80,8 @@ public class ChangePasswordController {
     		 * get the user from session attribute
     		 */
     		HttpSession session = request.getSession();
-    		String name = (String)((Employee) session.getAttribute("user")).getUserName();
-    		Employee e = employeeService.getEmployeeByUserName(name);
+    		String name = ((Employee) session.getAttribute("user")).getUserName();
+    		
     		
     		/*
     		 * confirm and update the password
@@ -89,22 +89,18 @@ public class ChangePasswordController {
     		String confirmPassword = changePasswordForm.getConfirmNewPassword();
     		
     		try {
-				if (!employeeService.matchPassword(e, confirmPassword)) {
-					FieldError wrongPasswordError = new FieldError("changePasswordForm", "password",
-							messageSource.getMessage("wrongPasswordError", null, Locale.getDefault()));
-					result.addError(wrongPasswordError);
-					return "employee_changepassword";
-				}
-			} catch (NoSuchMessageException | RollbackException e1) {
-				e1.printStackTrace();
+				employeeService.updatePassword(name, confirmPassword);
+			} catch (RollbackException e1) {
+				FieldError wrongPasswordError = new FieldError("changePasswordForm", "password",
+						messageSource.getMessage("wrongPasswordError", null, Locale.getDefault()));
+				result.addError(wrongPasswordError);
+				return "employee_changepassword";
 			} 
-  
-    		employeeService.updatePassword(e, confirmPassword);
-    			
-    		session.setAttribute("user", new User(null, e.getUserName(), 1));
+
+    		session.setAttribute("user", new User(null, name, 1));
     			
 		/*consider to separate the page*/
-		 model.addAttribute("success", "Employee " + e.getUserName() + " update password successfully");
+		 model.addAttribute("success", "Employee " + name + " update password successfully");
 		return "success";
     		
     }
@@ -151,25 +147,27 @@ public class ChangePasswordController {
     		HttpSession session = request.getSession();
     		Long cid = (Long) ((Customer) session.getAttribute("user")).getId();
     		
-    		Customer c = customerService.getCustomerById(cid);
+ 
     		
     		/*
     		 * confirm and update the password
     		 */
     		String confirmPassword = changePasswordForm.getConfirmNewPassword();
+    			
     		
-    		if (!customerService.matchPassword(cid, confirmPassword)) {
-    			FieldError wrongPasswordError = new FieldError("changePasswordForm", "password",
-    					messageSource.getMessage("wrongPasswordError", null, Locale.getDefault()));
-    			result.addError(wrongPasswordError);
-    			return "customer_changepassword";
-    		} 
-  
-    		customerService.updatePassword(c, confirmPassword);
-    			session.setAttribute("user", new User(cid, c.getUserName(), 1));
+    			try {
+					customerService.updatePassword(cid, confirmPassword);
+				} catch (RollbackException e) {
+		    			FieldError wrongPasswordError = new FieldError("changePasswordForm", "password",
+		    					messageSource.getMessage("wrongPasswordError", null, Locale.getDefault()));
+		    			result.addError(wrongPasswordError);
+		    			return "customer_changepassword";
+				}
+
+    			session.setAttribute("user", new User(cid, ((User) session.getAttribute("user")).getUserName(), 1));
     			
     			/*consider to separate the page*/
-    			 model.addAttribute("success", "Customer " + c.getUserName() + " update password successfully");
+    			 model.addAttribute("success", "Customer " + ((User) session.getAttribute("user")).getUserName() + " update password successfully");
     			return "success";
     		
     }
@@ -217,8 +215,7 @@ public class ChangePasswordController {
         */
        
        if (!customerService.checkCustomerbyId(cid)) {
-    	   		FieldError customerNotExitError = new FieldError("changePasswordForm",
-						"customerId", NOCUSTOMER);
+    	   		FieldError customerNotExitError = new FieldError("changePasswordForm","customerId", CUSTOMERNOTEXIST); 
 	   		result.addError(customerNotExitError);
        }
        
@@ -226,26 +223,29 @@ public class ChangePasswordController {
         * Check password
         */
        
-       if (!customerService.matchPassword(cid, changePasswordForm.getOriginPassword())) {
-    	   		FieldError wrongPasswordError = new FieldError("changePasswordForm", "password",
-    	   														WRONGPASSWORD);
+     
+    	   Customer c;
+		try {
+			c = customerService.updateCustomerPassword(cid, confirmPassword);
+		} catch (RollbackException e) {
+			FieldError wrongPasswordError = new FieldError("changePasswordForm", "password",
+						WRONGPASSWORD);
 			result.addError(wrongPasswordError);
-       }
-       
+		}
+
       /*
        * Update the password
        */
-       Customer c = customerService.updateCustomerPassword(cid, confirmPassword);
-
+       
     		if (result.hasErrors()) {
     			return "employee_changecuspassword";
     		}
 
 		HttpSession session = request.getSession();
-		session.setAttribute("user", new User(null, c.getUserName(), 0));
+		session.setAttribute("user", new User(null, ((User) session.getAttribute("user")).getUserName(), 0));
 		
 		/*consider to separate the page*/
-		model.addAttribute("success", "Customer " + c.getUserName() + " password has been updated successfully");
+		model.addAttribute("success", "Customer " + ((User) session.getAttribute("user")).getUserName() + " password has been updated successfully");
 		return "success";
     }
     

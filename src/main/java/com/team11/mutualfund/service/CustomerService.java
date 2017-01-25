@@ -5,12 +5,17 @@ import com.team11.mutualfund.dao.CustomerDao;
 import com.team11.mutualfund.model.Customer;
 import com.team11.mutualfund.utils.User;
 
+import static com.team11.mutualfund.utils.Constant.WRONGPASSWORD;
+
+import javax.transaction.RollbackException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.team11.mutualfund.dao.CustomerDao;
 import com.team11.mutualfund.model.Customer;
+import static com.team11.mutualfund.utils.Constant.*;
 
 @Service
 @Transactional // transaction for service layer
@@ -52,15 +57,30 @@ public class CustomerService {
 	 * @param confirmPassword
 	 * @return
 	 */
-	public Customer updateCustomerPassword(Long cid, String confirmPassword) {
-		Customer c = customerDao.getCustomerById(cid);
+	public Customer updateCustomerPassword(Long cid, String confirmPassword) throws RollbackException{
+		
+		
+		Customer c =  customerDao.getCustomerById(cid);
+		
+		if (!c.getPassword().equals(confirmPassword)) {
+			throw new RollbackException(WRONGPASSWORD);
+		}
+		
+		
 		c.setPassword(confirmPassword);
 		return c;
 	}
 	
-	public boolean updatePassword(Customer c, String confirmPassword) {
+	public void updatePassword(Long cid, String confirmPassword) throws RollbackException {
+		
+		Customer c =  customerDao.getCustomerById(cid);
+		
+		if (!c.getPassword().equals(confirmPassword)) {
+			throw new RollbackException(WRONGPASSWORD);
+		}
+		
 		customerDao.updatePassword(c, confirmPassword);
-		return true;
+	
 	}
 	
 	public Customer findCustomerbyId(long id) {
@@ -78,15 +98,4 @@ public class CustomerService {
 		return true;
 	}
 
-	public boolean matchPassword(Long cid, String oldPassword) {
-		
-		Customer c =  customerDao.getCustomerById(cid);
-		
-		if (!c.getPassword().equals(oldPassword)) {
-			return false;
-		}
-		
-		return true;
-	}
-	
 }
