@@ -3,7 +3,7 @@ package com.team11.mutualfund.model;
 import java.math.BigDecimal;
 
 public class Transition {
-    private int fundId;
+     int fundId;
     private BigDecimal price;
 
     public int getFundId() {
