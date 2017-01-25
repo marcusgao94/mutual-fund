@@ -32,7 +32,7 @@ public class CreateFundController {
     @Autowired
     MessageSource messageSource;
 
-    @RequestMapping(value = "/create_fund", method = RequestMethod.GET)
+    @RequestMapping(value = "/employee_createfund", method = RequestMethod.GET)
     public String createFund(HttpServletRequest request,
                                RedirectAttributes redirectAttributes, Model model) {
 
@@ -43,10 +43,10 @@ public class CreateFundController {
 
         CreateFundForm createFundForm = new CreateFundForm();
         model.addAttribute("createFundForm", createFundForm);
-        return "create_fund";
+        return "employee_createfund";
     }
 
-    @RequestMapping(value = "/create_fund", method = RequestMethod.POST)
+    @RequestMapping(value = "/employee_createfund", method = RequestMethod.POST)
     public String createFund(HttpServletRequest request, Model model,
                                @Valid CreateFundForm createFundForm, BindingResult result, RedirectAttributes ra) {
         if (!checkEmployee(request)) {
@@ -54,18 +54,18 @@ public class CreateFundController {
             return "redirect:/employee_login";
         }
         if (result.hasErrors())
-            return "create_fund";
+            return "employee_createfund";
         if (createFundForm.getName().isEmpty()) {
             FieldError emptyFundNameError = new FieldError("createFundForm", "fundName",
                     messageSource.getMessage("emptyFundName", null, Locale.getDefault()));
             result.addError(emptyFundNameError);
-            return "create_fund";
+            return "employee_createfund";
         }
         if (createFundForm.getSymbol().isEmpty()) {
             FieldError emptyFundSymbolError = new FieldError("createFundForm", "fundSymbol",
                     messageSource.getMessage("emptyFundSymbol", null, Locale.getDefault()));
             result.addError(emptyFundSymbolError);
-            return "create_fund";
+            return "employee_createfund";
         }
 
         Fund fund = new Fund(createFundForm);
@@ -73,7 +73,7 @@ public class CreateFundController {
             FieldError fundNameUniqueError = new FieldError("createFundForm", "FundName",
                     messageSource.getMessage("fundNameUniqueError", new String[]{fund.getName()}, Locale.getDefault()));
             result.addError(fundNameUniqueError);
-            return "create_fund";
+            return "employee_createfund";
         }
         model.addAttribute("success", "fund " + fund.getName() + " created successfully");
         return "success";

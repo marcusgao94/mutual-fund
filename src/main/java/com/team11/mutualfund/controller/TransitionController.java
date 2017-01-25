@@ -32,7 +32,7 @@ public class TransitionController {
     @Autowired
     MessageSource messageSource;
 
-    @RequestMapping(value = "/transition_day", method = RequestMethod.GET)
+    @RequestMapping(value = "/transitionday", method = RequestMethod.GET)
     public String transitionDay(HttpServletRequest request,
                                RedirectAttributes redirectAttributes, Model model) {
 
@@ -43,10 +43,10 @@ public class TransitionController {
 
         TransitionForm transitionForm = new TransitionForm();
         model.addAttribute("createFundForm", transitionForm);
-        return "transition_day";
+        return "transitionday";
     }
 
-    @RequestMapping(value = "/transition_day", method = RequestMethod.POST)
+    @RequestMapping(value = "/transitionday", method = RequestMethod.POST)
     public String createFund(HttpServletRequest request, Model model,
                                @Valid TransitionForm transitionForm, BindingResult result, RedirectAttributes ra) {
         if (!checkEmployee(request)) {
@@ -54,18 +54,18 @@ public class TransitionController {
             return "redirect:/employee_login";
         }
         if (result.hasErrors())
-            return "transition_day";
+            return "transitionday";
         if (transitionForm.getDate().isEmpty()) {
             FieldError emptyDateError = new FieldError("transitionForm", "date",
                     messageSource.getMessage("emptyDate", null, Locale.getDefault()));
             result.addError(emptyDateError);
-            return "transition_day";
+            return "transitionday";
         }
         if (transitionForm.getPrice().isEmpty()) {
             FieldError emptyPriceError = new FieldError("transitionForm", "price",
                     messageSource.getMessage("emptyPrice", null, Locale.getDefault()));
             result.addError(emptyPriceError);
-            return "transition_day";
+            return "transitionday";
         }
 
         Transition transition = new Transition(); //没写完
