@@ -3,6 +3,8 @@ package com.team11.mutualfund.service;
 import com.team11.mutualfund.dao.FundDao;
 import com.team11.mutualfund.dao.FundPriceHistoryDao;
 import com.team11.mutualfund.model.Fund;
+import com.team11.mutualfund.utils.Pair;
+
 
 import com.team11.mutualfund.model.FundDate;
 import com.team11.mutualfund.model.FundPriceHistory;
@@ -42,6 +44,12 @@ public class FundService {
     public List<Fund> listFund() {
         return fundDao.listFund();
     }
-    //list funds that a customer purchased
+    //get fund history by fundticker
+    public FundPriceHistory getFundPriceHistoryByTicker(String ticker){
+    		FundPriceHistory fph =fundPriceHistoryDao.getFundPriceHistoryByFundTicker(ticker);
+		return fph;
+    	
+    	
+    }
 }
 

@@ -10,12 +10,12 @@ public class FundPriceHistoryDao extends AbstractDao<Long, FundPriceHistory> {
         persist(fundPriceHistory);
     }
 
-    public FundPriceHistory getFundPriceHistoryByFundId(long fid) {
+    public FundPriceHistory getFundPriceHistoryByFundTicker(String ft) {
         Query query = getSession().createQuery(
                 "select fph from FundPriceHistory fph where " +
-                        "fph.fund.id = :fid"
+                        "fph.fund.id = :ft"
         )
-                .setParameter("fid", fid);
+                .setParameter("ft", ft);
         return (FundPriceHistory) query.uniqueResult();
     }
 }
