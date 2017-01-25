@@ -21,9 +21,11 @@ public class Fund implements Serializable {
     @Column(unique = true, nullable = false)
     private String ticker;
 
+    public Fund() {}
+
     public Fund(CreateFundForm ff) {
-        setName(ff.getName());
-        setTicker(ff.getSymbol());
+        setName(ff.getFundName());
+        setTicker(ff.getFundTicker());
     }
 
     public Long getId() {

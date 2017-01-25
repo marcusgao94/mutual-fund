@@ -18,34 +18,39 @@
 
 	<h3>Create Fund</h3>
 
-<div class="container">
-    <div class="row-fluid">
+	<div class="container">
+		<div class="row-fluid">
 
-            <div class="col-md-6">
+			<div class="col-md-6">
 
-              <table>
-                  <tbody>
-                  	<form:form method="post" modelAttribute="fundForm">
-                  	<tr>
-                  					<td>Fund Symbol:</td>
-                  					<td><input type="text" name="fundticker" value="${fundform.getSymbol()}"/></td>
-                  	</tr>
-                  	<tr>
-                  	                 <td>Fund Name:</td>
-                  	                 <td><input type="text" name="fundname" value="${fundform.getName()}"/></td>
-                  	</tr>
-                  	<tr>
-                  	                 <td><button type="submit" class="btn btn-default">Create</button></td>
-                  	                 <td><button type="submit" class="btn btn-default">Cancel</button></td>
-                  	</tr>
-                  	</form:form>                                                      
-
-                </tbody>
-              </table>
-              
-            </div>
-            </div>
-            <c:import url="bottom.jsp"/> 
-            </div>
+				<form:form method="post" modelAttribute="createFundForm">
+					<table>
+						<tbody>
+						<tr>
+							<td>Fund Symbol:</td>
+							<td><input type="text" name="fundTicker"
+									   value="${createFundForm.fundTicker}"/></td>
+						</tr>
+						<tr>
+							<td>Fund Name:</td>
+							<td><input type="text" name="fundName"
+									   value="${createFundForm.fundName}"/>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<button type="submit" class="btn btn-default">Create</button>
+							</td>
+							<td>
+								<button type="submit" class="btn btn-default">Cancel</button>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+				</form:form>
+			</div>
+		</div>
+	</div>
+	<c:import url="bottom.jsp"/>
 </body>
 </html>

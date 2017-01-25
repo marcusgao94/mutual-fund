@@ -55,13 +55,13 @@ public class CreateFundController {
         }
         if (result.hasErrors())
             return "employee_createfund";
-        if (createFundForm.getName().isEmpty()) {
+        if (createFundForm.getFundName().isEmpty()) {
             FieldError emptyFundNameError = new FieldError("createFundForm", "fundName",
                     messageSource.getMessage("emptyFundName", null, Locale.getDefault()));
             result.addError(emptyFundNameError);
             return "employee_createfund";
         }
-        if (createFundForm.getSymbol().isEmpty()) {
+        if (createFundForm.getFundTicker().isEmpty()) {
             FieldError emptyFundSymbolError = new FieldError("createFundForm", "fundSymbol",
                     messageSource.getMessage("emptyFundSymbol", null, Locale.getDefault()));
             result.addError(emptyFundSymbolError);

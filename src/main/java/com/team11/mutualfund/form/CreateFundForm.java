@@ -3,27 +3,26 @@ package com.team11.mutualfund.form;
 public class CreateFundForm {
 
     private String fundName;
-    private String fundSymbol;
+    private String fundTicker;
 
 
     public String sanitize(String s) {
         return s.replace("&", "&qmp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;");
     }
 
-    public String getName() {
+    public String getFundName() {
         return fundName;
     }
 
-    public void setName(String fundName) {
-        this.fundName = sanitize(fundName);
+    public void setFundName(String fundName) {
+        this.fundName = fundName;
     }
 
-    public String getSymbol() {
-        return fundSymbol;
+    public String getFundTicker() {
+        return fundTicker;
     }
 
-    public void setSymbol(String fundSymbol) {
-        this.fundSymbol = sanitize(fundSymbol);
+    public void setFundTicker(String fundTicker) {
+        this.fundTicker = fundTicker;
     }
-
 }

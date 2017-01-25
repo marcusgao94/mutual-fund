@@ -36,9 +36,6 @@ public class FundService {
     private CustomerDao customerDao;
 
     public boolean createFund(Fund fund) {
-        if (fundDao.findById(fund.getId()) != null) {
-            return false;
-        }
         if (fundDao.findByTicker(fund.getTicker()) != null)
             return false;
         fundDao.saveFund(fund);
