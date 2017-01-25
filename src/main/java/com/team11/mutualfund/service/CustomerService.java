@@ -1,12 +1,10 @@
 package com.team11.mutualfund.service;
 
-<<<<<<< HEAD
-=======
+
 import com.team11.mutualfund.dao.CustomerDao;
 import com.team11.mutualfund.model.Customer;
 import com.team11.mutualfund.utils.User;
 
->>>>>>> branch 'master' of https://github.com/CMU-J2EE/Team11.git
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -54,10 +52,9 @@ public class CustomerService {
 	 * @param confirmPassword
 	 * @return
 	 */
-	public Customer updateCustomerPassword(Long id, String confirmPassword) {
-		Customer c = findCustomerbyId(id);
-
-		customerDao.updatePassword(c, confirmPassword);
+	public Customer updateCustomerPassword(Long cid, String confirmPassword) {
+		Customer c = customerDao.getCustomerById(cid);
+		c.setPassword(confirmPassword);
 		return c;
 	}
 	
@@ -81,7 +78,9 @@ public class CustomerService {
 		return true;
 	}
 
-	public boolean matchPassword(Customer c, String oldPassword) {
+	public boolean matchPassword(Long cid, String oldPassword) {
+		
+		Customer c =  customerDao.getCustomerById(cid);
 		
 		if (!c.getPassword().equals(oldPassword)) {
 			return false;
