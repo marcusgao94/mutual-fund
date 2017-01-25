@@ -1,6 +1,7 @@
 package com.team11.mutualfund.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.context.NoSuchMessageException;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -21,6 +22,7 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.transaction.RollbackException;
 import javax.validation.Valid;
 import static com.team11.mutualfund.utils.Constant.CUSTOMERNOTEXIST;
 import static com.team11.mutualfund.utils.Constant.WRONGPASSWORD;
@@ -80,19 +82,24 @@ public class ChangePasswordController {
     		 * get the user from session attribute
     		 */
     		HttpSession session = request.getSession();
-    		Employee e = (Employee) session.getAttribute("user");
+    		String name = (String)((Employee) session.getAttribute("user")).getUserName();
+    		Employee e = employeeService.getEmployeeByUserName(name);
     		
     		/*
     		 * confirm and update the password
     		 */
     		String confirmPassword = changePasswordForm.getConfirmNewPassword();
     		
-    		if (!employeeService.matchPassword(e, confirmPassword)) {
-    			FieldError wrongPasswordError = new FieldError("changePasswordForm", "password",
-    					messageSource.getMessage("wrongPasswordError", null, Locale.getDefault()));
-    			result.addError(wrongPasswordError);
-    			return "employee_changepassword";
-    		} 
+    		try {
+				if (!employeeService.matchPassword(e, confirmPassword)) {
+					FieldError wrongPasswordError = new FieldError("changePasswordForm", "password",
+							messageSource.getMessage("wrongPasswordError", null, Locale.getDefault()));
+					result.addError(wrongPasswordError);
+					return "employee_changepassword";
+				}
+			} catch (NoSuchMessageException | RollbackException e1) {
+				e1.printStackTrace();
+			} 
   
     		employeeService.updatePassword(e, confirmPassword);
     			

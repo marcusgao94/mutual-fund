@@ -2,6 +2,8 @@ package com.team11.mutualfund.service;
 
 import java.util.List;
 
+import javax.transaction.RollbackException;
+
 import com.team11.mutualfund.dao.EmployeeDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,10 +49,11 @@ public class EmployeeService {
 		return true;
 	}
 
-	public boolean matchPassword(Employee e, String confirmPassword) {
-		if (!e.getPassword().equals(confirmPassword)) {
-			return false;
-		}
+	public boolean matchPassword(Employee e, String confirmPassword) throws RollbackException {		
+			if (!e.getPassword().equals(confirmPassword)) {
+				return false;
+			}
+			
 		return true;
 	}
 
