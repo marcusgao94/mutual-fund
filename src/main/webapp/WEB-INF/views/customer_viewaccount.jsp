@@ -90,8 +90,8 @@
     <div class="row-fluid">
       <div class="col-sm-12">
             <h3>Account Info</h3>
-                    <h4>Date of the last trading day: ？？？ </h4>
-                    <h4>${customer_account.cash} </h4>
+                    <h4> Date of the last trading day:</h4>
+                    <h4> Cash: ${customer_account.cash}</h4>
             <div class="col-md-6">
 
               <table>
@@ -99,22 +99,25 @@
 		<tr>
 			<th>Name of fund</th>
 			<th>Shares</th>
-			<th>value</th>
+			<th>Price</th>
+			<th>Value</th>
 		</tr>
 	</thead>
 	<tbody>
-                 <c:forEach var="customer_position" items="${customer_Position}">
+                 <c:forEach var="customer_pv" items="${customer_positionvalue}">
 			<tr>
 				<td>
-	 				${customer_position.fund.name}
+	 				${customer_pv.fund.name}
 				</td>
 				<td>
-	 				${customer_position.share}
+	 				${customer_pv.shares}
 				</td>
 				<td>
-	 				price?
+	 				${customer_pv.price}
 				</td>
-
+				<td>
+	 				${customer_pv.value}
+				</td>
 			</tr>
 		</c:forEach>
 		</tbody>

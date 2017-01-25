@@ -9,6 +9,7 @@ import com.team11.mutualfund.service.CustomerService;
 import com.team11.mutualfund.service.EmployeeService;
 import com.team11.mutualfund.service.FundService;
 import com.team11.mutualfund.service.TransactionService;
+import com.team11.mutualfund.utils.Positionvalue;
 import com.team11.mutualfund.utils.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -41,6 +42,9 @@ public class ViewAccountController {
 
     @Autowired
     private MessageSource messageSource;
+    
+    @Autowired
+    private FundService fundService;
 
     // employeeViewHistory
 
@@ -77,26 +81,11 @@ public class ViewAccountController {
         Customer c = customerService.getCustomerByUserName(user.getUserName());
         model.addAttribute("customer_account", c);
         
-//        Position p = 
+        List<Positionvalue> pv = fundService.listPositionvalueByCustomerId(user.getId());
+        model.addAttribute("customer_position", pv);
         return "customer_viewaccount";
     }
 
-//    @RequestMapping(value = "/customer_transactionhistory", method = RequestMethod.POST)
-//    public String customerViewAccount(HttpServletRequest request, Model model,
-//                                 @Valid CustomerRegisterForm customerRegisterForm, BindingResult result,
-//                                 RedirectAttributes redirectAttributes) {
-//    	
-//		HttpSession session = request.getSession();
-//		Customer c = (Customer) session.getAttribute("user");
-//		request.setAttribute("customer_account", c);
-//        //Customer c = customerService.findCustomerByUserName(customerRegisterForm.getUserName());
-//    	List<Transaction> pendingTransaction = transactionService.listPendingTransactionByCustomerId(c.getId());
-//        request.setAttribute("customer_pendingTransaction", pendingTransaction);
-//        
-//        List<Transaction> finishTransaction = transactionService.listFinishTransactionByCustomerId(c.getId());
-//        request.setAttribute("customer_finishTransaction", finishTransaction);
-//        
-//        return "customer_viewaccount";
-//    }
+
 
 }
