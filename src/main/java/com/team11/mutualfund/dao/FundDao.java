@@ -12,20 +12,8 @@ public class FundDao extends AbstractDao<Long, Fund> {
         persist(fund);
     }
 
-    public Fund getFundById(long id) {
+    public Fund findById(long id) {
         return getByKey(id);
-    }
-
-    public List<Fund> listFund() {
-        return listAll();
-    }
-
-    @SuppressWarnings("unchecked")
-    public Fund findByFundId(long fid) {
-        Query query = getSession().createQuery(
-                "select p from Fund p where p.id = :fid"
-        ).setParameter("fid", fid);
-        return (Fund) query.uniqueResult();
     }
 
     @SuppressWarnings("unchecked")
@@ -35,6 +23,10 @@ public class FundDao extends AbstractDao<Long, Fund> {
         )
                 .setParameter("ticker", ticker);
         return (Fund) query.uniqueResult();
+    }
+
+    public List<Fund> listFund() {
+        return listAll();
     }
 
 }

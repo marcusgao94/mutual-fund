@@ -6,6 +6,7 @@ import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Repository
 public class FundPriceHistoryDao extends AbstractDao<Long, FundPriceHistory> {
@@ -13,13 +14,15 @@ public class FundPriceHistoryDao extends AbstractDao<Long, FundPriceHistory> {
         persist(fundPriceHistory);
     }
 
-    public FundPriceHistory findByFundId(long fid) {
+    @SuppressWarnings("unchecked")
+    public List<FundPriceHistory> listByFundId(long fid) {
         Query query = getSession().createQuery(
                 "select fph from FundPriceHistory fph where " +
-                        "fph.fund.id = :fid"
+                        "fph.fund.id = :fid " +
+                        "order by fundDate.date desc"
         )
                 .setParameter("fid", fid);
-        return (FundPriceHistory) query.uniqueResult();
+        return (List<FundPriceHistory>) query.list();
     }
 
     public FundPriceHistory findByFundDate(FundDate fundDate) {

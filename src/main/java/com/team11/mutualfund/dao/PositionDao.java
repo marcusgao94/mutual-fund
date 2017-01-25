@@ -26,11 +26,11 @@ public class PositionDao extends AbstractDao<Long, Position> {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Fund> listFundByCustomerId(long cid) {
+    public List<Position> listByCustomerId(long cid) {
         Query query = getSession().createQuery(
                 "select p from Position p where p.customer.id = :cid"
         ).setParameter("cid", cid);
-        return (List<Fund>) query.list();
+        return (List<Position>) query.list();
     }
 
     public void delete(Position position) {

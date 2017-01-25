@@ -28,12 +28,13 @@ public class Constant {
 
     public static final String TOOLITTLESHARE = "share must >= 0.001";
 
-
     public static final String NOFUND = "fund does not exist";
 
     public static final String NOPOSITION = "this customer does not have this fund";
 
     public static final String NOFUNDPRICEHISTORY = "price of this fund on this date is not set";
+
+    public static final String NOFUNDPRICE = "fund has no price";
 
 
 }
