@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.team11.mutualfund.model.Employee;
+import static com.team11.mutualfund.utils.Constant.*;
 
 @Service
 @Transactional // transaction for service layer
@@ -42,19 +43,16 @@ public class EmployeeService {
 		}
 	}
 
-	public Boolean updatePassword(Employee e, String confirmPassword) {
+	public Boolean updatePassword(String name, String confirmPassword) throws RollbackException{
+		
+		Employee e = getEmployeeByUserName(name);
+		
+		if (!e.getPassword().equals(confirmPassword)) {
+			throw new RollbackException(WRONGPASSWORD);
+		}
 		
 		employeeDao.updatePassword(e, confirmPassword);
 		
 		return true;
 	}
-
-	public boolean matchPassword(Employee e, String confirmPassword) throws RollbackException {		
-			if (!e.getPassword().equals(confirmPassword)) {
-				return false;
-			}
-			
-		return true;
-	}
-
 }
