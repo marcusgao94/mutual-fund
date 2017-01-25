@@ -53,8 +53,8 @@
 				
  
              
-              </div><!--table-responsive close-->
-            </div><!--col-md-6 close-->
+              </div>
+            </div>
             
             
             <div class="col-md-6">
@@ -89,20 +89,12 @@
             </div>
 
 
-
-          
-          <h4>Date of the last trading day: ？？？ </h4>
+          <h4>Date of the last trading day: ${lastTransitonDay} </h4>
           
           
-		<input type="submit" name="button" value="transationday"/>
+		<input type="submit" name="button" value="Set Transation Day"/>
 		<input type="submit" name="button" value="Create an customer account"/>
-		<input type="submit" name="button" value="deposite fund"/>
-		
-				
-      
-		
-             
-        
+		<input type="submit" name="button" value="Deposite fund"/>
 
 <div>
 	<c:import url="bottom.jsp"/>
