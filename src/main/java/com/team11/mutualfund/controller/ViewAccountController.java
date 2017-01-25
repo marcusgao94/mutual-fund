@@ -24,7 +24,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-
+import static com.team11.mutualfund.controller.LoginController.checkCustomer;
+import static com.team11.mutualfund.controller.LoginController.checkEmployee;
 import static com.team11.mutualfund.utils.Constant.DUPLICATEUSERNAME;
 import static com.team11.mutualfund.utils.Constant.NOTLOGIN;
 
@@ -45,6 +46,10 @@ public class ViewAccountController {
 
     @RequestMapping(value = "/employee_viewaccount", method = RequestMethod.GET)
     public String employeeViewAccount(HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) {
+        if (!checkEmployee(request)) {
+            redirectAttributes.addFlashAttribute("loginError", NOTLOGIN);
+            return "redirect:/employee_login";
+        }
     	HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         if (user == null) {
@@ -59,7 +64,11 @@ public class ViewAccountController {
     // customer
 
     @RequestMapping(value = "customer_viewaccount", method = RequestMethod.GET)
-    public String customerViewAccount(HttpServletRequest request, Model model) {
+    public String customerViewAccount(HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) {
+        if (!checkCustomer(request)) {
+            redirectAttributes.addFlashAttribute("loginError", NOTLOGIN);
+            return "redirect:/customer_login";
+        }
     	HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         if (user == null) {
