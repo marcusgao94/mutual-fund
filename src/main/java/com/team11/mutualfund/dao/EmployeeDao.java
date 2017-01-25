@@ -1,14 +1,9 @@
 package com.team11.mutualfund.dao;
 
-import java.util.List;
-
-import org.hibernate.Criteria;
-import org.hibernate.query.*;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
-import com.team11.mutualfund.dao.*;
-import com.team11.mutualfund.model.*;
+import com.team11.mutualfund.model.Employee;
 
 @Repository
 public class EmployeeDao extends AbstractDao<Integer, Employee> {

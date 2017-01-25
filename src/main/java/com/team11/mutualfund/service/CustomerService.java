@@ -1,5 +1,6 @@
 package com.team11.mutualfund.service;
 
+
 import com.team11.mutualfund.dao.CustomerDao;
 import com.team11.mutualfund.model.Customer;
 import com.team11.mutualfund.utils.User;
@@ -8,13 +9,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.team11.mutualfund.dao.CustomerDao;
+import com.team11.mutualfund.model.Customer;
+
 @Service
 @Transactional // transaction for service layer
 public class CustomerService {
 
 	@Autowired
 	private CustomerDao customerDao;
-	
+
 	public boolean createCustomer(Customer customer) {
 		if (customerDao.getCustomerByUserName(customer.getUserName()) != null) {
 			return false;
@@ -34,7 +38,7 @@ public class CustomerService {
 	/*
 	 * Since the method is running with Transaction, No need to call hibernate update explicitly.
 	 * Just fetch the entity from db and update it with proper values within transaction.
-	 * It will be updated in db once transaction ends. 
+	 * It will be updated in db once transaction ends.
 	 */
 	public void updateCustomer(Customer customer) {
 		Customer entity = customerDao.getCustomerByUserName(customer.getUserName());
@@ -48,10 +52,9 @@ public class CustomerService {
 	 * @param confirmPassword
 	 * @return
 	 */
-	public Customer updateCustomerPassword(Long id, String confirmPassword) {
-		Customer c = findCustomerbyId(id);
-
-		customerDao.updatePassword(c, confirmPassword);
+	public Customer updateCustomerPassword(Long cid, String confirmPassword) {
+		Customer c = customerDao.getCustomerById(cid);
+		c.setPassword(confirmPassword);
 		return c;
 	}
 	
@@ -75,7 +78,9 @@ public class CustomerService {
 		return true;
 	}
 
-	public boolean matchPassword(Customer c, String oldPassword) {
+	public boolean matchPassword(Long cid, String oldPassword) {
+		
+		Customer c =  customerDao.getCustomerById(cid);
 		
 		if (!c.getPassword().equals(oldPassword)) {
 			return false;

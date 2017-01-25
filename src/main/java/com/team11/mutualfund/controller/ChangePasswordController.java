@@ -22,7 +22,7 @@ import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import static com.team11.mutualfund.utils.Constant.NOCUSTOMER;
+import static com.team11.mutualfund.utils.Constant.CUSTOMERNOTEXIST;
 import static com.team11.mutualfund.utils.Constant.WRONGPASSWORD;
 
 public class ChangePasswordController {
@@ -141,17 +141,19 @@ public class ChangePasswordController {
     			return "customer_changepassword";
     		}
     		/*
-    		 * get the user from session attribute
+    		 * get the user id from session attribute
     		 */
     		HttpSession session = request.getSession();
-    		Customer c = (Customer) session.getAttribute("user");
+    		Long cid = (Long) ((Customer) session.getAttribute("user")).getId();
+    		
+    		Customer c = customerService.getCustomerById(cid);
     		
     		/*
     		 * confirm and update the password
     		 */
     		String confirmPassword = changePasswordForm.getConfirmNewPassword();
     		
-    		if (!customerService.matchPassword(c, confirmPassword)) {
+    		if (!customerService.matchPassword(cid, confirmPassword)) {
     			FieldError wrongPasswordError = new FieldError("changePasswordForm", "password",
     					messageSource.getMessage("wrongPasswordError", null, Locale.getDefault()));
     			result.addError(wrongPasswordError);
@@ -159,7 +161,7 @@ public class ChangePasswordController {
     		} 
   
     		customerService.updatePassword(c, confirmPassword);
-    			session.setAttribute("user", new User(null, c.getUserName(), 1));
+    			session.setAttribute("user", new User(cid, c.getUserName(), 1));
     			
     			/*consider to separate the page*/
     			 model.addAttribute("success", "Customer " + c.getUserName() + " update password successfully");
@@ -202,17 +204,15 @@ public class ChangePasswordController {
             }
            
        
-       Long customerId = changePasswordForm.getCustomerId();
+       Long cid = changePasswordForm.getCustomerId();
        String confirmPassword = changePasswordForm.getConfirmNewPassword();
        
-       Customer c = customerService.findCustomerbyId(customerId);
        /*
         * Check Customer by id
         */
        
-       if (!customerService.checkCustomerbyId(customerId)) {
-    	   		FieldError customerNotExitError = new FieldError(
-    	   				"changePasswordForm", "customerId", NOCUSTOMER);
+       if (!customerService.checkCustomerbyId(cid)) {
+    	   		FieldError customerNotExitError = new FieldError("changePasswordForm","customerId", CUSTOMERNOTEXIST); 
 	   		result.addError(customerNotExitError);
        }
        
@@ -220,7 +220,7 @@ public class ChangePasswordController {
         * Check password
         */
        
-       if (!customerService.matchPassword(c, changePasswordForm.getOriginPassword())) {
+       if (!customerService.matchPassword(cid, changePasswordForm.getOriginPassword())) {
     	   		FieldError wrongPasswordError = new FieldError("changePasswordForm", "password",
     	   														WRONGPASSWORD);
 			result.addError(wrongPasswordError);
@@ -229,7 +229,7 @@ public class ChangePasswordController {
       /*
        * Update the password
        */
-       c = customerService.updateCustomerPassword(customerId, confirmPassword);
+       Customer c = customerService.updateCustomerPassword(cid, confirmPassword);
 
     		if (result.hasErrors()) {
     			return "employee_changecuspassword";
