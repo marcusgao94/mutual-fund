@@ -1,12 +1,18 @@
 package com.team11.mutualfund.service;
 
+<<<<<<< HEAD
+=======
 import com.team11.mutualfund.dao.CustomerDao;
 import com.team11.mutualfund.model.Customer;
 import com.team11.mutualfund.utils.User;
 
+>>>>>>> branch 'master' of https://github.com/CMU-J2EE/Team11.git
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.team11.mutualfund.dao.CustomerDao;
+import com.team11.mutualfund.model.Customer;
 
 @Service
 @Transactional // transaction for service layer
@@ -14,7 +20,7 @@ public class CustomerService {
 
 	@Autowired
 	private CustomerDao customerDao;
-	
+
 	public boolean createCustomer(Customer customer) {
 		if (customerDao.getCustomerByUserName(customer.getUserName()) != null) {
 			return false;
@@ -34,7 +40,7 @@ public class CustomerService {
 	/*
 	 * Since the method is running with Transaction, No need to call hibernate update explicitly.
 	 * Just fetch the entity from db and update it with proper values within transaction.
-	 * It will be updated in db once transaction ends. 
+	 * It will be updated in db once transaction ends.
 	 */
 	public void updateCustomer(Customer customer) {
 		Customer entity = customerDao.getCustomerByUserName(customer.getUserName());

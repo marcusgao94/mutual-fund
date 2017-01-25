@@ -7,6 +7,7 @@ import com.team11.mutualfund.model.Employee;
 import com.team11.mutualfund.model.Transaction;
 import com.team11.mutualfund.service.CustomerService;
 import com.team11.mutualfund.service.EmployeeService;
+import com.team11.mutualfund.service.FundService;
 import com.team11.mutualfund.service.TransactionService;
 import com.team11.mutualfund.utils.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,57 +43,55 @@ public class ViewAccountController {
 
 
 
+
     // employeeViewHistory
 
     @RequestMapping(value = "/employee_viewaccount", method = RequestMethod.GET)
     public String employeeViewAccount(HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) {
-
-        model.addAttribute("customerRegisterForm", new CustomerRegisterForm());
-        return "employee_viewaccount";
-    }
-    // employeeViewHistory
-    @RequestMapping(value = "/employee_viewaccount", method = RequestMethod.POST)
-    public String employeeViewAccount(HttpServletRequest request, Model model,
-                                 @Valid CustomerRegisterForm customerRegisterForm, BindingResult result,
-                                 RedirectAttributes redirectAttributes) {
-
-    	
-    	Customer c = customerService.findCustomerByUserName(customerRegisterForm.getUserName());
-    	List<Transaction> pendingTransaction = transactionService.listPendingTransactionByCustomerId(c.getId());
-        request.setAttribute("employee_pendingTransaction", pendingTransaction);
+    	HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            user = new User(null, "Guest", -1);
+        }
+        Customer c = customerService.findCustomerByUserName(user.getUserName());
+        model.addAttribute("customer_account", c);
         
-        List<Transaction> finishTransaction = transactionService.listFinishTransactionByCustomerId(c.getId());
-        request.setAttribute("employee_finishTransaction", finishTransaction);
-
         return "employee_viewaccount";
     }
+
 
     // customer
 
     @RequestMapping(value = "customer_viewaccount", method = RequestMethod.GET)
-    public String customerViewAccount(HttpServletRequest request, Model model,
-                                 RedirectAttributes redirectAttributes) {
-
-        model.addAttribute("customerRegisterForm", new CustomerRegisterForm());
+    public String customerViewAccount(HttpServletRequest request, Model model) {
+    	HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            user = new User(null, "Guest", -1);
+        }
+        Customer c = customerService.findCustomerByUserName(user.getUserName());
+        model.addAttribute("customer_account", c);
+        
+//        Position p = 
         return "customer_viewaccount";
     }
 
-    @RequestMapping(value = "/customer_transactionhistory", method = RequestMethod.POST)
-    public String customerViewAccount(HttpServletRequest request, Model model,
-                                 @Valid CustomerRegisterForm customerRegisterForm, BindingResult result,
-                                 RedirectAttributes redirectAttributes) {
-    	
-		HttpSession session = request.getSession();
-		Customer c = (Customer) session.getAttribute("user");
-		request.setAttribute("customer_account", c);
-        //Customer c = customerService.findCustomerByUserName(customerRegisterForm.getUserName());
-    	List<Transaction> pendingTransaction = transactionService.listPendingTransactionByCustomerId(c.getId());
-        request.setAttribute("customer_pendingTransaction", pendingTransaction);
-        
-        List<Transaction> finishTransaction = transactionService.listFinishTransactionByCustomerId(c.getId());
-        request.setAttribute("customer_finishTransaction", finishTransaction);
-        
-        return "customer_viewaccount";
-    }
+//    @RequestMapping(value = "/customer_transactionhistory", method = RequestMethod.POST)
+//    public String customerViewAccount(HttpServletRequest request, Model model,
+//                                 @Valid CustomerRegisterForm customerRegisterForm, BindingResult result,
+//                                 RedirectAttributes redirectAttributes) {
+//    	
+//		HttpSession session = request.getSession();
+//		Customer c = (Customer) session.getAttribute("user");
+//		request.setAttribute("customer_account", c);
+//        //Customer c = customerService.findCustomerByUserName(customerRegisterForm.getUserName());
+//    	List<Transaction> pendingTransaction = transactionService.listPendingTransactionByCustomerId(c.getId());
+//        request.setAttribute("customer_pendingTransaction", pendingTransaction);
+//        
+//        List<Transaction> finishTransaction = transactionService.listFinishTransactionByCustomerId(c.getId());
+//        request.setAttribute("customer_finishTransaction", finishTransaction);
+//        
+//        return "customer_viewaccount";
+//    }
 
 }

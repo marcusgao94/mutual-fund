@@ -27,7 +27,7 @@
 <div class="container">
     <div class="row-fluid">
       <div class="col-sm-12">
-        <h2>${customer_account.username}</h2>
+        <h2>${customer_account.userName}</h2>
             <h3>Basic Info</h3>
 
             <div class="col-md-6">
@@ -40,15 +40,15 @@
                     </tr>
                  <tr>
                     <td>FirstName</td>
-                    <td>${customer_account.firstname}</td>
+                    <td>${customer_account.firstName}</td>
                  </tr>
                  <tr>
                     <td>LastName</td>
-                    <td>${customer_account.lastname}</td>
+                    <td>${customer_account.lastName}</td>
                  </tr>
                  <tr>
                     <td>UserName</td>
-                    <td>customer_account.username0</td>
+                    <td>${customer_account.userName}</td>
                 </tr>
                 </tbody>
               </table>
@@ -90,7 +90,7 @@
     <div class="row-fluid">
       <div class="col-sm-12">
             <h3>Account Info</h3>
-                    <h4>Date of the last trading day: xxxx </h4>
+                    <h4>Date of the last trading day: ？？？ </h4>
                     <h4>${customer_account.cash} </h4>
             <div class="col-md-6">
 
