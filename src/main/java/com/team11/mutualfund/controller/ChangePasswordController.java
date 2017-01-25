@@ -215,8 +215,8 @@ public class ChangePasswordController {
         */
        
        if (!customerService.checkCustomerbyId(cid)) {
-    	   		FieldError customerNotExitError = new FieldError("changePasswordForm","customerId", CUSTOMERNOTEXIST); 
-	   		result.addError(customerNotExitError);
+    	   		FieldError customerNotExitError = new FieldError("changePasswordForm",
+						"customerId", NOCUSTOMER); result.addError(customerNotExitError);
        }
        
        /*
