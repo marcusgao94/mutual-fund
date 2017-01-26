@@ -63,6 +63,17 @@ public class CustomerService {
 		return c;
 	}
 	
+	
+	public Customer updatePassword(Long cid, String newPassword)
+			throws RollbackException {
+		Customer c =  customerDao.findById(cid);
+		if (c == null)
+			throw new javax.persistence.RollbackException(NOCUSTOMER);
+		
+		c.setPassword(newPassword);
+		return c;
+	}
+	
 	public Customer findCustomerbyId(long id) {
 		return customerDao.findById(id);
 	}

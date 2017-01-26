@@ -172,10 +172,10 @@ public class ChangePasswordController {
             return "employee_changecuspassword";
         }
 
-        String originPassword = changePasswordForm.getOriginPassword();
+       
         String newPassword = changePasswordForm.getNewPassword();
         try {
-            Customer c = customerService.updatePassword(cid, originPassword, newPassword);
+            Customer c = customerService.updatePassword(cid, newPassword);
 		    /*consider to separate the page*/
             model.addAttribute("success", "Customer " + c.getUserName() +
                     " password has been updated successfully");
