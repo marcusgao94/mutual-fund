@@ -131,6 +131,14 @@
 										Deposit Check
 									</a>
 								</li>
+								
+								<li>
+									<a href="<c:url value="/transitionday" />">
+										<i class="glyphicon glyphicon-user"></i>
+										Transition Day
+									</a>
+								</li>
+								
 							</c:if>
 							<c:if test="${user.type != -1}">
 								<li>
