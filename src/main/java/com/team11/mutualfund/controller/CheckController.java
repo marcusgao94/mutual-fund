@@ -80,7 +80,7 @@ public class CheckController {
         RequestCheckForm requestCheckForm = new RequestCheckForm();
         requestCheckForm.setCustomerId(customer.getId());
         double available = customer.getCash() - customer.getPendingCashDecrease();
-        requestCheckForm.setAvailable(Math.round(available * 100) / 100d);
+        requestCheckForm.setAvailable(available);
         model.addAttribute("requestCheckForm", requestCheckForm);
         return "request_check";
     }

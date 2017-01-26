@@ -61,9 +61,6 @@ public class FundService {
     //list funds that a customer purchased
 
     public List<Positionvalue> listPositionvalueByCustomerId(long cid) throws RollbackException {
-        Customer customer = customerDao.findById(cid);
-        if (customer == null)
-            throw new RollbackException(NOCUSTOMER);
         List<Positionvalue> positionvalueList = new LinkedList();
         List<Position> positionList = positionDao.listByCustomerId(cid);
         for (Position p : positionList) {

@@ -110,9 +110,9 @@
 									</a>
 								</li>
 							</c:if>
-							<c:if test="${user.type != -1}">
+							<c:if test="${user.type == 0}">
 								<li>
-									<a href="#">
+									<a href="<c:url value="/customer_viewaccount" />">
 										<i class="glyphicon glyphicon-user"></i>
 										View My Account
 									</a>
