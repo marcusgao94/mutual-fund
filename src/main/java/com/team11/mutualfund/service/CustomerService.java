@@ -68,7 +68,7 @@ public class CustomerService {
 			throws RollbackException {
 		Customer c =  customerDao.findById(cid);
 		if (c == null)
-			throw new javax.persistence.RollbackException(NOCUSTOMER);
+			throw new RollbackException(NOCUSTOMER);
 		
 		c.setPassword(newPassword);
 		return c;
