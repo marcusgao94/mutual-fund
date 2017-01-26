@@ -112,7 +112,7 @@
       <div class="col-sm-12">
             <h3>Account Info</h3>
                     <h4>Date of the last trading day: xxxx </h4>
-                    <h4>${customer_account.cash} </h4>
+                    <h4>Cash: ${customer_account.cash} </h4>
             <div class="col-md-6">
 
               <table>

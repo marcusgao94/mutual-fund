@@ -52,7 +52,7 @@ public class ViewAccountController {
 
     // employeeViewHistory
 
-    @RequestMapping(value = "/employee_viewaccount", method = RequestMethod.GET)
+    @RequestMapping(value = "/employee_searchcustomer", method = RequestMethod.GET)
     public String employeeViewAccount(HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) {
         if (!checkEmployee(request)) {
             redirectAttributes.addFlashAttribute("loginError", NOTLOGIN);
@@ -62,7 +62,7 @@ public class ViewAccountController {
         SearchForm SearchForm = new SearchForm();
         model.addAttribute("searchForm", SearchForm);
         
-        return "employee_viewaccount";
+        return "employee_searchcustomer";
     }
     
     @RequestMapping(value = "/employee_searchcustomer", method = RequestMethod.POST)
@@ -97,9 +97,9 @@ public class ViewAccountController {
         }
     	HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        if (user == null) {
-            user = new User(null, "Guest", -1);
-        }
+//        if (user == null) {
+//            user = new User(null, "Guest", -1);
+//        }
         Customer c = customerService.getCustomerByUserName(user.getUserName());
         model.addAttribute("customer_account", c);
         
@@ -107,7 +107,6 @@ public class ViewAccountController {
         model.addAttribute("customer_positionvalue", pv);
         return "customer_viewaccount";
     }
-
 
 
 }

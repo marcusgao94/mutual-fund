@@ -23,31 +23,30 @@
 </div>
 
 <div class="container">
-    <div class="row">
-    <br>
-        <div class="col-xs-9 col-xs-offset-1">
-        <div class="input-group">
-                <div class="input-group-btn search-panel">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                      <span id="search_concept">Filter by</span> <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu">
-                      <li><a href="#ID">ID</a></li>
-                      <li class="divider"></li>
-                      <li><a href="#FIRST NAME">First Name</a></li>
-                      <li class="divider"></li>
-                      <li><a href="#LAST NAME">Last Name</a></li>
-                    </ul>
-                </div>
-                <input type="hidden" name="search_param" value="all" id="search_param">
-                <input type="text" class="form-control" name="x" placeholder="Search term...">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
-                </span>
-            </div>
-        </div>
-  </div>
+<form:form method="post" modelAttribute="searchForm">
+		<table>
+			<tr>
+				<td> <form:errors path="" cssClass="error" /> </td>
+			</tr>
+			<tr>
+				<td>Search User Name:</td>
+				<td><input type="text" name="userName"
+						   value="${searchForm.userName}" autofocus/>
+				</td>
+				<td><form:errors path="userName" cssClass="error"/></td>
+			</tr>
+
+			<tr>
+				<th colspan="2">
+					<input type="submit" name="button" value="search"/>
+				</th>
+			</tr>
+
+		</table>
+	</form:form>
 </div>
+
+
 
 <div class="container">
 
