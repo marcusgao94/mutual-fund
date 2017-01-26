@@ -18,7 +18,7 @@
 </div>
 <div class="container">
 
-	<h3>My Account</h3>
+	<h3>Save Account</h3>
 
 
           <h4>Date of the last trading day: ${lastTransitonDay} </h4>
@@ -48,7 +48,7 @@
                  </tr>
                  <tr>
                     <td>LastName</td>
-                    <td>${employee_account.lastName}</td>
+                   <td>${employee_account.lastName}</td>
                  </tr>
                  <tr>
                     <td>UserName</td>
@@ -56,7 +56,7 @@
                 </tr>
                 
              	</table>
-               <a href="<c:url value="/employee_editaccount"/>"> <input type="submit" name="button" value="Edit"/> </a>
+               
 				<a href="<c:url value="/employee_changepassword"/>"> <input type="submit" name="button" value="Change Password"/> </a>
 
               </div>
@@ -69,24 +69,24 @@
                   <tbody>
                  <tr>
                      <td>Address</td>
-                     <td>${employee_account.addr_line1} ${employee_account.addr_line2}</td>
+                      <td><input type = "text" name = "address" value= ""/></td>
                  </tr>
                  <tr>
                      <td>State</td>
-                     <td>${employee_account.state}</td>
+                     <td><input type = "text" name = "state" value= ""/></td>
                   </tr>
                   <tr>
                      <td>City</td>
-                     <td>${employee_account.city}</td>
+                      <td><input type = "text" name = "city" value= ""/></td>
                   </tr>
                   <tr>
                      <td>ZIP</td>
-                     <td>${employee_account.zip}</td>
+                      <td><input type = "text" name = "zip" value= ""/></td>
                   </tr>
                 </tbody>
               </table>
               <div class="text-right">
-  <button type="button" class="btn btn-primary">Edit</button>
+  <button type="button" class="btn btn-primary">Save</button>
 </div>
             </div>
             </div>

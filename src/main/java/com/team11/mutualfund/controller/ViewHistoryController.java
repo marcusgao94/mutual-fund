@@ -2,6 +2,7 @@ package com.team11.mutualfund.controller;
 
 import com.team11.mutualfund.form.CustomerRegisterForm;
 import com.team11.mutualfund.form.EmployeeRegisterForm;
+import com.team11.mutualfund.form.SearchForm;
 import com.team11.mutualfund.model.Customer;
 import com.team11.mutualfund.model.Employee;
 import com.team11.mutualfund.model.Transaction;
@@ -24,8 +25,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import static com.team11.mutualfund.controller.LoginController.checkCustomer;
+import static com.team11.mutualfund.controller.LoginController.checkEmployee;
 import static com.team11.mutualfund.utils.Constant.DUPLICATEUSERNAME;
 import static com.team11.mutualfund.utils.Constant.NOTLOGIN;
+import static com.team11.mutualfund.utils.Constant.NOUSERNAME;
 
 import java.util.List;
 
@@ -44,27 +48,40 @@ public class ViewHistoryController {
 
     // employeeViewHistory
 
-    @RequestMapping(value = "/employee_transactionhistory", method = RequestMethod.GET)
+    @RequestMapping(value = "/employee_searchtransaction", method = RequestMethod.GET)
     public String employeeViewHistory(HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) {
-
-        model.addAttribute("customerRegisterForm", new CustomerRegisterForm());
-        return "employee_transactionhistory";
+    	if (!checkEmployee(request)) {
+            redirectAttributes.addFlashAttribute("loginError", NOTLOGIN);
+            return "redirect:/employee_login";
+        }
+    	
+        SearchForm SearchForm = new SearchForm();
+        model.addAttribute("searchForm", SearchForm);
+        
+        return "employee_searchtransaction";
     }
     // employeeViewHistory
-    @RequestMapping(value = "/employee_transactionhistory", method = RequestMethod.POST)
+    @RequestMapping(value = "/employee_searchtransaction", method = RequestMethod.POST)
     public String employeeViewHistory(HttpServletRequest request, Model model,
-                                 @Valid CustomerRegisterForm customerRegisterForm, BindingResult result,
+                                 @Valid SearchForm searchForm, BindingResult result,
                                  RedirectAttributes redirectAttributes) {
+        if (result.hasErrors())
+            return "employee_searchcustomer";
+        Customer c = customerService.getCustomerByUserName(searchForm.getUserName());
 
+        if (c == null) {
+            FieldError userNameExistError = new FieldError("searchForm", "userName", NOUSERNAME);
+            result.addError(userNameExistError);
+            return "employee_searchcustomer";
+        }
     	
-    	Customer c = customerService.getCustomerByUserName(customerRegisterForm.getUserName());
     	List<Transaction> pendingTransaction = transactionService.listPendingTransactionByCustomerId(c.getId());
         request.setAttribute("employee_pendingTransaction", pendingTransaction);
         
         List<Transaction> finishTransaction = transactionService.listFinishTransactionByCustomerId(c.getId());
         request.setAttribute("employee_finishTransaction", finishTransaction);
 
-        return "employee_transactionhistory";
+        return "redirect:/employee_transactionhistory";
     }
 
     // customer
@@ -72,17 +89,16 @@ public class ViewHistoryController {
     @RequestMapping(value = "customer_transactionhistory", method = RequestMethod.GET)
     public String customerViewHistory(HttpServletRequest request, Model model,
                                  RedirectAttributes redirectAttributes) {
-
-        model.addAttribute("customerRegisterForm", new CustomerRegisterForm());
-        return "customer_transactionhistory";
-    }
-
-    @RequestMapping(value = "/customer_transactionhistory", method = RequestMethod.POST)
-    public String customerViewHistory(HttpServletRequest request, Model model,
-                                 @Valid CustomerRegisterForm customerRegisterForm, BindingResult result,
-                                 RedirectAttributes redirectAttributes) {
-        Customer c = customerService.getCustomerByUserName(customerRegisterForm.getUserName());
-    	List<Transaction> pendingTransaction = transactionService.listPendingTransactionByCustomerId(c.getId());
+    	if (!checkCustomer(request)) {
+            redirectAttributes.addFlashAttribute("loginError", NOTLOGIN);
+            return "redirect:/customer_login";
+        }
+    	HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        
+        Customer c = customerService.getCustomerByUserName(user.getUserName());
+        
+        List<Transaction> pendingTransaction = transactionService.listPendingTransactionByCustomerId(c.getId());
         request.setAttribute("customer_pendingTransaction", pendingTransaction);
         
         List<Transaction> finishTransaction = transactionService.listFinishTransactionByCustomerId(c.getId());
@@ -90,5 +106,6 @@ public class ViewHistoryController {
         
         return "customer_transactionhistory";
     }
+
 
 }

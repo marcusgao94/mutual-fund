@@ -9,7 +9,6 @@ import com.team11.mutualfund.service.CustomerService;
 import com.team11.mutualfund.service.EmployeeService;
 import com.team11.mutualfund.service.FundService;
 import com.team11.mutualfund.service.TransactionService;
-import com.team11.mutualfund.utils.Positionvalue;
 import com.team11.mutualfund.utils.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -22,13 +21,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.persistence.RollbackException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import static com.team11.mutualfund.controller.LoginController.checkCustomer;
 import static com.team11.mutualfund.controller.LoginController.checkEmployee;
-import static com.team11.mutualfund.utils.Constant.CUSTOMERNOTLOGIN;
 import static com.team11.mutualfund.utils.Constant.DUPLICATEUSERNAME;
 import static com.team11.mutualfund.utils.Constant.NOTLOGIN;
 
@@ -45,23 +42,45 @@ public class ViewAccountController {
     @Autowired
     private FundService fundService;
 
-    @Autowired
-    private MessageSource messageSource;
-
     // employeeViewHistory
 
-    @RequestMapping(value = "/employee_viewaccount", method = RequestMethod.GET)
-    public String employeeViewAccount(HttpServletRequest request, Model model,
-                                      RedirectAttributes redirectAttributes) {
+    @RequestMapping(value = "/employee_searchcustomer", method = RequestMethod.GET)
+    public String employeeViewAccount(HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) {
         if (!checkEmployee(request)) {
             redirectAttributes.addFlashAttribute("loginError", NOTLOGIN);
             return "redirect:/employee_login";
         }
-    	HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        Customer c = customerService.getCustomerByUserName(user.getUserName());
-        model.addAttribute("customer_account", c);
-        return "employee_viewaccount";
+
+        SearchForm searchForm = new SearchForm();
+        model.addAttribute("searchForm", searchForm);
+
+        return "employee_searchcustomer";
+    }
+
+    @RequestMapping(value = "/employee_searchcustomer", method = RequestMethod.POST)
+    public String employeeViewAccount(HttpServletRequest request, Model model,
+                                      RedirectAttributes ra,
+                                @Valid SearchForm searchForm, BindingResult result) {
+        if (!checkEmployee(request)) {
+            redirectAttributes.addFlashAttribute("loginError", NOTLOGIN);
+            return "redirect:/employee_login";
+        }
+        if (result.hasErrors())
+            return "employee_searchcustomer";
+        Customer c = customerService.getCustomerByUserName(searchForm.getUserName());
+
+        if (c == null) {
+            FieldError userNameExistError = new FieldError("searchForm", "userName", NOUSERNAME);
+            result.addError(userNameExistError);
+            return "employee_searchcustomer";
+        }
+
+        model.addAttribute("employee_customeraccount", c);
+
+        List<Positionvalue> pv = fundService.listPositionvalueByCustomerId(c.getId());
+        model.addAttribute("employee_customerpositionvalue", pv);
+
+        return "redirect:/employee_viewaccount";
     }
 
     // customer
@@ -69,7 +88,7 @@ public class ViewAccountController {
     @RequestMapping(value = "customer_viewaccount", method = RequestMethod.GET)
     public String customerViewAccount(HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) {
         if (!checkCustomer(request)) {
-            redirectAttributes.addFlashAttribute("loginError", CUSTOMERNOTLOGIN);
+            redirectAttributes.addFlashAttribute("loginError", NOTLOGIN);
             return "redirect:/customer_login";
         }
     	HttpSession session = request.getSession();
