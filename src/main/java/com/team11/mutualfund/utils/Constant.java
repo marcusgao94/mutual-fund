@@ -27,6 +27,8 @@ public class Constant {
     public static final String NOFUNDPRICE = "fund has no price";
     public static final String DUPLICATEFUNDTICKER = "fund ticker already exists";
     public static final String NOFUNDPRICEHISTORY = "price of this fund on this date is not set";
+    public static final String DUPLICATEFUNDPRICEHISTORY = "price of this fund on this date " +
+            "has set";
 
 
 }

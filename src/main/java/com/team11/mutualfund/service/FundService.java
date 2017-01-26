@@ -16,9 +16,7 @@ import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
-import static com.team11.mutualfund.utils.Constant.DUPLICATEFUNDTICKER;
-import static com.team11.mutualfund.utils.Constant.NOCUSTOMER;
-import static com.team11.mutualfund.utils.Constant.NOFUNDPRICE;
+import static com.team11.mutualfund.utils.Constant.*;
 
 @Service
 @Transactional
@@ -46,10 +44,18 @@ public class FundService {
         return fundDao.findByTicker(ticker);
     }
 
-    public void updateFundPrice(Fund fund, LocalDate date, double price) {
+    public void updateFundPrice(String ticker, LocalDate date, double price)
+            throws RollbackException {
+        Fund fund = fundDao.findByTicker(ticker);
+        if (fund == null)
+            throw new RollbackException(NOFUND);
         FundPriceHistory fundPriceHistory = new FundPriceHistory();
+        FundDate fundDate = new FundDate(fund.getId(), date);
+        if (fundPriceHistoryDao.findByFundDate(fundDate) != null)
+            throw new RollbackException(DUPLICATEFUNDPRICEHISTORY);
         fundPriceHistory.setFundDate(new FundDate(fund.getId(), date));
         fundPriceHistory.setPrice(price);
+        fundPriceHistory.setFund(fund);
         fundPriceHistoryDao.save(fundPriceHistory);
     }
 
@@ -73,6 +79,7 @@ public class FundService {
             Positionvalue pv = new Positionvalue();
             pv.setFund(p.getFund());
             pv.setShares(p.getShares());
+            pv.setPrice(price);
             pv.setValue(p.getShares() * price);
             positionvalueList.add(pv);
         }

@@ -149,6 +149,8 @@ public class TransactionService {
                 customerFund.setFundId(t.getFund().getId());
                 position.setCustomerFund(customerFund);
                 position.setShares(shares);
+                position.setCustomer(customer);
+                position.setFund(fund);
                 positionDao.save(position);
             }
             else {

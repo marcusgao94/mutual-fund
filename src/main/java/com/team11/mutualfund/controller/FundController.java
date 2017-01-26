@@ -69,14 +69,16 @@ public class FundController {
             transactionService.buyFund(user.getId(), buyFundForm.getFundTicker(),
                 buyFundForm.getAmount());
 
-            /*
-            Fund fund = fundService.getFundByTicker(buyFundForm.getFundTicker());
-            fundService.updateFundPrice(fund, LocalDate.now(), 23);
-            transactionService.executeBuyFund(buyFundForm.getFundTicker(), LocalDate.now());
-            */
 
 
-            return "success";
+            // need delete !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//            fundService.updateFundPrice(buyFundForm.getFundTicker(), LocalDate.now().minusDays(3)
+//                    , 23);
+//            transactionService.executeBuyFund(buyFundForm.getFundTicker(), LocalDate.now());
+
+
+
+
         } catch (RollbackException e) {
             String message = e.getMessage();
             if (message.startsWith("customer"))
@@ -87,6 +89,7 @@ public class FundController {
                 result.rejectValue("amount", "", message);
             return "buy_fund";
         }
+        return "success";
     }
 
     @RequestMapping("sell_fund")
@@ -112,7 +115,6 @@ public class FundController {
         User user = (User) request.getSession().getAttribute("user");
         try {
             transactionService.sellFund(user.getId(), sellFundForm.getFundTicker(), sellFundForm.getShare());
-            return "success";
         } catch (RollbackException e) {
             String message = e.getMessage();
             if (message.startsWith("customer id"))
@@ -124,5 +126,6 @@ public class FundController {
                 result.rejectValue("share", "2", message);
             return "sell_fund";
         }
+        return "success";
     }
 }
