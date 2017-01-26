@@ -23,45 +23,44 @@
 	<h1>Transition Day</h1>
 	<label> Current Date is: </label>
 	<%
-			DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-			Date date = new Date();
-			out.println(df.format(date));
-		%>
-	<label> Enter Date(dd/MM/yyyy): </label>
-    <input type="text" name="date"><br>
-    </div>
-	
-	
-<p> 
-	<div class="form">
-	   <form:form method="post" modelAttribute="TransitionForm">	
-		 <table>
-		   <thead>
-	       <tr>
-	       <td><b>FundId</b></td>
-           <td><b>Fund</b></td>
-           <td><b>Fund Symbol</b></td>
-           <td><b>Current Price ($)</b></td>
-           <td><b>Enter New Price</b></td>
-           </tr>
-            </thead>
-            <tbody>
-               			<c:forEach var="listFund" items="${listFund}">
-               			 <tr>
-               			   <td>${listFund.getFundId()}</td>
-               			   <td>${listFund.getName()}</td>
-               			   <td>${listFund.getSymbol()}</td>
-               			   <td>${listFund.getPrice()}</td>
-	                       <td><input type="text" name="newPrice"/></td>
-	                      </tr>
-	                    </c:forEach>
-	        </tbody>
-		    </table>
-          </form:form> 
-        </div>
-</p>
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = new Date();
+		out.println(df.format(date));
+	%>
+	<form:form method="post" modelAttribute="transitionForm">
+		<label> Enter Date(dd/MM/yyyy): </label>
+		<input type="text" name="date" placeholder="dd/MM/yyyy"><br>
 
-           <button type="submit" class="btn btn-default">Submit</button>       
+
+		<p>
+		<div class="form">
+			<table>
+				<thead>
+				<tr>
+					<td><b>FundId</b></td>
+					<td><b>Fund</b></td>
+					<td><b>Fund Symbol</b></td>
+					<td><b>Current Price ($)</b></td>
+					<td><b>Enter New Price</b></td>
+				</tr>
+				</thead>
+				<tbody>
+				<c:forEach var="listFund" items="${listFund}">
+					<tr>
+						<td>${listFund.getFundId()}</td>
+						<td>${listFund.getName()}</td>
+						<td>${listFund.getSymbol()}</td>
+						<td>${listFund.getPrice()}</td>
+						<td><input type="text" name="newPrice"/></td>
+					</tr>
+				</c:forEach>
+				</tbody>
+			</table>
+		</div>
+		</p>
+	</form:form>
+
+	<button type="submit" class="btn btn-default">Submit</button>
 </div>
 <div>
 	<c:import url="bottom.jsp"/>
