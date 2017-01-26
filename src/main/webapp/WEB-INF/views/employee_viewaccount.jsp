@@ -22,34 +22,29 @@
 </div>
 
 <div class="container">
-    <div class="row">
-    <br>
-        <div class="col-xs-9 col-xs-offset-1">
-        <div class="input-group">
-                <div class="input-group-btn search-panel">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                      <span id="search_concept">Filter by</span> <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu">
-                      <li><a href="#ID">ID</a></li>
-                      <li class="divider"></li>
-                      <li><a href="#FIRST NAME">First Name</a></li>
-                      <li class="divider"></li>
-                      <li><a href="#LAST NAME">Last Name</a></li>
-                    </ul>
-                </div>
-                <input type="hidden" name="search_param" value="all" id="search_param">
-                <input type="text" class="form-control" name="x" placeholder="Search term...">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
-                </span>
-            </div>
-        </div>
-  </div>
+<form:form method="post" modelAttribute="searchForm">
+		<table>
+			<tr>
+				<td> <form:errors path="" cssClass="error" /> </td>
+			</tr>
+			<tr>
+				<td>Search User Name:</td>
+				<td><input type="text" name="userName"
+						   value="${searchForm.userName}" autofocus/>
+				</td>
+				<td><form:errors path="userName" cssClass="error"/></td>
+			</tr>
+
+			<tr>
+				<th colspan="2">
+					<input type="submit" name="button" value="search"/>
+				</th>
+			</tr>
+
+		</table>
+	</form:form>
 </div>
 
-
-<div class="container">
 
 <div class="container">
     <div class="row-fluid">
@@ -62,19 +57,19 @@
                   <tbody>
                     <tr>
                        <td>ID</td>
-                       <td>${customer_account.id}</td>
+                       <td>${employee_customeraccount.id}</td>
                     </tr>
                  <tr>
                     <td>FirstName</td>
-                    <td>${customer_account.firstname}</td>
+                    <td>${employee_customeraccount.firstName}</td>
                  </tr>
                  <tr>
                     <td>LastName</td>
-                    <td>${customer_account.lastname}</td>
+                    <td>${employee_customeraccount.lastName}</td>
                  </tr>
                  <tr>
                     <td>UserName</td>
-                    <td>customer_account.username0</td>
+                    <td>employee_customeraccount.userName</td>
                 </tr>
                 </tbody>
               </table>
@@ -87,25 +82,25 @@
                   <tbody>
                  <tr>
                      <td>Address</td>
-                     <td>${customer_account.addr_line1} ${customer_account.addr_line2}</td>
+                     <td>${employee_customeraccount.addr_line1} ${employee_customeraccount.addr_line2}</td>
                  </tr>
                  <tr>
                      <td>State</td>
-                     <td>${customer_account.state}</td>
+                     <td>${employee_customeraccount.state}</td>
                   </tr>
                   <tr>
                      <td>City</td>
-                     <td>${customer_account.city}</td>
+                     <td>${employee_customeraccount.city}</td>
                   </tr>
                   <tr>
                      <td>ZIP</td>
-                     <td>${customer_account.zip}</td>
+                     <td>${employee_customeraccount.zip}</td>
                   </tr>
                 </tbody>
               </table>
-              <div class="text-right">
+           <div class="text-right">
   <button type="button" class="btn btn-primary">Edit</button>
-</div>
+			<input type="button" value="Change Password" onclick="window.location='employee_changepassword.jsp';">
             </div>
             </div>
             </div>
@@ -125,22 +120,25 @@
 		<tr>
 			<th>Name of fund</th>
 			<th>Shares</th>
-			<th>value</th>
+			<th>Price</th>
+			<th>Value</th>
 		</tr>
 	</thead>
 	<tbody>
-                 <c:forEach var="customer_position" items="${customer_Position}">
+                 <c:forEach var="employee_cpv" items="${employee_customerpositionvalue}">
 			<tr>
 				<td>
-	 				${customer_position.fund.name}
+	 				${employee_cpv.fund.name}
 				</td>
 				<td>
-	 				${customer_position.share}
+	 				${employee_cpv.shares}
 				</td>
 				<td>
-	 				price?
+	 				${employee_cpv.price}
 				</td>
-
+				<td>
+	 				${employee_cpv.value}
+				</td>
 			</tr>
 		</c:forEach>
 		</tbody>

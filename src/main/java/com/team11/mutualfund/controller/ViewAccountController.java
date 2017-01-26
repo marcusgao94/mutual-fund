@@ -2,6 +2,8 @@ package com.team11.mutualfund.controller;
 
 import com.team11.mutualfund.form.CustomerRegisterForm;
 import com.team11.mutualfund.form.EmployeeRegisterForm;
+import com.team11.mutualfund.form.LoginForm;
+import com.team11.mutualfund.form.SearchForm;
 import com.team11.mutualfund.model.Customer;
 import com.team11.mutualfund.model.Employee;
 import com.team11.mutualfund.model.Transaction;
@@ -29,6 +31,8 @@ import static com.team11.mutualfund.controller.LoginController.checkCustomer;
 import static com.team11.mutualfund.controller.LoginController.checkEmployee;
 import static com.team11.mutualfund.utils.Constant.DUPLICATEUSERNAME;
 import static com.team11.mutualfund.utils.Constant.NOTLOGIN;
+import static com.team11.mutualfund.utils.Constant.NOUSERNAME;
+import static com.team11.mutualfund.utils.Constant.WRONGPASSWORD;
 
 import java.util.List;
 
@@ -54,16 +58,34 @@ public class ViewAccountController {
             redirectAttributes.addFlashAttribute("loginError", NOTLOGIN);
             return "redirect:/employee_login";
         }
-    	HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        if (user == null) {
-            user = new User(null, "Guest", -1);
-        }
-        Customer c = customerService.getCustomerByUserName(user.getUserName());
-        model.addAttribute("customer_account", c);
+        
+        SearchForm SearchForm = new SearchForm();
+        model.addAttribute("searchForm", SearchForm);
         
         return "employee_viewaccount";
     }
+    
+    @RequestMapping(value = "/employee_searchcustomer", method = RequestMethod.POST)
+    public String employeeViewAccount(HttpServletRequest request, Model model,
+                                @Valid SearchForm searchForm, BindingResult result) {
+        if (result.hasErrors())
+            return "employee_searchcustomer";
+        Customer c = customerService.getCustomerByUserName(searchForm.getUserName());
+
+        if (c == null) {
+            FieldError userNameExistError = new FieldError("searchForm", "userName", NOUSERNAME);
+            result.addError(userNameExistError);
+            return "employee_searchcustomer";
+        }
+
+        model.addAttribute("employee_customeraccount", c);
+        
+        List<Positionvalue> pv = fundService.listPositionvalueByCustomerId(c.getId());
+        model.addAttribute("employee_customerpositionvalue", pv);
+        
+        return "redirect:/employee_viewaccount";
+    }
+    
 
     // customer
 
