@@ -28,7 +28,7 @@
 		out.println(df.format(date));
 	%>
 	<form:form method="post" modelAttribute="transitionForm">
-		<label> Enter Date(dd/MM/yyyy): </label>
+		<label> Enter Date: </label>
 		<input type="text" name="date" placeholder="dd/MM/yyyy"><br>
 
 
@@ -37,11 +37,11 @@
 			<table>
 				<thead>
 				<tr>
-					<td><b>FundId</b></td>
-					<td><b>Fund</b></td>
-					<td><b>Fund Symbol</b></td>
-					<td><b>Current Price ($)</b></td>
-					<td><b>Enter New Price</b></td>
+					<td><br>FundId</br></td>
+					<td><br>Fund Name</br></td>
+					<td><br>Fund Symbol</br></td>
+					<td><br>Current Price ($)</br></td>
+					<td><br>Enter New Price</br></td>
 				</tr>
 				</thead>
 				<tbody>
