@@ -49,7 +49,8 @@ public class CreateFundController {
 
     @RequestMapping(value = "/employee_createfund", method = RequestMethod.POST)
     public String createFund(HttpServletRequest request, Model model,
-                               @Valid CreateFundForm createFundForm, BindingResult result, RedirectAttributes ra) {
+                             @Valid CreateFundForm createFundForm, BindingResult result,
+                             RedirectAttributes ra) {
         if (!checkEmployee(request)) {
             ra.addFlashAttribute("loginError", NOTLOGIN);
             return "redirect:/employee_login";

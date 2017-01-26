@@ -61,12 +61,16 @@ public class CheckController {
         try {
             transactionService.depositCheck(
                 depositCheckForm.getCustomerId(), depositCheckForm.getAmount());
+
+            transactionService.executeDepositCheck(
+                    depositCheckForm.getCustomerId(), LocalDate.now());
+
+
             return "success";
         } catch (RollbackException e) {
             result.rejectValue("customerId", "0", e.getMessage());
             return "deposit_check";
         }
-        //transactionService.executeDepositCheck(depositCheckForm.getCustomerId(), LocalDate.now());
     }
 
     @RequestMapping("/request_check")
@@ -101,6 +105,11 @@ public class CheckController {
         try {
             transactionService.requestCheck(
                 requestCheckForm.getCustomerId(), requestCheckForm.getAmount());
+
+
+            // transactionService.executeRequestCheck(
+            //        requestCheckForm.getCustomerId(), LocalDate.now());
+
             return "success";
         } catch (RollbackException e) {
             String message = e.getMessage();
@@ -110,7 +119,6 @@ public class CheckController {
                 result.rejectValue("amount", "1", message);
             return "request_check";
         }
-        //transactionService.executeRequestCheck(requestCheckForm.getCustomerId(), LocalDate.now());
     }
 
 }

@@ -43,16 +43,12 @@ public class EmployeeService {
 		}
 	}
 
-	public Boolean updatePassword(String name, String confirmPassword) throws RollbackException{
-		
-		Employee e = getEmployeeByUserName(name);
-		
-		if (!e.getPassword().equals(confirmPassword)) {
+	public Boolean updatePassword(String name, String originPassword,
+								  String newPassword) throws RollbackException {
+		Employee e = employeeDao.findByUserName(name);
+		if (!e.getPassword().equals(originPassword))
 			throw new RollbackException(WRONGPASSWORD);
-		}
-		
-		employeeDao.updatePassword(e, confirmPassword);
-		
+		e.setPassword(newPassword);
 		return true;
 	}
 }

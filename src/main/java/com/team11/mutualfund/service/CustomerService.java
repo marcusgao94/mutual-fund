@@ -51,36 +51,16 @@ public class CustomerService {
 			entity.setFirstName("edit success");
 		}
 	}
-	/**
-	 * Used to tell whether the customer exist and if yes, update the password
-	 * @param cid
-	 * @param confirmPassword
-	 * @return
-	 */
-	public Customer updateCustomerPassword(Long cid, String confirmPassword) throws RollbackException{
-		
-		
+
+	public Customer updatePassword(Long cid, String originPassword, String newPassword)
+			throws RollbackException {
 		Customer c =  customerDao.findById(cid);
-		
-		if (!c.getPassword().equals(confirmPassword)) {
+		if (c == null)
+			throw new javax.persistence.RollbackException(NOCUSTOMER);
+		if (!c.getPassword().equals(originPassword))
 			throw new RollbackException(WRONGPASSWORD);
-		}
-		
-		
-		c.setPassword(confirmPassword);
+		c.setPassword(newPassword);
 		return c;
-	}
-	
-	public void updatePassword(Long cid, String confirmPassword) throws RollbackException {
-		
-		Customer c =  customerDao.findById(cid);
-		
-		if (!c.getPassword().equals(confirmPassword)) {
-			throw new RollbackException(WRONGPASSWORD);
-		}
-		
-		customerDao.updatePassword(c, confirmPassword);
-	
 	}
 	
 	public Customer findCustomerbyId(long id) {

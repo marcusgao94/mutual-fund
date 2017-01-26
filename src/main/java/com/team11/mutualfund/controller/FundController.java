@@ -3,6 +3,9 @@ package com.team11.mutualfund.controller;
 import com.team11.mutualfund.dao.FundDao;
 import com.team11.mutualfund.form.BuyFundForm;
 import com.team11.mutualfund.form.SellFundForm;
+import com.team11.mutualfund.model.Customer;
+import com.team11.mutualfund.model.Fund;
+import com.team11.mutualfund.service.CustomerService;
 import com.team11.mutualfund.service.FundService;
 import com.team11.mutualfund.service.TransactionService;
 import com.team11.mutualfund.utils.Pair;
@@ -21,6 +24,8 @@ import javax.persistence.RollbackException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import java.time.LocalDate;
+
 import static com.team11.mutualfund.controller.LoginController.checkCustomer;
 import static com.team11.mutualfund.utils.Constant.CUSTOMERNOTLOGIN;
 
@@ -33,13 +38,19 @@ public class FundController {
     @Autowired
     private TransactionService transactionService;
 
+    @Autowired
+    private CustomerService customerService;
+
     @RequestMapping("buy_fund")
     public String buyFund(HttpServletRequest request, RedirectAttributes ra, Model model) {
         if (!checkCustomer(request)) {
             ra.addFlashAttribute("loginError", CUSTOMERNOTLOGIN);
             return "redirect:/customer_login";
         }
+        User user = (User) request.getSession().getAttribute("user");
+        Customer customer = customerService.getCustomerById(user.getId());
         BuyFundForm buyFundForm = new BuyFundForm();
+        buyFundForm.setAvailable(customer.getCash() - customer.getPendingCashDecrease());
         model.addAttribute("buyFundForm", buyFundForm);
         return "buy_fund";
     }
@@ -57,15 +68,23 @@ public class FundController {
         try {
             transactionService.buyFund(user.getId(), buyFundForm.getFundTicker(),
                 buyFundForm.getAmount());
+
+            /*
+            Fund fund = fundService.getFundByTicker(buyFundForm.getFundTicker());
+            fundService.updateFundPrice(fund, LocalDate.now(), 23);
+            transactionService.executeBuyFund(buyFundForm.getFundTicker(), LocalDate.now());
+            */
+
+
             return "success";
         } catch (RollbackException e) {
             String message = e.getMessage();
             if (message.startsWith("customer"))
                 result.rejectValue("", "0", message);
             else if (message.startsWith("fund"))
-                result.rejectValue("fundTicker", "1", message);
+                result.rejectValue("fundTicker", "", message);
             else
-                result.rejectValue("amount", "2", message);
+                result.rejectValue("amount", "", message);
             return "buy_fund";
         }
     }

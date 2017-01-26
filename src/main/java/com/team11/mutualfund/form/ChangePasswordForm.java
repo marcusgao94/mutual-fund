@@ -21,8 +21,8 @@ public class ChangePasswordForm {
 
     public Errors getValidationErrors() {
         Errors errors = new DirectFieldBindingResult(this, "changePasswordForm");
-        if (!newPassword.equals(confirmNewPassword))
-            errors.rejectValue("confirmNewPassword", "0", INCONSISTENTPASSWORD);
+        if (newPassword != null && !newPassword.equals(confirmNewPassword))
+            errors.rejectValue("confirmNewPassword", "", INCONSISTENTPASSWORD);
         return errors;
     }
 

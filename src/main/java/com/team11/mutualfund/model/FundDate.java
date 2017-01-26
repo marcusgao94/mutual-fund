@@ -11,7 +11,7 @@ import java.util.Objects;
 @Embeddable
 public class FundDate implements Serializable {
 
-    @Column(name = "fundId", insertable = false, updatable = false)
+    @Column(name = "fundId")
     private Long fundId;
 
     private LocalDate date;

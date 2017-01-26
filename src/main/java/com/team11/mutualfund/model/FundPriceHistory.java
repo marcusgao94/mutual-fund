@@ -14,7 +14,7 @@ public class FundPriceHistory implements Serializable {
 
     @MapsId("fundId")
     @ManyToOne
-    @JoinColumn
+    @JoinColumn()
     private Fund fund;
 
     public FundDate getFundDate() {

@@ -27,9 +27,10 @@
 					<table>
 						<tbody>
 						<tr>
-							<td>Fund Symbol:</td>
+							<td>Fund Ticker:</td>
 							<td><input type="text" name="fundTicker"
 									   value="${createFundForm.fundTicker}"/></td>
+							<form:errors path="fundTicker" cssClass="error" />
 						</tr>
 						<tr>
 							<td>Fund Name:</td>
@@ -39,10 +40,12 @@
 						</tr>
 						<tr>
 							<td>
-								<button type="submit" class="btn btn-default">Create</button>
+								<input type="submit" class="btn btn-default" value="submit" />
 							</td>
 							<td>
-								<button type="submit" class="btn btn-default">Cancel</button>
+								<a href="<c:url value="/home" />">
+									<button class="btn btn-primary">Cancel</button>
+								</a>
 							</td>
 						</tr>
 						</tbody>
