@@ -17,7 +17,7 @@
 </div>
 <div class="container">
 
-	<h3>Customer View Account</h3>
+	<h3>Research Fund</h3>
 	
 	
 	
@@ -31,6 +31,7 @@
 			    <div class="form-group">
 			      <label for="sel1">Select one fund:</label>
 			      <select class="form-control" id="sel1">
+			        <option>Please select:</option>
 			        <option>fundA</option>
 			        <option>fundB</option>
 			        <option>fundC</option>
@@ -39,13 +40,17 @@
 			    </div>
 			  </form:form>
 				
-				
-				<h3>Fund Info</h3>
+          <div class="panel panel-default">
+          <div class="panel-heading">
+            <span itemscope itemtype="http://schema.org/Review">
+            <h3 class="panel-title" itemprop="name">Fund Info</h3>
+          </div><!--/panel-heading-->
+          <div class="panel-body" itemprop="reviewBody">
 
 				<div class="col-md-6">
-
-					<table>
-						<tbody>
+		<div class="table-responsive responsiv-table">
+		              <table class="table bio-table">
+		                  <tbody>
 						<tr>
 							<td>FundTicker</td>
 							<td>${fund.ticker}</td>
@@ -55,12 +60,16 @@
 							<td>${fund.name}</td>
 						</tr>
 						</tbody>
+		
+						
 					</table>
 				</div><!--table-responsive close-->
 			</div><!--col-md-6 close-->
 			<div class="col-md-6">
+            <div class="table-responsive responsiv-table">
 
 				<table class="table bio-table">
+				<tbody>
 					<tr>
 						<td>Average Price</td>
 						<td>${fund.avgPrice} </td>
@@ -69,7 +78,7 @@
 						<td>Total Shares Sold</td>
 						<td>${fund.shares}</td>
 					</tr>
-
+				</tbody>
 				</table>
 
 			</div>
