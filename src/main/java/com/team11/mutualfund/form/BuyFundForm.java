@@ -17,6 +17,8 @@ public class BuyFundForm {
     @NotNull
     private Double amount;
 
+    private Double available;
+
     public Errors getValidationError() {
         Errors errors = new DirectFieldBindingResult(this, "buyFundForm");
         if (amount < 0.01) {
@@ -39,5 +41,13 @@ public class BuyFundForm {
 
     public void setAmount(Double amount) {
         this.amount = amount;
+    }
+
+    public Double getAvailable() {
+        return available;
+    }
+
+    public void setAvailable(Double available) {
+        this.available = available;
     }
 }

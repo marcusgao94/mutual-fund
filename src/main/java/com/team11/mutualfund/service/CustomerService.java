@@ -25,7 +25,7 @@ public class CustomerService {
 	private CustomerDao customerDao;
 
 	public boolean createCustomer(Customer customer) {
-		if (customerDao.getCustomerByUserName(customer.getUserName()) != null) {
+		if (customerDao.findByUserName(customer.getUserName()) != null) {
 			return false;
 		}
 		customerDao.saveCustomer(customer);
@@ -33,11 +33,11 @@ public class CustomerService {
 	}
 
 	public Customer getCustomerById(long id) {
-		return customerDao.getCustomerById(id);
+		return customerDao.findById(id);
 	}
 
 	public Customer getCustomerByUserName(String userName) {
-		return customerDao.getCustomerByUserName(userName);
+		return customerDao.findByUserName(userName);
 	}
 
 	/*
@@ -46,50 +46,41 @@ public class CustomerService {
 	 * It will be updated in db once transaction ends.
 	 */
 	public void updateCustomer(Customer customer) {
-		Customer entity = customerDao.getCustomerByUserName(customer.getUserName());
+		Customer entity = customerDao.findByUserName(customer.getUserName());
 		if(entity!=null){
 			entity.setFirstName("edit success");
 		}
 	}
-	/**
-	 * Used to tell whether the customer exist and if yes, update the password
-	 * @param id
-	 * @param confirmPassword
-	 * @return
-	 */
-	public Customer updateCustomerPassword(Long cid, String confirmPassword) throws RollbackException{
-		
-		
-		Customer c =  customerDao.getCustomerById(cid);
-		
-		if (!c.getPassword().equals(confirmPassword)) {
+
+	public Customer updatePassword(Long cid, String originPassword, String newPassword)
+			throws RollbackException {
+		Customer c =  customerDao.findById(cid);
+		if (c == null)
+			throw new javax.persistence.RollbackException(NOCUSTOMER);
+		if (!c.getPassword().equals(originPassword))
 			throw new RollbackException(WRONGPASSWORD);
-		}
-		
-		
-		c.setPassword(confirmPassword);
+		c.setPassword(newPassword);
 		return c;
 	}
 	
-	public void updatePassword(Long cid, String confirmPassword) throws RollbackException {
-		
-		Customer c =  customerDao.getCustomerById(cid);
-		
-		if (!c.getPassword().equals(confirmPassword)) {
-			throw new RollbackException(WRONGPASSWORD);
-		}
-		
-		customerDao.updatePassword(c, confirmPassword);
 	
+	public Customer updatePassword(Long cid, String newPassword)
+			throws RollbackException {
+		Customer c =  customerDao.findById(cid);
+		if (c == null)
+			throw new RollbackException(NOCUSTOMER);
+		
+		c.setPassword(newPassword);
+		return c;
 	}
 	
 	public Customer findCustomerbyId(long id) {
-		return customerDao.getCustomerById(id);
+		return customerDao.findById(id);
 	}
 	
 	public boolean checkCustomerbyId(long id) {
 		
-		Customer c = customerDao.getCustomerById(id);
+		Customer c = customerDao.findById(id);
 		
 		if (c == null) {
 			return false;

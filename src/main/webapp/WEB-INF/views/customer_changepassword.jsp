@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+	<meta charset="UTF-8">
 	<title>Change Password</title>
 	<style>
 		.error {
@@ -14,46 +14,54 @@
 	</style>
 </head>
 <body>
-	<div>
-		<c:import url= "/header" />
-	</div>
-	
+<div>
+	<c:import url="/header"/>
+</div>
+
+<div class="container">
+
 	<h5>Change Password</h5>
-        <table>
+	<form:form modelAttribute="changePasswordForm">
 
-        <tr>
-            <td>Old Password:</td>
-            <td>
-                <input type = "password" name = "old-password" value = "" autofocus/>
-            </td>
-        </tr>
+		<table>
 
-        <tr>
-            <td>New Password:</td>
-            <td>
-                <input type = "password" name = "new-password" value = "" autofocus/>
-            </td>
-        </tr>
+			<tr>
+				<td>Old Password:</td>
+				<td>
+					<input type="password" name="originPassword" value="" autofocus/>
+				</td>
+				<td><form:errors path="originPassword" cssClass="error"/></td>
+			</tr>
 
-        <tr>
-            <td>Confirm Password:</td>
-            <td>
-                <input type = "password" name ="confirm-password" value = ""/>
-            </td>
-        </tr>
+			<tr>
+				<td>New Password:</td>
+				<td>
+					<input type="password" name="newPassword" value="" autofocus/>
+				</td>
+				<td><form:errors path="newPassword" cssClass="error"/></td>
+			</tr>
 
+			<tr>
+				<td>Confirm Password:</td>
+				<td>
+					<input type="password" name="confirmNewPassword" value=""/>
+				</td>
+				<td><form:errors path="confirmNewPassword" cssClass="error"/></td>
+			</tr>
 
-        <tr>
-            <th colspan = "2">
-                <input type = "submit" name = "button" value = "Change Password"/>
-            </th>
-        </tr>
+			<tr>
+				<th colspan="2">
+					<input type="submit" name="button" value="Change Password"/>
+				</th>
+			</tr>
 
-    </table>
-    
-    <div>
-		<c:import url="bottom.jsp" />
-    </div>
-    </body>
+		</table>
+	</form:form>
+</div>
+
+<div>
+	<c:import url="bottom.jsp"/>
+</div>
+</body>
 
 </html>

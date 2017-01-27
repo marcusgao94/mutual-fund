@@ -3,16 +3,12 @@ package com.team11.mutualfund.service;
 import com.team11.mutualfund.dao.*;
 import com.team11.mutualfund.model.*;
 import com.team11.mutualfund.utils.Pair;
-import javafx.geometry.Pos;
-import javafx.scene.AmbientLight;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import sun.jvm.hotspot.runtime.posix.POSIXSignals;
 
 import javax.persistence.RollbackException;
-import javax.swing.*;
 import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
@@ -65,7 +61,7 @@ public class TransactionService {
     }
 
     public void buyFund(long cid, String ticker, double amount) throws RollbackException {
-        Customer customer = customerDao.getCustomerById(cid);
+        Customer customer = customerDao.findById(cid);
         Fund fund = fundDao.findByTicker(ticker);
         if (customer == null)
             throw new RollbackException("customer id " + String.valueOf(cid) + " does not exist");
@@ -78,10 +74,8 @@ public class TransactionService {
         transactionDao.saveTransaction(new Transaction(customer, fund, BUYFUND, null, amount));
     }
 
-
-
     public void sellFund(long cid, String ticker, double shares) throws RollbackException {
-        Customer customer = customerDao.getCustomerById(cid);
+        Customer customer = customerDao.findById(cid);
         Fund fund = fundDao.findByTicker(ticker);
         if (customer == null)
             throw new RollbackException("customer id " + String.valueOf(cid) + " does not exist");
@@ -107,7 +101,7 @@ public class TransactionService {
     }
 
     public void requestCheck(long cid, double amount) throws RollbackException {
-        Customer customer = customerDao.getCustomerById(cid);
+        Customer customer = customerDao.findById(cid);
         if (customer == null)
             throw new RollbackException("customer id " + String.valueOf(cid) + " does not exist");
 
@@ -120,7 +114,7 @@ public class TransactionService {
     }
 
     public void depositCheck(long cid, double amount) throws RollbackException {
-        Customer customer = customerDao.getCustomerById(cid);
+        Customer customer = customerDao.findById(cid);
         if (customer == null)
             throw new RollbackException("customer id " + String.valueOf(cid) + " does not exist");
         transactionDao.saveTransaction(new Transaction(customer, null, DEPOSITCHECK, null, amount));
@@ -155,6 +149,8 @@ public class TransactionService {
                 customerFund.setFundId(t.getFund().getId());
                 position.setCustomerFund(customerFund);
                 position.setShares(shares);
+                position.setCustomer(customer);
+                position.setFund(fund);
                 positionDao.save(position);
             }
             else {
@@ -203,7 +199,7 @@ public class TransactionService {
     }
 
     public void executeRequestCheck(long cid, LocalDate date) {
-        Customer customer = customerDao.getCustomerById(cid);
+        Customer customer = customerDao.findById(cid);
         List<Transaction> transactionList = transactionDao.listPendingTransactionByCustomerIdType(cid, REQUESTCHECK);
         for (Transaction t : transactionList) {
             t.setExectuteDate(date);

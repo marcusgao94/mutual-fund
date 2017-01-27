@@ -63,30 +63,6 @@
 							</li>
 						</ul>
 					</li>
-
-					<c:if test="${user.type == 1}">
-						<li class="dropdown">
-							<a data-toggle="dropdown" class="dropdown-toggle"
-							   href="#">
-								<span class="glyphicon glyphicon-user"></span>
-								Open an Account <b class="caret"></b>
-							</a>
-							<ul class="dropdown-menu">
-								<li class="">
-									<a href="<c:url value="/customer_register" />">
-										<span class="glyphicon glyphicon-user"></span>
-										For Customers
-									</a>
-								</li>
-								<li class="">
-									<a href="<c:url value="/employee_register" />">
-										<span class="glyphicon glyphicon-user"></span>
-										For Employees
-									</a>
-								</li>
-							</ul>
-						</li>
-					</c:if>
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
@@ -110,15 +86,63 @@
 									</a>
 								</li>
 							</c:if>
-							<c:if test="${user.type != -1}">
+							<c:if test="${user.type == 0}">
 								<li>
-									<a href="#">
+									<a href="<c:url value="/customer_viewaccount" />">
 										<i class="glyphicon glyphicon-user"></i>
 										View My Account
 									</a>
 								</li>
+							</c:if>
+							<c:if test="${user.type == 1}">
 								<li>
-									<a href="#">
+									<a href="<c:url value="/employee_register" />">
+										<span class="glyphicon glyphicon-user"></span>
+										Create an Employee
+									</a>
+								</li>
+								<li>
+									<a href="<c:url value="/customer_register" />">
+										<span class="glyphicon glyphicon-user"></span>
+										Create A Customer
+									</a>
+								</li>
+								<li>
+									<a href="<c:url value="/employee_searchcustomer" />">
+										<i class="glyphicon glyphicon-user"></i>
+										View Customer Account
+									</a>
+								</li>
+								<li>
+									<a href="<c:url value="/employee_searchcustomer" />">
+										<i class="glyphicon glyphicon-user"></i>
+										Reset Customer Password
+									</a>
+								</li>
+								<li>
+									<a href="<c:url value="/employee_createfund" />">
+										<i class="glyphicon glyphicon-user"></i>
+										Create Fund
+									</a>
+								</li>
+								<li>
+									<a href="<c:url value="/deposit_check" />">
+										<i class="glyphicon glyphicon-user"></i>
+										Deposit Check
+									</a>
+								</li>
+								
+								<li>
+									<a href="<c:url value="/transitionday" />">
+										<i class="glyphicon glyphicon-user"></i>
+										Transition Day
+									</a>
+								</li>
+								
+							</c:if>
+							<c:if test="${user.type != -1}">
+								<li>
+									<a href="<c:url value="/logout" />">
 										<i class="glyphicon glyphicon-off"></i>
 										Logout
 									</a>

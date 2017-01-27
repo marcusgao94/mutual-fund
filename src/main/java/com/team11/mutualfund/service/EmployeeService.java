@@ -20,7 +20,7 @@ public class EmployeeService {
 	private EmployeeDao employeeDao;
 	
 	public boolean createEmployee(Employee employee) {
-		if (employeeDao.getEmployeeByUserName(employee.getUserName()) != null) {
+		if (employeeDao.findByUserName(employee.getUserName()) != null) {
 			return false;
 		}
 		employeeDao.saveEmployee(employee);
@@ -28,7 +28,7 @@ public class EmployeeService {
 	}
 
 	public Employee getEmployeeByUserName(String userName) {
-		return employeeDao.getEmployeeByUserName(userName);
+		return employeeDao.findByUserName(userName);
 	}
 
 	/*
@@ -37,22 +37,18 @@ public class EmployeeService {
 	 * It will be updated in db once transaction ends. 
 	 */
 	public void updateEmployee(Employee employee) {
-		Employee entity = employeeDao.getEmployeeByUserName(employee.getUserName());
+		Employee entity = employeeDao.findByUserName(employee.getUserName());
 		if(entity!=null){
 			entity.setFirstName("edit success");
 		}
 	}
 
-	public Boolean updatePassword(String name, String confirmPassword) throws RollbackException{
-		
-		Employee e = getEmployeeByUserName(name);
-		
-		if (!e.getPassword().equals(confirmPassword)) {
+	public Boolean updatePassword(String name, String originPassword,
+								  String newPassword) throws RollbackException {
+		Employee e = employeeDao.findByUserName(name);
+		if (!e.getPassword().equals(originPassword))
 			throw new RollbackException(WRONGPASSWORD);
-		}
-		
-		employeeDao.updatePassword(e, confirmPassword);
-		
+		e.setPassword(newPassword);
 		return true;
 	}
 }

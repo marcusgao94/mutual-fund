@@ -16,8 +16,7 @@ import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
-import static com.team11.mutualfund.utils.Constant.NOCUSTOMER;
-import static com.team11.mutualfund.utils.Constant.NOFUNDPRICE;
+import static com.team11.mutualfund.utils.Constant.*;
 
 @Service
 @Transactional
@@ -35,24 +34,34 @@ public class FundService {
     @Autowired
     private CustomerDao customerDao;
 
-    public boolean createFund(Fund fund) {
+    public void createFund(Fund fund) throws RollbackException {
         if (fundDao.findByTicker(fund.getTicker()) != null)
-            return false;
+            throw new RollbackException(DUPLICATEFUNDTICKER);
         fundDao.saveFund(fund);
-        return true;
     }
 
-    public void updateFundPrice(Fund fund, LocalDate date, double price) {
+    public Fund getFundByTicker(String ticker) {
+        return fundDao.findByTicker(ticker);
+    }
+
+    public void updateFundPrice(String ticker, LocalDate date, double price)
+            throws RollbackException {
+        Fund fund = fundDao.findByTicker(ticker);
+        if (fund == null)
+            throw new RollbackException(NOFUND);
         FundPriceHistory fundPriceHistory = new FundPriceHistory();
+        FundDate fundDate = new FundDate(fund.getId(), date);
+        if (fundPriceHistoryDao.findByFundDate(fundDate) != null)
+            throw new RollbackException(DUPLICATEFUNDPRICEHISTORY);
         fundPriceHistory.setFundDate(new FundDate(fund.getId(), date));
         fundPriceHistory.setPrice(price);
+        fundPriceHistory.setFund(fund);
         fundPriceHistoryDao.save(fundPriceHistory);
     }
 
     //get fund history by fundticker
     public FundPriceHistory getFundPriceHistoryByTicker(String ticker){
-        FundPriceHistory fph =fundPriceHistoryDao.getFundPriceHistoryByFundTicker(ticker);
-        return fph;
+        return fundPriceHistoryDao.findByFundTicker(ticker);
     }
 
     //list all available funds for purchasing
@@ -61,20 +70,16 @@ public class FundService {
     }
     //list funds that a customer purchased
 
-    public List<Positionvalue> listPositionvalueByCustomerId(long cid) throws RollbackException {
-        Customer customer = customerDao.getCustomerById(cid);
-        if (customer == null)
-            throw new RollbackException(NOCUSTOMER);
+    public List<Positionvalue> listPositionvalueByCustomerId(long cid) {
         List<Positionvalue> positionvalueList = new LinkedList();
         List<Position> positionList = positionDao.listByCustomerId(cid);
         for (Position p : positionList) {
             List<FundPriceHistory> fph = fundPriceHistoryDao.listByFundId(p.getFund().getId());
-            if (fph == null)
-                throw new RollbackException(NOFUNDPRICE);
             double price = fph.get(0).getPrice();
             Positionvalue pv = new Positionvalue();
             pv.setFund(p.getFund());
             pv.setShares(p.getShares());
+            pv.setPrice(price);
             pv.setValue(p.getShares() * price);
             positionvalueList.add(pv);
         }

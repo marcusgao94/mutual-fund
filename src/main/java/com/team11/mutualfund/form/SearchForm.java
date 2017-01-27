@@ -14,7 +14,6 @@ public class SearchForm {
     @Size(min = 1, message = EMPTYUSERNAME)
     private String userName;
 
-
     public String getUserName() {
         return userName;
     }

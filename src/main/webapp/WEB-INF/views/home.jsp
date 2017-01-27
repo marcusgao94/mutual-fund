@@ -26,7 +26,7 @@
 
 	<%--<a href="<c:url value="/request_check" />"><button>request check</button></a>--%>
 	<%--<a href="<c:url value="/deposit_check" />"><button>deposit check</button></a>--%>
-	<a href="<c:url value="/employee_createfund" />"><button>create fund</button></a>
+	<%--<a href="<c:url value="/employee_createfund" />"><button>create fund</button></a>--%>
 
 </div>
 

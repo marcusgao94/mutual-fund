@@ -12,7 +12,7 @@ public class EmployeeDao extends AbstractDao<Integer, Employee> {
 		persist(employee);
 	}
 
-	public Employee getEmployeeByUserName(String userName) {
+	public Employee findByUserName(String userName) {
 		Query query = getSession().createQuery(
 				"select e from Employee e where e.userName = :name")
 				.setParameter("name", userName);

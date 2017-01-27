@@ -36,8 +36,17 @@
 			</tr>
 
 			<tr>
+				<td>available amount:</td>
+				<td>${buyFundForm.available}</td>
+					<input type="hidden" step="0.01" name="available"
+						   value="${buyFundForm.available}"/>
+				<td><form:errors path="available" cssClass="error"/></td>
+			</tr>
+
+			<tr>
 				<td>amount:</td>
-				<td><input type="number" step="0.01" name="amount" value="${buyFundForm.amount}"/></td>
+				<td><input type="number" step="0.01" name="amount"
+						   value="${buyFundForm.amount}"/></td>
 				<td><form:errors path="amount" cssClass="error"/></td>
 			</tr>
 

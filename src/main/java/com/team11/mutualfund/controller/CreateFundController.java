@@ -5,6 +5,7 @@ import static com.team11.mutualfund.utils.Constant.NOTLOGIN;
 
 import java.util.Locale;
 
+import javax.persistence.RollbackException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -48,35 +49,24 @@ public class CreateFundController {
 
     @RequestMapping(value = "/employee_createfund", method = RequestMethod.POST)
     public String createFund(HttpServletRequest request, Model model,
-                               @Valid CreateFundForm createFundForm, BindingResult result, RedirectAttributes ra) {
+                             @Valid CreateFundForm createFundForm, BindingResult result,
+                             RedirectAttributes ra) {
         if (!checkEmployee(request)) {
             ra.addFlashAttribute("loginError", NOTLOGIN);
             return "redirect:/employee_login";
         }
         if (result.hasErrors())
             return "employee_createfund";
-        if (createFundForm.getFundName().isEmpty()) {
-            FieldError emptyFundNameError = new FieldError("createFundForm", "fundName",
-                    messageSource.getMessage("emptyFundName", null, Locale.getDefault()));
-            result.addError(emptyFundNameError);
-            return "employee_createfund";
-        }
-        if (createFundForm.getFundTicker().isEmpty()) {
-            FieldError emptyFundSymbolError = new FieldError("createFundForm", "fundSymbol",
-                    messageSource.getMessage("emptyFundSymbol", null, Locale.getDefault()));
-            result.addError(emptyFundSymbolError);
-            return "employee_createfund";
-        }
 
         Fund fund = new Fund(createFundForm);
-        if (!fundService.createFund(fund)) {
-            FieldError fundNameUniqueError = new FieldError("createFundForm", "FundName",
-                    messageSource.getMessage("fundNameUniqueError", new String[]{fund.getName()}, Locale.getDefault()));
-            result.addError(fundNameUniqueError);
+        try {
+            fundService.createFund(fund);
+            model.addAttribute("success", "fund " + fund.getName() + " created successfully");
+            return "success";
+        } catch (RollbackException e){
+            result.rejectValue("fundTicker", "", e.getMessage());
             return "employee_createfund";
         }
-        model.addAttribute("success", "fund " + fund.getName() + " created successfully");
-        return "success";
     }
 
 }
