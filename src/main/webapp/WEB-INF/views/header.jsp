@@ -13,7 +13,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<div class="animbrand"><a href="#" class="navbar-brand">Singularity</a>
+				<div class="animbrand"><a href="<c:url value="/home" />" class="navbar-brand">Singularity</a>
 				</div>
 			</div>
 
@@ -58,7 +58,7 @@
 							<li class="">
 								<a href="<c:url value="/customer_researchfund"/>">
 									<span class="glyphicon glyphicon-search"></span>
-									Click Report
+									View Fund Analysis
 								</a>
 							</li>
 						</ul>

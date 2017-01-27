@@ -23,7 +23,7 @@ import java.time.LocalDate;
 
 import static com.team11.mutualfund.controller.LoginController.checkCustomer;
 import static com.team11.mutualfund.controller.LoginController.checkEmployee;
-import static com.team11.mutualfund.utils.Constant.NOTLOGIN;
+import static com.team11.mutualfund.utils.Constant.*;
 
 
 @Controller
@@ -36,7 +36,7 @@ public class ResearchFundController {
     public String researchFund(HttpServletRequest request,
                                RedirectAttributes redirectAttributes, Model model) {
         if (!checkCustomer(request)) {
-            redirectAttributes.addFlashAttribute("loginError", NOTLOGIN);
+            redirectAttributes.addFlashAttribute("loginError", CUSTOMERNOTLOGIN);
             return "redirect:/customer_login";
         }
 
@@ -51,7 +51,7 @@ public class ResearchFundController {
                                @Valid ResearchFundForm researchFundForm, BindingResult result,
                                RedirectAttributes ra) {
         if (!checkCustomer(request)) {
-            ra.addFlashAttribute("loginError", NOTLOGIN);
+            ra.addFlashAttribute("loginError", CUSTOMERNOTLOGIN);
             return "redirect:/customer_login";
         }
         if (result.hasErrors())
