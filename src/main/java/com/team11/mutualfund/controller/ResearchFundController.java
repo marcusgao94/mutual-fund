@@ -32,30 +32,30 @@ public class ResearchFundController {
     @Autowired
     private FundService fundService;
 
-    @RequestMapping("/research_fund")
+    @RequestMapping("/customer_researchfund")
     public String researchFund(HttpServletRequest request,
                                RedirectAttributes redirectAttributes, Model model) {
-        if (!checkEmployee(request)) {
+        if (!checkCustomer(request)) {
             redirectAttributes.addFlashAttribute("loginError", NOTLOGIN);
-            return "redirect:/employee_login";
+            return "redirect:/customer_login";
         }
 
         ResearchFundForm researchFundForm = new ResearchFundForm();
         model.addAttribute("researchFundForm", researchFundForm);
-        return "research_fund";
+        return "customer_researchfund";
     }
 
 
-    @RequestMapping(value = "/research_fund", method = RequestMethod.POST)
-    public String depositCheck(HttpServletRequest request, Model model,
+    @RequestMapping(value = "/cutomer_researchfund", method = RequestMethod.POST)
+    public String researchFund(HttpServletRequest request, Model model,
                                @Valid ResearchFundForm researchFundForm, BindingResult result,
                                RedirectAttributes ra) {
-        if (!checkEmployee(request)) {
+        if (!checkCustomer(request)) {
             ra.addFlashAttribute("loginError", NOTLOGIN);
-            return "redirect:/employee_login";
+            return "redirect:/customer_login";
         }
         if (result.hasErrors())
-            return "research_fund";
+            return "customer_researchfund";
         FundPriceHistory fundPriceHistory = fundService.getFundPriceHistoryByTicker(researchFundForm.getTicker());
         /*
         if (!pair.getRes()) {
@@ -67,6 +67,6 @@ public class ResearchFundController {
         session.setAttribute("fundPriceHistory", fundPriceHistory);
  
         // transactionService.executeDepositCheck(depositCheckForm.getCustomerId(), LocalDate.now());
-        return "research_fund"; //?
+        return "customer_researchfund"; //?
     }
 }

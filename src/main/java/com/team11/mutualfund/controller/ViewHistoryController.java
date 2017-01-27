@@ -81,7 +81,7 @@ public class ViewHistoryController {
         List<Transaction> finishTransaction = transactionService.listFinishTransactionByCustomerId(c.getId());
         request.setAttribute("employee_finishTransaction", finishTransaction);
 
-        return "redirect:/employee_transactionhistory";
+        return "employee_transactionhistory";
     }
 
     // customer

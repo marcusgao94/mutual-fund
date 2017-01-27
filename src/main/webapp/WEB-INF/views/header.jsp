@@ -56,7 +56,7 @@
 						</a>
 						<ul class="dropdown-menu">
 							<li class="">
-								<a href="#">
+								<a href="<c:url value="/customer_researchfund"/>">
 									<span class="glyphicon glyphicon-search"></span>
 									Click Report
 								</a>
@@ -131,6 +131,14 @@
 										Deposit Check
 									</a>
 								</li>
+								
+								<li>
+									<a href="<c:url value="/transitionday" />">
+										<i class="glyphicon glyphicon-user"></i>
+										Transition Day
+									</a>
+								</li>
+								
 							</c:if>
 							<c:if test="${user.type != -1}">
 								<li>

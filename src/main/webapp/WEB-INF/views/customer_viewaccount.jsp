@@ -56,6 +56,38 @@
 			</div><!--col-md-6 close-->
 			<div class="col-md-6">
 
+<<<<<<< HEAD
+            <div class="table-responsive responsiv-table">
+              <table class="table bio-table">
+                  <tbody>
+                 <tr>
+                     <td>Address</td>
+                     <td>${customer_account.addr_line1} ${customer_account.addr_line2}</td>
+                 </tr>
+                 <tr>
+                     <td>State</td>
+                     <td>${customer_account.state}</td>
+                  </tr>
+                  <tr>
+                     <td>City</td>
+                     <td>${customer_account.city}</td>
+                  </tr>
+                  <tr>
+                     <td>ZIP</td>
+                     <td>${customer_account.zip}</td>
+                  </tr>
+                </tbody>
+              </table>
+            <div class="text-right">
+<!--   <button type="button" class="btn btn-primary">Edit</button> -->
+			<input type="button" value="Change Password" onclick="window.location='customer_changepassword.jsp';">
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+=======
 				<table class="table bio-table">
 					<tr>
 						<td>Address</td>
@@ -83,6 +115,7 @@
 		</div>
 	</div>
 </div>
+>>>>>>> 9293251cdd9ab6e8e460eac002f280f26402dd28
 
 <div class="container">
 	<div class="row-fluid">
