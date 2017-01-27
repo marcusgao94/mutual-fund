@@ -27,7 +27,7 @@
 			<div class="col-sm-12">
 				<h2>${customer_account.userName}</h2>
 				
-			<form:form method="post">
+			<form:form method="post" modelAttribute="ResearchFundForm">
 			    <div class="form-group">
 			      <label for="sel1">Select one fund:</label>
 			      <select class="form-control" id="sel1">

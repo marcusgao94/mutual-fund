@@ -56,7 +56,7 @@
 						</a>
 						<ul class="dropdown-menu">
 							<li class="">
-								<a href="#">
+								<a href="<c:url value="/customer_researchfund"/>">
 									<span class="glyphicon glyphicon-search"></span>
 									Click Report
 								</a>
