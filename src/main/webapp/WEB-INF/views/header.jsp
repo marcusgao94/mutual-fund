@@ -58,7 +58,7 @@
 							<li class="">
 								<a href="<c:url value="/customer_researchfund"/>">
 									<span class="glyphicon glyphicon-search"></span>
-									Click Report
+									View Fund Analysis
 								</a>
 							</li>
 						</ul>
