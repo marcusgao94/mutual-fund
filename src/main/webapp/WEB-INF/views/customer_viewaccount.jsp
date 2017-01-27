@@ -78,7 +78,7 @@
                 </tbody>
               </table>
             <div class="text-right">
-  <button type="button" class="btn btn-primary">Edit</button>
+<!--   <button type="button" class="btn btn-primary">Edit</button> -->
 			<input type="button" value="Change Password" onclick="window.location='customer_changepassword.jsp';">
             </div>
             </div>

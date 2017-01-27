@@ -83,7 +83,7 @@ public class ViewAccountController {
         List<Positionvalue> pv = fundService.listPositionvalueByCustomerId(c.getId());
         model.addAttribute("employee_customerpositionvalue", pv);
         
-        return "redirect:/employee_viewaccount";
+        return "employee_viewaccount";
     }
     
 
