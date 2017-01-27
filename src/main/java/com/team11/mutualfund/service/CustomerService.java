@@ -64,12 +64,19 @@ public class CustomerService {
 	}
 	
 	
-	public Customer updatePassword(Long cid, String newPassword)
-			throws RollbackException {
+	public Customer updatePassword(Long cid, String newPassword) throws RollbackException {
 		Customer c =  customerDao.findById(cid);
 		if (c == null)
 			throw new RollbackException(NOCUSTOMER);
 		
+		c.setPassword(newPassword);
+		return c;
+	}
+
+	public Customer updatePassword(String userName, String newPassword) throws RollbackException {
+		Customer c =  customerDao.findByUserName(userName);
+		if (c == null)
+			throw new RollbackException(NOCUSTOMER);
 		c.setPassword(newPassword);
 		return c;
 	}

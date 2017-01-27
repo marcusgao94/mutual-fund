@@ -19,9 +19,4 @@ public class EmployeeDao extends AbstractDao<Integer, Employee> {
 		return (Employee) query.uniqueResult();
 	}
 
-	public Employee updatePassword(Employee e, String confirmPassword) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

@@ -3,9 +3,11 @@ package com.team11.mutualfund.form;
 import org.springframework.validation.DirectFieldBindingResult;
 import org.springframework.validation.Errors;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import static com.team11.mutualfund.utils.Constant.EMPTYPASSWORD;
+import static com.team11.mutualfund.utils.Constant.EMPTYUSERNAME;
 import static com.team11.mutualfund.utils.Constant.INCONSISTENTPASSWORD;
 
 public class ChangePasswordForm {
@@ -17,7 +19,9 @@ public class ChangePasswordForm {
 
     private String confirmNewPassword;
 
-	private Long customerId;
+    @NotNull
+    @Size(min = 1, message = EMPTYUSERNAME)
+	private String userName;
 
     public Errors getValidationErrors() {
         Errors errors = new DirectFieldBindingResult(this, "changePasswordForm");
@@ -50,8 +54,11 @@ public class ChangePasswordForm {
         this.confirmNewPassword = confirmNewPassword;
     }
 
-	public Long getCustomerId() {
-		
-		return customerId;
-	}
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 }

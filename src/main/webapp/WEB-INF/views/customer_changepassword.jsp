@@ -22,8 +22,13 @@
 
 	<h5>Change Password</h5>
 	<form:form modelAttribute="changePasswordForm">
-
 		<table>
+			<tr>
+				<td>
+					<input type="hidden" name="userName" value="${changePasswordForm.userName}">
+				</td>
+				<form:errors path="userName" cssClass="error" />
+			</tr>
 
 			<tr>
 				<td>Old Password:</td>
