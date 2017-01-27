@@ -34,7 +34,7 @@
 
 		<p>
 		<div class="form">
-			<table>
+			<table class="table">
 				<thead>
 				<tr>
 					<td><b>FundId</b></td>

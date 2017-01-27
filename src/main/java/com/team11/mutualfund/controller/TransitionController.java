@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team11.mutualfund.form.TransitionForm;
-import com.team11.mutualfund.model.Transition;
 import com.team11.mutualfund.service.FundService;
 
 
@@ -42,6 +41,7 @@ public class TransitionController {
         }
 
         TransitionForm transitionForm = new TransitionForm();
+
         model.addAttribute("createFundForm", transitionForm);
         return "transitionday";
     }
@@ -61,15 +61,11 @@ public class TransitionController {
             result.addError(emptyDateError);
             return "transitionday";
         }
-        if (transitionForm.getPrice().isEmpty()) {
-            FieldError emptyPriceError = new FieldError("transitionForm", "price",
-                    messageSource.getMessage("emptyPrice", null, Locale.getDefault()));
-            result.addError(emptyPriceError);
-            return "transitionday";
-        }
 
+        /*
         Transition transition = new Transition(); //没写完
         model.addAttribute("success", "fund " + transition.getFundId() + " updated successfully");
+        */
         return "success";
     }
 

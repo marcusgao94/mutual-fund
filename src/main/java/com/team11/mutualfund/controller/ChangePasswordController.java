@@ -172,7 +172,6 @@ public class ChangePasswordController {
             return "employee_changecuspassword";
         }
 
-       
         String newPassword = changePasswordForm.getNewPassword();
         try {
             Customer c = customerService.updatePassword(cid, newPassword);
