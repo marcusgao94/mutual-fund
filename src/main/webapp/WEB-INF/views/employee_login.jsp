@@ -20,6 +20,7 @@
 
 <div class="container">
 	<h3>Employee Login</h3>
+	<br>
 	<form:form method="post" modelAttribute="loginForm">
 		<table>
 			<c:if test="${not empty error}">
@@ -41,13 +42,18 @@
 				<td><form:errors path="password" cssClass="error"/></td>
 			</tr>
 
-			<tr>
+			<!-- <tr>
 				<td>
 					<label><input type="checkbox"> Remember me</label>
 				</td>
 
+			</tr> -->
+	
+			<tr>
+			<td><br/><td>
+			<td><br/><td>
 			</tr>
-
+			
 			<tr>
 				<th colspan="2">
 					<input type="submit" name="button" value="login"/>

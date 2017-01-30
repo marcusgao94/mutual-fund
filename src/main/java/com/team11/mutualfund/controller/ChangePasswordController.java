@@ -102,7 +102,7 @@ public class ChangePasswordController {
                                          RedirectAttributes redirectAttributes) {
         // Check whether the customer has logged in.
         if (!checkCustomer(request)) {
-            redirectAttributes.addFlashAttribute("loginError", NOTLOGIN);
+            redirectAttributes.addFlashAttribute("loginError", CUSTOMERNOTLOGIN);
             return "redirect:/customer_login";
         }
 
@@ -115,7 +115,7 @@ public class ChangePasswordController {
                                          @Valid ChangePasswordForm changePasswordForm, BindingResult result,
                                          RedirectAttributes redirectAttributes) {
         if (!checkCustomer(request)) {
-            redirectAttributes.addFlashAttribute("loginError", NOTLOGIN);
+            redirectAttributes.addFlashAttribute("loginError", CUSTOMERNOTLOGIN);
             return "redirect:/customer_login";
         }
 

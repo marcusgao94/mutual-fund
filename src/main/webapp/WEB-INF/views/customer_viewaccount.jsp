@@ -20,20 +20,18 @@
 <div>
 	<c:import url="/header"/>
 </div>
-<div class="container">
+<!-- <div class="container"> -->
 
-	<h3>Customer View Account</h3>
+	
 
 	<div class="container">
+	<h3>${customer_account.userName}'s Account</h3>
 		<div class="row-fluid">
 			<div class="col-sm-12">
-				<h2>${customer_account.userName}</h2>
 				<h3>Basic Info</h3>
 
 				<div class="col-md-6">
-
-					<table>
-						<tbody>
+					<table class="table bio-table">
 						<tr>
 							<td>ID</td>
 							<td>${customer_account.id}</td>
@@ -50,45 +48,15 @@
 							<td>UserName</td>
 							<td>${customer_account.userName}</td>
 						</tr>
-						</tbody>
-					</table>
-				</div><!--table-responsive close-->
-			</div><!--col-md-6 close-->
+					<!-- </table>
+				</div>table-responsive close
+			</div>col-md-6 close
+			
+			
+			
+			
 			<div class="col-md-6">
-
-<<<<<<< HEAD
-            <div class="table-responsive responsiv-table">
-              <table class="table bio-table">
-                  <tbody>
-                 <tr>
-                     <td>Address</td>
-                     <td>${customer_account.addr_line1} ${customer_account.addr_line2}</td>
-                 </tr>
-                 <tr>
-                     <td>State</td>
-                     <td>${customer_account.state}</td>
-                  </tr>
-                  <tr>
-                     <td>City</td>
-                     <td>${customer_account.city}</td>
-                  </tr>
-                  <tr>
-                     <td>ZIP</td>
-                     <td>${customer_account.zip}</td>
-                  </tr>
-                </tbody>
-              </table>
-            <div class="text-right">
-<!--   <button type="button" class="btn btn-primary">Edit</button> -->
-			<input type="button" value="Change Password" onclick="window.location='customer_changepassword.jsp';">
-            </div>
-            </div>
-            </div>
-            </div>
-            </div>
-            </div>
-=======
-				<table class="table bio-table">
+				<table class="table bio-table"> -->
 					<tr>
 						<td>Address</td>
 						<td>${customer_account.addr_line1} ${customer_account.addr_line2}</td>
@@ -106,6 +74,7 @@
 						<td>${customer_account.zip}</td>
 					</tr>
 				</table>
+				
 				<div class="text-right">
 					<a href="<c:url value="/customer_changepassword" />">
 						<button class="btn btn-default">change password</button>
@@ -115,7 +84,6 @@
 		</div>
 	</div>
 </div>
->>>>>>> 9293251cdd9ab6e8e460eac002f280f26402dd28
 
 <div class="container">
 	<div class="row-fluid">

@@ -13,7 +13,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<div class="animbrand"><a href="<c:url value="/home" />" class="navbar-brand">Singularity</a>
+				<div class="animbrand"><a href="<c:url value="/home" />" class="navbar-brand"><span style = "font-weight:bold">Singularity</span></a>
 				</div>
 			</div>
 
