@@ -60,8 +60,8 @@ public class FundService {
     }
 
     //get fund history by fundticker
-    public FundPriceHistory getFundPriceHistoryByTicker(String ticker){
-        return fundPriceHistoryDao.findByFundTicker(ticker);
+    public List<FundPriceHistory> getFundPriceHistoryByTicker(String ticker){
+        return fundPriceHistoryDao.listByFundTicker(ticker);
     }
 
     //list all available funds for purchasing

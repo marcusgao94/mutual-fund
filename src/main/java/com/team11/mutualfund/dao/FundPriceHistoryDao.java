@@ -25,13 +25,13 @@ public class FundPriceHistoryDao extends AbstractDao<Long, FundPriceHistory> {
         return (List<FundPriceHistory>) query.list();
     }
 
-    public FundPriceHistory findByFundTicker(String ft) {
+    public List<FundPriceHistory> listByFundTicker(String ft) {
         Query query = getSession().createQuery(
                 "select fph from FundPriceHistory fph where " +
                         "fph.fund.ticker = :ft"
         )
                 .setParameter("ft", ft);
-        return (FundPriceHistory) query.uniqueResult();
+        return (List<FundPriceHistory>) query.list();
     }
 
     public FundPriceHistory findByFundDate(FundDate fundDate) {
