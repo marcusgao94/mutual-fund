@@ -31,11 +31,9 @@
 			    <div class="form-group">
 			      <label for="sel1">Select one fund:</label>
 			      <select class="form-control" id="sel1">
-			        <option>Please select:</option>
-			        <option>fundA</option>
-			        <option>fundB</option>
-			        <option>fundC</option>
-			        <option>fundD</option>
+			      	<c:forEach var="funds" items="${funds}">
+				        <option>${funds.ticker}</option>				        
+				     </c:forEach>
 			      </select>
 			    </div>
 			  </form:form>
@@ -65,6 +63,7 @@
 					</table>
 				</div><!--table-responsive close-->
 			</div><!--col-md-6 close-->
+			<%--
 			<div class="col-md-6">
             <div class="table-responsive responsiv-table">
 
@@ -81,8 +80,9 @@
 				</tbody>
 				</table>
 
-			</div>
-		</div>
+			   </div>
+			   </div> 
+		       --%>
 	</div>
 </div>
 
@@ -100,13 +100,14 @@
 		      google.charts.load('current', {'packages':['corechart']});
 		      google.charts.setOnLoadCallback(drawChart);
 		      function drawChart() {
-		        // Define the chart to be drawn.
+		        // Define the chart to be drawn. ['2017-01-01',  3]
 		        var data = new google.visualization.arrayToDataTable([
 		            ['Date', 'fundName'],
-		            ['2017-01-01',  3],
-		            ['2017-01-02',  6],
-		            ['2017-01-03',  9],
-		            ['2017-01-04',  2]
+		            
+		            <c:forEach var="fundPriceHistory" items="${fundPriceHistory}">
+		            [${fundPriceHistory.fundDate.date}, ${fundPriceHistory.price}],		        
+			     	</c:forEach>
+		           
 		          ]);
 		
 		        var options = {
