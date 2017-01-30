@@ -21,43 +21,36 @@
 
 <div class="container">
 	<h1>Transition Day</h1>
-	<label> Current Date is: </label>
-	<%
-		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-		Date date = new Date();
-		out.println(df.format(date));
-	%>
+	<label> Last Transition Date is: ${lastTransitionday}</label>
 	<form:form method="post" modelAttribute="transitionForm">
-		<label> Enter Date: </label>
-		<input type="text" name="date" placeholder="dd/MM/yyyy"><br>
-
-
-		<p>
+		<label> Enter new Transition Date: </label>
+		<input type="text" name="newDate" placeholder="dd/MM/yyyy"><br>
 		<div class="form">
 			<table class="table">
 				<thead>
 				<tr>
-					<td><br>FundId</br></td>
-					<td><br>Fund Name</br></td>
-					<td><br>Fund Symbol</br></td>
-					<td><br>Current Price ($)</br></td>
-					<td><br>Enter New Price</br></td>
+					<td>Fund Ticker</td>
+					<td>Fund Name</td>
+					<td>Current Price ($)</td>
+					<td>Enter New Price</td>
 				</tr>
 				</thead>
 				<tbody>
-				<c:forEach var="listFund" items="${listFund}">
+				<c:forEach var="listFund" items="${transitionForm.fundList}" varStatus="status">
 					<tr>
-						<td>${listFund.getFundId()}</td>
-						<td>${listFund.getName()}</td>
-						<td>${listFund.getSymbol()}</td>
-						<td>${listFund.getPrice()}</td>
-						<td><input type="text" name="newPrice"/></td>
+						<td>${listFund.fund.ticker}</td>
+						<td>${listFund.fund.name}</td>
+						<td>${listFund.lastPrice}</td>
+						<td>
+							<form:input path="listFund[${status.index}].newPrice" type="number"
+										step="0.01"
+										value="${listFund.lastPrice}"/>
+						</td>
 					</tr>
 				</c:forEach>
 				</tbody>
 			</table>
 		</div>
-		</p>
 	</form:form>
 
 	<button type="submit" class="btn btn-default">Submit</button>
