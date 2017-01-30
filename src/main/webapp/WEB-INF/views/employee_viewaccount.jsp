@@ -47,13 +47,14 @@
 
 
 <div class="container">
+<h3>${employee_customeraccount.userName}'s Account</h3>
     <div class="row-fluid">
       <div class="col-sm-12">
             <h3>Basic Info</h3>
 
             <div class="col-md-6">
 
-              <table>
+              <table class="table bio-table">
                   <tbody>
                     <tr>
                        <td>ID</td>
@@ -69,17 +70,17 @@
                  </tr>
                  <tr>
                     <td>UserName</td>
-                    <td>employee_customeraccount.userName</td>
+                    <td>${employee_customeraccount.userName}</td>
                 </tr>
-                </tbody>
+               <!--  </tbody>
               </table>
-              </div><!--table-responsive close-->
-            </div><!--col-md-6 close-->
+              </div>table-responsive close
+            </div>col-md-6 close
             <div class="col-md-6">
 
             <div class="table-responsive responsiv-table">
               <table class="table bio-table">
-                  <tbody>
+                  <tbody> -->
                  <tr>
                      <td>Address</td>
                      <td>${employee_customeraccount.addr_line1} ${employee_customeraccount.addr_line2}</td>
@@ -100,9 +101,16 @@
               </table>
            <div class="text-right">
 <!--   <button type="button" class="btn btn-primary">Edit</button> -->
-			<input type="button" value="Change Password" onclick="window.location='customer_changepassword.jsp';"/>
-            <input type="button" value="Deposite Check" onclick="window.location='deposite_check.jsp';"/>
-            <input type="button" value="Change Password" onclick="window.location='customer_changepassword.jsp';"/>
+			<div class="text-right">
+				<a href="<c:url value="/customer_changepassword" />">
+					<input type = "button" value = "Change password" class="btn btn-default"/>
+				</a>
+				<a href="<c:url value="/deposite_check" />">
+					<input type = "button" value = "Deposit Check" class="btn btn-default"/>
+				</a>
+				
+			</div>
+            
             </div>
             </div>
             </div>
