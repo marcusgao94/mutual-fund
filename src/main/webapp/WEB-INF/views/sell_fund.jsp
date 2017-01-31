@@ -44,7 +44,7 @@
 
 			<tr>
 				<th colspan="2">
-					<input type="submit" name="button" value="buy"/>
+					<input type="submit" name="button" value="sell"/>
 				</th>
 			</tr>
 			
