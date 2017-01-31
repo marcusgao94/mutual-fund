@@ -33,7 +33,7 @@
 			</tr>
 			<tr>
 				<td>
-					<input class="btn btn-default" type="submit" name="button" value="search"/>
+					<input class="btn btn-default" type="submit" name="button" value="Search"/>
 				</td>
 			</tr>
 		</table>

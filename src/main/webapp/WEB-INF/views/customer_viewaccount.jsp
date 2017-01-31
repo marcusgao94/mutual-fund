@@ -70,7 +70,7 @@
 		<div class="col-xs-6">
 			<div class="text-right">
 			<a href="<c:url value="/customer_changepassword" />">
-				<button class="btn btn-default">change password</button>
+				<button class="btn btn-default">Change Password</button>
 			</a>
 			
 			<a href="<c:url value="/customer_transactionhistory" />">
@@ -107,7 +107,7 @@
 			<table class="table">
 				<thead>
 				<tr>
-					<th>Name of fund</th>
+					<th>Name of Fund</th>
 					<th>Shares</th>
 					<th>Price</th>
 					<th>Value</th>

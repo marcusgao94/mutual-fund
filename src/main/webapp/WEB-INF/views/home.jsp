@@ -23,7 +23,7 @@
 <div class="container">
 	<h1> Welcome to Singularity Mutual Fund </h1>
 	<P>
-		Current time is
+		Current Time is
 		<%
 			DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 			Date date = new Date();
