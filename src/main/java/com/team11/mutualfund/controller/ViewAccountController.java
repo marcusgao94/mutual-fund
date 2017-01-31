@@ -35,6 +35,7 @@ import static com.team11.mutualfund.utils.Constant.*;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -106,7 +107,7 @@ public class ViewAccountController {
         
         Date d = fundService.getLastTransitionDay();
         DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-        model.addAttribute("date", df.format(d));
+        model.addAttribute("date", df.format(d)); 
         
         List<Positionvalue> pv = fundService.listPositionvalueByCustomerId(c.getId());
         model.addAttribute("customerPosition", pv);

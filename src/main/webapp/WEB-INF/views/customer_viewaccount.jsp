@@ -159,7 +159,7 @@
         data.addRows([
         	
         	
-            ['${customer_pv.fund.name}', ${customer_pv.shares}],
+            ['${customer_pv.fund.name}', ${customer_pv.shares}]
 
         ]);
         </c:forEach>

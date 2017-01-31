@@ -205,13 +205,11 @@
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Element');
         data.addColumn('number', 'Percentage');
+        <c:forEach var="employee_cpv" items="${employee_customerpositionvalue}">
         data.addRows([
-          ['Fund1', 11],
-          ['Fund2', 22],
-          ['Fund3', 2],
-          ['Fund4', 33],
-          ['Fund5', 21]
+        	['${employee_cpv.fund.name}', ${employee_cpv.shares}]
         ]);
+        </c:forEach>
         var options = {
             title: 'My Fund Collection'
           };

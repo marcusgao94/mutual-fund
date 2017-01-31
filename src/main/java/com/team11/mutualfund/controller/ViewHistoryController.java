@@ -110,6 +110,7 @@ public class ViewHistoryController {
         request.setAttribute("customer_pendingTransaction", pendingTransaction);
         
         List<Transaction> finishTransaction = transactionService.listFinishTransactionByCustomerId(c.getId());
+        
         request.setAttribute("customer_finishTransaction", finishTransaction);
         
         return "customer_transactionhistory";
