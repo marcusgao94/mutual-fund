@@ -51,9 +51,13 @@
 				</td>
 				<td><form:errors path="userName" cssClass="error"/></td>
 				<td>
+<<<<<<< HEAD
 				                <span class="input-group-btn">
                     <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
                 </span>
+=======
+					<input class="btn btn-default" type="submit" name="button" value="Search"/>
+>>>>>>> b4c9afd93784d6cecbbca5a1868b98911e787076
 				</td>
 			</tr>
 			<tr>

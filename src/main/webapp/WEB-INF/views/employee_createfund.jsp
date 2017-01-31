@@ -40,13 +40,9 @@
 						</tr>
 						<tr>
 							<td>
-								<input type="submit" class="btn btn-default" value="submit" />
+								<input type="submit" class="btn btn-default" value="Submit" />
 							</td>
-							<td>
-								<a href="<c:url value="/home" />">
-									<button class="btn btn-primary">Cancel</button>
-								</a>
-							</td>
+							
 						</tr>
 						</tbody>
 					</table>
