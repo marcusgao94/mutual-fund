@@ -75,13 +75,6 @@
 											Create An Employee
 									</a>
 								</li>
-
-								<li class="">
-									<a href="<c:url value="/customer_register" />">
-											<span class="fa fa-users"></span>
-											Create A Customer
-									</a>
-								</li>
 							</ul>
 
 
@@ -145,9 +138,9 @@
 									</a>
 								</li>
 							</ul>
-						</li>
-
-							<%-- <a data-toggle="dropdown" class="dropdown-toggle"
+						
+							<li>
+							 <a data-toggle="dropdown" class="dropdown-toggle"
 							   href="#">
 								<span class="glyphicon glyphicon-user"></span>
 								Set Transition Day<b class="caret"></b>
@@ -160,15 +153,10 @@
 										Set Transition Day
 									</a>
 								</li>
-							</ul> --%>
-
+							</ul> 
+							</li>
 
 						</c:if>
-
-
-
-
-
 
 					<li class="dropdown">
 
