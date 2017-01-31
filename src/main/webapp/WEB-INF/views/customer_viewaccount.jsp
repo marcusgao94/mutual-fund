@@ -84,7 +84,7 @@
 	<div class="row">
 		<div class="col-xs-12">
 			<h3>Account Info</h3>
-			<h4> Date of the last trading day:</h4>
+			<h4> Date of the last trading day: ${date}</h4>
 			<h4> Cash: ${customer_account.cash}</h4>
 			<div class="col-md-6">
 					<a href="<c:url value="/request_check" />">

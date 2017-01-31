@@ -32,6 +32,7 @@ import static com.team11.mutualfund.controller.LoginController.checkCustomer;
 import static com.team11.mutualfund.controller.LoginController.checkEmployee;
 import static com.team11.mutualfund.utils.Constant.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -81,7 +82,8 @@ public class ViewAccountController {
         model.addAttribute("employee_customeraccount", c);
         List<Positionvalue> pv = fundService.listPositionvalueByCustomerId(c.getId());
         model.addAttribute("employee_customerpositionvalue", pv);
-
+        LocalDate d = fundService.getLastTransitionDay();
+        model.addAttribute("date", d);
         return "employee_viewaccount";
     }
 
@@ -98,28 +100,13 @@ public class ViewAccountController {
         User user = (User) session.getAttribute("user");
         Customer c = customerService.getCustomerById(user.getId());
         model.addAttribute("customer_account", c);
-
+        
+        LocalDate d = fundService.getLastTransitionDay();
+        model.addAttribute("date", d);
+        
         List<Positionvalue> pv = fundService.listPositionvalueByCustomerId(c.getId());
         model.addAttribute("customerPosition", pv);
         return "customer_viewaccount";
     }
-
-//    @RequestMapping(value = "/customer_transactionhistory", method = RequestMethod.POST)
-//    public String customerViewAccount(HttpServletRequest request, Model model,
-//                                 @Valid CustomerRegisterForm customerRegisterForm, BindingResult result,
-//                                 RedirectAttributes redirectAttributes) {
-//    	
-//		HttpSession session = request.getSession();
-//		Customer c = (Customer) session.getAttribute("user");
-//		request.setAttribute("customer_account", c);
-//        //Customer c = customerService.findCustomerByUserName(customerRegisterForm.getUserName());
-//    	List<Transaction> pendingTransaction = transactionService.listPendingTransactionByCustomerId(c.getId());
-//        request.setAttribute("customer_pendingTransaction", pendingTransaction);
-//        
-//        List<Transaction> finishTransaction = transactionService.listFinishTransactionByCustomerId(c.getId());
-//        request.setAttribute("customer_finishTransaction", finishTransaction);
-//        
-//        return "customer_viewaccount";
-//    }
 
 }
