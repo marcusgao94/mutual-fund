@@ -64,23 +64,20 @@
 		</table>
 	</form:form>
 
+				<h3>My Funds</h3>
 
 <div class="row">
 		<div class="col-md-6">
 			<table class="table">
 				<thead>
 				<tr>
-					<th>Name of Fund</th>
+					<th>Fund Ticker</th>
 					<th>Shares</th>
 					<th>Price</th>
 					<th>Value</th>
 				</tr>
 				</thead>
 				<tbody>
-				
-				<tr>
-					<td>My Funds</td>
-				</tr>
 
 				<c:forEach var="customer_pv" items="${customerPosition}">
 
@@ -103,6 +100,41 @@
 			</table>
 		</div>
 	</div>
+	
+	<h3>Available Funds</h3>
+	
+	<div class="row">
+		<div class="col-md-6">
+			<table class="table">
+				<thead>
+				<tr>
+					<th>Fund Ticker</th>
+					<th>Fund Name</th>
+				</tr>
+				</thead>
+				<tbody>
+
+				<c:forEach var="fund" items="${fundList}">
+
+					<tr>
+						<td>
+								${fund.ticker}
+						</td>
+						<td>
+								${fund.name}
+						</td>
+
+					</tr>
+				</c:forEach>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+	
+	
+	
+	
 	</div>
 
 
