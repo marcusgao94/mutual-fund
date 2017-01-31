@@ -23,9 +23,9 @@
 	<h1>Transition Day</h1>
 	<form:form method="post" modelAttribute="transitionForm">
 		<label> Last Transition Date is: ${transitionForm.lastDate}</label><br />
-		<input type="hidden" name="lastDate" value="${transitionForm.lastDate}" />
+		<form:input type="hidden" path="lastDate" />
 		<label> Enter New Transition Date: </label>
-		<input type="text" name="newDate" placeholder="MM/dd/yyyy" />
+		<form:input type="text" path="newDate" placeholder="MM/dd/yyyy" />
 		<form:errors path="newDate" cssClass="error" />
 		<div class="form">
 			<form:errors path="" cssClass="error" />

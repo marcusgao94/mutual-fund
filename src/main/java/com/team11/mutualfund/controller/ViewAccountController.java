@@ -14,6 +14,7 @@ import com.team11.mutualfund.utils.Positionvalue;
 import com.team11.mutualfund.utils.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.format.datetime.DateFormatterRegistrar;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,7 +33,9 @@ import static com.team11.mutualfund.controller.LoginController.checkCustomer;
 import static com.team11.mutualfund.controller.LoginController.checkEmployee;
 import static com.team11.mutualfund.utils.Constant.*;
 
-import java.time.LocalDate;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -82,11 +85,11 @@ public class ViewAccountController {
         model.addAttribute("employee_customeraccount", c);
         List<Positionvalue> pv = fundService.listPositionvalueByCustomerId(c.getId());
         model.addAttribute("employee_customerpositionvalue", pv);
-        LocalDate d = fundService.getLastTransitionDay();
-        model.addAttribute("date", d);
+        Date d = fundService.getLastTransitionDay();
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+        model.addAttribute("date", df.format(d));
         return "employee_viewaccount";
     }
-
 
     // customer
 
@@ -101,8 +104,9 @@ public class ViewAccountController {
         Customer c = customerService.getCustomerById(user.getId());
         model.addAttribute("customer_account", c);
         
-        LocalDate d = fundService.getLastTransitionDay();
-        model.addAttribute("date", d);
+        Date d = fundService.getLastTransitionDay();
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+        model.addAttribute("date", df.format(d));
         
         List<Positionvalue> pv = fundService.listPositionvalueByCustomerId(c.getId());
         model.addAttribute("customerPosition", pv);
