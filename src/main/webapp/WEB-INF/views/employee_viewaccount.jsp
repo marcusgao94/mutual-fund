@@ -86,6 +86,54 @@
 					</tbody>
 				</table>
 			</div>
+<<<<<<< HEAD
+            
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+
+<div class="container">
+    <div class="row-fluid">
+      <div class="col-sm-12">
+            <h3>Account Info</h3>
+                    <h4>Date of the last trading day: xxxx </h4>
+                    <h4>Cash: ${employee_customeraccount.cash} </h4>
+            <div class="col-md-6">
+				<table class="table">
+					<thead>
+					<tr>
+						<th>Name of fund</th>
+						<th>Shares</th>
+						<th>Price</th>
+						<th>Value</th>
+					</tr>
+					</thead>
+					<tbody>
+					<c:forEach var="employee_cpv" items="${employee_customerpositionvalue}">
+						<tr>
+							<td>
+									${employee_cpv.fund.name}
+							</td>
+							<td>
+									${employee_cpv.shares}
+							</td>
+							<td>
+									${employee_cpv.price}
+							</td>
+							<td>
+									${employee_cpv.value}
+							</td>
+						</tr>
+					</c:forEach>
+					</tbody>
+				</table>
+       </div>
+       </div>
+       </div>
+       </div>      
+=======
 		</div>
 	</div>
 	<div class="row">
@@ -149,6 +197,7 @@
 		</div>
 	</div>
 </div>
+>>>>>>> 97b05aa2f92f6cd044814a29becf337b52eed535
 
 <div>
 	<c:import url="bottom.jsp"/>
