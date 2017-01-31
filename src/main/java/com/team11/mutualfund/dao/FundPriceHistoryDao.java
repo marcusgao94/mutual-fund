@@ -5,7 +5,6 @@ import com.team11.mutualfund.model.FundPriceHistory;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Repository
