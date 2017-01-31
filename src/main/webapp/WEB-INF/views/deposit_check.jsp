@@ -26,6 +26,8 @@
 			<tr>
 				<td>Customer UserName:</td>
 				<td><input type="text" name="userName"
+						   value="" autofocus/></td>
+				<td><input type="hidden" name="userName"
 						   value="${depositCheckForm.getUserName()}" autofocus/>
 				</td>
 				<td><form:errors path="userName" cssClass="error"/></td>

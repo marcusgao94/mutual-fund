@@ -80,8 +80,7 @@ public class CheckController {
            
         } catch (RollbackException e) {
             result.rejectValue("customerId", "0", e.getMessage());
-            if (result.hasErrors())
-            	return fast == null? "deposit_check": "deposit_check_fast";
+            return fast == null? "deposit_check": "deposit_check_fast";
         }
         model.addAttribute("success", "update password for " + userName + " successfully");
         return "success";
