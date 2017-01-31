@@ -1,5 +1,6 @@
 package com.team11.mutualfund.controller;
 
+import com.team11.mutualfund.form.ChangePasswordForm;
 import com.team11.mutualfund.form.DepositCheckForm;
 import com.team11.mutualfund.form.RequestCheckForm;
 import com.team11.mutualfund.model.Customer;
@@ -14,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.persistence.RollbackException;
@@ -52,7 +54,8 @@ public class CheckController {
 
     @RequestMapping(value = "/deposit_check", method = RequestMethod.POST)
     public String depositCheck(HttpServletRequest request, RedirectAttributes ra, Model model,
-                               @Valid DepositCheckForm depositCheckForm, BindingResult result) {
+                               @Valid DepositCheckForm depositCheckForm, BindingResult result,
+                               @RequestParam(value = "un", required = false) String userName) {
         if (!checkEmployee(request)) {
             ra.addFlashAttribute("loginError", NOTLOGIN);
             return "redirect:/employee_login";
@@ -65,7 +68,14 @@ public class CheckController {
 
 //            transactionService.executeDepositCheck(
 //                    depositCheckForm.getCustomerId(), LocalDate.now());
-            String userName = depositCheckForm.getUserName();
+            //String userName = depositCheckForm.getUserName();
+            if (userName != null) {
+            	DepositCheckForm dpf = new DepositCheckForm();
+                dpf.setUserName(userName);
+                model.addAttribute("depositCheckForm", dpf);
+                return "deposit_check";
+            }
+            model.addAttribute("depositCheckForm", new DepositCheckForm());
             model.addAttribute("success", "update password for " + userName + " successfully");
             return "success";
         } catch (RollbackException e) {
