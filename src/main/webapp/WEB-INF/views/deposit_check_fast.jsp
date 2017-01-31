@@ -26,8 +26,6 @@
 			<tr>
 				<td>Customer UserName:</td>
 				<td><input type="text" name="userName"
-						   value="" autofocus/></td>
-				<td><input type="hidden" name="userName"
 						   value="${depositCheckForm.getUserName()}" autofocus/>
 				</td>
 				<td><form:errors path="userName" cssClass="error"/></td>
@@ -42,6 +40,9 @@
 			<tr>
 				<th colspan="2">
 					<input type="submit" name="button" value="deposit"/>
+				</th>
+				<th>
+					<input type = "hidden" name = "fast" value = "fast"/>
 				</th>
 			</tr>
 

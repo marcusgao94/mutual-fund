@@ -99,7 +99,7 @@
 					</button>
 				</a>
 				
-				<a href="<c:url value="/deposite_check?un=${employee_customeraccount.userName}" />">
+				<a href="<c:url value="/deposit_check?un=${employee_customeraccount.userName}" />">
 					<button class="btn btn-default">
 						Deposit Check
 					</button>
