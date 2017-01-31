@@ -28,64 +28,6 @@
 		<div class="col-xs-12">
 			
 			<h3>Basic Info</h3>
-
-<<<<<<< HEAD
-				<div class="col-md-6">
-					<table class="table bio-table">
-						<tr>
-							<td>ID</td>
-							<td>${customer_account.id}</td>
-						</tr>
-						<tr>
-							<td>FirstName</td>
-							<td>${customer_account.firstName}</td>
-						</tr>
-						<tr>
-							<td>LastName</td>
-							<td>${customer_account.lastName}</td>
-						</tr>
-						<tr>
-							<td>UserName</td>
-							<td>${customer_account.userName}</td>
-						</tr>
-					<!-- </table>
-				</div>table-responsive close
-			</div>col-md-6 close
-			
-			
-			
-			
-			<div class="col-md-6">
-				<table class="table bio-table"> -->
-					<tr>
-						<td>Address</td>
-						<td>${customer_account.addr_line1} ${customer_account.addr_line2}</td>
-					</tr>
-					<tr>
-						<td>State</td>
-						<td>${customer_account.state}</td>
-					</tr>
-					<tr>
-						<td>City</td>
-						<td>${customer_account.city}</td>
-					</tr>
-					<tr>
-						<td>ZIP</td>
-						<td>${customer_account.zip}</td>
-					</tr>
-				</table>
-				
-				<div class="text-right">
-					<a href="<c:url value="/customer_changepassword" />">
-						<button class="btn btn-default">change password</button>
-					</a>
-					<a href="<c:url value="/customer_transactionhistory" />">
-						<button class="btn btn-default">View Transaction History</button>
-					</a>
-				</div>
-			</div>
-=======
->>>>>>> 97b05aa2f92f6cd044814a29becf337b52eed535
 		</div>
 	</div>
 	<div class="row">
@@ -123,7 +65,7 @@
 				</tbody>
 			</table>
 		</div>
-	</div>
+
 	<div class="row">
 		<div class="col-xs-offset-6 col-xs-6">
 			<a href="<c:url value="/customer_changepassword" />">
@@ -131,21 +73,18 @@
 			</a>
 		</div>
 	</div>
+	</div>
 
 	<div class="row">
 		<div class="col-xs-12">
 			<h3>Account Info</h3>
 			<h4> Date of the last trading day:</h4>
 			<h4> Cash: ${customer_account.cash}</h4>
-<<<<<<< HEAD
+
 					<a href="<c:url value="request_check" />">
 						<button class="btn btn-default">Request Check</button>
 					</a>
 			<div class="col-md-6">
-
-				<table class="table">
-					<thead>
-=======
 		</div>
 	</div>
 	<div class="row">
@@ -161,7 +100,7 @@
 				</thead>
 				<tbody>
 				<c:forEach var="customer_pv" items="${customerPosition}">
->>>>>>> 97b05aa2f92f6cd044814a29becf337b52eed535
+
 					<tr>
 						<td>
 								${customer_pv.fund.name}
@@ -181,7 +120,9 @@
 			</table>
 		</div>
 	</div>
-</div>
+	</div>
+	</div>
+
 
 <div>
 	<c:import url="bottom.jsp"/>
