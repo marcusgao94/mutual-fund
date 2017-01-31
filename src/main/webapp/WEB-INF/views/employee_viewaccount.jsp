@@ -23,25 +23,23 @@
 
 <div class="container">
 	<div class="row">
-
-		<form:form method="post" action="/employee_searchcustomer" modelAttribute="searchForm">
-			<table class="table">
-				<tr>
-					<td>Search User Name:</td>
-					<td><input type="text" name="userName"
-							   value="${searchForm.userName}" autofocus/>
-					</td>
-					<td><form:errors path="userName" cssClass="error"/></td>
-				</tr>
-
-				<tr>
-					<th colspan="2">
-						<input type="submit" class="btn btn-default" name="button" value="search"/>
-					</th>
-				</tr>
-
-			</table>
-		</form:form>
+		
+			<form:form method="post" modelAttribute="searchForm">
+		<table class="table">
+			<tr>
+				<td>Search User Name:</td>
+				<td>
+					<input type="text" name="userName" value="${searchForm.userName}" autofocus/>
+				</td>
+				<td><form:errors path="userName" cssClass="error"/></td>
+			</tr>
+			<tr>
+				<td>
+					<input class="btn btn-default" type="submit" name="button" value="search"/>
+				</td>
+			</tr>
+		</table>
+	</form:form>
 	</div>
 
 	<div class="row">
@@ -93,8 +91,8 @@
             
             
             	<div class="row">
-		<div class="col-xs-6">
-			<div class="text-right">
+		<div class="col-xs-9">
+			<!-- <div class="text-right"> -->
 				<a href="<c:url value="/employee_changecuspassword?un=${employee_customeraccount.userName}" />">
 					<button class="btn btn-default">
 						Reset password
@@ -106,21 +104,25 @@
 						Deposit Check
 					</button>
 				</a>
+				<br>
+				<a href="<c:url value="/employee_searchtransaction" />">
+					<button class="btn btn-default">
+						Search Transaction History
+					</button>
+				</a>
 				
-			</div>
+			<!-- </div> -->
 		</div>
 	</div>
 
 <div class="container">
-	<div class="row">
-		<div class="col-xs-6">
+
 			<h3>Account Info</h3>
 			<h4>Date of the last trading day: xxxx </h4>
 			<h4>Cash: ${employee_customeraccount.cash} </h4>
-		</div>
-	</div>
+
 	<div class="row">
-		<div class="col-xs-6">
+		<div class="col-md-6">
 			<table class="table">
 				<thead>
 				<tr>

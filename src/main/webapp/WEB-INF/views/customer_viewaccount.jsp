@@ -65,7 +65,7 @@
 				</tbody>
 			</table>
 		</div>
-
+</div>
 	<div class="row">
 		<div class="col-xs-6">
 			<div class="text-right">
@@ -93,6 +93,9 @@
 			<div class="col-md-6">
 		</div>
 	</div>
+	</div>
+	
+	<div class="container">
 	<div class="row">
 		<div class="col-md-6">
 			<table class="table">
@@ -125,7 +128,6 @@
 				</tbody>
 			</table>
 		</div>
-	</div>
 	</div>
 	</div>
 
