@@ -86,62 +86,15 @@
 					</tbody>
 				</table>
 			</div>
-<<<<<<< HEAD
             
             </div>
             </div>
             </div>
-            </div>
-            </div>
-
-<div class="container">
-    <div class="row-fluid">
-      <div class="col-sm-12">
-            <h3>Account Info</h3>
-                    <h4>Date of the last trading day: xxxx </h4>
-                    <h4>Cash: ${employee_customeraccount.cash} </h4>
-            <div class="col-md-6">
-				<table class="table">
-					<thead>
-					<tr>
-						<th>Name of fund</th>
-						<th>Shares</th>
-						<th>Price</th>
-						<th>Value</th>
-					</tr>
-					</thead>
-					<tbody>
-					<c:forEach var="employee_cpv" items="${employee_customerpositionvalue}">
-						<tr>
-							<td>
-									${employee_cpv.fund.name}
-							</td>
-							<td>
-									${employee_cpv.shares}
-							</td>
-							<td>
-									${employee_cpv.price}
-							</td>
-							<td>
-									${employee_cpv.value}
-							</td>
-						</tr>
-					</c:forEach>
-					</tbody>
-				</table>
-       </div>
-       </div>
-       </div>
-       </div>      
-=======
-		</div>
-	</div>
-	<div class="row">
+            
+            
+            	<div class="row">
 		<div class="col-xs-6">
 			<div class="text-right">
-				<!--   <button type="button" class="btn btn-primary">Edit</button> -->
-				<%--<input type="button" value="Change Password"--%>
-				<%--onclick="window.location='customer_changepassword.jsp';">--%>
 				<a href="<c:url value="/employee_changecuspassword?un=${employee_customeraccount.userName}" />">
 					<button class="btn btn-default">
 						Reset password
@@ -157,6 +110,8 @@
 			</div>
 		</div>
 	</div>
+
+<div class="container">
 	<div class="row">
 		<div class="col-xs-6">
 			<h3>Account Info</h3>
@@ -196,8 +151,7 @@
 			</table>
 		</div>
 	</div>
-</div>
->>>>>>> 97b05aa2f92f6cd044814a29becf337b52eed535
+	</div>
 
 <div>
 	<c:import url="bottom.jsp"/>
