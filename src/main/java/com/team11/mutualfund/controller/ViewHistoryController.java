@@ -19,6 +19,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -49,15 +50,22 @@ public class ViewHistoryController {
     // employeeViewHistory
 
     @RequestMapping(value = "/employee_searchtransaction", method = RequestMethod.GET)
-    public String employeeViewHistory(HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) {
+    public String employeeViewHistory(HttpServletRequest request, Model model, 
+    		RedirectAttributes redirectAttributes, 
+    		@RequestParam(value = "un", required = false) String userName) {
+    	
     	if (!checkEmployee(request)) {
             redirectAttributes.addFlashAttribute("loginError", NOTLOGIN);
             return "redirect:/employee_login";
         }
-    	
-        SearchForm SearchForm = new SearchForm();
-        model.addAttribute("searchForm", SearchForm);
-        
+    	if (userName != null) {
+    		SearchForm SearchForm = new SearchForm();
+    		SearchForm.setUserName(userName);
+    		model.addAttribute("searchForm", SearchForm);
+    		return "employee_transactionhistory_fast";
+    	}
+    	   
+        model.addAttribute("searchForm", new SearchForm());     
         return "employee_searchtransaction";
     }
     // employeeViewHistory
