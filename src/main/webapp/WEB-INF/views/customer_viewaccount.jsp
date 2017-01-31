@@ -65,12 +65,18 @@
 				</tbody>
 			</table>
 		</div>
-
+</div>
 	<div class="row">
-		<div class="col-xs-offset-6 col-xs-6">
+		<div class="col-xs-6">
+			<div class="text-right">
 			<a href="<c:url value="/customer_changepassword" />">
 				<button class="btn btn-default">change password</button>
 			</a>
+			
+			<a href="<c:url value="/customer_transactionhistory" />">
+				<button class="btn btn-default">View Transaction History</button>
+			</a>
+		</div>
 		</div>
 	</div>
 	</div>
@@ -81,12 +87,15 @@
 			<h4> Date of the last trading day:</h4>
 			<h4> Cash: ${customer_account.cash}</h4>
 
-					<a href="<c:url value="request_check" />">
+					<a href="<c:url value="/request_check" />">
 						<button class="btn btn-default">Request Check</button>
 					</a>
 			<div class="col-md-6">
 		</div>
 	</div>
+	</div>
+	
+	<div class="container">
 	<div class="row">
 		<div class="col-md-6">
 			<table class="table">
@@ -119,7 +128,6 @@
 				</tbody>
 			</table>
 		</div>
-	</div>
 	</div>
 	</div>
 
