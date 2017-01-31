@@ -90,10 +90,10 @@
 					<a href="<c:url value="/request_check" />">
 						<button class="btn btn-default">Request Check</button>
 					</a>
-					<a href="<c:url value="/request_check" />">
+					<a href="<c:url value="/sell_fund" />">
 						<button class="btn btn-default">Sell Fund</button>
 					</a>
-					<a href="<c:url value="/request_check" />">
+					<a href="<c:url value="/buy_fund" />">
 						<button class="btn btn-default">Buy Fund</button>
 					</a>
 
