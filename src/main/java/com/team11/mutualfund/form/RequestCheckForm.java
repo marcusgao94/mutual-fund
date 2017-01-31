@@ -12,8 +12,10 @@ import static com.team11.mutualfund.utils.Constant.TOOLITTLEAMOUNT;
 
 public class RequestCheckForm {
 
-    @NotNull(message = "customer id cannot be null")
-    private Long customerId;
+//    @NotNull(message = "customer id cannot be null")
+//    private Long customerId;
+	@NotNull(message = "customer userName cannot be null")
+	private String userName;
 
     @NotNull(message = "amount cannot be null")
     private Double amount;
@@ -30,12 +32,12 @@ public class RequestCheckForm {
     }
 
 
-    public Long getCustomerId() {
-        return customerId;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public Double getAmount() {

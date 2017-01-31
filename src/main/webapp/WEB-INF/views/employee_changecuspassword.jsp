@@ -19,7 +19,8 @@
 </div>
 
 <div class="container">
-
+	
+	
 	<h5>Reset Customer Password</h5>
 	<form:form modelAttribute="changePasswordForm">
 		<table class="table">
@@ -35,7 +36,6 @@
 				<td><input type="password" name="newPassword" value=""/></td>
 				<td><form:errors path="newPassword" cssClass="error"/></td>
 			</tr>
-
 			<tr>
 				<td>Confirm Password:</td>
 				<td><input type="password" name="confirmNewPassword" value=""/></td>

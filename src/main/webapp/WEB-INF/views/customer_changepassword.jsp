@@ -20,9 +20,12 @@
 
 <div class="container">
 
-	<h5>Change Password</h5>
+	<h4>Change Password</h4>
 	<form:form modelAttribute="changePasswordForm">
 		<table>
+			<tr>
+			<td><br/></td>
+			</tr>
 			<tr>
 				<td>
 					<input type="hidden" name="userName" value="${changePasswordForm.userName}">
@@ -53,7 +56,11 @@
 				</td>
 				<td><form:errors path="confirmNewPassword" cssClass="error"/></td>
 			</tr>
-
+			
+			<tr>
+				<th>
+				<br/>
+				<th>
 			<tr>
 				<th colspan="2">
 					<input type="submit" name="button" value="Change Password"/>

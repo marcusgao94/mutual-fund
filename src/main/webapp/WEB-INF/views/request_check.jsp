@@ -25,18 +25,18 @@
 	<form:form method="post" modelAttribute="requestCheckForm">
 		<table>
 			<tr>
-				<td>Customer Id:</td>
+				<td>UserName:</td>
 				<td>
-					<span>${requestCheckForm.customerId}</span>
-					<input type="hidden" name="customerId" value="${requestCheckForm.customerId}">
+					<span style = "font-size:large">${requestCheckForm.userName}</span>
+					<input type="hidden" name="userName" value="${requestCheckForm.userName}">
 				</td>
-				<td><form:errors path="customerId" cssClass="error"/></td>
+				<td><form:errors path="userName" cssClass="error"/></td>
 			</tr>
 
 			<tr>
 				<td>available amount:</td>
 				<td><span>${requestCheckForm.available}</span> </td>
-				<input type="hidden" name="available" value="${requestCheckForm.available}">
+				<td><input type="hidden" name="available" value="${requestCheckForm.available}"></td>
 				<td><form:errors path="available" cssClass="error"/></td>
 			</tr>
 

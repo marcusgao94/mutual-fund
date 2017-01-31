@@ -83,10 +83,10 @@ public class TransactionService {
         transactionDao.saveTransaction(new Transaction(customer, fund, SELLFUND, shares, null));
     }
 
-    public void requestCheck(long cid, double amount) throws RollbackException {
-        Customer customer = customerDao.findById(cid);
+    public void requestCheck(String userName, double amount) throws RollbackException {
+        Customer customer = customerDao.findByUserName(userName);
         if (customer == null)
-            throw new RollbackException("customer id " + String.valueOf(cid) + " does not exist");
+            throw new RollbackException("customer username " + String.valueOf(userName) + " does not exist");
 
         // check enough cash
         if (customer.getCash() < customer.getPendingCashDecrease() + amount)
@@ -102,6 +102,8 @@ public class TransactionService {
             throw new RollbackException("customer id " + String.valueOf(cid) + " does not exist");
         transactionDao.saveTransaction(new Transaction(customer, null, DEPOSITCHECK, null, amount));
     }
+
+
 
 
 

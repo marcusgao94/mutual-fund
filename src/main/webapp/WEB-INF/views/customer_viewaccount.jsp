@@ -22,13 +22,12 @@
 </div>
 <div class="container">
 
-	<h3>Customer View Account</h3>
+	<h1>${customer_account.userName}'s Account</h1>
 
 	<div class="row">
 		<div class="col-xs-12">
-			<h2>User name: ${customer_account.userName}</h2>
+			
 			<h3>Basic Info</h3>
-
 		</div>
 	</div>
 	<div class="row">
@@ -62,17 +61,24 @@
 					<td>ZIP</td>
 					<td>${customer_account.zip}</td>
 				</tr>
-				</tr>
+				
 				</tbody>
 			</table>
 		</div>
-	</div>
+</div>
 	<div class="row">
-		<div class="col-xs-offset-6 col-xs-6">
+		<div class="col-xs-6">
+			<div class="text-right">
 			<a href="<c:url value="/customer_changepassword" />">
 				<button class="btn btn-default">change password</button>
 			</a>
+			
+			<a href="<c:url value="/customer_transactionhistory" />">
+				<button class="btn btn-default">View Transaction History</button>
+			</a>
 		</div>
+		</div>
+	</div>
 	</div>
 
 	<div class="row">
@@ -80,8 +86,16 @@
 			<h3>Account Info</h3>
 			<h4> Date of the last trading day:</h4>
 			<h4> Cash: ${customer_account.cash}</h4>
+
+					<a href="<c:url value="/request_check" />">
+						<button class="btn btn-default">Request Check</button>
+					</a>
+			<div class="col-md-6">
 		</div>
 	</div>
+	</div>
+	
+	<div class="container">
 	<div class="row">
 		<div class="col-md-6">
 			<table class="table">
@@ -95,6 +109,7 @@
 				</thead>
 				<tbody>
 				<c:forEach var="customer_pv" items="${customerPosition}">
+
 					<tr>
 						<td>
 								${customer_pv.fund.name}
@@ -114,7 +129,8 @@
 			</table>
 		</div>
 	</div>
-</div>
+	</div>
+
 
 <div>
 	<c:import url="bottom.jsp"/>
