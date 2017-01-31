@@ -27,18 +27,19 @@
 
 	<h3>Customer Transaction History</h3>
 <h4> Pending </h4>
-<table>
-	<thead>
-		<tr>
+
+<table class="table">
+					<thead>
+					<tr>
 			<th>ID</th>
 			<th>Name</th>
 			<th>Shares</th>
 			<th>Amount</th>
           	<th>Operations</th>
-		</tr>
-	</thead>
-	<tbody>
-		<c:forEach var="customer_pendingtransaction" items="${customer_pendingTransaction}">
+					</tr>
+					</thead>
+					<tbody>
+<c:forEach var="customer_pendingtransaction" items="${customer_pendingTransaction}">
 			<tr>
 				<td>
 	 				${customer_pendingtransaction.id}
@@ -57,11 +58,12 @@
 				</td>
 			</tr>
 		</c:forEach>
-	<tbody>
-</table>
+					</tbody>
+				</table>
+
 
 <h4> Finished </h4>
-<table>
+<table class="table">
 	<thead>
 		<tr>
 			<th>ID</th>
