@@ -23,27 +23,34 @@
 </div>
 
 <div class="container">
+    <div class="row">
+    <br>
+        <div class="col-xs-5">
+        <div class="input-group">
+                <div class="input-group-btn search-panel">
 <form:form method="post" modelAttribute="searchForm">
-		<table>
-			<tr>
-				<td> <form:errors path="" cssClass="error" /> </td>
-			</tr>
+		<table class="table">
 			<tr>
 				<td>Search User Name:</td>
-				<td><input type="text" name="userName"
-						   value="${searchForm.userName}" autofocus/>
+				<td>
+					<input type="text" name="userName" value="${searchForm.userName}" autofocus/>
 				</td>
 				<td><form:errors path="userName" cssClass="error"/></td>
+				<td>
+				                <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                </span>
+				</td>
 			</tr>
-
 			<tr>
-				<th colspan="2">
-					<input type="submit" name="button" value="search"/>
-				</th>
 			</tr>
-
 		</table>
 	</form:form>
+
+        </div>
+  </div>
+</div>
+</div>
 </div>
 
 
