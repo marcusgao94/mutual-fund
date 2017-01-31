@@ -22,11 +22,11 @@
 </div>
 <div class="container">
 
-	<h3>Customer View Account</h3>
+	<h1>${customer_account.userName}'s Account</h1>
 
 	<div class="row">
 		<div class="col-xs-12">
-			<h2>User name: ${customer_account.userName}</h2>
+			
 			<h3>Basic Info</h3>
 
 		</div>

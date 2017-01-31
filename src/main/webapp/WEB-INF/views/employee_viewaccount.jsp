@@ -49,64 +49,6 @@
 			<h3>Basic Info</h3>
 
 			<div class="col-xs-6">
-
-<<<<<<< HEAD
-              <table class="table bio-table">
-                  <tbody>
-                    <tr>
-                       <td>ID</td>
-                       <td>${employee_customeraccount.id}</td>
-                    </tr>
-                 <tr>
-                    <td>FirstName</td>
-                    <td>${employee_customeraccount.firstName}</td>
-                 </tr>
-                 <tr>
-                    <td>LastName</td>
-                    <td>${employee_customeraccount.lastName}</td>
-                 </tr>
-                 <tr>
-                    <td>UserName</td>
-                    <td>${employee_customeraccount.userName}</td>
-                </tr>
-               <!--  </tbody>
-              </table>
-              </div>table-responsive close
-            </div>col-md-6 close
-            <div class="col-md-6">
-
-            <div class="table-responsive responsiv-table">
-              <table class="table bio-table">
-                  <tbody> -->
-                 <tr>
-                     <td>Address</td>
-                     <td>${employee_customeraccount.addr_line1} ${employee_customeraccount.addr_line2}</td>
-                 </tr>
-                 <tr>
-                     <td>State</td>
-                     <td>${employee_customeraccount.state}</td>
-                  </tr>
-                  <tr>
-                     <td>City</td>
-                     <td>${employee_customeraccount.city}</td>
-                  </tr>
-                  <tr>
-                     <td>ZIP</td>
-                     <td>${employee_customeraccount.zip}</td>
-                  </tr>
-                </tbody>
-              </table>
-           <div class="text-right">
-<!--   <button type="button" class="btn btn-primary">Edit</button> -->
-			<div class="text-right">
-				<a href="<c:url value="/employee_changecuspassword" />">
-					<input type = "button" value = "Change password" class="btn btn-default"/>
-				</a>
-				<a href="<c:url value="/deposite_check" />">
-					<input type = "button" value = "Deposit Check" class="btn btn-default"/>
-				</a>
-				
-=======
 				<table class="table">
 					<tbody>
 					<tr>
@@ -143,7 +85,6 @@
 					</tr>
 					</tbody>
 				</table>
->>>>>>> branch 'master' of https://github.com/CMU-J2EE/Team11.git
 			</div>
 		</div>
 	</div>
@@ -158,6 +99,13 @@
 						Reset password
 					</button>
 				</a>
+				
+				<a href="<c:url value="/deposite_check?un=${employee_customeraccount.userName}" />">
+					<button class="btn btn-default">
+						Deposit Check
+					</button>
+				</a>
+				
 			</div>
 		</div>
 	</div>
