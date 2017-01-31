@@ -28,7 +28,7 @@
 						<tbody>
 						<tr>
 							<td>Fund Ticker:</td>
-							<td><input type="text" name="fundTicker"
+							<td><input type="text" name="fundTicker" placeholder=""
 									   value="${createFundForm.fundTicker}"/></td>
 							<td><form:errors path="fundTicker" cssClass="error" /></td>
 						</tr>
@@ -37,14 +37,22 @@
 							<td><input type="text" name="fundName"
 									   value="${createFundForm.fundName}"/>
 							</td>
+							<td><form:errors path="fundName" cssClass="error" /></td>
 						</tr>
+						
 						<tr>
 							<td>
-								<input type="submit" class="btn btn-default" value="submit" />
+							<br/>
+							</td>
+						</tr>
+						
+						<tr>
+							<td>
+								<input type="submit" class="btn btn-primary" value="submit" />
 							</td>
 							<td>
 								<a href="<c:url value="/home" />">
-									<button class="btn btn-primary">Cancel</button>
+									<button class="btn btn-default">Cancel</button>
 								</a>
 							</td>
 						</tr>
