@@ -92,6 +92,18 @@
 										<i class="glyphicon glyphicon-user"></i>
 										View My Account
 									</a>
+									<a href="<c:url value="/customer_changepassword" />">
+										<i class="glyphicon glyphicon-user"></i>
+										Change Password
+									</a>
+									<a href="<c:url value="/request_check" />">
+										<i class="glyphicon glyphicon-user"></i>
+										Request Check
+									</a>
+									<a href="<c:url value="/customer_transactionhistory" />">
+										<i class="glyphicon glyphicon-user"></i>
+										View Transaction History
+									</a>
 								</li>
 							</c:if>
 							<c:if test="${user.type == 1}">

@@ -83,7 +83,7 @@ public class CheckController {
         User user = (User) request.getSession().getAttribute("user");
         Customer customer = customerService.getCustomerById(user.getId());
         RequestCheckForm requestCheckForm = new RequestCheckForm();
-        requestCheckForm.setCustomerId(customer.getId());
+        requestCheckForm.setUserName(customer.getUserName());
         double available = customer.getCash() - customer.getPendingCashDecrease();
         requestCheckForm.setAvailable(available);
         model.addAttribute("requestCheckForm", requestCheckForm);
@@ -102,10 +102,10 @@ public class CheckController {
         result.addAllErrors(requestCheckForm.getValidationErrors());
         if (result.hasErrors())
             return "request_check";
-        User user = (User) request.getSession().getAttribute("user");
+        //User user = (User) request.getSession().getAttribute("user");
         try {
             transactionService.requestCheck(
-                requestCheckForm.getCustomerId(), requestCheckForm.getAmount());
+                requestCheckForm.getUserName(), requestCheckForm.getAmount());
 
 
             // transactionService.executeRequestCheck(

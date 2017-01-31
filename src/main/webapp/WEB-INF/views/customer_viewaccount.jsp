@@ -62,7 +62,7 @@
 					<td>ZIP</td>
 					<td>${customer_account.zip}</td>
 				</tr>
-				</tr>
+				
 				</tbody>
 			</table>
 		</div>
