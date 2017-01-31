@@ -107,7 +107,7 @@
 				<br>
 				<a href="<c:url value="/employee_searchtransaction" />">
 					<button class="btn btn-default">
-						Search Transaction History
+						View Transaction History
 					</button>
 				</a>
 				
