@@ -38,7 +38,7 @@
 			<tr>
 				<td>available amount:</td>
 				<td>${buyFundForm.available}</td>
-					<input type="hidden" step="0.01" name="available"
+					<td><input type="hidden" step="0.01" name="available"
 						   value="${buyFundForm.available}"/>
 				<td><form:errors path="available" cssClass="error"/></td>
 			</tr>
@@ -55,10 +55,54 @@
 					<input type="submit" name="button" value="buy"/>
 				</th>
 			</tr>
+			<tr>
+				<th>
+					<br/>
+				</th>
+			</tr>
 
 		</table>
 	</form:form>
-</div>
+
+
+<div class="row">
+		<div class="col-md-6">
+			<table class="table">
+				<thead>
+				<tr>
+					<th>Name of fund</th>
+					<th>Shares</th>
+					<th>Price</th>
+					<th>Value</th>
+				</tr>
+				</thead>
+				<tbody>
+				<c:forEach var="customer_pv" items="${customerPosition}">
+
+					<tr>
+						<td>
+								${customer_pv.fund.name}
+						</td>
+						<td>
+								${customer_pv.shares}
+						</td>
+						<td>
+								${customer_pv.price}
+						</td>
+						<td>
+								${customer_pv.value}
+						</td>
+					</tr>
+				</c:forEach>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	</div>
+
+
+
+
 <div>
 	<c:import url="bottom.jsp"/>
 </div>

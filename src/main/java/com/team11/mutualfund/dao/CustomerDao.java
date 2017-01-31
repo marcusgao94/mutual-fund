@@ -1,6 +1,8 @@
 package com.team11.mutualfund.dao;
 
 import com.team11.mutualfund.model.Customer;
+import com.team11.mutualfund.utils.User;
+
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
@@ -15,6 +17,14 @@ public class CustomerDao extends AbstractDao<Long, Customer> {
         return getByKey(customerId);
     }
 
+    public User findUserByUserName(String userName) {
+        Query query = getSession().createQuery(
+                "select c from Customer c where c.userName = :name"
+        )
+                .setParameter("name", userName);
+        return (User) query.uniqueResult();
+    }
+    
     public Customer findByUserName(String userName) {
         Query query = getSession().createQuery(
                 "select c from Customer c where c.userName = :name"

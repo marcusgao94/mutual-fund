@@ -101,7 +101,7 @@ public class FundService {
 
     //list funds that a customer purchased
     public List<Positionvalue> listPositionvalueByCustomerId(long cid) {
-        List<Positionvalue> positionvalueList = new LinkedList();
+        List<Positionvalue> positionvalueList = new LinkedList<>();
         List<Position> positionList = positionDao.listByCustomerId(cid);
         for (Position p : positionList) {
             List<FundPriceHistory> fph = fundPriceHistoryDao.listByFundId(p.getFund().getId());

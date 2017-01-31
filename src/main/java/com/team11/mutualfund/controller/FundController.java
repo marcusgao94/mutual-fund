@@ -9,6 +9,7 @@ import com.team11.mutualfund.service.CustomerService;
 import com.team11.mutualfund.service.FundService;
 import com.team11.mutualfund.service.TransactionService;
 import com.team11.mutualfund.utils.Pair;
+import com.team11.mutualfund.utils.Positionvalue;
 import com.team11.mutualfund.utils.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static com.team11.mutualfund.controller.LoginController.checkCustomer;
 import static com.team11.mutualfund.utils.Constant.CUSTOMERNOTLOGIN;
@@ -48,7 +50,7 @@ public class FundController {
             return "redirect:/customer_login";
         }
         User user = (User) request.getSession().getAttribute("user");
-        Customer customer = customerService.getCustomerById(user.getId());
+        Customer customer = customerService.getCustomerByUserName(user.getUserName());
         BuyFundForm buyFundForm = new BuyFundForm();
         buyFundForm.setAvailable(customer.getCash() - customer.getPendingCashDecrease());
         model.addAttribute("buyFundForm", buyFundForm);
@@ -57,7 +59,7 @@ public class FundController {
 
     @RequestMapping(value = "buy_fund", method = RequestMethod.POST)
     public String buyFund(HttpServletRequest request, RedirectAttributes ra,
-                          @Valid BuyFundForm buyFundForm, BindingResult result) {
+                          @Valid BuyFundForm buyFundForm, BindingResult result, Model model) {
         if (!checkCustomer(request)) {
             ra.addFlashAttribute("loginError", CUSTOMERNOTLOGIN);
             return "redirect:/customer_login";
@@ -65,6 +67,9 @@ public class FundController {
         if (result.hasErrors())
             return "buy_fund";
         User user = (User) request.getSession().getAttribute("user");
+        Customer c = customerService.getCustomerByUserName(user.getUserName());
+        List<Positionvalue> pv = fundService.listPositionvalueByCustomerId(c.getId());
+        model.addAttribute("customerPositione", pv);
         try {
             transactionService.buyFund(user.getId(), buyFundForm.getFundTicker(),
                 buyFundForm.getAmount());
@@ -89,6 +94,7 @@ public class FundController {
                 result.rejectValue("amount", "", message);
             return "buy_fund";
         }
+        model.addAttribute("success", "Transaction has been submitted successfully, please wait for the next transition day!");
         return "success";
     }
 
@@ -105,7 +111,7 @@ public class FundController {
 
     @RequestMapping(value = "sell_fund", method = RequestMethod.POST)
     public String sellFund(HttpServletRequest request, RedirectAttributes ra,
-                           @Valid SellFundForm sellFundForm, BindingResult result) {
+                           @Valid SellFundForm sellFundForm, BindingResult result, Model model) {
         if (!checkCustomer(request)) {
             ra.addFlashAttribute("loginError", CUSTOMERNOTLOGIN);
             return "redirect:/customer_login";
@@ -113,6 +119,9 @@ public class FundController {
         if (result.hasErrors())
             return "sell_fund";
         User user = (User) request.getSession().getAttribute("user");
+        Customer c = customerService.getCustomerByUserName(user.getUserName());
+        List<Positionvalue> pv = fundService.listPositionvalueByCustomerId(c.getId());
+        model.addAttribute("customerPositione", pv);
         try {
             transactionService.sellFund(user.getId(), sellFundForm.getFundTicker(), sellFundForm.getShare());
         } catch (RollbackException e) {
@@ -126,6 +135,7 @@ public class FundController {
                 result.rejectValue("share", "2", message);
             return "sell_fund";
         }
+        model.addAttribute("success", "Transaction has been submitted successfully, please wait for the next transition day!");
         return "success";
     }
 }
