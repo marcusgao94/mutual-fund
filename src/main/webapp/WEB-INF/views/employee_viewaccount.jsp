@@ -102,7 +102,7 @@
            <div class="text-right">
 <!--   <button type="button" class="btn btn-primary">Edit</button> -->
 			<div class="text-right">
-				<a href="<c:url value="/customer_changepassword" />">
+				<a href="<c:url value="/employee_changecuspassword" />">
 					<input type = "button" value = "Change password" class="btn btn-default"/>
 				</a>
 				<a href="<c:url value="/deposite_check" />">

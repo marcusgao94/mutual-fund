@@ -18,12 +18,15 @@
 		<c:import url="/header" />
 	</div>
 
-	<h5>Reset Customer Password</h5>
-	<table>
-
+	
+	
+<div class="container">
+<h5>Reset Customer Password</h5>
+<form:form modelAttribute="changePasswordForm">
+<table>
 		<tr>
-			<td>Customer ID:</td>
-			<td><input type="text" name="customer-id" value="" autofocus />
+			<td>Customer Username: </td>
+			<td><input type="text" name="customer-name" value="" autofocus />
 			</td>
 		</tr>
 
@@ -37,14 +40,25 @@
 			<td>Confirm Password:</td>
 			<td><input type="password" name="confirm-password" value="" /></td>
 		</tr>
-
-
+		
+		<tr>
+			<th><br/></th>
+		</tr>
+		<tr>
+			<th><br/></th>
+		</tr>
+		
 		<tr>
 			<th colspan="2"><input type="submit" name="button"
 				value="Change Password" /></th>
 		</tr>
 
 	</table>
+	</form:form>
+	</div>
+	
+	
+	
 	<div>
 		<c:import url="bottom.jsp" />
 	</div>
