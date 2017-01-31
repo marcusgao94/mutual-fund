@@ -57,63 +57,11 @@
               </table>
               </div><!--table-responsive close-->
             </div><!--col-md-6 close-->
-            <div class="col-md-6">
-	<div class="row">
-		<div class="col-xs-12">
-			
-			<h3>Basic Info</h3>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-xs-6">
-			<table class="table bio-table">
-				<tbody>
-				<tr>
-					<td>ID</td>
-					<td>${customer_account.id}</td>
-				</tr>
-				<tr>
-					<td>FirstName</td>
-					<td>${customer_account.firstName}</td>
-				</tr>
-				<tr>
-					<td>LastName</td>
-					<td>${customer_account.lastName}</td>
-				<tr>
-					<td>Address</td>
-					<td>${customer_account.addr_line1} ${customer_account.addr_line2}</td>
-				</tr>
-				<tr>
-					<td>State</td>
-					<td>${customer_account.state}</td>
-				</tr>
-				<tr>
-					<td>City</td>
-					<td>${customer_account.city}</td>
-				</tr>
-				<tr>
-					<td>ZIP</td>
-					<td>${customer_account.zip}</td>
-				</tr>
-				
-				</tbody>
-			</table>
-		</div>
 </div>
-	<div class="row">
-		<div class="col-xs-6">
-			<div class="text-right">
-			<a href="<c:url value="/customer_changepassword" />">
-				<button class="btn btn-default">Change Password</button>
-			</a>
-			
-			<a href="<c:url value="/customer_transactionhistory" />">
-				<button class="btn btn-default">View Transaction History</button>
-			</a>
-		</div>
-		</div>
-	</div>
-	</div>
+</div>
+</div>
+</div>
+</div>
 	<div class="container">
 	<div class="row">
 		<div class="col-xs-12">
@@ -168,9 +116,7 @@
             </div>
             </div>
             </div>
-            </div>
-            </div>
-            </div>
+            
                           <div class="col-sm-12">
                   <div class="panel panel-default">
                   <div class="panel-heading">
@@ -253,7 +199,7 @@
                     </div>
 </div>
 
-
+</div>
 
 
 <div>
