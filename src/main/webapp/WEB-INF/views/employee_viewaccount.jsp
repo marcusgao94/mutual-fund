@@ -118,7 +118,7 @@
 <div class="container">
 
 			<h3>Account Info</h3>
-			<h4>Date of the last trading day: xxxx </h4>
+			<h4>Date of the last trading day: ${date} </h4>
 			<h4>Cash: ${employee_customeraccount.cash} </h4>
 
 	<div class="row">
