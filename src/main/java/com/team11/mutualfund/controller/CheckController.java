@@ -43,8 +43,6 @@ public class CheckController {
             ra.addFlashAttribute("loginError", NOTLOGIN);
             return "redirect:/employee_login";
         }
-
-        // todo: change user id to user name
         DepositCheckForm depositCheckForm = new DepositCheckForm();
         model.addAttribute("depositCheckForm", depositCheckForm);
         return "deposit_check";
@@ -61,17 +59,12 @@ public class CheckController {
             return "deposit_check";
         try {
             transactionService.depositCheck(
-                depositCheckForm.getCustomerId(), depositCheckForm.getAmount());
-
-//            transactionService.executeDepositCheck(
-//                    depositCheckForm.getCustomerId(), LocalDate.now());
-
-
-            return "success";
+                depositCheckForm.getUserName(), depositCheckForm.getAmount());
         } catch (RollbackException e) {
             result.rejectValue("customerId", "0", e.getMessage());
             return "deposit_check";
         }
+        return "success";
     }
 
     @RequestMapping("/request_check")
@@ -102,7 +95,6 @@ public class CheckController {
         result.addAllErrors(requestCheckForm.getValidationErrors());
         if (result.hasErrors())
             return "request_check";
-        //User user = (User) request.getSession().getAttribute("user");
         try {
             transactionService.requestCheck(
                 requestCheckForm.getUserName(), requestCheckForm.getAmount());

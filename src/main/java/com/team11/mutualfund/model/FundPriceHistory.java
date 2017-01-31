@@ -13,7 +13,7 @@ public class FundPriceHistory implements Serializable {
     private double price;
 
     @MapsId("fundId")
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "fund_id")
     private Fund fund;
 

@@ -13,12 +13,12 @@ public class Position implements Serializable {
     private double shares;
 
     @MapsId("customerId")
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private Customer customer;
 
     @MapsId("fundId")
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "fund_id", referencedColumnName = "id")
     private Fund fund;
 

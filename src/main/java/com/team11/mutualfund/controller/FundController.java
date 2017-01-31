@@ -9,6 +9,7 @@ import com.team11.mutualfund.service.CustomerService;
 import com.team11.mutualfund.service.FundService;
 import com.team11.mutualfund.service.TransactionService;
 import com.team11.mutualfund.utils.Pair;
+import com.team11.mutualfund.utils.Positionvalue;
 import com.team11.mutualfund.utils.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,6 +50,10 @@ public class FundController {
         }
         User user = (User) request.getSession().getAttribute("user");
         Customer customer = customerService.getCustomerById(user.getId());
+        List<Positionvalue> pv = fundService.listPositionvalueByCustomerId(customer.getId());
+        model.addAttribute("customerPositione", pv);
+        List<Fund> fundList = fundService.listFund();
+        model.addAttribute("fundList", fundList);
         BuyFundForm buyFundForm = new BuyFundForm();
         buyFundForm.setAvailable(customer.getCash() - customer.getPendingCashDecrease());
         model.addAttribute("buyFundForm", buyFundForm);
@@ -65,9 +70,6 @@ public class FundController {
         if (result.hasErrors())
             return "buy_fund";
         User user = (User) request.getSession().getAttribute("user");
-        Customer c = customerService.getCustomerByUserName(user.getUserName());
-        List<Positionvalue> pv = fundService.listPositionvalueByCustomerId(c.getId());
-        model.addAttribute("customerPositione", pv);
         try {
             transactionService.buyFund(user.getId(), buyFundForm.getFundTicker(),
                 buyFundForm.getAmount());
@@ -91,6 +93,10 @@ public class FundController {
             ra.addFlashAttribute("loginError", CUSTOMERNOTLOGIN);
             return "redirect:/customer_login";
         }
+        User user = (User) request.getSession().getAttribute("user");
+        Customer c = customerService.getCustomerByUserName(user.getUserName());
+        List<Positionvalue> pv = fundService.listPositionvalueByCustomerId(c.getId());
+        model.addAttribute("customerPositione", pv);
         SellFundForm sellFundForm = new SellFundForm();
         model.addAttribute("sellFundForm", sellFundForm);
         return "sell_fund";
@@ -106,9 +112,6 @@ public class FundController {
         if (result.hasErrors())
             return "sell_fund";
         User user = (User) request.getSession().getAttribute("user");
-        Customer c = customerService.getCustomerByUserName(user.getUserName());
-        List<Positionvalue> pv = fundService.listPositionvalueByCustomerId(c.getId());
-        model.addAttribute("customerPositione", pv);
         try {
             transactionService.sellFund(user.getId(), sellFundForm.getFundTicker(), sellFundForm.getShare());
         } catch (RollbackException e) {
