@@ -61,12 +61,12 @@ public class CheckController {
             return "deposit_check";
         try {
             transactionService.depositCheck(
-                depositCheckForm.getCustomerId(), depositCheckForm.getAmount());
+                depositCheckForm.getUserName(), depositCheckForm.getAmount());
 
 //            transactionService.executeDepositCheck(
 //                    depositCheckForm.getCustomerId(), LocalDate.now());
-
-
+            String userName = depositCheckForm.getUserName();
+            model.addAttribute("success", "update password for " + userName + " successfully");
             return "success";
         } catch (RollbackException e) {
             result.rejectValue("customerId", "0", e.getMessage());
@@ -102,7 +102,7 @@ public class CheckController {
         result.addAllErrors(requestCheckForm.getValidationErrors());
         if (result.hasErrors())
             return "request_check";
-        //User user = (User) request.getSession().getAttribute("user");
+        User user = (User) request.getSession().getAttribute("user");
         try {
             transactionService.requestCheck(
                 requestCheckForm.getUserName(), requestCheckForm.getAmount());
@@ -110,7 +110,7 @@ public class CheckController {
 
             // transactionService.executeRequestCheck(
             //        requestCheckForm.getCustomerId(), LocalDate.now());
-
+            model.addAttribute("success", user.getUserName() + "request check successfully");
             return "success";
         } catch (RollbackException e) {
             String message = e.getMessage();

@@ -15,7 +15,7 @@
 
 	<div class="container">
 
-		message : ${success} <br /> <br /> Go back to <a href="<c:url value="/home" />">Home</a>
+		<h4>Message : ${success}</h4> <br /> <br /> Go back to <a href="<c:url value="/home" />">Home</a>
 	</div>
 	<div>
 		<c:import url="bottom.jsp" />

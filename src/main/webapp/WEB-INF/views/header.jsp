@@ -130,6 +130,14 @@
 										View Customer Account
 									</a>
 								</li>
+								
+								<li>
+								<a href="<c:url value="/employee-transactionhistory" />">
+										<i class="fa fa-money"></i>
+										View Customer Transaction History
+									</a>
+								</li>
+								
 								<li>
 									<a href="<c:url value="/employee_changecuspassword" />">
 										<i class="fa fa-key"></i>
@@ -152,9 +160,11 @@
 								<li>
 									<a href="<c:url value="/transitionday" />">
 										<i class="fa fa-legal"></i>
-										Transition Day
+										Set Transition Day
 									</a>
 								</li>
+								
+								
 								
 							</c:if>
 							<c:if test="${user.type != -1}">

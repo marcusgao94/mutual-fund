@@ -6,19 +6,19 @@ import javax.validation.constraints.Size;
 
 public class DepositCheckForm {
 
-    @NotNull(message = "customer id cannot be null")
-    private Long customerId;
+    @NotNull(message = "customer username cannot be null")
+    private String userName;
 
     @NotNull(message = "amount cannot be null")
     @Min(1)
     private Double amount;
 
-    public Long getCustomerId() {
-        return customerId;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public Double getAmount() {

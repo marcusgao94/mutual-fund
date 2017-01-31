@@ -54,6 +54,11 @@
 			</div>
 		</div>
 	</div>
+	</div>
+	
+	<div>
 	<c:import url="bottom.jsp"/>
+	</div>
+	
 </body>
 </html>

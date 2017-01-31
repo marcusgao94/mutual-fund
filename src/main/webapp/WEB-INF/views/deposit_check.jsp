@@ -24,11 +24,11 @@
 	<form:form method="post" modelAttribute="depositCheckForm">
 		<table>
 			<tr>
-				<td>Customer Id:</td>
-				<td><input type="number" name="customerId"
-						   value="${depositCheckForm.getCustomerId()}" autofocus/>
+				<td>Customer UserName:</td>
+				<td><input type="text" name="userName"
+						   value="${depositCheckForm.getUserName()}" autofocus/>
 				</td>
-				<td><form:errors path="customerId" cssClass="error"/></td>
+				<td><form:errors path="userName" cssClass="error"/></td>
 			</tr>
 
 			<tr>

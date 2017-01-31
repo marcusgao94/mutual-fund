@@ -96,10 +96,10 @@ public class TransactionService {
         transactionDao.saveTransaction(new Transaction(customer, null, REQUESTCHECK, null, amount));
     }
 
-    public void depositCheck(long cid, double amount) throws RollbackException {
-        Customer customer = customerDao.findById(cid);
+    public void depositCheck(String userName, double amount) throws RollbackException {
+        Customer customer = customerDao.findByUserName(userName);
         if (customer == null)
-            throw new RollbackException("customer id " + String.valueOf(cid) + " does not exist");
+            throw new RollbackException("customer id " + String.valueOf(userName) + " does not exist");
         transactionDao.saveTransaction(new Transaction(customer, null, DEPOSITCHECK, null, amount));
     }
 

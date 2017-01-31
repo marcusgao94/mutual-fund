@@ -25,7 +25,7 @@
 	<form:form method="post" modelAttribute="requestCheckForm">
 		<table>
 			<tr>
-				<td>UserName:</td>
+				<td>Customer UserName:</td>
 				<td>
 					<span style = "font-size:large">${requestCheckForm.userName}</span>
 					<input type="hidden" name="userName" value="${requestCheckForm.userName}">
