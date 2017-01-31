@@ -25,7 +25,7 @@
 		<label> Last Transition Date is: ${transitionForm.lastDate}</label><br />
 		<input type="hidden" name="lastDate" value="${transitionForm.lastDate}" />
 		<label> Enter new Transition Date: </label>
-		<input type="text" name="newDate" placeholder="dd/MM/yyyy" />
+		<input type="text" name="newDate" placeholder="MM/dd/yyyy" />
 		<form:errors path="newDate" cssClass="error" />
 		<div class="form">
 			<form:errors path="" cssClass="error" />
