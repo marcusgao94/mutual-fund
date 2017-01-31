@@ -86,7 +86,7 @@
 					</tbody>
 				</table>
 			</div>
-<<<<<<< HEAD
+<%-- <<<<<<< HEAD
             
             </div>
             </div>
@@ -134,7 +134,8 @@
        </div>
        </div>      
 =======
-		</div>
+ --%>		
+ </div>
 	</div>
 	<div class="row">
 		<div class="col-xs-6">
@@ -197,7 +198,7 @@
 		</div>
 	</div>
 </div>
->>>>>>> 97b05aa2f92f6cd044814a29becf337b52eed535
+<!-- >>>>>>> 97b05aa2f92f6cd044814a29becf337b52eed535 -->
 
 <div>
 	<c:import url="bottom.jsp"/>

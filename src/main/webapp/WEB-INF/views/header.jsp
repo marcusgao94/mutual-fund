@@ -115,7 +115,7 @@
 								<li>
 									<a href="<c:url value="/employee_register" />">
 										<span class="fa fa-user-plus"></span>
-										Create an Employee
+										Create An Employee
 									</a>
 								</li>
 								<li>
