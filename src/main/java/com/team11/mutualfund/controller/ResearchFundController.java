@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import static com.team11.mutualfund.controller.LoginController.checkCustomer;
@@ -74,8 +73,6 @@ public class ResearchFundController {
         List<FundPriceHistory> fundPriceHistory = fundService.getFundPriceHistoryByTicker(researchFundForm.getTicker());
         //HttpSession session = request.getSession();
         request.setAttribute("fundPriceHistory", fundPriceHistory);
- 
-        // transactionService.executeDepositCheck(depositCheckForm.getCustomerId(), LocalDate.now());
         return "customer_researchfund"; //?
     }
 }

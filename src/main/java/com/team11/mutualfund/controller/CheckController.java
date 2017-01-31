@@ -20,8 +20,6 @@ import javax.persistence.RollbackException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import java.time.LocalDate;
-
 import static com.team11.mutualfund.controller.LoginController.checkCustomer;
 import static com.team11.mutualfund.controller.LoginController.checkEmployee;
 import static com.team11.mutualfund.utils.Constant.CUSTOMERNOTLOGIN;
@@ -62,16 +60,11 @@ public class CheckController {
         try {
             transactionService.depositCheck(
                 depositCheckForm.getCustomerId(), depositCheckForm.getAmount());
-
-//            transactionService.executeDepositCheck(
-//                    depositCheckForm.getCustomerId(), LocalDate.now());
-
-
-            return "success";
         } catch (RollbackException e) {
             result.rejectValue("customerId", "0", e.getMessage());
             return "deposit_check";
         }
+        return "success";
     }
 
     @RequestMapping("/request_check")
@@ -106,12 +99,6 @@ public class CheckController {
         try {
             transactionService.requestCheck(
                 requestCheckForm.getUserName(), requestCheckForm.getAmount());
-
-
-            // transactionService.executeRequestCheck(
-            //        requestCheckForm.getCustomerId(), LocalDate.now());
-
-            return "success";
         } catch (RollbackException e) {
             String message = e.getMessage();
             if (message.startsWith("customer"))
@@ -120,6 +107,7 @@ public class CheckController {
                 result.rejectValue("amount", "1", message);
             return "request_check";
         }
+        return "success";
     }
 
 }

@@ -3,11 +3,13 @@ package com.team11.mutualfund.controller;
 import static com.team11.mutualfund.controller.LoginController.checkEmployee;
 import static com.team11.mutualfund.utils.Constant.NOTLOGIN;
 
-import java.time.DateTimeException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
-import java.util.Locale;
+import java.util.TimeZone;
 
 import javax.persistence.RollbackException;
 import javax.servlet.http.HttpServletRequest;
@@ -49,15 +51,17 @@ public class TransitionController {
         }
 
         TransitionForm transitionForm = new TransitionForm();
-        LocalDate date = fundService.getLastTransitionDay();
+        Date date = fundService.getLastTransitionDay();
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
         if (date == null)
             transitionForm.setLastDate("no last transition day");
         else {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-            String formattedDate = formatter.format(date);
+            String formattedDate = df.format(date);
             transitionForm.setLastDate(formattedDate);
         }
-        List<TransitionFund> fundList = fundService.listFundPrice();
+        String newDate = df.format(Calendar.getInstance().getTime());
+        transitionForm.setNewDate(newDate);
+        List<TransitionFund> fundList = fundService.listFundPrice(date);
         transitionForm.setFundList(fundList);
         model.addAttribute("transitionForm", transitionForm);
         return "transitionday";
@@ -77,10 +81,11 @@ public class TransitionController {
         }
 
         try {
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-            LocalDate date = LocalDate.parse(transitionForm.getNewDate(), dtf);
+            DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+            df.setTimeZone(TimeZone.getTimeZone("America/New_York"));
+            Date date = df.parse(transitionForm.getNewDate());
             transitionService.transit(date, transitionForm.getFundList());
-        } catch (DateTimeException e) {
+        } catch (ParseException e) {
             result.rejectValue("", "", "date must be the form MM/dd/yyyy");
             model.addAttribute("transitionForm", transitionForm);
             return "transitionday";

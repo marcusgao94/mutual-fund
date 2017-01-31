@@ -24,8 +24,6 @@ import javax.persistence.RollbackException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import java.time.LocalDate;
-
 import static com.team11.mutualfund.controller.LoginController.checkCustomer;
 import static com.team11.mutualfund.utils.Constant.CUSTOMERNOTLOGIN;
 
@@ -68,17 +66,6 @@ public class FundController {
         try {
             transactionService.buyFund(user.getId(), buyFundForm.getFundTicker(),
                 buyFundForm.getAmount());
-
-
-
-            // need delete !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//            fundService.updateFundPrice(buyFundForm.getFundTicker(), LocalDate.now().minusDays(3)
-//                    , 23);
-//            transactionService.executeBuyFund(buyFundForm.getFundTicker(), LocalDate.now());
-
-
-
-
         } catch (RollbackException e) {
             String message = e.getMessage();
             if (message.startsWith("customer"))

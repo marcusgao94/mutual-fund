@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.RollbackException;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import static com.team11.mutualfund.utils.Constant.NOFUND;
@@ -38,7 +38,7 @@ public class TransitionService {
     @Autowired
     private FundService fundService;
 
-    public void executeBuyFund(LocalDate date) throws RollbackException {
+    public void executeBuyFund(Date date) throws RollbackException {
         List<Transaction> transactionList = transactionDao.listPendingTransactionByType(BUYFUND);
         for (Transaction t : transactionList) {
             // update execute date
@@ -74,7 +74,7 @@ public class TransitionService {
         }
     }
 
-    public void executeSellFund(LocalDate date) throws RollbackException {
+    public void executeSellFund(Date date) throws RollbackException {
         List<Transaction> transactionList = transactionDao.listPendingTransactionByType(SELLFUND);
         for (Transaction t : transactionList) {
             // update execute date
@@ -105,7 +105,7 @@ public class TransitionService {
         }
     }
 
-    public void executeDepositCheck(LocalDate date) {
+    public void executeDepositCheck(Date date) {
         List<Transaction> transactionList = transactionDao.listPendingTransactionByType(DEPOSITCHECK);
         for (Transaction t : transactionList) {
             t.setExectuteDate(date);
@@ -114,7 +114,7 @@ public class TransitionService {
         }
     }
 
-    public void executeRequestCheck(LocalDate date) {
+    public void executeRequestCheck(Date date) {
         List<Transaction> transactionList = transactionDao.listPendingTransactionByType(REQUESTCHECK);
         for (Transaction t : transactionList) {
             t.setExectuteDate(date);
@@ -124,7 +124,7 @@ public class TransitionService {
         }
     }
 
-    public void transit(LocalDate date, List<TransitionFund> fundList)
+    public void transit(Date date, List<TransitionFund> fundList)
             throws RollbackException {
         // execute request, deposit check
         executeRequestCheck(date);
@@ -132,7 +132,7 @@ public class TransitionService {
 
         // update all fund price
         for (TransitionFund fd : fundList) {
-            fundService.updateFundPrice(fd.getFund(), date, fd.getNewPrice());
+            fundService.updateFundPrice(fd.getFund().getId(), date, fd.getNewPrice());
         }
 
         // execute buy, sell fund
