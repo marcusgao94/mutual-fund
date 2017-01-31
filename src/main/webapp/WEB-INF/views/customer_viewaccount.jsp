@@ -20,108 +20,98 @@
 <div>
 	<c:import url="/header"/>
 </div>
-<!-- <div class="container"> -->
+<div class="container">
 
-	
+	<h3>Customer View Account</h3>
 
-	<div class="container">
-	<h3>${customer_account.userName}'s Account</h3>
-		<div class="row-fluid">
-			<div class="col-sm-12">
-				<h3>Basic Info</h3>
+	<div class="row">
+		<div class="col-xs-12">
+			<h2>User name: ${customer_account.userName}</h2>
+			<h3>Basic Info</h3>
 
-				<div class="col-md-6">
-					<table class="table bio-table">
-						<tr>
-							<td>ID</td>
-							<td>${customer_account.id}</td>
-						</tr>
-						<tr>
-							<td>FirstName</td>
-							<td>${customer_account.firstName}</td>
-						</tr>
-						<tr>
-							<td>LastName</td>
-							<td>${customer_account.lastName}</td>
-						</tr>
-						<tr>
-							<td>UserName</td>
-							<td>${customer_account.userName}</td>
-						</tr>
-					<!-- </table>
-				</div>table-responsive close
-			</div>col-md-6 close
-			
-			
-			
-			
-			<div class="col-md-6">
-				<table class="table bio-table"> -->
-					<tr>
-						<td>Address</td>
-						<td>${customer_account.addr_line1} ${customer_account.addr_line2}</td>
-					</tr>
-					<tr>
-						<td>State</td>
-						<td>${customer_account.state}</td>
-					</tr>
-					<tr>
-						<td>City</td>
-						<td>${customer_account.city}</td>
-					</tr>
-					<tr>
-						<td>ZIP</td>
-						<td>${customer_account.zip}</td>
-					</tr>
-				</table>
-				
-				<div class="text-right">
-					<a href="<c:url value="/customer_changepassword" />">
-						<button class="btn btn-default">change password</button>
-					</a>
-				</div>
-			</div>
 		</div>
 	</div>
-</div>
+	<div class="row">
+		<div class="col-xs-6">
+			<table class="table bio-table">
+				<tbody>
+				<tr>
+					<td>ID</td>
+					<td>${customer_account.id}</td>
+				</tr>
+				<tr>
+					<td>FirstName</td>
+					<td>${customer_account.firstName}</td>
+				</tr>
+				<tr>
+					<td>LastName</td>
+					<td>${customer_account.lastName}</td>
+				<tr>
+					<td>Address</td>
+					<td>${customer_account.addr_line1} ${customer_account.addr_line2}</td>
+				</tr>
+				<tr>
+					<td>State</td>
+					<td>${customer_account.state}</td>
+				</tr>
+				<tr>
+					<td>City</td>
+					<td>${customer_account.city}</td>
+				</tr>
+				<tr>
+					<td>ZIP</td>
+					<td>${customer_account.zip}</td>
+				</tr>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-offset-6 col-xs-6">
+			<a href="<c:url value="/customer_changepassword" />">
+				<button class="btn btn-default">change password</button>
+			</a>
+		</div>
+	</div>
 
-<div class="container">
-	<div class="row-fluid">
-		<div class="col-sm-12">
+	<div class="row">
+		<div class="col-xs-12">
 			<h3>Account Info</h3>
 			<h4> Date of the last trading day:</h4>
 			<h4> Cash: ${customer_account.cash}</h4>
-			<div class="col-md-6">
-
-				<table class="table">
-					<thead>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<table class="table">
+				<thead>
+				<tr>
+					<th>Name of fund</th>
+					<th>Shares</th>
+					<th>Price</th>
+					<th>Value</th>
+				</tr>
+				</thead>
+				<tbody>
+				<c:forEach var="customer_pv" items="${customerPosition}">
 					<tr>
-						<th>Name of fund</th>
-						<th>Shares</th>
-						<th>Price</th>
-						<th>Value</th>
+						<td>
+								${customer_pv.fund.name}
+						</td>
+						<td>
+								${customer_pv.shares}
+						</td>
+						<td>
+								${customer_pv.price}
+						</td>
+						<td>
+								${customer_pv.value}
+						</td>
 					</tr>
-					</thead>
-					<tbody>
-					<c:forEach var="customer_pv" items="${customerPosition}">
-						<tr>
-							<td>
-									${customer_pv.fund.name}
-							</td>
-							<td>
-									${customer_pv.shares}
-							</td>
-							<td>
-									${customer_pv.price}
-							</td>
-							<td>
-									${customer_pv.value}
-							</td>
-						</tr>
-					</c:forEach>
-					</tbody>
-				</table>
-			</div>
+				</c:forEach>
+				</tbody>
+			</table>
 		</div>
 	</div>
 </div>
