@@ -112,7 +112,7 @@ public class TransitionService {
             Customer customer = t.getCustomer();
             customer.setCash(customer.getCash() + t.getAmount());
         }
-    }
+    } 
 
     public void executeRequestCheck(Date date) {
         List<Transaction> transactionList = transactionDao.listPendingTransactionByType(REQUESTCHECK);
@@ -121,8 +121,8 @@ public class TransitionService {
             Customer customer = t.getCustomer();
             customer.setCash(customer.getCash() - t.getAmount());
             customer.setPendingCashDecrease(0);
-        }
-    }
+        } 
+    }  
 
     public void transit(Date date, List<TransitionFund> fundList)
             throws RollbackException {
@@ -138,6 +138,6 @@ public class TransitionService {
         // execute buy, sell fund
         executeBuyFund(date);
         executeSellFund(date);
-    }
+    } 
 
-}
+} 
