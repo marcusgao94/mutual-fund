@@ -86,11 +86,11 @@
 			<h3>Account Info</h3>
 			<h4> Date of the last trading day:</h4>
 			<h4> Cash: ${customer_account.cash}</h4>
-
+			<div class="col-md-6">
 					<a href="<c:url value="/request_check" />">
 						<button class="btn btn-default">Request Check</button>
 					</a>
-			<div class="col-md-6">
+
 		</div>
 	</div>
 	</div>
