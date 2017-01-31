@@ -105,7 +105,7 @@
 					</button>
 				</a>
 				<br>
-				<a href="<c:url value="/employee_searchtransaction" />">
+				<a href="<c:url value="/employee_transactionhistory?un=${employee_customeraccount.userName}" />">
 					<button class="btn btn-default">
 						View Transaction History
 					</button>
