@@ -1,13 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		
+
 
 <body>
 <header role="banner" id="top" class="navbar navbar-static-top">
 	<nav role="navigation" class="navbar navbar-default">
-		
-		
+
+
 		<div class="container">
 
 			<div class="navbar-header">
@@ -24,8 +24,8 @@
 
 			<div class="collapse navbar-collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-					
-					
+
+
 					<li class="">
 						<a href="<c:url value="/home" />">
 							<span class="glyphicon glyphicon-home"></span> Home
@@ -33,80 +33,166 @@
 					</li>
 
 
-					<li class="dropdown">		
+				<li class="dropdown">
+
 						<c:if test="${user.type == 0}">
 							<a data-toggle="dropdown" class="dropdown-toggle"
 						   		href="#">
 								<span class="glyphicon glyphicon glyphicon-usd"></span>
 								Investing & Trading <b class="caret"></b>
 							</a>
-	
-	
-						<ul class="dropdown-menu">
-							<li class="">
-								<a href="<c:url value="/buy_fund" />">
-									<span class="glyphicon glyphicon-usd"></span>
-									Buy Funds
-								</a>
-							</li>
-							<li class="">
-								<a href="<c:url value="/sell_fund" />">
-									<span class="glyphicon glyphicon-usd"></span>
-									Sell Funds
-								</a>
-							</li>
-						</ul>
-						
-					</c:if>
-					
-					
-				<c:if test="${user.type == 1}">
-					<a data-toggle="dropdown" class="dropdown-toggle"
-						   href="#">
-							<span class="glyphicon glyphicon-user"></span>
-							Create accounts<b class="caret"></b>
-						</a>
-	
-						<ul class="dropdown-menu">
-	
-							<li class="">
-								<a href="<c:url value="/employee_register" />">
-										<span class="fa fa-user-plus"></span>
-										Create An Employee
-								</a>
-							</li>
-							<li class="">
-								<a href="<c:url value="/customer_register" />">
+							<ul class="dropdown-menu">
+								<li class="">
+									<a href="<c:url value="/buy_fund" />">
+										<span class="glyphicon glyphicon-usd"></span>
+										Buy Funds
+									</a>
+								</li>
+								<li class="">
+									<a href="<c:url value="/sell_fund" />">
+										<span class="glyphicon glyphicon-usd"></span>
+										Sell Funds
+									</a>
+								</li>
+							</ul>
+						</c:if>
+					</li>
+
+<c:if test="${user.type == 1}">
+					<li class="dropdown">
+
+							<a data-toggle="dropdown" class="dropdown-toggle"
+							   href="#">
+								<span class="glyphicon glyphicon-user"></span>
+								Manage Employees <b class="caret"></b>
+							</a>
+
+							<ul class="dropdown-menu">
+
+								<li class="">
+									<a href="<c:url value="/employee_register" />">
+											<span class="fa fa-user-plus"></span>
+											Create An Employee
+									</a>
+								</li>
+
+								<li class="">
+									<a href="<c:url value="/customer_register" />">
+											<span class="fa fa-users"></span>
+											Create A Customer
+									</a>
+								</li>
+							</ul>
+
+
+						<li class="dropdown">
+							<a data-toggle="dropdown" class="dropdown-toggle"
+							   href="#">
+								<span class="glyphicon glyphicon-user"></span>
+								Manage Customers<b class="caret"></b>
+							</a>
+
+							<ul class="dropdown-menu">
+
+								<li>
+									<a href="<c:url value="/customer_register" />">
 										<span class="fa fa-users"></span>
 										Create A Customer
-								</a>
-							</li>
-						</ul>
-					</c:if>
-				</li>
-	
-					<li class="dropdown">
-					
-					<c:if test="${user.type == 0}">
-						<a data-toggle="dropdown" class="dropdown-toggle"
-						   href="#">
-							<span class="fa fa-area-chart"></span>
-							Research Funds <b class="caret"></b>
-						</a>
-						<ul class="dropdown-menu">
-							<li class="">
-								<a href="<c:url value="/customer_researchfund"/>">
-									<span class="glyphicon glyphicon-search"></span>
-									View Fund Analysis
-								</a>
-							</li>
-						</ul>
+									</a>
+								</li>
+								<li>
+									<a href="<c:url value="/employee_searchcustomer" />">
+										<i class="fa fa-drivers-license"></i>
+										View Customer Account
+									</a>
+								</li>
+
+								<li>
+								<a href="<c:url value="/employee_searchtransaction" />">
+										<i class="fa fa-money"></i>
+										View Customer Transaction History
+									</a>
+								</li>
+
+								<li>
+									<a href="<c:url value="/employee_changecuspassword" />">
+										<i class="fa fa-key"></i>
+										Reset Customer Password
+									</a>
+								</li>
+
+								<li>
+									<a href="<c:url value="/deposit_check" />">
+										<i class="fa fa-credit-card"></i>
+										Deposit Check
+									</a>
+								</li>
+							</ul>
+						</li>
+
+						<li class="dropdown">
+							<a data-toggle="dropdown" class="dropdown-toggle"
+							   href="#">
+								<span class="glyphicon glyphicon-user"></span>
+								Manage Funds<b class="caret"></b>
+							</a>
+
+							<ul class="dropdown-menu">
+								<li>
+									<a href="<c:url value="/employee_createfund" />">
+										<i class="fa fa-plus"></i>
+										Create Fund
+									</a>
+								</li>
+							</ul>
+						</li>
+
+							<%-- <a data-toggle="dropdown" class="dropdown-toggle"
+							   href="#">
+								<span class="glyphicon glyphicon-user"></span>
+								Set Transition Day<b class="caret"></b>
+							</a>
+
+							<ul class="dropdown-menu">
+								<li>
+									<a href="<c:url value="/transitionday" />">
+										<i class="fa fa-legal"></i>
+										Set Transition Day
+									</a>
+								</li>
+							</ul> --%>
+
+
 						</c:if>
-						
+
+
+
+
+
+
+					<li class="dropdown">
+
+						<c:if test="${user.type == 0}">
+							<a data-toggle="dropdown" class="dropdown-toggle"
+							   href="#">
+								<span class="fa fa-area-chart"></span>
+								Research Funds <b class="caret"></b>
+							</a>
+							<ul class="dropdown-menu">
+								<li class="">
+									<a href="<c:url value="/customer_researchfund"/>">
+										<span class="glyphicon glyphicon-search"></span>
+										View Fund Analysis
+									</a>
+								</li>
+							</ul>
+						</c:if>
+
+
 					</li>
 				</ul>
-				
-				
+
+
 
 				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown">
@@ -129,6 +215,7 @@
 									</a>
 								</li>
 							</c:if>
+
 							<c:if test="${user.type == 0}">
 								<li>
 									<a href="<c:url value="/customer_viewaccount" />">
@@ -149,8 +236,10 @@
 									</a>
 								</li>
 							</c:if>
-							<c:if test="${user.type == 1}">
-								<li>
+
+
+							<%-- <c:if test="${user.type == 1}"> --%>
+								<%-- <li>
 									<a href="<c:url value="/employee_register" />">
 										<span class="fa fa-user-plus"></span>
 										Create An Employee
@@ -168,14 +257,14 @@
 										View Customer Account
 									</a>
 								</li>
-								
+
 								<li>
 								<a href="<c:url value="/employee_searchtransaction" />">
 										<i class="fa fa-money"></i>
 										View Customer Transaction History
 									</a>
 								</li>
-								
+
 								<li>
 									<a href="<c:url value="/employee_changecuspassword" />">
 										<i class="fa fa-key"></i>
@@ -194,17 +283,14 @@
 										Deposit Check
 									</a>
 								</li>
-								
+
 								<li>
 									<a href="<c:url value="/transitionday" />">
 										<i class="fa fa-legal"></i>
 										Set Transition Day
 									</a>
-								</li>
-								
-								
-								
-							</c:if>
+								</li> --%>
+							<%-- </c:if> --%>
 							<c:if test="${user.type != -1}">
 								<li>
 									<a href="<c:url value="/logout" />">
