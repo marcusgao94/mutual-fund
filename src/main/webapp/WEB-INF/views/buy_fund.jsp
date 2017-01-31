@@ -77,11 +77,15 @@
 				</tr>
 				</thead>
 				<tbody>
+				<tr>
+					<td>My Funds</td>
+				</tr>
+
 				<c:forEach var="customer_pv" items="${customerPosition}">
 
 					<tr>
 						<td>
-								${customer_pv.fund.name}
+								${customer_pv.fund.ticker}
 						</td>
 						<td>
 								${customer_pv.shares}
