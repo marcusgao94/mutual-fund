@@ -1,5 +1,6 @@
 package com.team11.mutualfund.dao;
 
+import com.team11.mutualfund.model.CustomerFund;
 import com.team11.mutualfund.model.Fund;
 import com.team11.mutualfund.model.Position;
 import org.hibernate.query.Query;
@@ -8,10 +9,14 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class PositionDao extends AbstractDao<Long, Position> {
+public class PositionDao extends AbstractDao<CustomerFund, Position> {
 
     public void save(Position position) {
         persist(position);
+    }
+
+    public Position findByCustomerFund(CustomerFund cf) {
+        return (Position) getByKey(cf);
     }
 
     public Position findByCustomerIdFundId(long cid, long fid) {

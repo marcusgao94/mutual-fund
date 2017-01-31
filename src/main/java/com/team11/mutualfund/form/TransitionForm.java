@@ -12,8 +12,10 @@ import java.util.List;
 
 public class TransitionForm {
 
+    private String lastDate;
+
     @NotNull
-    @Size(min = 10, max = 10)
+    @Size(min = 10, max = 10, message = "new date must be the form MM/dd/yyyy")
     private String newDate;
 
     private List<TransitionFund> fundList;
@@ -33,6 +35,14 @@ public class TransitionForm {
         return errors;
     }
 
+
+    public String getLastDate() {
+        return lastDate;
+    }
+
+    public void setLastDate(String lastDate) {
+        this.lastDate = lastDate;
+    }
 
     public String getNewDate() {
         return newDate;

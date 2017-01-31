@@ -30,7 +30,7 @@
 							<td>Fund Ticker:</td>
 							<td><input type="text" name="fundTicker"
 									   value="${createFundForm.fundTicker}"/></td>
-							<form:errors path="fundTicker" cssClass="error" />
+							<td><form:errors path="fundTicker" cssClass="error" /></td>
 						</tr>
 						<tr>
 							<td>Fund Name:</td>
