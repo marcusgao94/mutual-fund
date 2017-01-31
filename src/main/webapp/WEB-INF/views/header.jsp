@@ -24,18 +24,24 @@
 
 			<div class="collapse navbar-collapse navbar-collapse">
 				<ul class="nav navbar-nav">
+					
+					
 					<li class="">
 						<a href="<c:url value="/home" />">
 							<span class="glyphicon glyphicon-home"></span> Home
 						</a>
 					</li>
 
-					<li class="dropdown">
-						<a data-toggle="dropdown" class="dropdown-toggle"
-						   href="#">
-							<span class="glyphicon glyphicon glyphicon-usd"></span>
-							Investing & Trading <b class="caret"></b>
-						</a>
+
+					<li class="dropdown">		
+						<c:if test="${user.type == 0}">
+							<a data-toggle="dropdown" class="dropdown-toggle"
+						   		href="#">
+								<span class="glyphicon glyphicon glyphicon-usd"></span>
+								Investing & Trading <b class="caret"></b>
+							</a>
+	
+	
 						<ul class="dropdown-menu">
 							<li class="">
 								<a href="<c:url value="/buy_fund" />">
@@ -50,10 +56,38 @@
 								</a>
 							</li>
 						</ul>
-					</li>
-
-
+						
+					</c:if>
+					
+					
+				<c:if test="${user.type == 1}">
+					<a data-toggle="dropdown" class="dropdown-toggle"
+						   href="#">
+							<span class="glyphicon glyphicon-user"></span>
+							Create accounts<b class="caret"></b>
+						</a>
+	
+						<ul class="dropdown-menu">
+	
+							<li class="">
+								<a href="<c:url value="/employee_register" />">
+										<span class="fa fa-user-plus"></span>
+										Create An Employee
+								</a>
+							</li>
+							<li class="">
+								<a href="<c:url value="/customer_register" />">
+										<span class="fa fa-users"></span>
+										Create A Customer
+								</a>
+							</li>
+						</ul>
+					</c:if>
+				</li>
+	
 					<li class="dropdown">
+					
+					<c:if test="${user.type == 0}">
 						<a data-toggle="dropdown" class="dropdown-toggle"
 						   href="#">
 							<span class="fa fa-area-chart"></span>
@@ -67,8 +101,12 @@
 								</a>
 							</li>
 						</ul>
+						</c:if>
+						
 					</li>
 				</ul>
+				
+				
 
 				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown">
