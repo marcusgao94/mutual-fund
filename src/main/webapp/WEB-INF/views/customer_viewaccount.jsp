@@ -57,28 +57,8 @@
               </table>
               </div><!--table-responsive close-->
             </div><!--col-md-6 close-->
-</div>
-</div>
-</div>
-</div>
-</div>
-	<div class="container">
-	<div class="row">
-		<div class="col-xs-12">
-			<h3>Account Info</h3>
-			<h4> Date of the last trading day: ${date}</h4>
-			<h4> Cash: ${customer_account.cash}</h4>
-			<div class="col-md-6">
-					<a href="<c:url value="/request_check" />">
-						<button class="btn btn-default">Request Check</button>
-					</a>
-					<a href="<c:url value="/sell_fund" />">
-						<button class="btn btn-default">Sell Fund</button>
-					</a>
-					<a href="<c:url value="/buy_fund" />">
-						<button class="btn btn-default">Buy Fund</button>
-					</a>
 
+<div class="col-md-6">
             <div class="table-responsive responsiv-table">
               <table class="table bio-table">
                   <tbody>
@@ -113,6 +93,9 @@
 					</button>
 				</a>
               </div>
+            </div>
+            </div>
+            </div>
             </div>
             </div>
             </div>
@@ -199,7 +182,6 @@
                     </div>
 </div>
 
-</div>
 
 
 <div>
