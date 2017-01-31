@@ -21,25 +21,26 @@
 
 <div class="container">
 	<h3>Deposit Check</h3>
-	<form:form method="post" modelAttribute="depositCheckForm">
+	<form:form modelAttribute="depositCheckForm">
 		<table>
 			<tr>
 				<td>Customer UserName:</td>
-				<td><input type="text" name="userName"
+				<td>${depositCheckForm.getUserName()}</td>
+				<td><input type="hidden" name="userName"
 						   value="${depositCheckForm.getUserName()}" autofocus/>
 				</td>
 				<td><form:errors path="userName" cssClass="error"/></td>
 			</tr>
 
 			<tr>
-				<td>amount:</td>
+				<td>Amount:</td>
 				<td><input type="number" step="0.01" name="amount" value="${depositCheckForm.getAmount()}"/></td>
 				<td><form:errors path="amount" cssClass="error"/></td>
 			</tr>
 
 			<tr>
 				<th colspan="2">
-					<input type="submit" name="button" value="deposit"/>
+					<input type="submit" name="button" value="Deposit"/>
 				</th>
 			</tr>
 

@@ -105,7 +105,7 @@
 										<i class="fa fa-credit-card"></i>
 										Request Check
 									</a>
-									<a href="<c:url value="/customer_searchtransaction" />">
+									<a href="<c:url value="/customer_transactionhistory" />">
 										<i class="fa fa-search"></i>
 										View Transaction History
 									</a>
@@ -132,7 +132,7 @@
 								</li>
 								
 								<li>
-								<a href="<c:url value="/employee-transactionhistory" />">
+								<a href="<c:url value="/employee_searchtransaction" />">
 										<i class="fa fa-money"></i>
 										View Customer Transaction History
 									</a>

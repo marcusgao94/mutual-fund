@@ -6,20 +6,20 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.*;
+import java.util.Date;
 import java.util.Objects;
 
 @Embeddable
 public class FundDate implements Serializable {
 
-    @Column(name = "fundId")
     private Long fundId;
 
-    private LocalDate date;
+    private Date date;
 
     public FundDate() {
     }
 
-    public FundDate(long fid, LocalDate d) {
+    public FundDate(long fid, Date d) {
         fundId = fid;
         date = d;
     }
@@ -44,11 +44,11 @@ public class FundDate implements Serializable {
         this.fundId = fundId;
     }
 
-    public LocalDate getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 }

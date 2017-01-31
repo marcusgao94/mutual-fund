@@ -46,7 +46,7 @@
 	 				${customer_pendingtransaction.id}
 				</td>
 				<td>
-	 				${customer_pendingtransaction.fund.name}
+	 				${customer_pendingtransaction.fund.getName()}
 				</td>
 				<td>
 	 				${customer_pendingtransaction.shares}

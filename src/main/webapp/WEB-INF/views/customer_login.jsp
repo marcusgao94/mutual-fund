@@ -56,7 +56,7 @@
 			</tr>
 			<tr>
 				<th colspan="2">
-					<input type="submit" name="button" value="login"/>
+					<input type="submit" name="button" value="Login"/>
 				</th>
 			</tr>
 

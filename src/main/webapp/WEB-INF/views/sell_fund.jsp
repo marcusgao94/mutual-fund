@@ -28,7 +28,7 @@
 				<td> <form:errors path="" cssClass="error" /> </td>
 			</tr>
 			<tr>
-				<td>Fund ticker:</td>
+				<td>Fund Ticker:</td>
 				<td><input type="text" name="fundTicker"
 						   value="${sellFundForm.fundTicker}" autofocus/>
 				</td>
@@ -36,7 +36,7 @@
 			</tr>
 
 			<tr>
-				<td>share:</td>
+				<td>Share:</td>
 				<td><input type="number" step="0.001" name="share"
 						   value="${sellFundForm.share}"/></td>
 				<td><form:errors path="share" cssClass="error"/></td>
@@ -44,7 +44,7 @@
 
 			<tr>
 				<th colspan="2">
-					<input type="submit" name="button" value="buy"/>
+					<input type="submit" name="button" value="Sell"/>
 				</th>
 			</tr>
 			
@@ -66,7 +66,7 @@
 			<table class="table">
 				<thead>
 				<tr>
-					<th>Name of fund</th>
+					<th>Name of Fund</th>
 					<th>Shares</th>
 					<th>Price</th>
 					<th>Value</th>
