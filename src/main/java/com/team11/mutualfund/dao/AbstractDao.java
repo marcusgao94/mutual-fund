@@ -30,16 +30,8 @@ public abstract class AbstractDao<PK extends Serializable, T> {
 		getSession().persist(entity);
 	}
 
-	public T getByKey(Long customerId) {
-		return (T) getSession().get(persistentClass, customerId);
-	}
-
-	@SuppressWarnings("unchecked")
-	public List<T> listAll() {
-		Query query = getSession().createQuery(
-				"select f from " + persistentClass.getClass().getSimpleName() + " f"
-		);
-		return (List<T>) query.list();
+	public T getByKey(PK key) {
+		return (T) getSession().get(persistentClass, key);
 	}
 
 	public void delete(T entity) {

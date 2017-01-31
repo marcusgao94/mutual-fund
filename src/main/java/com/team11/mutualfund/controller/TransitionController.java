@@ -3,15 +3,18 @@ package com.team11.mutualfund.controller;
 import static com.team11.mutualfund.controller.LoginController.checkEmployee;
 import static com.team11.mutualfund.utils.Constant.NOTLOGIN;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
 
+import javax.persistence.RollbackException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import com.team11.mutualfund.model.FundPriceHistory;
+import com.team11.mutualfund.service.TransitionService;
 import com.team11.mutualfund.utils.TransitionFund;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -33,9 +36,9 @@ public class TransitionController {
     @Autowired
     private FundService fundService;
 
-
     @Autowired
-    MessageSource messageSource;
+    private TransitionService transitionService;
+
 
     @RequestMapping(value = "/transitionday", method = RequestMethod.GET)
     public String transitionDay(HttpServletRequest request,
@@ -48,11 +51,11 @@ public class TransitionController {
         TransitionForm transitionForm = new TransitionForm();
         LocalDate date = fundService.getLastTransitionDay();
         if (date == null)
-            model.addAttribute("lastTransitionday", "no last transition day");
+            transitionForm.setLastDate("no last transition day");
         else {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
             String formattedDate = formatter.format(date);
-            model.addAttribute("lastTransitionday", formattedDate);
+            transitionForm.setLastDate(formattedDate);
         }
         List<TransitionFund> fundList = fundService.listFundPrice();
         transitionForm.setFundList(fundList);
@@ -61,19 +64,31 @@ public class TransitionController {
     }
 
     @RequestMapping(value = "/transitionday", method = RequestMethod.POST)
-    public String createFund(HttpServletRequest request, Model model,
+    public String transitionDay(HttpServletRequest request, Model model,
                                @Valid TransitionForm transitionForm, BindingResult result, RedirectAttributes ra) {
         if (!checkEmployee(request)) {
             ra.addFlashAttribute("loginError", NOTLOGIN);
             return "redirect:/employee_login";
         }
-        if (result.hasErrors())
+        result.addAllErrors(transitionForm.getValidationErrors());
+        if (result.hasErrors()) {
+            model.addAttribute("transitionForm", transitionForm);
             return "transitionday";
-        /*
-        Transition transition = new Transition(); //没写完
-        model.addAttribute("success", "fund " + transition.getFundId() + " updated successfully");
-        */
+        }
 
+        try {
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+            LocalDate date = LocalDate.parse(transitionForm.getNewDate(), dtf);
+            transitionService.transit(date, transitionForm.getFundList());
+        } catch (DateTimeException e) {
+            result.rejectValue("", "", "date must be the form MM/dd/yyyy");
+            model.addAttribute("transitionForm", transitionForm);
+            return "transitionday";
+        } catch (RollbackException e) {
+            result.rejectValue("", "", e.getMessage());
+            model.addAttribute("transitionForm", transitionForm);
+            return "transitionday";
+        }
         return "success";
     }
 

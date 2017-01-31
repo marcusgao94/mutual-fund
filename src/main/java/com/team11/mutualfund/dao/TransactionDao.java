@@ -17,14 +17,12 @@ public class TransactionDao extends AbstractDao<Long, Transaction> {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Transaction> listPendingTransactionByCustomerIdType(long cid, TransactionType type) {
+    public List<Transaction> listPendingTransactionByType(TransactionType type) {
         Query query = getSession().createQuery(
                 "select t from Transaction t where " +
                         "t.executeDate is null and " +
-                        "t.customer.id = :cid and " +
                         "t.type = :type"
         )
-                .setParameter("cid", cid)
                 .setParameter("type", type);
         return (List<Transaction>) query.list();
     }
@@ -37,19 +35,6 @@ public class TransactionDao extends AbstractDao<Long, Transaction> {
                         "t.customer.id = :cid"
         )
                 .setParameter("cid", cid);
-        return (List<Transaction>) query.list();
-    }
-
-    @SuppressWarnings("unchecked")
-    public List<Transaction> listPendingBuyFundByFundTicker(String ticker) {
-        Query query = getSession().createQuery(
-                "select t from Transaction t where " +
-                        "t.executeDate is null and " +
-                        "t.fund.ticker = :ticker and " +
-                        "t.type = :type"
-        )
-                .setParameter("ticker", ticker)
-                .setParameter("type", BUYFUND);
         return (List<Transaction>) query.list();
     }
 

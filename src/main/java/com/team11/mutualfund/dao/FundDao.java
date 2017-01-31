@@ -25,8 +25,12 @@ public class FundDao extends AbstractDao<Long, Fund> {
         return (Fund) query.uniqueResult();
     }
 
+    @SuppressWarnings("unchecked")
     public List<Fund> listFund() {
-        return listAll();
+        Query query = getSession().createQuery(
+                "select f from Fund f"
+        );
+        return (List<Fund>) query.list();
     }
 
 }

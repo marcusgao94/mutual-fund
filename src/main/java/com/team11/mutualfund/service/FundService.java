@@ -46,11 +46,8 @@ public class FundService {
         return fundDao.findByTicker(ticker);
     }
 
-    public void updateFundPrice(String ticker, LocalDate date, double price)
+    public void updateFundPrice(Fund fund, LocalDate date, double price)
             throws RollbackException {
-        Fund fund = fundDao.findByTicker(ticker);
-        if (fund == null)
-            throw new RollbackException(NOFUND);
         FundPriceHistory fundPriceHistory = new FundPriceHistory();
         FundDate fundDate = new FundDate(fund.getId(), date);
         if (fundPriceHistoryDao.findByFundDate(fundDate) != null)
@@ -74,7 +71,7 @@ public class FundService {
     // get last transition day
     public LocalDate getLastTransitionDay() {
         List<FundPriceHistory> fundPriceHistoryList = fundPriceHistoryDao.listAllOrderByDate();
-        if (fundPriceHistoryList == null)
+        if (fundPriceHistoryList == null || fundPriceHistoryList.isEmpty())
             return null;
         return fundPriceHistoryList.get(0).getFundDate().getDate();
     }
