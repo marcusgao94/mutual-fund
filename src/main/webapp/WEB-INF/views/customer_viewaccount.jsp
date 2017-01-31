@@ -34,7 +34,6 @@
 
             <div class="col-md-6">
 
-<<<<<<< HEAD
             <div class="table-responsive responsiv-table">
               <table class="table bio-table">
                   <tbody>
@@ -59,7 +58,6 @@
               </div><!--table-responsive close-->
             </div><!--col-md-6 close-->
             <div class="col-md-6">
-=======
 	<div class="row">
 		<div class="col-xs-12">
 			
@@ -132,7 +130,6 @@
 					<a href="<c:url value="/buy_fund" />">
 						<button class="btn btn-default">Buy Fund</button>
 					</a>
->>>>>>> b4c9afd93784d6cecbbca5a1868b98911e787076
 
             <div class="table-responsive responsiv-table">
               <table class="table bio-table">
@@ -174,8 +171,6 @@
             </div>
             </div>
             </div>
-
-<<<<<<< HEAD
                           <div class="col-sm-12">
                   <div class="panel panel-default">
                   <div class="panel-heading">
@@ -197,22 +192,8 @@
                                <td>Value</td>
                             </tr>
                          </thead>
-<c:forEach var="customer_pv" items="${customerPosition}">
-=======
-	<div class="row">
-		<div class="col-md-6">
-			<table class="table">
-				<thead>
-				<tr>
-					<th>Name of Fund</th>
-					<th>Shares</th>
-					<th>Price</th>
-					<th>Value</th>
-				</tr>
-				</thead>
 				<tbody>
 				<c:forEach var="customer_pv" items="${customerPosition}">
->>>>>>> b4c9afd93784d6cecbbca5a1868b98911e787076
 
 					<tr>
 						<td>
