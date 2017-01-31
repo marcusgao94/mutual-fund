@@ -33,14 +33,14 @@
 			</tr>
 
 			<tr>
-				<td>amount:</td>
+				<td>Amount:</td>
 				<td><input type="number" step="0.01" name="amount" value="${depositCheckForm.getAmount()}"/></td>
 				<td><form:errors path="amount" cssClass="error"/></td>
 			</tr>
 
 			<tr>
 				<th colspan="2">
-					<input type="submit" name="button" value="deposit"/>
+					<input type="submit" name="button" value="Deposit"/>
 				</th>
 			</tr>
 
