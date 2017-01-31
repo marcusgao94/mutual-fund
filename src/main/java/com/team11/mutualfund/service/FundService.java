@@ -7,11 +7,13 @@ import com.team11.mutualfund.dao.PositionDao;
 import com.team11.mutualfund.model.*;
 
 import com.team11.mutualfund.utils.Positionvalue;
+import com.team11.mutualfund.utils.TransitionFund;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.RollbackException;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
@@ -68,8 +70,39 @@ public class FundService {
     public List<Fund> listFund() {
         return fundDao.listFund();
     }
-    //list funds that a customer purchased
 
+    // get last transition day
+    public LocalDate getLastTransitionDay() {
+        List<FundPriceHistory> fundPriceHistoryList = fundPriceHistoryDao.listAllOrderByDate();
+        if (fundPriceHistoryList == null)
+            return null;
+        return fundPriceHistoryList.get(0).getFundDate().getDate();
+    }
+
+    // list all fund with price of last transition day
+    public List<TransitionFund> listFundPrice() {
+        LocalDate date = getLastTransitionDay();
+        List<TransitionFund> transitionFundList = new LinkedList<>();
+        List<Fund> fundList = fundDao.listFund();
+        // cannot directly query fundPriceHistory, because new created fund does not have a price
+        for (Fund f : fundList) {
+            TransitionFund tf = new TransitionFund();
+            tf.setFund(f);
+            // get previous price
+            FundDate fd = new FundDate();
+            fd.setFundId(f.getId());
+            fd.setDate(date);
+            FundPriceHistory fph = fundPriceHistoryDao.findByFundDate(fd);
+            if (fph != null) {
+                DecimalFormat df = new DecimalFormat("#0.00");
+                tf.setLastPrice(df.format(fph.getPrice()));
+            }
+            transitionFundList.add(tf);
+        }
+        return transitionFundList;
+    }
+
+    //list funds that a customer purchased
     public List<Positionvalue> listPositionvalueByCustomerId(long cid) {
         List<Positionvalue> positionvalueList = new LinkedList();
         List<Position> positionList = positionDao.listByCustomerId(cid);

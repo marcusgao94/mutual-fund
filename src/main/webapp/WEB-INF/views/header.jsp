@@ -114,7 +114,7 @@
 									</a>
 								</li>
 								<li>
-									<a href="<c:url value="/employee_searchcustomer" />">
+									<a href="<c:url value="/employee_changecuspassword" />">
 										<i class="glyphicon glyphicon-user"></i>
 										Reset Customer Password
 									</a>

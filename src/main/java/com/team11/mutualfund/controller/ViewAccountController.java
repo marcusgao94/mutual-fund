@@ -76,6 +76,8 @@ public class ViewAccountController {
             result.rejectValue("userName", "", NOUSERNAME);
             return "employee_searchcustomer";
         }
+        searchForm.setUserName("");
+        model.addAttribute("searchForm", searchForm);
         model.addAttribute("employee_customeraccount", c);
         List<Positionvalue> pv = fundService.listPositionvalueByCustomerId(c.getId());
         model.addAttribute("employee_customerpositionvalue", pv);

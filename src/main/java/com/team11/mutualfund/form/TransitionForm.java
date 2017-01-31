@@ -1,41 +1,52 @@
 package com.team11.mutualfund.form;
 
+import com.team11.mutualfund.model.Fund;
+import com.team11.mutualfund.model.FundPriceHistory;
+import com.team11.mutualfund.utils.TransitionFund;
 import org.springframework.validation.DirectFieldBindingResult;
 import org.springframework.validation.Errors;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.List;
 
 public class TransitionForm {
 
     @NotNull
-    private String date;
+    @Size(min = 10, max = 10)
+    private String newDate;
 
-
-    private String price;
+    private List<TransitionFund> fundList;
 
     public String sanitize(String s) {
         return s.replace("&", "&qmp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;");
     }
 
-    public void setDate(String d) {
-        date = sanitize(d);
-    }
-    public String getDate() {
-        return date;
-    }
-
-    public void setPrice(String p) {
-        price = sanitize(p);
-    }
-    public String getPrice() {
-        return price;
-    }
-
     public Errors getValidationErrors() {
         Errors errors = new DirectFieldBindingResult(this, "transitionForm");
-        if (date == null || date.length() == 0) {
-            errors.rejectValue("date", "0", "please enter date MM/dd/yyyy");
+        for (TransitionFund tf : fundList) {
+            if (tf.getNewPrice() == null) {
+                errors.rejectValue("", "", "new price of every fund must be filled");
+                break;
+            }
         }
         return errors;
+    }
+
+
+    public String getNewDate() {
+        return newDate;
+    }
+
+    public void setNewDate(String newDate) {
+        this.newDate = sanitize(newDate);
+    }
+
+    public List<TransitionFund> getFundList() {
+        return fundList;
+    }
+
+    public void setFundList(List<TransitionFund> fundList) {
+        this.fundList = fundList;
     }
 }

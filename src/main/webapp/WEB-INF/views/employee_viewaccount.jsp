@@ -22,38 +22,35 @@
 </div>
 
 <div class="container">
-<form:form method="post" modelAttribute="searchForm">
-		<table>
-			<tr>
-				<td> <form:errors path="" cssClass="error" /> </td>
-			</tr>
-			<tr>
-				<td>Search User Name:</td>
-				<td><input type="text" name="userName"
-						   value="${searchForm.userName}" autofocus/>
-				</td>
-				<td><form:errors path="userName" cssClass="error"/></td>
-			</tr>
+	<div class="row">
 
-			<tr>
-				<th colspan="2">
-					<input type="submit" name="button" value="search"/>
-				</th>
-			</tr>
+		<form:form method="post" action="/employee_searchcustomer" modelAttribute="searchForm">
+			<table class="table">
+				<tr>
+					<td>Search User Name:</td>
+					<td><input type="text" name="userName"
+							   value="${searchForm.userName}" autofocus/>
+					</td>
+					<td><form:errors path="userName" cssClass="error"/></td>
+				</tr>
 
-		</table>
-	</form:form>
-</div>
+				<tr>
+					<th colspan="2">
+						<input type="submit" class="btn btn-default" name="button" value="search"/>
+					</th>
+				</tr>
 
+			</table>
+		</form:form>
+	</div>
 
-<div class="container">
-<h3>${employee_customeraccount.userName}'s Account</h3>
-    <div class="row-fluid">
-      <div class="col-sm-12">
-            <h3>Basic Info</h3>
+	<div class="row">
+		<div class="col-xs-12">
+			<h3>Basic Info</h3>
 
-            <div class="col-md-6">
+			<div class="col-xs-6">
 
+<<<<<<< HEAD
               <table class="table bio-table">
                   <tbody>
                     <tr>
@@ -102,14 +99,53 @@
            <div class="text-right">
 <!--   <button type="button" class="btn btn-primary">Edit</button> -->
 			<div class="text-right">
-				<a href="<c:url value="/customer_changepassword" />">
+				<a href="<c:url value="/employee_changecuspassword" />">
 					<input type = "button" value = "Change password" class="btn btn-default"/>
 				</a>
 				<a href="<c:url value="/deposite_check" />">
 					<input type = "button" value = "Deposit Check" class="btn btn-default"/>
 				</a>
 				
+=======
+				<table class="table">
+					<tbody>
+					<tr>
+						<td>ID</td>
+						<td>${employee_customeraccount.id}</td>
+					</tr>
+					<tr>
+						<td>FirstName</td>
+						<td>${employee_customeraccount.firstName}</td>
+					</tr>
+					<tr>
+						<td>LastName</td>
+						<td>${employee_customeraccount.lastName}</td>
+					</tr>
+					<tr>
+						<td>UserName</td>
+						<td>${employee_customeraccount.userName}</td>
+					</tr>
+					<tr>
+						<td>Address</td>
+						<td>${employee_customeraccount.addr_line1} ${employee_customeraccount.addr_line2}</td>
+					</tr>
+					<tr>
+						<td>State</td>
+						<td>${employee_customeraccount.state}</td>
+					</tr>
+					<tr>
+						<td>City</td>
+						<td>${employee_customeraccount.city}</td>
+					</tr>
+					<tr>
+						<td>ZIP</td>
+						<td>${employee_customeraccount.zip}</td>
+					</tr>
+					</tbody>
+				</table>
+>>>>>>> branch 'master' of https://github.com/CMU-J2EE/Team11.git
 			</div>
+<<<<<<< HEAD
             
             </div>
             </div>
@@ -156,6 +192,64 @@
        </div>
        </div>
        </div>      
+=======
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-6">
+			<div class="text-right">
+				<!--   <button type="button" class="btn btn-primary">Edit</button> -->
+				<%--<input type="button" value="Change Password"--%>
+				<%--onclick="window.location='customer_changepassword.jsp';">--%>
+				<a href="<c:url value="/employee_changecuspassword?un=${employee_customeraccount.userName}" />">
+					<button class="btn btn-default">
+						Reset password
+					</button>
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-6">
+			<h3>Account Info</h3>
+			<h4>Date of the last trading day: xxxx </h4>
+			<h4>Cash: ${employee_customeraccount.cash} </h4>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-6">
+			<table class="table">
+				<thead>
+				<tr>
+					<th>Name of fund</th>
+					<th>Shares</th>
+					<th>Price</th>
+					<th>Value</th>
+				</tr>
+				</thead>
+				<tbody>
+				<c:forEach var="employee_cpv" items="${employee_customerpositionvalue}">
+					<tr>
+						<td>
+								${employee_cpv.fund.name}
+						</td>
+						<td>
+								${employee_cpv.shares}
+						</td>
+						<td>
+								${employee_cpv.price}
+						</td>
+						<td>
+								${employee_cpv.value}
+						</td>
+					</tr>
+				</c:forEach>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+>>>>>>> 97b05aa2f92f6cd044814a29becf337b52eed535
 
 <div>
 	<c:import url="bottom.jsp"/>

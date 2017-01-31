@@ -44,6 +44,7 @@ public class CheckController {
             return "redirect:/employee_login";
         }
 
+        // todo: change user id to user name
         DepositCheckForm depositCheckForm = new DepositCheckForm();
         model.addAttribute("depositCheckForm", depositCheckForm);
         return "deposit_check";
@@ -62,8 +63,8 @@ public class CheckController {
             transactionService.depositCheck(
                 depositCheckForm.getCustomerId(), depositCheckForm.getAmount());
 
-            transactionService.executeDepositCheck(
-                    depositCheckForm.getCustomerId(), LocalDate.now());
+//            transactionService.executeDepositCheck(
+//                    depositCheckForm.getCustomerId(), LocalDate.now());
 
 
             return "success";

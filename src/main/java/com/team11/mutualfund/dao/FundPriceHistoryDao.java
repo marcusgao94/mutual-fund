@@ -15,6 +15,14 @@ public class FundPriceHistoryDao extends AbstractDao<Long, FundPriceHistory> {
     }
 
     @SuppressWarnings("unchecked")
+    public List<FundPriceHistory> listAllOrderByDate() {
+        Query query = getSession().createQuery(
+                "select fph from FundPriceHistory fph order by fundDate.date desc "
+        );
+        return (List<FundPriceHistory>) query.list();
+    }
+
+    @SuppressWarnings("unchecked")
     public List<FundPriceHistory> listByFundId(long fid) {
         Query query = getSession().createQuery(
                 "select fph from FundPriceHistory fph where " +
@@ -25,6 +33,7 @@ public class FundPriceHistoryDao extends AbstractDao<Long, FundPriceHistory> {
         return (List<FundPriceHistory>) query.list();
     }
 
+    @SuppressWarnings("unchecked")
     public List<FundPriceHistory> listByFundTicker(String ft) {
         Query query = getSession().createQuery(
                 "select fph from FundPriceHistory fph where " +
@@ -34,6 +43,7 @@ public class FundPriceHistoryDao extends AbstractDao<Long, FundPriceHistory> {
         return (List<FundPriceHistory>) query.list();
     }
 
+    @SuppressWarnings("unchecked")
     public FundPriceHistory findByFundDate(FundDate fundDate) {
         Query query = getSession().createQuery(
                 "select fph from FundPriceHistory fph where " +
