@@ -25,17 +25,23 @@
 	<div class="container">
 		<div class="row-fluid">
 			<div class="col-sm-12">
-				<h2>${customer_account.userName}</h2>
 				
-			<form:form method="post" modelAttribute="ResearchFundForm">
+			<form:form method="post" modelAttribute="researchFundForm">
+			    
+			    <%-- --%>
 			    <div class="form-group">
 			      <label for="sel1">Select one fund:</label>
-			      <select class="form-control" id="sel1">
+			      
+			      
+			      <select name="ticker" class="form-control" id="sel1">
+			      <option>Please select a fund and submit.</option>
 			      	<c:forEach var="funds" items="${funds}">
 				        <option>${funds.ticker}</option>				        
 				     </c:forEach>
 			      </select>
 			    </div>
+			    
+			    <input type="submit" value="Submit">
 			  </form:form>
 				
           <div class="panel panel-default">
@@ -51,11 +57,11 @@
 		                  <tbody>
 						<tr>
 							<td>FundTicker</td>
-							<td>${fund.ticker}</td>
+							<td>${a_fund.ticker}</td>
 						</tr>
 						<tr>
 							<td>FundName</td>
-							<td>${fund.name}</td>
+							<td>${a_fund.name}</td>
 						</tr>
 						</tbody>
 		
@@ -105,8 +111,15 @@
 		            ['Date', 'fundName'],
 		            
 		            <c:forEach var="fundPriceHistory" items="${fundPriceHistory}">
-		            [${fundPriceHistory.fundDate.date}, ${fundPriceHistory.price}],		        
-			     	</c:forEach>
+		            	['2017-01-01',  3],
+		            	//var x = ;
+		            	/*
+		            	var x = <c:out value="${fundPriceHistory.price}" />;
+		            	console.log("x = " + x);
+		            	alert(x);
+		            	[<c:out value="${fundPriceHistory.fundDate.date}" />, x],	        
+			     		*/
+		            </c:forEach>
 		           
 		          ]);
 		

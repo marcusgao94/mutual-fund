@@ -25,7 +25,6 @@ import javax.persistence.RollbackException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import static com.team11.mutualfund.controller.LoginController.checkCustomer;
@@ -50,7 +49,11 @@ public class FundController {
             return "redirect:/customer_login";
         }
         User user = (User) request.getSession().getAttribute("user");
-        Customer customer = customerService.getCustomerByUserName(user.getUserName());
+        Customer customer = customerService.getCustomerById(user.getId());
+        List<Positionvalue> pv = fundService.listPositionvalueByCustomerId(customer.getId());
+        model.addAttribute("customerPosition", pv);
+        List<Fund> fundList = fundService.listFund();
+        model.addAttribute("fundList", fundList);
         BuyFundForm buyFundForm = new BuyFundForm();
         buyFundForm.setAvailable(customer.getCash() - customer.getPendingCashDecrease());
         model.addAttribute("buyFundForm", buyFundForm);
@@ -73,17 +76,6 @@ public class FundController {
         try {
             transactionService.buyFund(user.getId(), buyFundForm.getFundTicker(),
                 buyFundForm.getAmount());
-
-
-
-            // need delete !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//            fundService.updateFundPrice(buyFundForm.getFundTicker(), LocalDate.now().minusDays(3)
-//                    , 23);
-//            transactionService.executeBuyFund(buyFundForm.getFundTicker(), LocalDate.now());
-
-
-
-
         } catch (RollbackException e) {
             String message = e.getMessage();
             if (message.startsWith("customer"))
@@ -104,6 +96,10 @@ public class FundController {
             ra.addFlashAttribute("loginError", CUSTOMERNOTLOGIN);
             return "redirect:/customer_login";
         }
+        User user = (User) request.getSession().getAttribute("user");
+        Customer c = customerService.getCustomerByUserName(user.getUserName());
+        List<Positionvalue> pv = fundService.listPositionvalueByCustomerId(c.getId());
+        model.addAttribute("customerPositione", pv);
         SellFundForm sellFundForm = new SellFundForm();
         model.addAttribute("sellFundForm", sellFundForm);
         return "sell_fund";
@@ -119,9 +115,6 @@ public class FundController {
         if (result.hasErrors())
             return "sell_fund";
         User user = (User) request.getSession().getAttribute("user");
-        Customer c = customerService.getCustomerByUserName(user.getUserName());
-        List<Positionvalue> pv = fundService.listPositionvalueByCustomerId(c.getId());
-        model.addAttribute("customerPosition", pv);
         try {
             transactionService.sellFund(user.getId(), sellFundForm.getFundTicker(), sellFundForm.getShare());
         } catch (RollbackException e) {

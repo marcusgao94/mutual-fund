@@ -206,11 +206,11 @@
         data.addColumn('string', 'Element');
         data.addColumn('number', 'Percentage');
         data.addRows([
-          ['Fund1', 0.1],
-          ['Fund2', 0.2],
-          ['Fund3', 0.3],
-          ['Fund4', 0.1],
-          ['Fund5', 0.3]
+          ['Fund1', 11],
+          ['Fund2', 22],
+          ['Fund3', 2],
+          ['Fund4', 33],
+          ['Fund5', 21]
         ]);
         var options = {
             title: 'My Fund Collection'

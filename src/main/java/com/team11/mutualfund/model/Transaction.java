@@ -4,7 +4,7 @@ import com.team11.mutualfund.utils.TransactionType;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 public class Transaction implements Serializable {
@@ -13,16 +13,17 @@ public class Transaction implements Serializable {
     @GeneratedValue
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(nullable = false)
     private Customer customer;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn
     private Fund fund;
+    
 
     @Column(nullable = true)
-    private LocalDate executeDate = null;
+    private Date executeDate = null;
 
     @Enumerated
     private TransactionType type;
@@ -59,6 +60,7 @@ public class Transaction implements Serializable {
     public void setId(long id) {
         this.id = id;
     }
+    
 
     public Customer getCustomer() {
         return customer;
@@ -76,11 +78,11 @@ public class Transaction implements Serializable {
         this.fund = fund;
     }
 
-    public LocalDate getExectuteDate(){
+    public Date getExectuteDate(){
         return executeDate;
     }
 
-    public void setExectuteDate(LocalDate executeDate) {
+    public void setExectuteDate(Date executeDate) {
         this.executeDate = executeDate;
     }
 

@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.RollbackException;
 import java.text.DecimalFormat;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -46,13 +46,16 @@ public class FundService {
         return fundDao.findByTicker(ticker);
     }
 
-    public void updateFundPrice(Fund fund, LocalDate date, double price)
+    public void updateFundPrice(long fid, Date date, double price)
             throws RollbackException {
+        Fund fund = fundDao.findById(fid);
+        if (fund == null)
+            throw new RollbackException(NOFUND);
         FundPriceHistory fundPriceHistory = new FundPriceHistory();
         FundDate fundDate = new FundDate(fund.getId(), date);
         if (fundPriceHistoryDao.findByFundDate(fundDate) != null)
             throw new RollbackException(DUPLICATEFUNDPRICEHISTORY);
-        fundPriceHistory.setFundDate(new FundDate(fund.getId(), date));
+        fundPriceHistory.setFundDate(fundDate);
         fundPriceHistory.setPrice(price);
         fundPriceHistory.setFund(fund);
         fundPriceHistoryDao.save(fundPriceHistory);
@@ -63,13 +66,8 @@ public class FundService {
         return fundPriceHistoryDao.listByFundTicker(ticker);
     }
 
-    //list all available funds for purchasing
-    public List<Fund> listFund() {
-        return fundDao.listFund();
-    }
-
     // get last transition day
-    public LocalDate getLastTransitionDay() {
+    public Date getLastTransitionDay() {
         List<FundPriceHistory> fundPriceHistoryList = fundPriceHistoryDao.listAllOrderByDate();
         if (fundPriceHistoryList == null || fundPriceHistoryList.isEmpty())
             return null;
@@ -77,8 +75,7 @@ public class FundService {
     }
 
     // list all fund with price of last transition day
-    public List<TransitionFund> listFundPrice() {
-        LocalDate date = getLastTransitionDay();
+    public List<TransitionFund> listFundPrice(Date date) {
         List<TransitionFund> transitionFundList = new LinkedList<>();
         List<Fund> fundList = fundDao.listFund();
         // cannot directly query fundPriceHistory, because new created fund does not have a price
@@ -99,6 +96,11 @@ public class FundService {
         return transitionFundList;
     }
 
+    //list all available funds for purchasing
+    public List<Fund> listFund() {
+        return fundDao.listFund();
+    }
+    
     //list funds that a customer purchased
     public List<Positionvalue> listPositionvalueByCustomerId(long cid) {
         List<Positionvalue> positionvalueList = new LinkedList<>();
