@@ -28,7 +28,7 @@
 				<td> <form:errors path="" cssClass="error" /> </td>
 			</tr>
 			<tr>
-				<td>Fund ticker:</td>
+				<td>Fund Ticker:</td>
 				<td><input type="text" name="fundTicker"
 						   value="${sellFundForm.fundTicker}" autofocus/>
 				</td>
@@ -36,7 +36,7 @@
 			</tr>
 
 			<tr>
-				<td>share:</td>
+				<td>Share:</td>
 				<td><input type="number" step="0.001" name="share"
 						   value="${sellFundForm.share}"/></td>
 				<td><form:errors path="share" cssClass="error"/></td>
@@ -44,13 +44,60 @@
 
 			<tr>
 				<th colspan="2">
-					<input type="submit" name="button" value="buy"/>
+					<input type="submit" name="button" value="Sell"/>
+				</th>
+			</tr>
+			
+			<tr>
+				<th colspan="2">
+					<br/>
 				</th>
 			</tr>
 
 		</table>
 	</form:form>
-</div>
+
+
+
+
+
+<div class="row">
+		<div class="col-md-6">
+			<table class="table">
+				<thead>
+				<tr>
+					<th>Name of Fund</th>
+					<th>Shares</th>
+					<th>Price</th>
+					<th>Value</th>
+				</tr>
+				</thead>
+				<tbody>
+				<c:forEach var="customer_pv" items="${customerPosition}">
+
+					<tr>
+						<td>
+								${customer_pv.fund.name}
+						</td>
+						<td>
+								${customer_pv.shares}
+						</td>
+						<td>
+								${customer_pv.price}
+						</td>
+						<td>
+								${customer_pv.value}
+						</td>
+					</tr>
+				</c:forEach>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	</div>
+
+
+
 <div>
 	<c:import url="bottom.jsp"/>
 </div>

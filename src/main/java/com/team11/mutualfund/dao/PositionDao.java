@@ -41,4 +41,9 @@ public class PositionDao extends AbstractDao<CustomerFund, Position> {
     public void delete(Position position) {
         super.delete(position);
     }
+
+	public List<Position> listByUserName(String userName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

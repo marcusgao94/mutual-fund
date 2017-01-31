@@ -70,7 +70,7 @@
 			<table class="table">
 	<thead>
 		<tr>
-			<th>ID</th>
+			<th>Date</th>
 			<th>Name</th>
 			<th>Shares</th>
 			<th>Amount</th>
@@ -81,7 +81,7 @@
 		<c:forEach var="customer_finishtransaction" items="${customer_finishTransaction}">
 			<tr>
 				<td>
-	 				${customer_finishtransaction.id}
+	 				${customer_finishtransaction.executeDate}
 				</td>
 				<td>
 	 				${customer_finishtransaction.fund.name}

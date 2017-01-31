@@ -23,7 +23,12 @@
 </div>
 
 <div class="container">
-	<form:form method="post" modelAttribute="searchForm">
+    <div class="row">
+    <br>
+        <div class="col-xs-5">
+        <div class="input-group">
+                <div class="input-group-btn search-panel">
+<form:form method="post" modelAttribute="searchForm">
 		<table class="table">
 			<tr>
 				<td>Search User Name:</td>
@@ -31,15 +36,25 @@
 					<input type="text" name="userName" value="${searchForm.userName}" autofocus/>
 				</td>
 				<td><form:errors path="userName" cssClass="error"/></td>
+				<td>
+				                <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                </span>
+				</td>
 			</tr>
 			<tr>
-				<td>
-					<input class="btn btn-default" type="submit" name="button" value="search"/>
-				</td>
 			</tr>
 		</table>
 	</form:form>
+
+        </div>
+  </div>
 </div>
+</div>
+</div>
+
+
+
 
 <div>
 	<c:import url="bottom.jsp"/>

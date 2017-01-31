@@ -25,22 +25,24 @@
 		<table>
 			<tr>
 				<td>Customer UserName:</td>
-				<td>${depositCheckForm.getUserName()}</td>
-				<td><input type="hidden" name="userName"
+				<td><input type="text" name="userName"
 						   value="${depositCheckForm.getUserName()}" autofocus/>
 				</td>
 				<td><form:errors path="userName" cssClass="error"/></td>
 			</tr>
 
 			<tr>
-				<td>Amount:</td>
+				<td>amount:</td>
 				<td><input type="number" step="0.01" name="amount" value="${depositCheckForm.getAmount()}"/></td>
 				<td><form:errors path="amount" cssClass="error"/></td>
 			</tr>
 
 			<tr>
 				<th colspan="2">
-					<input type="submit" name="button" value="Deposit"/>
+					<input type="submit" name="button" value="deposit"/>
+				</th>
+				<th>
+					<input type = "hidden" name = "fast" value = "fast">
 				</th>
 			</tr>
 

@@ -25,7 +25,7 @@
 	<form:form method="post" modelAttribute="requestCheckForm">
 		<table>
 			<tr>
-				<td>UserName:</td>
+				<td>Customer UserName:</td>
 				<td>
 					<span style = "font-size:large">${requestCheckForm.userName}</span>
 					<input type="hidden" name="userName" value="${requestCheckForm.userName}">
@@ -34,14 +34,14 @@
 			</tr>
 
 			<tr>
-				<td>available amount:</td>
+				<td>Available Amount:</td>
 				<td><span>${requestCheckForm.available}</span> </td>
 				<td><input type="hidden" name="available" value="${requestCheckForm.available}"></td>
 				<td><form:errors path="available" cssClass="error"/></td>
 			</tr>
 
 			<tr>
-				<td>amount:</td>
+				<td>Amount:</td>
 				<td><input type="number" step="0.01" name="amount"
 						   value="${requestCheckForm.amount}"/></td>
 				<td><form:errors path="amount" cssClass="error"/></td>
@@ -49,7 +49,7 @@
 
 			<tr>
 				<th colspan="2">
-					<input type="submit" name="button" value="request"/>
+					<input type="submit" name="button" value="Request"/>
 				</th>
 			</tr>
 
