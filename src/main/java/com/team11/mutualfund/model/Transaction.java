@@ -20,6 +20,7 @@ public class Transaction implements Serializable {
     @ManyToOne
     @JoinColumn
     private Fund fund;
+    
 
     @Column(nullable = true)
     private Date executeDate = null;
@@ -59,6 +60,7 @@ public class Transaction implements Serializable {
     public void setId(long id) {
         this.id = id;
     }
+    
 
     public Customer getCustomer() {
         return customer;

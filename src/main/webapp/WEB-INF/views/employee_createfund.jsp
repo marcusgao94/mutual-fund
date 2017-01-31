@@ -28,7 +28,7 @@
 						<tbody>
 						<tr>
 							<td>Fund Ticker:</td>
-							<td><input type="text" name="fundTicker"
+							<td><input type="text" name="fundTicker" placeholder=""
 									   value="${createFundForm.fundTicker}"/></td>
 							<td><form:errors path="fundTicker" cssClass="error" /></td>
 						</tr>
@@ -37,12 +37,32 @@
 							<td><input type="text" name="fundName"
 									   value="${createFundForm.fundName}"/>
 							</td>
+							<td><form:errors path="fundName" cssClass="error" /></td>
 						</tr>
+						
 						<tr>
 							<td>
-								<input type="submit" class="btn btn-default" value="Submit" />
+<<<<<<< HEAD
+							<br/>
 							</td>
+						</tr>
+						
+						<tr>
+							<td>
+								<input type="submit" class="btn btn-primary" value="submit" />
+=======
+								<input type="submit" class="btn btn-default" value="Submit" />
+>>>>>>> branch 'master' of https://github.com/CMU-J2EE/Team11.git
+							</td>
+<<<<<<< HEAD
+							<td>
+								<a href="<c:url value="/home" />">
+									<button class="btn btn-default">Cancel</button>
+								</a>
+							</td>
+=======
 							
+>>>>>>> branch 'master' of https://github.com/CMU-J2EE/Team11.git
 						</tr>
 						</tbody>
 					</table>
