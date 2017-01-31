@@ -55,7 +55,7 @@ public class CheckController {
             return "deposit_check";
         }
         model.addAttribute("depositCheckForm", new DepositCheckForm());
-        return "deposit_check";
+        return "deposit_check_fast";
     }
 
     @RequestMapping(value = "/deposit_check", method = RequestMethod.POST)
