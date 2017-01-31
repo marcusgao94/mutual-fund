@@ -175,8 +175,6 @@
 								</li>
 							</ul>
 						</c:if>
-
-
 					</li>
 				</ul>
 
@@ -224,7 +222,15 @@
 									</a>
 								</li>
 							</c:if>
-
+							
+							<c:if test="${user.type == 1}">
+							<li>							
+									<a href="<c:url value="/employee_changepassword" />">
+										<i class="fa fa-key"></i>
+										Change Password
+									</a>
+							</c:if>
+							
 
 							<%-- <c:if test="${user.type == 1}"> --%>
 								<%-- <li>
