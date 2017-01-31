@@ -77,6 +77,7 @@
 				</tr>
 				</thead>
 				<tbody>
+				
 				<tr>
 					<td>My Funds</td>
 				</tr>
