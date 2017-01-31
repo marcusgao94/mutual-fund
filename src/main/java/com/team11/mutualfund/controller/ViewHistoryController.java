@@ -66,20 +66,20 @@ public class ViewHistoryController {
                                  @Valid SearchForm searchForm, BindingResult result,
                                  RedirectAttributes redirectAttributes) {
         if (result.hasErrors())
-            return "employee_searchcustomer";
+            return "employee_searchtransaction";
         Customer c = customerService.getCustomerByUserName(searchForm.getUserName());
 
         if (c == null) {
             FieldError userNameExistError = new FieldError("searchForm", "userName", NOUSERNAME);
             result.addError(userNameExistError);
-            return "employee_searchcustomer";
+            return "employee_searchtransaction";
         }
-    	
+
     	List<Transaction> pendingTransaction = transactionService.listPendingTransactionByCustomerId(c.getId());
-        request.setAttribute("employee_pendingTransaction", pendingTransaction);
+    	model.addAttribute("employee_pendingTransaction", pendingTransaction);
         
         List<Transaction> finishTransaction = transactionService.listFinishTransactionByCustomerId(c.getId());
-        request.setAttribute("employee_finishTransaction", finishTransaction);
+        model.addAttribute("employee_finishTransaction", finishTransaction);
 
         return "employee_transactionhistory";
     }

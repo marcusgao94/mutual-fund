@@ -27,8 +27,9 @@
 
 	<h3>Customer Transaction History</h3>
 <h4> Pending </h4>
-
-<table class="table">
+	<div class="row">
+		<div class="col-md-6">
+			<table class="table">
 					<thead>
 					<tr>
 			<th>ID</th>
@@ -60,10 +61,13 @@
 		</c:forEach>
 					</tbody>
 				</table>
-
+</div>
+</div>
 
 <h4> Finished </h4>
-<table class="table">
+	<div class="row">
+		<div class="col-md-6">
+			<table class="table">
 	<thead>
 		<tr>
 			<th>ID</th>
@@ -95,8 +99,8 @@
 		</c:forEach>
 	<tbody>
 </table>
-
-
+</div>
+</div>
 </div>
 <div>
 	<c:import url="bottom.jsp"/>
