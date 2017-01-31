@@ -23,25 +23,20 @@
 </div>
 
 <div class="container">
-<form:form method="post" modelAttribute="searchForm">
-		<table>
-			<tr>
-				<td> <form:errors path="" cssClass="error" /> </td>
-			</tr>
+	<form:form method="post" modelAttribute="searchForm">
+		<table class="table">
 			<tr>
 				<td>Search User Name:</td>
-				<td><input type="text" name="userName"
-						   value="${searchForm.userName}" autofocus/>
+				<td>
+					<input type="text" name="userName" value="${searchForm.userName}" autofocus/>
 				</td>
 				<td><form:errors path="userName" cssClass="error"/></td>
 			</tr>
-
 			<tr>
-				<th colspan="2">
-					<input type="submit" name="button" value="search"/>
-				</th>
+				<td>
+					<input class="btn btn-default" type="submit" name="button" value="search"/>
+				</td>
 			</tr>
-
 		</table>
 	</form:form>
 </div>

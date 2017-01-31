@@ -54,7 +54,10 @@
 	
 	
 <h4> Pending </h4>
-<table>
+
+	<div class="row">
+		<div class="col-md-6">
+			<table class="table">
 	<thead>
 		<tr>
 			<th>ID</th>
@@ -86,9 +89,13 @@
 		</c:forEach>
 	<tbody>
 </table>
+</div>
+</div>
 
 <h4> Finished </h4>
-<table>
+	<div class="row">
+		<div class="col-md-6">
+			<table class="table">
 	<thead>
 		<tr>
 			<th>ID</th>
@@ -120,7 +127,8 @@
 		</c:forEach>
 	<tbody>
 </table>
-
+</div>
+</div>
 
 </div>
 <div>
