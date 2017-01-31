@@ -7,22 +7,30 @@
 <html>
 <head>
 	<title>Singularity MutualFund</title>
+	<style>
+	/* img {
+    position: relative;
+    left: 400px;
+	} */
+	
+	</style>
 </head>
 <body>
 <div>
 	<c:import url="/header" />
 </div>
+
 <div class="container">
-	<h1> Hello world! </h1>
+	<h1> Welcome to Singularity Mutual Fund </h1>
 	<P>
-		The time on the server is
+		Current time is
 		<%
 			DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 			Date date = new Date();
 			out.println(df.format(date));
 		%>
 	</P>
-
+	<a><img src="<c:url value="https://techraptor.net/wp-content/uploads/2015/02/singularity.jpg" />" alt="TestDisplay"/></a>
 
 	<%--<a href="<c:url value="/request_check" />"><button>request check</button></a>--%>
 	<%--<a href="<c:url value="/deposit_check" />"><button>deposit check</button></a>--%>
