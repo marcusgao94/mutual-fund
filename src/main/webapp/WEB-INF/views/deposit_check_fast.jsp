@@ -21,7 +21,7 @@
 
 <div class="container">
 	<h3>Deposit Check</h3>
-	<form:form method="post" modelAttribute="depositCheckForm">
+	<form:form modelAttribute="depositCheckForm">
 		<table>
 			<tr>
 				<td>Customer UserName:</td>
@@ -42,7 +42,7 @@
 					<input type="submit" name="button" value="deposit"/>
 				</th>
 				<th>
-					<input type = "hidden" name = "fast" value = "fast"/>
+					<input type = "hidden" name = "fast" value = "fast">
 				</th>
 			</tr>
 

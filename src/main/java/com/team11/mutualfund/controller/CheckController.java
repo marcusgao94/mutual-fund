@@ -55,7 +55,7 @@ public class CheckController {
             return "deposit_check";
         }
         model.addAttribute("depositCheckForm", new DepositCheckForm());
-        return "deposit_check";
+        return "deposit_check_fast";
     }
 
     @RequestMapping(value = "/deposit_check", method = RequestMethod.POST)
@@ -82,7 +82,7 @@ public class CheckController {
             result.rejectValue("customerId", "0", e.getMessage());
             return fast == null? "deposit_check": "deposit_check_fast";
         }
-        model.addAttribute("success", "update password for " + userName + " successfully");
+        model.addAttribute("success", "deposit check for " + userName + " successfully");
         return "success";
     }
 

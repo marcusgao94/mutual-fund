@@ -2,8 +2,8 @@ package com.team11.mutualfund.utils;
 
 public class Constant {
 
-    public static final String NOTLOGIN = "you have not login as an employee";
-    public static final String CUSTOMERNOTLOGIN = "you have not login as a customer";
+    public static final String NOTLOGIN = "you have not logged in as an employee";
+    public static final String CUSTOMERNOTLOGIN = "you have not logged in as a customer";
 
     public static final String EMPTYUSERNAME = "user name cannot be empty";
     public static final String NOUSERNAME = "user name does not exist";

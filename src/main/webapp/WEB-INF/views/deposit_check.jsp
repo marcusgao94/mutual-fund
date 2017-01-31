@@ -21,12 +21,11 @@
 
 <div class="container">
 	<h3>Deposit Check</h3>
-	<form:form method="post" modelAttribute="depositCheckForm">
+	<form:form modelAttribute="depositCheckForm">
 		<table>
 			<tr>
 				<td>Customer UserName:</td>
-				<td><input type="text" name="userName"
-						   value="" autofocus/></td>
+				<td>${depositCheckForm.getUserName()}</td>
 				<td><input type="hidden" name="userName"
 						   value="${depositCheckForm.getUserName()}" autofocus/>
 				</td>
