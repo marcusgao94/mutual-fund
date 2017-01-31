@@ -38,19 +38,19 @@
               <table class="table bio-table">
                   <tbody>
                     <tr>
-                       <td>ID</td>
+                       <td>ID:</td>
                        <td> ${customer_account.id}</td>
                     </tr>
                  <tr>
-                    <td>FirstName</td>
+                    <td>FirstName:</td>
                     <td> ${customer_account.firstName}</td>
                  </tr>
                  <tr>
-                    <td>LastName</td>
+                    <td>LastName:</td>
                     <td> ${customer_account.lastName}</td>
                  </tr>
                  <tr>
-                    <td>UserName</td>
+                    <td>UserName:</td>
                     <td> ${customer_account.userName}</td>
                 </tr>
                 </tbody>
@@ -63,19 +63,19 @@
               <table class="table bio-table">
                   <tbody>
                  <tr>
-                     <td>Address</td>
+                     <td>Address:</td>
                      <td> ${customer_account.addr_line1} ${customer_account.addr_line2}</td>
                  </tr>
                  <tr>
-                     <td>State</td>
+                     <td>State:</td>
                      <td> ${customer_account.state}</td>
                   </tr>
                   <tr>
-                     <td>City</td>
+                     <td>City:</td>
                      <td> ${customer_account.city}</td>
                   </tr>
                   <tr>
-                     <td>ZIP</td>
+                     <td>ZIP:</td>
                      <td> ${customer_account.zip}</td>
                   </tr>
                 </tbody>
