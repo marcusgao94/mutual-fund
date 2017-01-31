@@ -93,7 +93,7 @@ public class CheckController {
             return "redirect:/customer_login";
         }
         User user = (User) request.getSession().getAttribute("user");
-        Customer customer = customerService.getCustomerById(user.getId());
+        Customer customer = customerService.getCustomerByUserName(user.getUserName());
         RequestCheckForm requestCheckForm = new RequestCheckForm();
         requestCheckForm.setUserName(customer.getUserName());
         double available = customer.getCash() - customer.getPendingCashDecrease();
@@ -127,7 +127,7 @@ public class CheckController {
         } catch (RollbackException e) {
             String message = e.getMessage();
             if (message.startsWith("customer"))
-                result.rejectValue("customerId", "0", message);
+                result.rejectValue("customer", "0", message);
             else
                 result.rejectValue("amount", "1", message);
             return "request_check";

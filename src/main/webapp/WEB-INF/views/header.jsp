@@ -132,7 +132,7 @@
 								</li>
 								
 								<li>
-								<a href="<c:url value="/employee-searchtransaction" />">
+								<a href="<c:url value="/employee_searchtransaction" />">
 										<i class="fa fa-money"></i>
 										View Customer Transaction History
 									</a>
