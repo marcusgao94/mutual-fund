@@ -160,7 +160,7 @@
                   </div><!--/panel-heading-->
                   <div class="panel-body" itemprop="reviewBody">
                     <h4>Date of the last trading day: ${date} </h4>
-                    <h4>Cansh balance: ${employee_customeraccount.cash} </h4>
+                    <h4>Cash Balance: ${employee_customeraccount.cash} </h4>
                     <div class="col-md-6">
 
                     <div class="table-responsive responsiv-table">
