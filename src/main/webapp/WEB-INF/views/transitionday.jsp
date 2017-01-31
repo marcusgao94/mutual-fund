@@ -39,7 +39,7 @@
 				</tr>
 				</thead>
 				<tbody>
-				<c:forEach var="listFund" items="${transitionForm.fundList}" varStatus="status">
+				<c:forEach var="listFund" items="${transitionForm.fundList}" varStatus="status"> 
 					<tr>
 						<td>${listFund.fund.ticker}</td>
 						<td>${listFund.fund.name}</td>
