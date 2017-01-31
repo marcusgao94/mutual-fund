@@ -155,13 +155,14 @@
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Element');
         data.addColumn('number', 'Percentage');
+        <c:forEach var="customer_pv" items="${customerPosition}">
         data.addRows([
-          ['Fund1', 0.1],
-          ['Fund2', 0.2],
-          ['Fund3', 0.3],
-          ['Fund4', 0.1],
-          ['Fund5', 0.3]
+        	
+        	
+            ['${customer_pv.fund.name}', ${customer_pv.shares}],
+
         ]);
+        </c:forEach>
         var options = {
             title: 'My Fund Collection'
           };
