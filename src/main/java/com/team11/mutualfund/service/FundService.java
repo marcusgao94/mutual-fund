@@ -63,11 +63,6 @@ public class FundService {
         return fundPriceHistoryDao.listByFundTicker(ticker);
     }
 
-    //list all available funds for purchasing
-    public List<Fund> listFund() {
-        return fundDao.listFund();
-    }
-
     // get last transition day
     public LocalDate getLastTransitionDay() {
         List<FundPriceHistory> fundPriceHistoryList = fundPriceHistoryDao.listAllOrderByDate();
@@ -99,6 +94,11 @@ public class FundService {
         return transitionFundList;
     }
 
+    //list all available funds for purchasing
+    public List<Fund> listFund() {
+        return fundDao.listFund();
+    }
+    
     //list funds that a customer purchased
     public List<Positionvalue> listPositionvalueByCustomerId(long cid) {
         List<Positionvalue> positionvalueList = new LinkedList<>();

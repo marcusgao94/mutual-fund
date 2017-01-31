@@ -69,7 +69,7 @@ public class FundController {
         User user = (User) request.getSession().getAttribute("user");
         Customer c = customerService.getCustomerByUserName(user.getUserName());
         List<Positionvalue> pv = fundService.listPositionvalueByCustomerId(c.getId());
-        model.addAttribute("customerPositione", pv);
+        model.addAttribute("customerPosition", pv);
         try {
             transactionService.buyFund(user.getId(), buyFundForm.getFundTicker(),
                 buyFundForm.getAmount());
