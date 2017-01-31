@@ -20,99 +20,107 @@
 <div>
 	<c:import url="/header"/>
 </div>
+
 <div class="container">
+    <div class="row-fluid">
+      <div class="col-sm-12">
+        <h2>${customer_account.firstName} ${customer_account.lastName}</h2>
+          <div class="panel panel-default">
+          <div class="panel-heading">
+            <span itemscope itemtype="http://schema.org/Review">
+            <h3 class="panel-title" itemprop="name">Basic Info</h3>
+          </div><!--/panel-heading-->
+          <div class="panel-body" itemprop="reviewBody">
 
-	<h1>${customer_account.userName}'s Account</h1>
+            <div class="col-md-6">
 
-	<div class="row">
-		<div class="col-xs-12">
-			
-			<h3>Basic Info</h3>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-xs-6">
-			<table class="table bio-table">
-				<tbody>
-				<tr>
-					<td>ID</td>
-					<td>${customer_account.id}</td>
-				</tr>
-				<tr>
-					<td>FirstName</td>
-					<td>${customer_account.firstName}</td>
-				</tr>
-				<tr>
-					<td>LastName</td>
-					<td>${customer_account.lastName}</td>
-				<tr>
-					<td>Address</td>
-					<td>${customer_account.addr_line1} ${customer_account.addr_line2}</td>
-				</tr>
-				<tr>
-					<td>State</td>
-					<td>${customer_account.state}</td>
-				</tr>
-				<tr>
-					<td>City</td>
-					<td>${customer_account.city}</td>
-				</tr>
-				<tr>
-					<td>ZIP</td>
-					<td>${customer_account.zip}</td>
-				</tr>
-				
-				</tbody>
-			</table>
-		</div>
-</div>
-	<div class="row">
-		<div class="col-xs-6">
-			<div class="text-right">
-			<a href="<c:url value="/customer_changepassword" />">
-				<button class="btn btn-default">change password</button>
-			</a>
-			
-			<a href="<c:url value="/customer_transactionhistory" />">
-				<button class="btn btn-default">View Transaction History</button>
-			</a>
-		</div>
-		</div>
-	</div>
-	</div>
-	<div class="container">
-	<div class="row">
-		<div class="col-xs-12">
-			<h3>Account Info</h3>
-			<h4> Date of the last trading day: ${date}</h4>
-			<h4> Cash: ${customer_account.cash}</h4>
-			<div class="col-md-6">
-					<a href="<c:url value="/request_check" />">
-						<button class="btn btn-default">Request Check</button>
-					</a>
-					<a href="<c:url value="/sell_fund" />">
-						<button class="btn btn-default">Sell Fund</button>
-					</a>
-					<a href="<c:url value="/buy_fund" />">
-						<button class="btn btn-default">Buy Fund</button>
-					</a>
+            <div class="table-responsive responsiv-table">
+              <table class="table bio-table">
+                  <tbody>
+                    <tr>
+                       <td>ID</td>
+                       <td> ${customer_account.id}</td>
+                    </tr>
+                 <tr>
+                    <td>FirstName</td>
+                    <td> ${customer_account.firstName}</td>
+                 </tr>
+                 <tr>
+                    <td>LastName</td>
+                    <td> ${customer_account.lastName}</td>
+                 </tr>
+                 <tr>
+                    <td>UserName</td>
+                    <td> ${customer_account.userName}</td>
+                </tr>
+                </tbody>
+              </table>
+              </div><!--table-responsive close-->
+            </div><!--col-md-6 close-->
 
-		</div>
-	</div>
-	</div>
-	
+<div class="col-md-6">
+            <div class="table-responsive responsiv-table">
+              <table class="table bio-table">
+                  <tbody>
+                 <tr>
+                     <td>Address</td>
+                     <td> ${customer_account.addr_line1} ${customer_account.addr_line2}</td>
+                 </tr>
+                 <tr>
+                     <td>State</td>
+                     <td> ${customer_account.state}</td>
+                  </tr>
+                  <tr>
+                     <td>City</td>
+                     <td> ${customer_account.city}</td>
+                  </tr>
+                  <tr>
+                     <td>ZIP</td>
+                     <td> ${customer_account.zip}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="text-right">
+<!--   <button type="button" class="btn btn-primary">Edit</button> -->
+				<a href="<c:url value="/customer_changepassword" />">
+					<button class="btn btn-primary">
+						Change password
+					</button>
+				</a>
+				<a href="<c:url value="/customer_transactionhistory" />">
+					<button class="btn btn-primary">
+						View Transaction History
+					</button>
+				</a>
+              </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            
+                          <div class="col-sm-12">
+                  <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <span itemscope itemtype="http://schema.org/Review">
+                    <h3 class="panel-title" itemprop="name">Account Info</h3>
+                  </div><!--/panel-heading-->
+                  <div class="panel-body" itemprop="reviewBody">
+                    <h4>Date of the last trading day: ${date} </h4>
+                    <h4>Cash balance: ${customer_account.cash} </h4>
+                    <div class="col-md-6">
 
-	<div class="row">
-		<div class="col-md-6">
-			<table class="table">
-				<thead>
-				<tr>
-					<th>Name of fund</th>
-					<th>Shares</th>
-					<th>Price</th>
-					<th>Value</th>
-				</tr>
-				</thead>
+                    <div class="table-responsive responsiv-table">
+                      <table class="table bio-table">
+                          <thead>
+                            <tr>
+                               <td>Name of the fund</td>
+                               <td>Shares</td>
+                               <td>Price</td>
+                               <td>Value</td>
+                            </tr>
+                         </thead>
 				<tbody>
 				<c:forEach var="customer_pv" items="${customerPosition}">
 
@@ -132,10 +140,48 @@
 					</tr>
 				</c:forEach>
 				</tbody>
-			</table>
-		</div>
-	</div>
-	</div>
+                      </table>
+                      </div><!--table-responsive close-->
+                    </div><!--col-md-6 close-->
+<!-- pie chart -->
+<div class="col-md-4">
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        // Define the chart to be drawn.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Element');
+        data.addColumn('number', 'Percentage');
+        data.addRows([
+          ['Fund1', 0.1],
+          ['Fund2', 0.2],
+          ['Fund3', 0.3],
+          ['Fund4', 0.1],
+          ['Fund5', 0.3]
+        ]);
+        var options = {
+            title: 'My Fund Collection'
+          };
+        // Instantiate and draw the chart.
+   var chart = new google.visualization.PieChart(document.getElementById('pieChart'));
+   chart.draw(data, options);
+  }
+
+    </script>
+  </head>
+  <body>
+    <div id="pieChart" style="width: 530px; height: 300px;"></div>
+  </body>
+
+  </div>
+                    </div>
+                    </div>
+                    </div>
+</div>
+
 
 
 <div>
