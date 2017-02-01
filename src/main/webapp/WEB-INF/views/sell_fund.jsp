@@ -7,7 +7,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Sell Fund</title>
+	<title>Sell Funds</title>
 	<style>
 		.error {
 			color: red;
@@ -36,7 +36,7 @@
 			</tr>
 
 			<tr>
-				<td>Share:</td>
+				<td>Quantity of Shares:</td>
 				<td><input type="number" step="0.001" name="share"
 						   value="${sellFundForm.share}"/></td>
 				<td><form:errors path="share" cssClass="error"/></td>
@@ -66,16 +66,20 @@
 			<table class="table">
 				<thead>
 				<tr>
-					<th>Name of Fund</th>
-					<th>Shares</th>
-					<th>Price</th>
-					<th>Value</th>
+					<th>Fund Name</th>
+					<th>Fund Ticker</th>
+					<th>Quantity of Shares</th>
+					<th>Price per Share</th>
+					<th>Total Value</th>
 				</tr>
 				</thead>
 				<tbody>
 				<c:forEach var="customer_pv" items="${customerPosition}">
 
 					<tr>
+					    <td>
+					            ${customer_pv.fund.name}
+					    </td>
 						<td>
 								${customer_pv.fund.ticker}
 						</td>
