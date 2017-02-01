@@ -48,6 +48,7 @@
 							<form:input path="fundList[${status.index}].newPrice" type="number"
 										step="0.01"
 										value="${listFund.lastPrice}"/>
+							<form:errors path="fundList[${status.index}].newPrice" cssClass="error" />
 						</td>
 						<td><form:input path="fundList[${status.index}].fund.id" type="hidden" /></td>
 						<td><form:input path="fundList[${status.index}].fund.ticker" type="hidden" /></td>

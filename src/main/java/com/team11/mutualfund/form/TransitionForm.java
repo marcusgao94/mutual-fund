@@ -26,10 +26,10 @@ public class TransitionForm {
 
     public Errors getValidationErrors() {
         Errors errors = new DirectFieldBindingResult(this, "transitionForm");
-        for (TransitionFund tf : fundList) {
+        for (int i = 0; i < fundList.size(); i++) {
+            TransitionFund tf = fundList.get(i);
             if (tf.getNewPrice() == null) {
-                errors.rejectValue("", "", "new price of every fund must be filled");
-                break;
+                errors.rejectValue("fundList[" + i + "].newPrice", "", "new price of every fund must be filled");
             }
         }
         return errors;

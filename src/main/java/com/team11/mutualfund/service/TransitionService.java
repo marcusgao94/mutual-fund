@@ -11,9 +11,7 @@ import javax.persistence.RollbackException;
 import java.util.Date;
 import java.util.List;
 
-import static com.team11.mutualfund.utils.Constant.NOFUND;
-import static com.team11.mutualfund.utils.Constant.NOFUNDPRICEHISTORY;
-import static com.team11.mutualfund.utils.Constant.NOPOSITION;
+import static com.team11.mutualfund.utils.Constant.*;
 import static com.team11.mutualfund.utils.TransactionType.*;
 
 @Service
@@ -130,6 +128,8 @@ public class TransitionService {
         executeRequestCheck(date);
         executeDepositCheck(date);
 
+        if (fundList.size() != fundService.listFund().size())
+            throw new RollbackException(NEWFUNDCREATED);
         // update all fund price
         for (TransitionFund fd : fundList) {
             fundService.updateFundPrice(fd.getFund().getId(), date, fd.getNewPrice());
