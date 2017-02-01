@@ -21,7 +21,7 @@
 </div>
 
 <div class="container">
-	<h3>Sell Fund</h3>
+	<h3>Sell Funds</h3>
 	<form:form method="post" modelAttribute="sellFundForm">
 		<table>
 			<tr>
