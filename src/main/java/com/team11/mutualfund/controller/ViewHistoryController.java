@@ -59,7 +59,13 @@ public class ViewHistoryController {
     	if (userName != null) {
     		SearchForm searchForm = new SearchForm();
     		searchForm.setUserName(userName);
+    		 Customer c = customerService.getCustomerByUserName(searchForm.getUserName());
     		model.addAttribute("searchForm", searchForm);
+        	List<Transaction> pendingTransaction = transactionService.listPendingTransactionByCustomerId(c.getId());
+        	model.addAttribute("employee_pendingTransaction", pendingTransaction);
+            
+            List<Transaction> finishTransaction = transactionService.listFinishTransactionByCustomerId(c.getId());
+            model.addAttribute("employee_finishTransaction", finishTransaction);
     		return "employee_transactionhistory_fast";
     	}
     	   
@@ -80,9 +86,10 @@ public class ViewHistoryController {
             result.addError(userNameExistError);
             return "employee_searchtransaction";
         }
-
+        
         model.addAttribute("searchForm", searchForm);
-
+        //request.setAttribute("user", c);
+        
     	List<Transaction> pendingTransaction = transactionService.listPendingTransactionByCustomerId(c.getId());
     	model.addAttribute("employee_pendingTransaction", pendingTransaction);
         
