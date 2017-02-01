@@ -97,7 +97,7 @@ public class ViewAccountController {
     @RequestMapping(value = "customer_viewaccount", method = RequestMethod.GET)
     public String customerViewAccount(HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) {
         if (!checkCustomer(request)) {
-            redirectAttributes.addFlashAttribute("loginError", NOTLOGIN);
+            redirectAttributes.addFlashAttribute("loginError", CUSTOMERNOTLOGIN);
             return "redirect:/customer_login";
         }
         HttpSession session = request.getSession();
