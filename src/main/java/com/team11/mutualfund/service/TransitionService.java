@@ -40,7 +40,7 @@ public class TransitionService {
         List<Transaction> transactionList = transactionDao.listPendingTransactionByType(BUYFUND);
         for (Transaction t : transactionList) {
             // update execute date
-            t.setExectuteDate(date);
+            t.setExecuteDate(date);
             // substract cash in customer
             Customer customer = t.getCustomer();
             customer.setCash(customer.getCash() - t.getAmount());
@@ -76,7 +76,7 @@ public class TransitionService {
         List<Transaction> transactionList = transactionDao.listPendingTransactionByType(SELLFUND);
         for (Transaction t : transactionList) {
             // update execute date
-            t.setExectuteDate(date);
+            t.setExecuteDate(date);
             // substract shares in position
             Customer customer = t.getCustomer();
             Fund fund = t.getFund();
@@ -106,7 +106,7 @@ public class TransitionService {
     public void executeDepositCheck(Date date) {
         List<Transaction> transactionList = transactionDao.listPendingTransactionByType(DEPOSITCHECK);
         for (Transaction t : transactionList) {
-            t.setExectuteDate(date);
+            t.setExecuteDate(date);
             Customer customer = t.getCustomer();
             customer.setCash(customer.getCash() + t.getAmount());
         }
@@ -115,7 +115,7 @@ public class TransitionService {
     public void executeRequestCheck(Date date) {
         List<Transaction> transactionList = transactionDao.listPendingTransactionByType(REQUESTCHECK);
         for (Transaction t : transactionList) {
-            t.setExectuteDate(date);
+            t.setExecuteDate(date);
             Customer customer = t.getCustomer();
             customer.setCash(customer.getCash() - t.getAmount());
             customer.setPendingCashDecrease(0);

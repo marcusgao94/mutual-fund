@@ -18,24 +18,28 @@
 <div class="container">
 
 	<h3>Research Fund</h3>
-	
-	
-	
+
 
 	<div class="container">
 		<div class="row-fluid">
 			<div class="col-sm-12">
-				<h2>${customer_account.userName}</h2>
 				
-			<form:form method="post" modelAttribute="ResearchFundForm">
+			<form:form method="post" modelAttribute="researchFundForm">
+			    
+			    <%-- --%>
 			    <div class="form-group">
 			      <label for="sel1">Select one fund:</label>
-			      <select class="form-control" id="sel1">
+			      
+			      
+			      <select name="ticker" class="form-control" id="sel1">
+			      <option>Please select a fund and submit.</option>
 			      	<c:forEach var="funds" items="${funds}">
 				        <option>${funds.ticker}</option>				        
 				     </c:forEach>
 			      </select>
 			    </div>
+			    
+			    <input type="submit" value="Submit">
 			  </form:form>
 				
           <div class="panel panel-default">
@@ -51,11 +55,11 @@
 		                  <tbody>
 						<tr>
 							<td>FundTicker</td>
-							<td>${fund.ticker}</td>
+							<td>${a_fund.ticker}</td>
 						</tr>
 						<tr>
 							<td>FundName</td>
-							<td>${fund.name}</td>
+							<td>${a_fund.name}</td>
 						</tr>
 						</tbody>
 		
@@ -86,6 +90,8 @@
 	</div>
 </div>
 
+		
+
 <div class="container">
 	<div class="row-fluid">
 		<div class="col-sm-12">
@@ -100,15 +106,19 @@
 		      google.charts.load('current', {'packages':['corechart']});
 		      google.charts.setOnLoadCallback(drawChart);
 		      function drawChart() {
-		        // Define the chart to be drawn. ['2017-01-01',  3]
+
+		    	  
+
+			     
 		        var data = new google.visualization.arrayToDataTable([
-		            ['Date', 'fundName'],
-		            
+		            ['Date', 'fundPrice'],
 		            <c:forEach var="fundPriceHistory" items="${fundPriceHistory}">
-		            [${fundPriceHistory.fundDate.date}, ${fundPriceHistory.price}],		        
-			     	</c:forEach>
-		           
-		          ]);
+		            
+		            		['${fundPriceHistory.fundDate.date}', ${fundPriceHistory.price}],
+
+		            </c:forEach>
+		            	
+		         ]);
 		
 		        var options = {
 		            title: 'Fund Price History',

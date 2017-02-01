@@ -23,7 +23,7 @@ public class Transaction implements Serializable {
     
 
     @Column(nullable = true)
-    private Date executeDate = null;
+    private Date executeDate;
 
     @Enumerated
     private TransactionType type;
@@ -78,11 +78,11 @@ public class Transaction implements Serializable {
         this.fund = fund;
     }
 
-    public Date getExectuteDate(){
+    public Date getExecuteDate(){
         return executeDate;
     }
 
-    public void setExectuteDate(Date executeDate) {
+    public void setExecuteDate(Date executeDate) {
         this.executeDate = executeDate;
     }
 

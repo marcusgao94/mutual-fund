@@ -82,6 +82,7 @@
 			<tr>
 				<td>
 	 				${customer_finishtransaction.executeDate}
+	 			
 				</td>
 				<td>
 	 				${customer_finishtransaction.fund.name}

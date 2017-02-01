@@ -42,37 +42,43 @@ public class ResearchFundController {
 
         ResearchFundForm researchFundForm = new ResearchFundForm();
         model.addAttribute("researchFundForm", researchFundForm);
+        List<Fund> funds = fundService.listFund();
+        model.addAttribute("funds", funds);
         return "customer_researchfund";
+       
     }
 
 
-    @RequestMapping(value = "/cutomer_researchfund", method = RequestMethod.POST)
-    public String researchFund(HttpServletRequest request, Model model,
-                               @Valid ResearchFundForm researchFundForm, BindingResult result,
-                               RedirectAttributes ra) {
+    @RequestMapping(value = "/customer_researchfund", method = RequestMethod.POST)
+    public String researchFund(HttpServletRequest request, Model model,RedirectAttributes ra,
+                               @Valid ResearchFundForm researchFundForm, BindingResult result
+                               ) {
         if (!checkCustomer(request)) {
             ra.addFlashAttribute("loginError", CUSTOMERNOTLOGIN);
             return "redirect:/customer_login";
         }
         
-        List<Fund> funds = fundService.listFund();
-        request.setAttribute("funds", funds);
-        
         if (result.hasErrors())
             return "customer_researchfund";
         
-        Fund aFund = fundService.getFundByTicker(researchFundForm.getTicker());       
+        List<Fund> funds = fundService.listFund();
+        model.addAttribute("funds", funds);
+        //request.setAttribute("funds", funds);
+        
+        
+        Fund a_Fund = fundService.getFundByTicker(researchFundForm.getTicker());       
        
-        if (aFund == null) {
+        if (a_Fund == null) {
             FieldError fundIdNotExisterror = new FieldError("researchFundForm", "fundId", "This fund doesn't exist.");
             result.addError(fundIdNotExisterror);
             return "research_fund";
         }
         
-        request.setAttribute("fund", aFund);
+        model.addAttribute("a_fund", a_Fund);
         List<FundPriceHistory> fundPriceHistory = fundService.getFundPriceHistoryByTicker(researchFundForm.getTicker());
+        //System.out.println("a");
         //HttpSession session = request.getSession();
-        request.setAttribute("fundPriceHistory", fundPriceHistory);
+        model.addAttribute("fundPriceHistory", fundPriceHistory);
         return "customer_researchfund"; //?
     }
 }
