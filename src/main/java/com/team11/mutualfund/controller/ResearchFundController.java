@@ -61,14 +61,11 @@ public class ResearchFundController {
         if (result.hasErrors())
             return "customer_researchfund";
         
-        System.out.println("aaaa");
-        System.out.println(researchFundForm.getTicker());
         List<Fund> funds = fundService.listFund();
         model.addAttribute("funds", funds);
         //request.setAttribute("funds", funds);
         
         
-        System.out.println(researchFundForm.getTicker());
         Fund a_Fund = fundService.getFundByTicker(researchFundForm.getTicker());       
        
         if (a_Fund == null) {
@@ -79,6 +76,7 @@ public class ResearchFundController {
         
         model.addAttribute("a_fund", a_Fund);
         List<FundPriceHistory> fundPriceHistory = fundService.getFundPriceHistoryByTicker(researchFundForm.getTicker());
+        //System.out.println("a");
         //HttpSession session = request.getSession();
         model.addAttribute("fundPriceHistory", fundPriceHistory);
         return "customer_researchfund"; //?
