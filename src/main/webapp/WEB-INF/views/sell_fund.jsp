@@ -77,7 +77,7 @@
 
 					<tr>
 						<td>
-								${customer_pv.fund.name}
+								${customer_pv.fund.ticker}
 						</td>
 						<td>
 								${customer_pv.shares}
