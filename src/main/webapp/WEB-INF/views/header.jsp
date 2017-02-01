@@ -158,9 +158,8 @@
 
 						</c:if>
 
+				<c:if test="${user.type == 0}">
 					<li class="dropdown">
-
-						<c:if test="${user.type == 0}">
 							<a data-toggle="dropdown" class="dropdown-toggle"
 							   href="#">
 								<span class="fa fa-area-chart"></span>
@@ -174,8 +173,36 @@
 									</a>
 								</li>
 							</ul>
-						</c:if>
-					</li>
+						</li>
+						
+						<li class="dropdown">
+							<a data-toggle="dropdown" class="dropdown-toggle"
+							   href="#">
+								<span class="fa fa-area-chart"></span>
+								My Account <b class="caret"></b>
+							</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="<c:url value="/customer_viewaccount" />">
+										<i class="fa fa-drivers-license"></i>
+										View My Account
+									</a>
+									<a href="<c:url value="/customer_changepassword" />">
+										<i class="fa fa-key"></i>
+										Change Password
+									</a>
+									<a href="<c:url value="/request_check" />">
+										<i class="fa fa-credit-card"></i>
+										Request Check
+									</a>
+									<a href="<c:url value="/customer_transactionhistory" />">
+										<i class="fa fa-search"></i>
+										View Transaction History
+									</a>
+								</li>
+							</ul>
+						</li>
+					</c:if>
 				</ul>
 
 
@@ -202,7 +229,7 @@
 								</li>
 							</c:if>
 
-							<c:if test="${user.type == 0}">
+							<%-- <c:if test="${user.type == 0}">
 								<li>
 									<a href="<c:url value="/customer_viewaccount" />">
 										<i class="fa fa-drivers-license"></i>
@@ -221,7 +248,7 @@
 										View Transaction History
 									</a>
 								</li>
-							</c:if>
+							</c:if> --%>
 							
 							<c:if test="${user.type == 1}">
 							<li>							

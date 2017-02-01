@@ -23,30 +23,51 @@
 	
 	<h5>Reset Customer Password</h5>
 	<form:form modelAttribute="changePasswordForm">
-		<table class="table">
+		<table>
 			<tr>
-				<td>Customer User Name:</td>
-				<td>${changePasswordForm.userName}</td>
-				<td><input type="hidden" name="userName" value="${changePasswordForm.userName}"/></td>
-				<td><form:errors path="userName" cssClass="error"/></td>
+			<td><br/></td>
+			</tr>
+			<tr>
+				<td>
+					<input type="hidden" name="userName" value="${changePasswordForm.userName}">
+				</td>
+				<form:errors path="userName" cssClass="error" />
+			</tr>
+
+			<tr>
+				<td>Old Password:</td>
+				<td>
+					<input type="password" name="originPassword" value="" autofocus/>
+				</td>
+				<td><form:errors path="originPassword" cssClass="error"/></td>
 			</tr>
 
 			<tr>
 				<td>New Password:</td>
-				<td><input type="password" name="newPassword" value=""/></td>
+				<td>
+					<input type="password" name="newPassword" value="" autofocus/>
+				</td>
 				<td><form:errors path="newPassword" cssClass="error"/></td>
-			</tr>
-			<tr>
-				<td>Confirm Password:</td>
-				<td><input type="password" name="confirmNewPassword" value=""/></td>
-				<td><form:errors path="confirmNewPassword" cssClass="error"/></td>
 			</tr>
 
 			<tr>
+				<td>Confirm Password:</td>
 				<td>
-					<input type="submit" class="btn btn-default" value="Reset Password"/>
+					<input type="password" name="confirmNewPassword" value=""/>
 				</td>
+				<td><form:errors path="confirmNewPassword" cssClass="error"/></td>
 			</tr>
+			
+			<tr>
+				<th>
+				<br/>
+				<th>
+			<tr>
+				<th colspan="2">
+					<input type="submit" name="button" value="Change Password"/>
+				</th>
+			</tr>
+
 		</table>
 	</form:form>
 </div>

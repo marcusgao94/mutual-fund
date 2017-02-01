@@ -29,6 +29,9 @@ public class Constant {
     public static final String NOFUNDPRICEHISTORY = "Price of this fund on this date is not set";
     public static final String DUPLICATEFUNDPRICEHISTORY = "Price of this fund on this date " +
             "has set";
-
-
+    public static final String REQUESTCHECKSUCCESS = "Your request has been submitted successfully! "
+    		+ "Please wait for the next transition day!";
+    
+    //public static final String DEPOSITCHECK = "Deposit check successfully";
+    
 }
