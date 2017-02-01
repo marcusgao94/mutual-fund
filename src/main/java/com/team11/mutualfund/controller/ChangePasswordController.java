@@ -1,7 +1,9 @@
 package com.team11.mutualfund.controller;
 
+import org.hibernate.exception.LockAcquisitionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.dao.CannotAcquireLockException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -134,8 +136,11 @@ public class ChangePasswordController {
         String newPassword = changePasswordForm.getNewPassword();
         try {
             customerService.updatePassword(cid, originPassword, newPassword);
-        } catch (RollbackException e) {
-            result.rejectValue("originPassword", "", e.getMessage());
+        } catch (RollbackException | LockAcquisitionException | CannotAcquireLockException e) {
+            if (e instanceof RollbackException)
+                result.rejectValue("originPassword", "", e.getMessage());
+            else
+                result.rejectValue("originPassword", "", "others have changed the password");
             return "customer_changepassword";
         }
 
@@ -162,8 +167,6 @@ public class ChangePasswordController {
         model.addAttribute("changePasswordForm", new ChangePasswordForm());
         return "employee_changecuspassword_fast";
     }
-
-
 
 
     @RequestMapping(value = "/employee_changecuspassword", method = RequestMethod.POST)

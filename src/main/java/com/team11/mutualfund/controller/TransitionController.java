@@ -1,7 +1,7 @@
 package com.team11.mutualfund.controller;
 
 import static com.team11.mutualfund.controller.LoginController.checkEmployee;
-import static com.team11.mutualfund.utils.Constant.NOTLOGIN;
+import static com.team11.mutualfund.utils.Constant.*;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -15,15 +15,12 @@ import javax.persistence.RollbackException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import com.team11.mutualfund.model.FundPriceHistory;
 import com.team11.mutualfund.service.TransitionService;
 import com.team11.mutualfund.utils.TransitionFund;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -79,7 +76,6 @@ public class TransitionController {
             model.addAttribute("transitionForm", transitionForm);
             return "transitionday";
         }
-
         try {
             DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
             df.setTimeZone(TimeZone.getTimeZone("America/New_York"));
@@ -87,13 +83,12 @@ public class TransitionController {
             transitionService.transit(date, transitionForm.getFundList());
         } catch (ParseException e) {
             result.rejectValue("", "", "date must be the form MM/dd/yyyy");
-            model.addAttribute("transitionForm", transitionForm);
             return "transitionday";
         } catch (RollbackException e) {
             result.rejectValue("", "", e.getMessage());
-            model.addAttribute("transitionForm", transitionForm);
             return "transitionday";
         }
+        model.addAttribute("success", SETTRANSITIONDAY);
         return "success";
     }
 

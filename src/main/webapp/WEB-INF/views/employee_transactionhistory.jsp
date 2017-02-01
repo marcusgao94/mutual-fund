@@ -15,6 +15,8 @@
 		.error {
 			color: red;
 		}
+		.shares {}
+		.price {}
 	</style>
 </head>
 <body>
@@ -23,124 +25,146 @@
 </div>
 
 <div class="container">
-    <div class="row">
-    <br>
-        <div class="col-xs-5">
-        <div class="input-group">
-                <div class="input-group-btn search-panel">
-<form:form method="post" modelAttribute="searchForm">
-		<table class="table">
-			<tr>
-				<td>Search User Name:</td>
-				<td>
-					<input type="text" name="userName" value="${searchForm.userName}" autofocus/>
-				</td>
-				<td><form:errors path="userName" cssClass="error"/></td>
-				<td>
+	<div class="row">
+		<br>
+		<div class="col-xs-5">
+			<div class="input-group">
+				<div class="input-group-btn search-panel">
+					<form:form method="post" modelAttribute="searchForm">
+						<table class="table">
+							<tr>
+								<td>Search User Name:</td>
+								<td>
+									<input type="text" name="userName"
+										   value="${searchForm.userName}" autofocus/>
+								</td>
+								<td><form:errors path="userName" cssClass="error"/></td>
+								<td>
 				                <span class="input-group-btn">
-                    <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                    <button class="btn btn-default" type="submit"><span
+							class="glyphicon glyphicon-search"></span></button>
                 </span>
-				</td>
-			</tr>
-			<tr>
-			</tr>
-		</table>
-	</form:form>
+								</td>
+							</tr>
+							<tr>
+							</tr>
+						</table>
+					</form:form>
 
-        </div>
-  </div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
-</div>
-</div>
-
 
 
 <div class="container">
-
 	<h3>Transaction History</h3>
-	
-	
-<h4> Pending </h4>
+	<h4> Pending </h4>
 
 	<div class="row">
 		<div class="col-md-6">
 			<table class="table">
-	<thead>
-		<tr>
-			<th>ID</th>
-			<th>Name</th>
-			<th>Shares</th>
-			<th>Amount</th>
-          	<th>Operations</th>
-		</tr>
-	</thead>
-	<tbody>
-		<c:forEach var="employee_pendingtransaction" items="${employee_pendingTransaction}">
-			<tr>
-				<td>
-	 				${employee_pendingtransaction.id}
-				</td>
-				<td>
-	 				${employee_pendingtransaction.fund.name}
-				</td>
-				<td>
-	 				${employee_pendingtransaction.shares}
-				</td>
-				<td>
-	 				${employee_pendingtransaction.amount}
-				</td>
-				<td>
-	 				${employee_pendingtransaction.type}
-				</td>
-			</tr>
-		</c:forEach>
-	<tbody>
-</table>
-</div>
-</div>
+				<thead>
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Shares</th>
+					<th>Amount</th>
+					<th>Operations</th>
+				</tr>
+				</thead>
+				<tbody>
+				<c:forEach var="employee_pendingtransaction" items="${employee_pendingTransaction}">
+				<tr>
+					<td>
+							${employee_pendingtransaction.id}
+					</td>
+					<td>
+							${employee_pendingtransaction.fund.name}
+					</td>
+					<td class="shares">
+							${employee_pendingtransaction.shares}
+					</td>
+					<td class="price">
+							${employee_pendingtransaction.amount}
+					</td>
+					<td>
+							${employee_pendingtransaction.type}
+					</td>
+				</tr>
+				</c:forEach>
+				<tbody>
+			</table>
+		</div>
+	</div>
 
-<h4> Finished </h4>
+	<h4> Finished </h4>
 	<div class="row">
 		<div class="col-md-6">
 			<table class="table">
-	<thead>
-		<tr>
-			<th>Date</th>
-			<th>Name</th>
-			<th>Shares</th>
-			<th>Amount</th>
-          	<th>Operations</th>
-		</tr>
-	</thead>
-	<tbody>
-		<c:forEach var="employee_finishtransaction" items="${employee_finishTransaction}">
-			<tr>
-				<td>
-	 				${employee_finishtransaction.executeDate}
-				</td>
-				<td>
-	 				${employee_finishtransaction.fund.name}
-				</td>
-				<td>
-	 				${employee_finishtransaction.shares}
-				</td>
-				<td>
-	 				${employee_finishtransaction.amount}
-				</td>
-				<td>
-	 				${employee_finishtransaction.type}
-				</td>
-			</tr>
-		</c:forEach>
-	<tbody>
-</table>
-</div>
-</div>
+				<thead>
+				<tr>
+					<th>Date</th>
+					<th>Name</th>
+					<th>Shares</th>
+					<th>Amount</th>
+					<th>Operations</th>
+				</tr>
+				</thead>
+				<tbody>
+				<c:forEach var="employee_finishtransaction" items="${employee_finishTransaction}">
+				<tr>
+					<td>
+							${employee_finishtransaction.executeDate}
+					</td>
+					<td>
+							${employee_finishtransaction.fund.name}
+					</td>
+					<td class="shares">
+							${employee_finishtransaction.shares}
+					</td>
+					<td class="price">
+							${employee_finishtransaction.amount}
+					</td>
+					<td>
+							${employee_finishtransaction.type}
+					</td>
+				</tr>
+				</c:forEach>
+				<tbody>
+			</table>
+		</div>
+	</div>
 
 </div>
 <div>
 	<c:import url="bottom.jsp"/>
 </div>
+
+<script type="text/javascript">
+    var p = document.getElementsByClassName("price");
+    var i;
+    for (i = 0; i < p.length; i++) {
+        var pr = p[i].innerHTML.trim();
+        if (pr)
+            p[i].innerHTML = parseFloat(pr).toFixed(2);
+        else {
+            var n = 0;
+            p[i].innerHTML = n.toFixed(2);
+        }
+    }
+    var s = document.getElementsByClassName("shares");
+    for (i = 0; i < s.length; i++) {
+        var sh = s[i].innerHTML.trim();
+        if (sh)
+            s[i].innerHTML = parseFloat(sh).toFixed(3);
+        else {
+            var n = 0;
+            s[i].innerHTML = n.toFixed(3);
+        }
+    }
+</script>
 
 </body>
 </html>
