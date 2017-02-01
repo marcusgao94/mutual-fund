@@ -18,9 +18,7 @@
 <div class="container">
 
 	<h3>Research Fund</h3>
-	
-	
-	
+
 
 	<div class="container">
 		<div class="row-fluid">
@@ -92,6 +90,8 @@
 	</div>
 </div>
 
+		
+
 <div class="container">
 	<div class="row-fluid">
 		<div class="col-sm-12">
@@ -106,22 +106,19 @@
 		      google.charts.load('current', {'packages':['corechart']});
 		      google.charts.setOnLoadCallback(drawChart);
 		      function drawChart() {
-		        // Define the chart to be drawn. ['2017-01-01',  3]
+
+		    	  
+
+			     
 		        var data = new google.visualization.arrayToDataTable([
-		            ['Date', 'fundName'],
-		            
+		            ['Date', 'fundPrice'],
 		            <c:forEach var="fundPriceHistory" items="${fundPriceHistory}">
-		            	['2017-01-01',  3],
-		            	//var x = ;
-		            	/*
-		            	var x = <c:out value="${fundPriceHistory.price}" />;
-		            	console.log("x = " + x);
-		            	alert(x);
-		            	[<c:out value="${fundPriceHistory.fundDate.date}" />, x],	        
-			     		*/
+		            
+		            		['${fundPriceHistory.fundDate.date}', ${fundPriceHistory.price}],
+
 		            </c:forEach>
-		           
-		          ]);
+		            	
+		         ]);
 		
 		        var options = {
 		            title: 'Fund Price History',
