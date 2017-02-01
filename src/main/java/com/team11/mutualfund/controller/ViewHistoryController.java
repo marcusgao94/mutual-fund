@@ -28,9 +28,7 @@ import javax.validation.Valid;
 
 import static com.team11.mutualfund.controller.LoginController.checkCustomer;
 import static com.team11.mutualfund.controller.LoginController.checkEmployee;
-import static com.team11.mutualfund.utils.Constant.DUPLICATEUSERNAME;
-import static com.team11.mutualfund.utils.Constant.NOTLOGIN;
-import static com.team11.mutualfund.utils.Constant.NOUSERNAME;
+import static com.team11.mutualfund.utils.Constant.*;
 
 import java.util.List;
 
@@ -59,9 +57,9 @@ public class ViewHistoryController {
             return "redirect:/employee_login";
         }
     	if (userName != null) {
-    		SearchForm SearchForm = new SearchForm();
-    		SearchForm.setUserName(userName);
-    		model.addAttribute("searchForm", SearchForm);
+    		SearchForm searchForm = new SearchForm();
+    		searchForm.setUserName(userName);
+    		model.addAttribute("searchForm", searchForm);
     		return "employee_transactionhistory_fast";
     	}
     	   
@@ -83,6 +81,8 @@ public class ViewHistoryController {
             return "employee_searchtransaction";
         }
 
+        model.addAttribute("searchForm", searchForm);
+
     	List<Transaction> pendingTransaction = transactionService.listPendingTransactionByCustomerId(c.getId());
     	model.addAttribute("employee_pendingTransaction", pendingTransaction);
         
@@ -98,7 +98,7 @@ public class ViewHistoryController {
     public String customerViewHistory(HttpServletRequest request, Model model,
                                  RedirectAttributes redirectAttributes) {
     	if (!checkCustomer(request)) {
-            redirectAttributes.addFlashAttribute("loginError", NOTLOGIN);
+            redirectAttributes.addFlashAttribute("loginError", CUSTOMERNOTLOGIN);
             return "redirect:/customer_login";
         }
     	HttpSession session = request.getSession();

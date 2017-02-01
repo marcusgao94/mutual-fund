@@ -76,7 +76,6 @@ public class TransitionController {
             model.addAttribute("transitionForm", transitionForm);
             return "transitionday";
         }
-
         try {
             DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
             df.setTimeZone(TimeZone.getTimeZone("America/New_York"));
@@ -84,11 +83,9 @@ public class TransitionController {
             transitionService.transit(date, transitionForm.getFundList());
         } catch (ParseException e) {
             result.rejectValue("", "", "date must be the form MM/dd/yyyy");
-            model.addAttribute("transitionForm", transitionForm);
             return "transitionday";
         } catch (RollbackException e) {
             result.rejectValue("", "", e.getMessage());
-            model.addAttribute("transitionForm", transitionForm);
             return "transitionday";
         }
         model.addAttribute("success", SETTRANSITIONDAY);

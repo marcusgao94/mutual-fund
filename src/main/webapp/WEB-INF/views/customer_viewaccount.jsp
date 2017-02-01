@@ -14,6 +14,8 @@
 		.error {
 			color: red;
 		}
+		.shares {}
+		.price {}
 	</style>
 </head>
 <body>
@@ -22,172 +24,198 @@
 </div>
 
 <div class="container">
-    <div class="row-fluid">
-      <div class="col-sm-12">
-        <h2>${customer_account.firstName} ${customer_account.lastName}</h2>
-          <div class="panel panel-default">
-          <div class="panel-heading">
-            <span itemscope itemtype="http://schema.org/Review">
-            <h3 class="panel-title" itemprop="name">Basic Info</h3>
-          </div><!--/panel-heading-->
-          <div class="panel-body" itemprop="reviewBody">
+	<div class="row-fluid">
+		<div class="col-sm-12">
+			<h2>${customer_account.firstName} ${customer_account.lastName}</h2>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<span itemscope itemtype="http://schema.org/Review">
+            			<h3 class="panel-title" itemprop="name">Basic Info</h3>
+					</span>
+				</div><!--/panel-heading-->
+				<div class="panel-body" itemprop="reviewBody">
 
-            <div class="col-md-6">
+					<div class="col-md-6">
 
-            <div class="table-responsive responsiv-table">
-              <table class="table bio-table">
-                  <tbody>
-                    <tr>
-                       <td>ID:</td>
-                       <td> ${customer_account.id}</td>
-                    </tr>
-                 <tr>
-                    <td>FirstName:</td>
-                    <td> ${customer_account.firstName}</td>
-                 </tr>
-                 <tr>
-                    <td>LastName:</td>
-                    <td> ${customer_account.lastName}</td>
-                 </tr>
-                 <tr>
-                    <td>UserName:</td>
-                    <td> ${customer_account.userName}</td>
-                </tr>
-                </tbody>
-              </table>
-              </div><!--table-responsive close-->
-            </div><!--col-md-6 close-->
+						<div class="table-responsive responsiv-table">
+							<table class="table bio-table">
+								<tbody>
+								<tr>
+									<td>ID:</td>
+									<td> ${customer_account.id}</td>
+								</tr>
+								<tr>
+									<td>FirstName:</td>
+									<td> ${customer_account.firstName}</td>
+								</tr>
+								<tr>
+									<td>LastName:</td>
+									<td> ${customer_account.lastName}</td>
+								</tr>
+								<tr>
+									<td>UserName:</td>
+									<td> ${customer_account.userName}</td>
+								</tr>
+								</tbody>
+							</table>
+						</div><!--table-responsive close-->
+					</div><!--col-md-6 close-->
 
-<div class="col-md-6">
-            <div class="table-responsive responsiv-table">
-              <table class="table bio-table">
-                  <tbody>
-                 <tr>
-                     <td>Address:</td>
-                     <td> ${customer_account.addr_line1} ${customer_account.addr_line2}</td>
-                 </tr>
-                 <tr>
-                     <td>State:</td>
-                     <td> ${customer_account.state}</td>
-                  </tr>
-                  <tr>
-                     <td>City:</td>
-                     <td> ${customer_account.city}</td>
-                  </tr>
-                  <tr>
-                     <td>ZIP:</td>
-                     <td> ${customer_account.zip}</td>
-                  </tr>
-                </tbody>
-              </table>
-              <div class="text-right">
-<!--   <button type="button" class="btn btn-primary">Edit</button> -->
-				<a href="<c:url value="/customer_changepassword" />">
-					<button class="btn btn-primary">
-						Change password
-					</button>
-				</a>
-				<a href="<c:url value="/customer_transactionhistory" />">
-					<button class="btn btn-primary">
-						View Transaction History
-					</button>
-				</a>
-              </div>
-            </div>
-            </div>
-            </div>
-            </div>
-            </div>
-            </div>
-            
-                          <div class="col-sm-12">
-                  <div class="panel panel-default">
-                  <div class="panel-heading">
+					<div class="col-md-6">
+						<div class="table-responsive responsiv-table">
+							<table class="table bio-table">
+								<tbody>
+								<tr>
+									<td>Address:</td>
+									<td> ${customer_account.addr_line1} ${customer_account.addr_line2}</td>
+								</tr>
+								<tr>
+									<td>State:</td>
+									<td> ${customer_account.state}</td>
+								</tr>
+								<tr>
+									<td>City:</td>
+									<td> ${customer_account.city}</td>
+								</tr>
+								<tr>
+									<td>ZIP:</td>
+									<td> ${customer_account.zip}</td>
+								</tr>
+								</tbody>
+							</table>
+							<div class="text-right">
+								<!--   <button type="button" class="btn btn-primary">Edit</button> -->
+								<a href="<c:url value="/customer_changepassword" />">
+									<button class="btn btn-primary">
+										Change password
+									</button>
+								</a>
+								<a href="<c:url value="/customer_transactionhistory" />">
+									<button class="btn btn-primary">
+										View Transaction History
+									</button>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-sm-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
                     <span itemscope itemtype="http://schema.org/Review">
                     <h3 class="panel-title" itemprop="name">Account Info</h3>
-                  </div><!--/panel-heading-->
-                  <div class="panel-body" itemprop="reviewBody">
-                    <h4>Date of the last trading day: ${date} </h4>
-                    <h4>Cash balance: ${customer_account.cash} </h4>
-                    <div class="col-md-6">
+					</span>
+			</div><!--/panel-heading-->
+			<div class="panel-body" itemprop="reviewBody">
+				<h4>Date of the last trading day: ${date} </h4>
+				<h4>Cash balance: <span class="price"> ${customer_account.cash} </span></h4>
+				<div class="col-md-6">
 
-                    <div class="table-responsive responsiv-table">
-                      <table class="table bio-table">
-                          <thead>
-                            <tr>
-                               <td>Name of the fund</td>
-                               <td>Shares</td>
-                               <td>Price</td>
-                               <td>Value</td>
-                            </tr>
-                         </thead>
-				<tbody>
-				<c:forEach var="customer_pv" items="${customerPosition}">
+					<div class="table-responsive responsiv-table">
+						<table class="table bio-table">
+							<thead>
+							<tr>
+								<td>Name of the fund</td>
+								<td>Shares</td>
+								<td>Price</td>
+								<td>Value</td>
+							</tr>
+							</thead>
+							<tbody>
+							<c:forEach var="customer_pv" items="${customerPosition}">
 
-					<tr>
-						<td>
-								${customer_pv.fund.name}
-						</td>
-						<td>
-								${customer_pv.shares}
-						</td>
-						<td>
-								${customer_pv.price}
-						</td>
-						<td>
-								${customer_pv.value}
-						</td>
-					</tr>
-				</c:forEach>
-				</tbody>
-                      </table>
-                      </div><!--table-responsive close-->
-                    </div><!--col-md-6 close-->
-<!-- pie chart -->
-<div class="col-md-4">
-  <head>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
-      function drawChart() {
-        // Define the chart to be drawn.
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Element');
-        data.addColumn('number', 'Percentage');
-        <c:forEach var="customer_pv" items="${customerPosition}">
-        data.addRows([
-        	
-        	
-            ['${customer_pv.fund.name}', ${customer_pv.shares}]
+								<tr>
+									<td>
+											${customer_pv.fund.name}
+									</td>
+									<td class="shares">
+											${customer_pv.shares}
+									</td>
+									<td class="price">
+											${customer_pv.price}
+									</td>
+									<td class="price">
+											${customer_pv.value}
+									</td>
+								</tr>
+							</c:forEach>
+							</tbody>
+						</table>
+					</div><!--table-responsive close-->
+				</div><!--col-md-6 close-->
+				<!-- pie chart -->
+				<div class="col-md-4">
+					<head>
+						<script type="text/javascript"
+								src="https://www.gstatic.com/charts/loader.js"></script>
+						<script type="text/javascript">
+                            google.charts.load('current', {'packages': ['corechart']});
+                            google.charts.setOnLoadCallback(drawChart);
+                            function drawChart() {
+                                // Define the chart to be drawn.
+                                var data = new google.visualization.DataTable();
+                                data.addColumn('string', 'Element');
+                                data.addColumn('number', 'Percentage');
+                                <c:forEach var="customer_pv" items="${customerPosition}">
+                                data.addRows([
 
-        ]);
-        </c:forEach>
-        var options = {
-            title: 'My Fund Collection'
-          };
-        // Instantiate and draw the chart.
-   var chart = new google.visualization.PieChart(document.getElementById('pieChart'));
-   chart.draw(data, options);
-  }
 
-    </script>
-  </head>
-  <body>
-    <div id="pieChart" style="width: 530px; height: 300px;"></div>
-  </body>
+                                    ['${customer_pv.fund.name}', ${customer_pv.shares}]
 
-  </div>
-                    </div>
-                    </div>
-                    </div>
+                                ]);
+                                </c:forEach>
+                                var options = {
+                                    title: 'My Fund Collection'
+                                };
+                                // Instantiate and draw the chart.
+                                var chart = new google.visualization.PieChart(document.getElementById('pieChart'));
+                                chart.draw(data, options);
+                            }
+
+						</script>
+					</head>
+					<body>
+					<div id="pieChart" style="width: 530px; height: 300px;"></div>
+					</body>
+
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
-
 
 
 <div>
 	<c:import url="bottom.jsp"/>
 </div>
+
+<script type="text/javascript">
+    var p = document.getElementsByClassName("price");
+    var i;
+    for (i = 0; i < p.length; i++) {
+        var pr = p[i].innerHTML.trim();
+        if (pr)
+            p[i].innerHTML = parseFloat(pr).toFixed(2);
+        else {
+            var n = 0;
+            p[i].innerHTML = n.toFixed(2);
+        }
+    }
+    var s = document.getElementsByClassName("shares");
+    for (i = 0; i < s.length; i++) {
+        var sh = s[i].innerHTML.trim();
+        if (sh)
+            s[i].innerHTML = parseFloat(sh).toFixed(3);
+        else {
+            var n = 0;
+            s[i].innerHTML = n.toFixed(3);
+        }
+    }
+</script>
 
 </body>
 </html>

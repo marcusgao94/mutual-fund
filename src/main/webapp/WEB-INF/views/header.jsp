@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
 <body>
@@ -18,7 +19,8 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<div class="animbrand"><a href="<c:url value="/home" />" class="navbar-brand"><span style = "font-weight:bold">Singularity</span></a>
+				<div class="animbrand"><a href="<c:url value="/home" />" class="navbar-brand"><span
+						style="font-weight:bold">Singularity</span></a>
 				</div>
 			</div>
 
@@ -33,11 +35,11 @@
 					</li>
 
 
-				<li class="dropdown">
+					<li class="dropdown">
 
 						<c:if test="${user.type == 0}">
 							<a data-toggle="dropdown" class="dropdown-toggle"
-						   		href="#">
+							   href="#">
 								<span class="glyphicon glyphicon glyphicon-usd"></span>
 								Investing & Trading <b class="caret"></b>
 							</a>
@@ -58,21 +60,19 @@
 						</c:if>
 					</li>
 
-<c:if test="${user.type == 1}">
-					<li class="dropdown">
+					<c:if test="${user.type == 1}">
+						<li class="dropdown">
 
 							<a data-toggle="dropdown" class="dropdown-toggle"
 							   href="#">
 								<span class="glyphicon glyphicon-user"></span>
 								Manage Employees <b class="caret"></b>
 							</a>
-
 							<ul class="dropdown-menu">
-
 								<li class="">
 									<a href="<c:url value="/employee_register" />">
-											<span class="fa fa-user-plus"></span>
-											Create An Employee
+										<span class="fa fa-user-plus"></span>
+										Create An Employee
 									</a>
 								</li>
 							</ul>
@@ -84,9 +84,7 @@
 								<span class="glyphicon glyphicon-user"></span>
 								Manage Customers<b class="caret"></b>
 							</a>
-
 							<ul class="dropdown-menu">
-
 								<li>
 									<a href="<c:url value="/customer_register" />">
 										<span class="fa fa-users"></span>
@@ -101,7 +99,7 @@
 								</li>
 
 								<li>
-								<a href="<c:url value="/employee_searchtransaction" />">
+									<a href="<c:url value="/employee_searchtransaction" />">
 										<i class="fa fa-money"></i>
 										View Customer Transaction History
 									</a>
@@ -138,9 +136,9 @@
 									</a>
 								</li>
 							</ul>
-						
-							<li>
-							 <a data-toggle="dropdown" class="dropdown-toggle"
+
+						<li>
+							<a data-toggle="dropdown" class="dropdown-toggle"
 							   href="#">
 								<span class="glyphicon glyphicon-user"></span>
 								Set Transition Day<b class="caret"></b>
@@ -153,10 +151,10 @@
 										Set Transition Day
 									</a>
 								</li>
-							</ul> 
-							</li>
+							</ul>
+						</li>
 
-						</c:if>
+					</c:if>
 
 				<c:if test="${user.type == 0}">
 					<li class="dropdown">
@@ -206,7 +204,6 @@
 				</ul>
 
 
-
 				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown">
 						<a data-toggle="dropdown" class="dropdown-toggle">
@@ -249,17 +246,17 @@
 									</a>
 								</li>
 							</c:if> --%>
-							
-							<c:if test="${user.type == 1}">
-							<li>							
-									<a href="<c:url value="/employee_changepassword" />">
-										<i class="fa fa-key"></i>
-										Change Password
-									</a>
-							</c:if>
-							
 
-							<%-- <c:if test="${user.type == 1}"> --%>
+							<c:if test="${user.type == 1}">
+							<li>
+								<a href="<c:url value="/employee_changepassword" />">
+									<i class="fa fa-key"></i>
+									Change Password
+								</a>
+								</c:if>
+
+
+								<%-- <c:if test="${user.type == 1}"> --%>
 								<%-- <li>
 									<a href="<c:url value="/employee_register" />">
 										<span class="fa fa-user-plus"></span>
@@ -311,14 +308,14 @@
 										Set Transition Day
 									</a>
 								</li> --%>
-							<%-- </c:if> --%>
-							<c:if test="${user.type != -1}">
-								<li>
-									<a href="<c:url value="/logout" />">
-										<i class="glyphicon glyphicon-off"></i>
-										Logout
-									</a>
-								</li>
+								<%-- </c:if> --%>
+								<c:if test="${user.type != -1}">
+							<li>
+								<a href="<c:url value="/logout" />">
+									<i class="glyphicon glyphicon-off"></i>
+									Logout
+								</a>
+							</li>
 							</c:if>
 						</ul>
 					</li>
