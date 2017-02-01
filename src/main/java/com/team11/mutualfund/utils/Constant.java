@@ -32,6 +32,8 @@ public class Constant {
     public static final String REQUESTCHECKSUCCESS = "Your request has been submitted successfully! "
     		+ "Please wait for the next transition day!";
     
+    public static final String SETTRANSITIONDAY = "New transition day has been set successfully!";
+    
     //public static final String DEPOSITCHECK = "Deposit check successfully";
     
 }
