@@ -24,7 +24,7 @@
 	<form:form modelAttribute="depositCheckForm">
 		<table>
 			<tr>
-				<td>Customer UserName:</td>
+				<td>Customer User Name:</td>
 				<td>${depositCheckForm.getUserName()}</td>
 				<td><input type="hidden" name="userName"
 						   value="${depositCheckForm.getUserName()}" autofocus/>

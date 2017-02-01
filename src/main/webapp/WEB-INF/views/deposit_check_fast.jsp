@@ -24,7 +24,7 @@
 	<form:form modelAttribute="depositCheckForm">
 		<table>
 			<tr>
-				<td>Customer UserName:</td>
+				<td>Customer User Name:</td>
 				<td><input type="text" name="userName"
 						   value="${depositCheckForm.getUserName()}" autofocus/>
 				</td>
@@ -32,7 +32,7 @@
 			</tr>
 
 			<tr>
-				<td>amount:</td>
+				<td>Amount:</td>
 				<td><input type="number" step="0.01" name="amount" value="${depositCheckForm.getAmount()}"/></td>
 				<td><form:errors path="amount" cssClass="error"/></td>
 			</tr>
