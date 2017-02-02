@@ -77,13 +77,10 @@
 					<td>
 							${employee_pendingtransaction.fund.name}
 					</td>
-<<<<<<< HEAD
 					<td>
 	 						${employee_pendingtransaction.price}
-=======
 					<td class ="price">
 							${employee_finishtransaction.price}
->>>>>>> 46ec50a33c755652e1c870d7a80298cdb1f17a82
 					</td>
 					<td class="shares">
 							${employee_pendingtransaction.shares}
