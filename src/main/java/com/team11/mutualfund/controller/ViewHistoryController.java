@@ -61,11 +61,12 @@ public class ViewHistoryController {
     		model.addAttribute("searchForm", searchForm);
         	List<Transaction> pendingTransaction = transactionService.listPendingTransactionByCustomerId(c.getId());
         	model.addAttribute("employee_pendingTransaction", pendingTransaction);
-            
+        	System.out.println("1111111");
             List<Transaction> finishTransaction = transactionService.listFinishTransactionByCustomerId(c.getId());
             model.addAttribute("employee_finishTransaction", finishTransaction);
-    		return "employee_transactionhistory_fast";
+    		return "employee_transaction";
     	}
+    	System.out.println("22222");
 		List<Customer> customerList = customerService.getCustomerList();
 	    model.addAttribute("customerList",customerList);
 	    //request.getSession().setAttribute("customerList", customerList);
@@ -90,6 +91,7 @@ public class ViewHistoryController {
             result.rejectValue("userName", "", NOUSERNAME);
             return "employee_searchtransaction";
         }
+        System.out.println("3333333");
         model.addAttribute("customer", customer);
         model.addAttribute("searchForm", searchForm);
     	List<Transaction> pendingTransaction = transactionService.listPendingTransactionByCustomerId(customer.getId());

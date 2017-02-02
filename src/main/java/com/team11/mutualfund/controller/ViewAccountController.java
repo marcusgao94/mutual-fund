@@ -20,6 +20,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -55,9 +56,11 @@ public class ViewAccountController {
 
     // employeeViewHistory
     @RequestMapping(value = "/employee_searchcustomer", method = RequestMethod.GET)
-    public String employeeViewAccount(HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) {
-        if (!checkEmployee(request)) {
-            redirectAttributes.addFlashAttribute("loginError", NOTLOGIN);
+    public String employeeViewAccount(HttpServletRequest request, Model model, RedirectAttributes ra, 
+    		@RequestParam(value = "un", required = false) String userName)  {
+
+    		if (!checkEmployee(request)) {
+            ra.addFlashAttribute("loginError", NOTLOGIN);
             return "redirect:/employee_login";
         }
         List<Customer> customerList = customerService.getCustomerList();
