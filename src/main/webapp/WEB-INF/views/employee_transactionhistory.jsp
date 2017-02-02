@@ -52,7 +52,7 @@
 
 
 <div class="container">
-	<h3>Transaction History</h3>
+	<h3>Transaction History for ${customer.getUserName()}</h3>
 	<h4> Pending </h4>
 
 	<div class="row">
@@ -77,8 +77,8 @@
 					<td>
 							${employee_pendingtransaction.fund.name}
 					</td>
-					<td>
-							${employee_finishtransaction.price}
+					<td class ="price">
+	 						${employee_pendingtransaction.price}
 					</td>
 					<td class="shares">
 							${employee_pendingtransaction.shares}
@@ -123,7 +123,7 @@
 					<td>
 							${employee_finishtransaction.fund.name}
 					</td>
-					<td>
+					<td class= "price">
 							${employee_finishtransaction.price}
 					</td>
 					<td class="shares">
@@ -159,6 +159,7 @@
             p[i].innerHTML = n.toFixed(2);
         }
     }
+
     var s = document.getElementsByClassName("shares");
     for (i = 0; i < s.length; i++) {
         var sh = s[i].innerHTML.trim();

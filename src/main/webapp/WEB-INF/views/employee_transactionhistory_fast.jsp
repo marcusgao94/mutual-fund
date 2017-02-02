@@ -25,7 +25,7 @@
 
 <div class="container">
 
-	<h3>Transaction History</h3>
+	<h3>Transaction History for ${userName}</h3>
 	
 	
 <h4> Pending </h4>
@@ -52,8 +52,8 @@
 					<td>
 							${employee_pendingtransaction.fund.name}
 					</td>
-					<td>
-	 						${employee_finishtransaction.price}
+					<td class="price">
+	 						${employee_pendingtransaction.price}
 					</td>
 					<td class="shares">
 							${employee_pendingtransaction.shares}
@@ -98,7 +98,7 @@
 					<td>
 							${employee_finishtransaction.fund.name}
 					</td>
-					<td>
+					<td class="price">
 	 						${employee_finishtransaction.price}
 					</td>
 					<td class="shares">
@@ -122,5 +122,29 @@
 	<c:import url="bottom.jsp"/>
 </div>
 
+<script type="text/javascript">
+    var p = document.getElementsByClassName("price");
+    var i;
+    for (i = 0; i < p.length; i++) {
+        var pr = p[i].innerHTML.trim();
+        if (pr)
+            p[i].innerHTML = parseFloat(pr).toFixed(2);
+        else {
+            var n = 0;
+            p[i].innerHTML = n.toFixed(2);
+        }
+    }
+
+    var s = document.getElementsByClassName("shares");
+    for (i = 0; i < s.length; i++) {
+        var sh = s[i].innerHTML.trim();
+        if (sh)
+            s[i].innerHTML = parseFloat(sh).toFixed(3);
+        else {
+            var n = 0;
+            s[i].innerHTML = n.toFixed(3);
+        }
+    }
+</script>
 </body>
 </html>
