@@ -24,21 +24,24 @@
 	<form:form modelAttribute="depositCheckForm">
 		<table>
 			<tr>
-			<td>Customer User Name:</td>
-			<td><select name="userName" class="form-control" id="sel1">
-			<option value="">Please select a name
-			</option>
-			<c:forEach var="customer" items="${customerList}">
-				<option>${customer.userName}</option>
-			</c:forEach>
-		</select>
-		<form:errors path="userName" cssClass="error"/>
-		</td>
-		</tr>
+				<td>Customer User Name:</td>
+				<td><select name="userName" class="form-control" id="sel1">
+					<option value="">Please select a name
+					</option>
+					<c:forEach var="customer" items="${customerList}">
+						<option>${customer.userName}</option>
+					</c:forEach>
+				</select>
+				</td>
+				<td>
+					<form:errors path="userName" cssClass="error"/>
+				</td>
+			</tr>
 
 			<tr>
-				<td>Amount:</td>
-				<td><input type="number" step="0.01" name="amount" value="${depositCheckForm.getAmount()}"/></td>
+				<td>Enter Deposit Amount:</td>
+				<td><input type="number" step="0.01" name="amount"
+						   value="${depositCheckForm.getAmount()}"/></td>
 				<td><form:errors path="amount" cssClass="error"/></td>
 			</tr>
 
@@ -47,13 +50,15 @@
 					<input type="submit" name="button" value="deposit"/>
 				</th>
 				<th>
-					<input type = "hidden" name = "fast" value = "fast">
+					<input type="hidden" name="fast" value="fast">
 				</th>
 			</tr>
 
 		</table>
 	</form:form>
 </div>
+
+
 <div>
 	<c:import url="bottom.jsp"/>
 </div>

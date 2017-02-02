@@ -22,10 +22,8 @@ public class Position implements Serializable {
     @JoinColumn(name = "fund_id", referencedColumnName = "id")
     private Fund fund;
 
-
-
     @Column(scale = 3)
-    private double pendingShareDecrease = 0.0;
+    private Double pendingShareDecrease = 0d;
 
     public CustomerFund getCustomerFund() {
         return customerFund;
@@ -59,11 +57,11 @@ public class Position implements Serializable {
         this.shares = shares;
     }
 
-    public double getPendingShareDecrease() {
+    public Double getPendingShareDecrease() {
         return pendingShareDecrease;
     }
 
-    public void setPendingShareDecrease(double pendingShareDecrease) {
+    public void setPendingShareDecrease(Double pendingShareDecrease) {
         this.pendingShareDecrease = pendingShareDecrease;
     }
 }

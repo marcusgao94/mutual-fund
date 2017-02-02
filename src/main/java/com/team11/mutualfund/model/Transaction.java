@@ -30,13 +30,13 @@ public class Transaction implements Serializable {
     private TransactionType type;
 
     @Column(scale = 3)
-    private Double shares = 0d;
+    private Double shares;
 
     @Column(scale = 2)
-    private Double amount = 0d;
+    private Double amount;
 
     @Column(scale = 2)
-    private Double price = 0d;
+    private Double price;
 
     public Transaction() {}
     public Transaction(Customer customer, Fund fund, TransactionType type, Double shares, Double amount) {
@@ -45,6 +45,7 @@ public class Transaction implements Serializable {
         setType(type);
         setShares(shares);
         setAmount(amount);
+        setPrice(null);
     }
 
     public long getId() {

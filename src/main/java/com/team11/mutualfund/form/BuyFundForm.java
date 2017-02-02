@@ -11,10 +11,10 @@ import static com.team11.mutualfund.utils.Constant.TOOLITTLEAMOUNT;
 public class BuyFundForm {
 
     @NotNull
-    @Size(min = 1, max = 5)
+    @Size(min = 1, max = 5, message = "fund ticker length must between 1 and 5")
     private String fundTicker;
 
-    @NotNull
+    @NotNull(message = "amount cannot be empty")
     private Double amount;
 
     private Double available;

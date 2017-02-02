@@ -8,10 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team11.mutualfund.model.Employee;
@@ -24,6 +21,7 @@ import com.team11.mutualfund.utils.User;
 import static com.team11.mutualfund.controller.LoginController.checkCustomer;
 import static com.team11.mutualfund.utils.Constant.*;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
@@ -33,6 +31,7 @@ import javax.transaction.RollbackException;
 import javax.validation.Valid;
 
 @Controller
+@SessionAttributes("customerList")
 public class ChangePasswordController {
 
 
@@ -171,6 +170,7 @@ public class ChangePasswordController {
 
     @RequestMapping(value = "/employee_changecuspassword", method = RequestMethod.POST)
     public String employeeChangeCusPassword(HttpServletRequest request, Model model,
+                                            //@ModelAttribute("customerList") LinkedList<Customer> customerList,
                                             @Valid ChangePasswordForm changePasswordForm, BindingResult result,
                                             String fast, RedirectAttributes redirectAttributes) {
         if (!checkEmployee(request)) {
@@ -190,7 +190,7 @@ public class ChangePasswordController {
             customerService.updatePassword(userName, newPassword);
         } catch (RollbackException e) {
             String message = e.getMessage();
-            if (message.startsWith("customer"))
+            if (message.startsWith("Customer"))
                 result.rejectValue("userName", "", message);
             else
                 result.rejectValue("originPassword", "", WRONGPASSWORD);

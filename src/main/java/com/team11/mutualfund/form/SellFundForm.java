@@ -12,16 +12,16 @@ import static com.team11.mutualfund.utils.Constant.TOOLITTLESHARE;
 public class SellFundForm {
 
     @NotNull
-    @Size(min = 1, max = 5)
+    @Size(min = 1, max = 5, message = "fund ticker length must between 1 and 5")
     private String fundTicker;
 
-    @NotNull
+    @NotNull(message = "share cannot be empty")
     private Double share;
 
     public Errors getValidationError() {
-        Errors errors = new DirectFieldBindingResult(this, "buyFundForm");
+        Errors errors = new DirectFieldBindingResult(this, "sellFundForm");
         if (share != null && share < 0.001) {
-            errors.rejectValue("amount", "0", TOOLITTLESHARE);
+            errors.rejectValue("share", "0", TOOLITTLESHARE);
         }
         return errors;
     }

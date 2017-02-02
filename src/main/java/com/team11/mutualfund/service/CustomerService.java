@@ -63,7 +63,7 @@ public class CustomerService {
 	}
 
 	public Customer updatePassword(String userName, String newPassword) throws RollbackException {
-		Customer c =  customerDao.findByUserName(userName);
+		Customer c =  customerDao.findByUserNameForUpdate(userName);
 		if (c == null)
 			throw new RollbackException(NOCUSTOMER);
 		c.setPassword(newPassword);

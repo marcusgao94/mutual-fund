@@ -25,21 +25,12 @@
 	<form:form modelAttribute="changePasswordForm">
 		<table>
 			<tr>
-			<td><br/></td>
-			</tr>
-			<tr>
+				<td>User Name:</td>
+				<td>${changePasswordForm.userName}</td>
+				<td><form:errors path="userName" cssClass="error"/></td>
 				<td>
-					<input type="hidden" name="userName" value="${changePasswordForm.userName}">
+					<input type="hidden" name="userName" value="${changePasswordForm.userName}" />
 				</td>
-				<form:errors path="userName" cssClass="error" />
-			</tr>
-
-			<tr>
-				<td>Old Password:</td>
-				<td>
-					<input type="password" name="originPassword" value="" autofocus/>
-				</td>
-				<td><form:errors path="originPassword" cssClass="error"/></td>
 			</tr>
 
 			<tr>
