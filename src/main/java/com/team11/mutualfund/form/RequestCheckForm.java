@@ -30,14 +30,16 @@ public class RequestCheckForm {
             errors.rejectValue("amount", "1", NOENOUGHCASH);
         return errors;
     }
-
+    public String sanitize(String s) {
+        return s.replace("&", "&qmp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;");
+    }
 
     public String getUserName() {
         return userName;
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.userName = sanitize(userName);
     }
 
     public Double getAmount() {

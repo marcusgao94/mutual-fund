@@ -29,13 +29,17 @@ public class ChangePasswordForm {
             errors.rejectValue("confirmNewPassword", "", INCONSISTENTPASSWORD);
         return errors;
     }
+    
+    public String sanitize(String s) {
+        return s.replace("&", "&qmp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;");
+    }
 
     public String getOriginPassword() {
         return originPassword;
     }
 
     public void setOriginPassword(String originPassword) {
-        this.originPassword = originPassword;
+        this.originPassword = sanitize(originPassword);
     }
 
     public String getNewPassword() {
@@ -43,7 +47,7 @@ public class ChangePasswordForm {
     }
 
     public void setNewPassword(String newPassword) {
-        this.newPassword = newPassword;
+        this.newPassword = sanitize(newPassword);
     }
 
     public String getConfirmNewPassword() {
@@ -51,7 +55,7 @@ public class ChangePasswordForm {
     }
 
     public void setConfirmNewPassword(String confirmNewPassword) {
-        this.confirmNewPassword = confirmNewPassword;
+        this.confirmNewPassword = sanitize(confirmNewPassword);
     }
 
     public String getUserName() {
@@ -59,6 +63,6 @@ public class ChangePasswordForm {
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.userName = sanitize(userName);
     }
 }

@@ -16,12 +16,16 @@ public class SearchForm {
     @Size(min = 1, message = EMPTYUSERNAME)
     private String userName;
 
+    public String sanitize(String s) {
+        return s.replace("&", "&qmp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;");
+    }
+    
     public String getUserName() {
         return userName;
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.userName = sanitize(userName);
     }
 
 }
