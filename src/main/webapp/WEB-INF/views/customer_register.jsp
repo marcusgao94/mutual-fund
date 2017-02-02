@@ -15,6 +15,9 @@
 		.error {
 			color: red;
 		}
+		.red-star {
+    	color: red;
+		}
 	</style>
 </head>
 <body>
@@ -32,7 +35,7 @@
 
 
 			<tr>
-				<td>User Name:</td>
+				<td><span class="red-star">*</span>User Name:</td>
 				<td>
 					<input type="text" name="userName"
 						   value="${customerRegisterForm.getUserName()}"/>
@@ -43,7 +46,7 @@
 			</tr>
 
 			<tr>
-				<td>Password:</td>
+				<td><span class="red-star">*</span>Password:</td>
 				<td>
 					<input type="password" name="password" value=""/>
 				</td>
@@ -53,7 +56,7 @@
 			</tr>
 
 			<tr>
-				<td>Confirm Password:</td>
+				<td><span class="red-star">*</span>Confirm Password:</td>
 				<td><input type="password" name="confirmPassword" value=""/>
 				</td>
 				<td>
@@ -62,7 +65,7 @@
 			</tr>
 
 			<tr>
-				<td>First Name:</td>
+				<td><span class="red-star">*</span>First Name:</td>
 				<td>
 					<input type="text" name="firstName"
 						   value="${customerRegisterForm.getFirstName()}" autofocus/>
@@ -73,7 +76,7 @@
 			</tr>
 
 			<tr>
-				<td>Last Name:</td>
+				<td><span class="red-star">*</span>Last Name:</td>
 				<td>
 					<input type="text" name="lastName"
 						   value="${customerRegisterForm.getLastName()}"/>
@@ -84,7 +87,7 @@
 			</tr>
 
 			<tr>
-				<td>Address Line1:</td>
+				<td><span class="red-star">*</span>Address Line1:</td>
 				<td>
 					<input type="text" name="addr_line1"
 						   value="${customerRegisterForm.getAddr_line1()}"/>
@@ -92,7 +95,7 @@
 			</tr>
 
 			<tr>
-				<td>Address Line2:</td>
+				<td><span class="red-star">*</span>Address Line2:</td>
 				<td>
 					<input type="text" name="addr_line2"
 						   value="${customerRegisterForm.getAddr_line2()}"/>
@@ -100,24 +103,35 @@
 			</tr>
 
 			<tr>
-				<td>City:</td>
+				<td><span class="red-star">*</span>City:</td>
 				<td>
 					<input type="text" name="city"
 						   value="${customerRegisterForm.getCity()}"/>
 				</td>
-				<td>State:</td>
+				<td><span class="red-star">*</span>State:</td>
 				<td>
 					<input type="text" name="state"
 						   value="${customerRegisterForm.getState()}"/>
 				</td>
-				<td>Zipcode:</td>
+				<td><span class="red-star">*</span>Zip code:</td>
 				<td>
 					<input type="number" name="zip"
 						   value="${customerRegisterForm.getZip()}"/>
 				</td>
 			</tr>
-
+			
 			<tr>
+				<td><br/></td>
+				<td><br/></td>
+			</tr>
+				<tr>
+					<td><span class="red-star">*</span> is required</td>
+				</tr>
+			<tr>
+			<tr>
+				<td><br/></td>
+				<td><br/></td>
+			</tr>
 				<th colspan="2">
 					<input type="submit" name="button" value="Register"/>
 				</th>
