@@ -55,7 +55,7 @@
 				<td>
 	 				${customer_pendingtransaction.fund.name}
 				</td>
-				<td>
+				<td class="price">
 	 				${customer_finishtransaction.price}
 				</td>
 				<td class="shares">
@@ -106,7 +106,7 @@
 				<td>
 	 				${customer_finishtransaction.fund.name}
 				</td>
-				<td>
+				<td class="price">
 	 				${customer_finishtransaction.price}
 				</td>
 				<td class="shares">
