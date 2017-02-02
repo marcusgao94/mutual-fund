@@ -35,8 +35,9 @@
 					<thead>
 					<tr>
 			<th>Transaction ID</th>
+			<th>Fund Ticker</th>
 			<th>Fund Name</th>
-			<th>Price</th>
+			<th>Price per Sare</th>
 			<th>Quantity of Shares</th>
 			<th>Total Amount</th>
           	<th>Operations</th>
@@ -47,6 +48,9 @@
 			<tr>
 				<td>
 	 				${customer_pendingtransaction.id}
+				</td>
+				<td>
+	 				${customer_pendingtransaction.fund.ticker}
 				</td>
 				<td>
 	 				${customer_pendingtransaction.fund.name}
@@ -76,10 +80,11 @@
 			<table class="table">
 	<thead>
 		<tr>
-			<th>Transition Date</th>
-			<th>ID</th>
+			<th>Transaction Date</th>
+			<th>Transaction ID</th>
+			<th>Fund Ticker</th>
 			<th>Fund Name</th>
-			<th>Price</th>
+			<th>Price per Share</th>
 			<th>Quantity of Shares</th>
 			<th>Total Amount</th>
           	<th>Operations</th>
@@ -94,6 +99,9 @@
 				</td>
 				<td>
 	 				${customer_finishtransaction.id}
+				</td>
+				<td>
+	 				${customer_finishtransaction.fund.ticker}
 				</td>
 				<td>
 	 				${customer_finishtransaction.fund.name}
@@ -137,10 +145,11 @@
     for (i = 0; i < s.length; i++) {
         var sh = s[i].innerHTML.trim();
         if (sh)
-            s[i].innerHTML = parseFloat(sh).toFixed(3);
+            
+        	s[i].innerHTML = s[i].innerHTML = parseFloat(sh).toFixed(3);
         else {
             var n = 0;
-            s[i].innerHTML = n.toFixed(3);
+            s[i].innerHTML = s[i].innerHTML = parseFloat(n).toFixed(3);
 		}
     }
 </script>
