@@ -52,7 +52,7 @@
 
 
 <div class="container">
-	<h3>Transaction History</h3>
+	<h3>Transaction History for ${customer.getUserName()}</h3>
 	<h4> Pending </h4>
 
 	<div class="row">
@@ -157,6 +157,17 @@
         else {
             var n = 0;
             p[i].innerHTML = n.toFixed(2);
+        }
+    }
+    var a = document.getElementsByClassName("amount");
+    var i;
+    for (i = 0; i < a.length; i++) {
+        var am = a[i].innerHTML.trim();
+        if (am)
+            a[i].innerHTML = parseFloat(am).toFixed(2);
+        else {
+            var n = 0;
+            a[i].innerHTML = n.toFixed(2);
         }
     }
     var s = document.getElementsByClassName("shares");

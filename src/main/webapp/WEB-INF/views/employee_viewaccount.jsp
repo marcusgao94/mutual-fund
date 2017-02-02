@@ -85,19 +85,19 @@
 							<table class="table bio-table">
 								<tbody>
 								<tr>
-									<td>ID</td>
+									<td>ID:</td>
 									<td> ${employee_customeraccount.id}</td>
 								</tr>
 								<tr>
-									<td>FirstName</td>
+									<td>First Name:</td>
 									<td> ${employee_customeraccount.firstName}</td>
 								</tr>
 								<tr>
-									<td>LastName</td>
+									<td>Last Name:</td>
 									<td> ${employee_customeraccount.lastName}</td>
 								</tr>
 								<tr>
-									<td>UserName</td>
+									<td>User Name:</td>
 									<td> ${employee_customeraccount.userName}</td>
 								</tr>
 								</tbody>
@@ -110,19 +110,19 @@
 							<table class="table bio-table">
 								<tbody>
 								<tr>
-									<td>Address</td>
+									<td>Address:</td>
 									<td> ${employee_customeraccount.addr_line1} ${employee_customeraccount.addr_line2}</td>
 								</tr>
 								<tr>
-									<td>State</td>
+									<td>State:</td>
 									<td> ${employee_customeraccount.state}</td>
 								</tr>
 								<tr>
-									<td>City</td>
+									<td>City:</td>
 									<td> ${employee_customeraccount.city}</td>
 								</tr>
 								<tr>
-									<td>ZIP</td>
+									<td>ZIP:</td>
 									<td> ${employee_customeraccount.zip}</td>
 								</tr>
 								</tbody>
@@ -200,7 +200,7 @@
 				</div><!--col-md-6 close-->
 				<!-- pie chart -->
 				<div class="col-md-4">
-					<head>
+				
 						<script type="text/javascript"
 								src="https://www.gstatic.com/charts/loader.js"></script>
 						<script type="text/javascript">
@@ -225,7 +225,7 @@
                             }
 
 						</script>
-					</head>
+				
 					<body>
 					<div id="pieChart" style="width: 530px; height: 300px;"></div>
 					</body>
