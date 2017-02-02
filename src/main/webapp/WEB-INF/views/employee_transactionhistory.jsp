@@ -77,8 +77,7 @@
 					<td>
 							${employee_pendingtransaction.fund.name}
 					</td>
-					<td>
-	 						${employee_pendingtransaction.price}
+					
 					<td class ="price">
 							${employee_finishtransaction.price}
 					</td>
