@@ -91,7 +91,7 @@
 </div>
 
 		
-
+<c:if test="${postMethod}">
 <div class="container">
 	<div class="row-fluid">
 		<div class="col-sm-12">
@@ -143,6 +143,7 @@
 	</div>
 </div>
 
+</c:if>
 <div>
 	<c:import url="bottom.jsp"/>
 </div>
