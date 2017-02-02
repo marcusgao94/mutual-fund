@@ -49,12 +49,15 @@ public class ViewAccountController {
 
     @Autowired
     private CustomerService customerService;
+    
+    @Autowired
+    private EmployeeService employeeService;
 
     @Autowired
     private FundService fundService;
     
 
-    // employeeViewHistory
+    // employeeViewCustomer
     @RequestMapping(value = "/employee_searchcustomer", method = RequestMethod.GET)
     public String employeeViewAccount(HttpServletRequest request, Model model, RedirectAttributes ra, 
     		@RequestParam(value = "un", required = false) String userName)  {
@@ -102,9 +105,56 @@ public class ViewAccountController {
         }
         return "employee_viewaccount";
     }
+    
+    
+ // employeeViewCustomer
+    @RequestMapping(value = "/employee_searchemployee", method = RequestMethod.GET)
+    public String employeeAccount(HttpServletRequest request, Model model, RedirectAttributes ra, 
+    		@RequestParam(value = "un", required = false) String userName)  {
 
+    		if (!checkEmployee(request)) {
+            ra.addFlashAttribute("loginError", NOTLOGIN);
+            return "redirect:/employee_login";
+        }
+        List<Employee> employeeList = employeeService.getEmployeeList();
+        model.addAttribute("employeeList", employeeList);
+        SearchForm searchForm = new SearchForm();
+        model.addAttribute("searchForm", searchForm);
+        return "employee_searchemployee";
+    }
+
+    
+    
+    //employee account
+    @RequestMapping(value = "/employee_searchemployee", method = RequestMethod.POST)
+    public String employeeAccount(HttpServletRequest request, Model model,
+                                      RedirectAttributes ra,
+                                      @Valid SearchForm searchForm, BindingResult result) {
+        if (!checkEmployee(request)) {
+            ra.addFlashAttribute("loginError", NOTLOGIN);
+            return "redirect:/employee_login";
+        }
+       
+        if (result.hasErrors())
+            return "employee_searchemployee";
+          Employee e = employeeService.getEmployeeByUserName(searchForm.getUserName());
+          
+        model.addAttribute("employee", e);
+        if (e == null) {
+            result.rejectValue("userName", "", NOUSERNAME);
+            return "employee_searchemployee";
+        }
+        // searchForm.setUserName("");
+        model.addAttribute("searchForm", searchForm);
+        //model.addAttribute("employee_customeraccount", );
+  
+        return "employee_account";
+    }
+
+    
+    
+    
     // customer
-
     @RequestMapping(value = "customer_viewaccount", method = RequestMethod.GET)
     public String customerViewAccount(HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) {
         if (!checkCustomer(request)) {
