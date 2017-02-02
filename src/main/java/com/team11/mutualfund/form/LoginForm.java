@@ -17,12 +17,16 @@ public class LoginForm {
     @Size(min = 1, message = EMPTYPASSWORD)
     private String password;
 
+    public String sanitize(String s) {
+        return s.replace("&", "&qmp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;");
+    }
+    
     public String getUserName() {
         return userName;
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.userName = sanitize(userName);
     }
 
     public String getPassword() {
@@ -30,6 +34,6 @@ public class LoginForm {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = sanitize(password);
     }
 }

@@ -1,15 +1,9 @@
-<%--
-  Created by Eclipse IDEA.
-  User: JevWang
-  Date: 17/1/23
-  Time: 下午6:32
---%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-	<title>Employee view Customer account</title>
+	<title>Employee view employee account</title>
 	<style>
 		.error {
 			color: red;
@@ -30,8 +24,8 @@
 					<option value="">Please select a name and then press the
 						button
 					</option>
-					<c:forEach var="customer" items="${customerList}">
-						<option>${customer.userName}</option>
+					<c:forEach var="employee" items="${employeeList}">
+						<option>${employee.userName}</option>
 					</c:forEach>
 				</select>
 				<form:errors path="userName" cssClass="error"/>

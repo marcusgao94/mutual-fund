@@ -28,14 +28,16 @@ public class ResearchFundForm {
             errors.rejectValue("amount", "1", NOENOUGHCASH);
         return errors;
     } */
-
+    public String sanitize(String s) {
+        return s.replace("&", "&qmp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;");
+    }
 
     public String getTicker() {
         return ticker;
     }
 
     public void setTicker(String ticker) {
-        this.ticker = ticker;
+        this.ticker = sanitize(ticker);
     }
 
 }

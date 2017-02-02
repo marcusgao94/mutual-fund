@@ -94,6 +94,12 @@
 										Create An Employee
 									</a>
 								</li>
+								<li class="">
+									<a href="<c:url value="/employee_searchemployee" />">
+										<span class="fa fa-drivers-license"></span>
+										View Employee Account
+									</a>
+								</li>
 							</ul>
 
 
@@ -245,27 +251,7 @@
 								</li>
 							</c:if>
 
-							<%-- <c:if test="${user.type == 0}">
-								<li>
-									<a href="<c:url value="/customer_viewaccount" />">
-										<i class="fa fa-drivers-license"></i>
-										View My Account
-									</a>
-									<a href="<c:url value="/customer_changepassword" />">
-										<i class="fa fa-key"></i>
-										Change Password
-									</a>
-									<a href="<c:url value="/request_check" />">
-										<i class="fa fa-credit-card"></i>
-										Request Check
-									</a>
-									<a href="<c:url value="/customer_transactionhistory" />">
-										<i class="fa fa-search"></i>
-										View Transaction History
-									</a>
-								</li>
-							</c:if> --%>
-
+						
 							<c:if test="${user.type == 1}">
 							<li>
 								<a href="<c:url value="/employee_changepassword" />">
@@ -275,59 +261,6 @@
 								</c:if>
 
 
-								<%-- <c:if test="${user.type == 1}"> --%>
-								<%-- <li>
-									<a href="<c:url value="/employee_register" />">
-										<span class="fa fa-user-plus"></span>
-										Create An Employee
-									</a>
-								</li>
-								<li>
-									<a href="<c:url value="/customer_register" />">
-										<span class="fa fa-users"></span>
-										Create A Customer
-									</a>
-								</li>
-								<li>
-									<a href="<c:url value="/employee_searchcustomer" />">
-										<i class="fa fa-drivers-license"></i>
-										View Customer Account
-									</a>
-								</li>
-
-								<li>
-								<a href="<c:url value="/employee_searchtransaction" />">
-										<i class="fa fa-money"></i>
-										View Customer Transaction History
-									</a>
-								</li>
-
-								<li>
-									<a href="<c:url value="/employee_changecuspassword" />">
-										<i class="fa fa-key"></i>
-										Reset Customer Password
-									</a>
-								</li>
-								<li>
-									<a href="<c:url value="/employee_createfund" />">
-										<i class="fa fa-plus"></i>
-										Create Fund
-									</a>
-								</li>
-								<li>
-									<a href="<c:url value="/deposit_check" />">
-										<i class="fa fa-credit-card"></i>
-										Deposit Check
-									</a>
-								</li>
-
-								<li>
-									<a href="<c:url value="/transitionday" />">
-										<i class="fa fa-legal"></i>
-										Set Transition Day
-									</a>
-								</li> --%>
-								<%-- </c:if> --%>
 								<c:if test="${user.type != -1}">
 							<li>
 								<a href="<c:url value="/logout" />">
