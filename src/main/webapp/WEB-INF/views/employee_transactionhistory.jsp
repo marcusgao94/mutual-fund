@@ -27,32 +27,36 @@
 <div class="container">
 	<div class="row">
 		<br>
-		<div class="col-xs-5">
-			<div class="input-group">
-				<div class="input-group-btn search-panel">
-					<form:form method="post" modelAttribute="searchForm">
-						<table class="table">
-							<tr>
-								<td>Search User Name:</td>
-								<td>
-									<input type="text" name="userName"
-										   value="${searchForm.userName}" autofocus/>
-								</td>
-								<td><form:errors path="userName" cssClass="error"/></td>
-								<td>
-				                <span class="input-group-btn">
-                    <button class="btn btn-default" type="submit"><span
-							class="glyphicon glyphicon-search"></span></button>
-                </span>
-								</td>
-							</tr>
-							<tr>
-							</tr>
-						</table>
-					</form:form>
+		<div class="col-xs-8">
+			  <div class="input-group">
+                <div class="input-group-btn search-panel">
+	<form:form method="post" modelAttribute="searchForm">
+			    <%-- --%>
+			    <div class="form-group">
+			     <div class="col-sm-7">
+			      <label for="sel1">Select User Name:</label>    
+			      <select name="userName" class="form-control" id="sel1">
+			      <option>Please select a name and then press the button</option>
+			      	<c:forEach var="customer" items="${customerList}">
+				        <option>${customer.userName}</option>				        
+				     </c:forEach>
+			      </select>
+			   </div>
+		
 
-				</div>
-			</div>
+				<span class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                </span>
+                </div>
+				<!-- </td>
+			</tr>
+			<tr>
+			</tr>
+		</table> --> 
+	</form:form>
+
+        </div>
+  </div>
 		</div>
 	</div>
 </div>
@@ -63,15 +67,16 @@
 	<h4> Pending </h4>
 
 	<div class="row">
-		<div class="col-md-6">
+		<div class="col-md-12">
 			<table class="table">
 				<thead>
 				<tr>
-					<th>ID</th>
-					<th>Name</th>
-					<th>Shares</th>
-					<th>Amount</th>
-					<th>Operations</th>
+					<th>Transaction ID</th>
+					<th>Fund Name</th>
+					<th>Price</th>
+					<th>Quantity of Shares</th>
+					<th>Total Amount</th>
+          			<th>Operations</th>
 				</tr>
 				</thead>
 				<tbody>
@@ -82,6 +87,9 @@
 					</td>
 					<td>
 							${employee_pendingtransaction.fund.name}
+					</td>
+					<td>
+	 						${employee_finishtransaction.price}
 					</td>
 					<td class="shares">
 							${employee_pendingtransaction.shares}
@@ -101,15 +109,17 @@
 
 	<h4> Finished </h4>
 	<div class="row">
-		<div class="col-md-6">
+		<div class="col-md-12">
 			<table class="table">
 				<thead>
 				<tr>
-					<th>Date</th>
-					<th>Name</th>
-					<th>Shares</th>
-					<th>Amount</th>
-					<th>Operations</th>
+					<th>Transition Date</th>
+					<th>ID</th>
+					<th>Fund Name</th>
+					<th>Price</th>
+					<th>Quantity of Shares</th>
+					<th>Total Amount</th>
+          			<th>Operations</th>
 				</tr>
 				</thead>
 				<tbody>
@@ -119,7 +129,13 @@
 							${employee_finishtransaction.executeDate}
 					</td>
 					<td>
+	 						${employee_finishtransaction.id}
+					</td>
+					<td>
 							${employee_finishtransaction.fund.name}
+					</td>
+					<td>
+	 						${employee_finishtransaction.price}
 					</td>
 					<td class="shares">
 							${employee_finishtransaction.shares}

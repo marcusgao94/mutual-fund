@@ -56,7 +56,8 @@ public class ViewAccountController {
             redirectAttributes.addFlashAttribute("loginError", NOTLOGIN);
             return "redirect:/employee_login";
         }
-
+        List<Customer> customerList = customerService.getCustomerList();
+        model.addAttribute("customerList", customerList);
         SearchForm searchForm = new SearchForm();
         model.addAttribute("searchForm", searchForm);
        
@@ -75,7 +76,9 @@ public class ViewAccountController {
         if (result.hasErrors())
             return "employee_searchcustomer";
         Customer c = customerService.getCustomerByUserName(searchForm.getUserName());
-       
+        List<Customer> customerList = customerService.getCustomerList();
+        model.addAttribute("customerList", customerList);
+        model.addAttribute("customer", c);
         if (c == null) {
             result.rejectValue("userName", "", NOUSERNAME);
             return "employee_searchcustomer";

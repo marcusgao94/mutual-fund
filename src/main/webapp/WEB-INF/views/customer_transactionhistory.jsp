@@ -30,12 +30,13 @@
 	<h3>Customer Transaction History</h3>
 <h4> Pending </h4>
 	<div class="row">
-		<div class="col-md-6">
+		<div class="col-md-12">
 			<table class="table">
 					<thead>
 					<tr>
 			<th>Transaction ID</th>
 			<th>Fund Name</th>
+			<th>Price</th>
 			<th>Quantity of Shares</th>
 			<th>Total Amount</th>
           	<th>Operations</th>
@@ -48,7 +49,10 @@
 	 				${customer_pendingtransaction.id}
 				</td>
 				<td>
-	 				${customer_pendingtransaction.fund.getName()}
+	 				${customer_pendingtransaction.fund.name}
+				</td>
+				<td>
+	 				${customer_finishtransaction.price}
 				</td>
 				<td class="shares">
 	 				${customer_pendingtransaction.shares}
@@ -68,12 +72,14 @@
 
 <h4> Finished </h4>
 	<div class="row">
-		<div class="col-md-6">
+		<div class="col-md-12">
 			<table class="table">
 	<thead>
 		<tr>
 			<th>Transition Date</th>
+			<th>ID</th>
 			<th>Fund Name</th>
+			<th>Price</th>
 			<th>Quantity of Shares</th>
 			<th>Total Amount</th>
           	<th>Operations</th>
@@ -87,7 +93,13 @@
 	 			
 				</td>
 				<td>
+	 				${customer_finishtransaction.id}
+				</td>
+				<td>
 	 				${customer_finishtransaction.fund.name}
+				</td>
+				<td>
+	 				${customer_finishtransaction.price}
 				</td>
 				<td class="shares">
 	 				${customer_finishtransaction.shares}
