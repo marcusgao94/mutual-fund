@@ -77,7 +77,7 @@
 					<td>
 							${employee_pendingtransaction.fund.name}
 					</td>
-					<td>
+					<td class ="price">
 							${employee_finishtransaction.price}
 					</td>
 					<td class="shares">
@@ -123,7 +123,7 @@
 					<td>
 							${employee_finishtransaction.fund.name}
 					</td>
-					<td>
+					<td class= "price">
 							${employee_finishtransaction.price}
 					</td>
 					<td class="shares">
@@ -159,17 +159,7 @@
             p[i].innerHTML = n.toFixed(2);
         }
     }
-    var a = document.getElementsByClassName("amount");
-    var i;
-    for (i = 0; i < a.length; i++) {
-        var am = a[i].innerHTML.trim();
-        if (am)
-            a[i].innerHTML = parseFloat(am).toFixed(2);
-        else {
-            var n = 0;
-            a[i].innerHTML = n.toFixed(2);
-        }
-    }
+
     var s = document.getElementsByClassName("shares");
     for (i = 0; i < s.length; i++) {
         var sh = s[i].innerHTML.trim();

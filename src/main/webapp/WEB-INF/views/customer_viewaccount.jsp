@@ -53,7 +53,7 @@
 									<td> ${customer_account.lastName}</td>
 								</tr>
 								<tr>
-									<td>UserName:</td>
+									<td>User Name:</td>
 									<td> ${customer_account.userName}</td>
 								</tr>
 								</tbody>
@@ -207,6 +207,7 @@
             p[i].innerHTML = n.toFixed(2);
         }
     }
+    
     var s = document.getElementsByClassName("shares");
     for (i = 0; i < s.length; i++) {
         var sh = s[i].innerHTML.trim();
@@ -217,6 +218,7 @@
             s[i].innerHTML = n.toFixed(3);
         }
     }
+
 </script>
 
 </body>
