@@ -30,7 +30,7 @@
 	<h3>Customer Transaction History</h3>
 <h4> Pending </h4>
 	<div class="row">
-		<div class="col-md-6">
+		<div class="col-md-12">
 			<table class="table">
 					<thead>
 					<tr>
@@ -72,7 +72,7 @@
 
 <h4> Finished </h4>
 	<div class="row">
-		<div class="col-md-6">
+		<div class="col-md-12">
 			<table class="table">
 	<thead>
 		<tr>
