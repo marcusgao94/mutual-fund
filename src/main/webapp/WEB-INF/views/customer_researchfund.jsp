@@ -90,7 +90,9 @@
 	</div>
 </div>
 
-		
+<c:if test="${fundPriceHistory.price}">
+
+</c:if>
 <c:if test="${postMethod}">
 <div class="container">
 	<div class="row-fluid">

@@ -8,6 +8,8 @@ import javax.validation.constraints.Size;
 import static com.team11.mutualfund.utils.Constant.EMPTYPASSWORD;
 import static com.team11.mutualfund.utils.Constant.EMPTYUSERNAME;
 import static com.team11.mutualfund.utils.Constant.INCONSISTENTPASSWORD;
+import static com.team11.mutualfund.utils.Constant.CANNOTEMPTY;
+
 
 public class CustomerRegisterForm {
 
@@ -18,12 +20,26 @@ public class CustomerRegisterForm {
     private String password;
 
     private String confirmPassword;
+    
+    @Size(min = 1, message = CANNOTEMPTY)
     private String firstName;
+    
+    @Size(min = 1, message = CANNOTEMPTY)
     private String lastName;
+    
+    @Size(min = 1, message = CANNOTEMPTY)
     private String addr_line1;
+    
+    @Size(min = 1, message = CANNOTEMPTY)
     private String addr_line2;
+    
+    @Size(min = 1, message = CANNOTEMPTY)
     private String city;
+    
+    @Size(min = 1, message = CANNOTEMPTY)
     private String state;
+    
+    @Size(min = 1, message = CANNOTEMPTY)
     private Integer zip;
 
     public String sanitize(String s) {

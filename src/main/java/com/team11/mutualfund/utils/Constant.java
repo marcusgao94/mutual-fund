@@ -4,7 +4,9 @@ public class Constant {
 
     public static final String NOTLOGIN = "You have not logged in as an employee";
     public static final String CUSTOMERNOTLOGIN = "You have not logged in as a customer";
+    public static final String CANNOTEMPTY = "Please fill in this field";
 
+    
     public static final String EMPTYUSERNAME = "User name cannot be empty";
     public static final String NOUSERNAME = "User name does not exist";
     public static final String DUPLICATEUSERNAME = "User name already exists";

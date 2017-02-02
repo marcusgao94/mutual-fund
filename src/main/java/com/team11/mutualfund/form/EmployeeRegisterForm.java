@@ -7,6 +7,7 @@ import org.springframework.validation.Errors;
 import javax.validation.constraints.Size;
 import java.util.Locale;
 
+import static com.team11.mutualfund.utils.Constant.CANNOTEMPTY;
 import static com.team11.mutualfund.utils.Constant.EMPTYPASSWORD;
 import static com.team11.mutualfund.utils.Constant.EMPTYUSERNAME;
 import static com.team11.mutualfund.utils.Constant.INCONSISTENTPASSWORD;
@@ -21,8 +22,10 @@ public class EmployeeRegisterForm {
 
     private String confirmPassword;
 
+    @Size(min = 1, message = CANNOTEMPTY)
     private String firstName;
 
+    @Size(min = 1, message = CANNOTEMPTY)
     private String lastName;
 
     public Errors getValidationErrors() {

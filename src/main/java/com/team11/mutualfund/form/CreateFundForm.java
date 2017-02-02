@@ -20,7 +20,7 @@ public class CreateFundForm {
 
     @NotNull(message = "fund ticker may not be null")
     @Size(min = 1, max = 5, message = "ticker length must between 1 to 5")
-    @Pattern(regexp = "^[A-Za-z]*$*", message = "ticker must be alphabet")
+    @Pattern(regexp = "^[A-Z]*$*", message = "ticker must be Capitalized alphabet")
     private String fundTicker;
 
     public String sanitize(String s) {
