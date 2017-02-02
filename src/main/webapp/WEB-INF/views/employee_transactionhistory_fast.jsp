@@ -122,5 +122,29 @@
 	<c:import url="bottom.jsp"/>
 </div>
 
+<script type="text/javascript">
+    var p = document.getElementsByClassName("price");
+    var i;
+    for (i = 0; i < p.length; i++) {
+        var pr = p[i].innerHTML.trim();
+        if (pr)
+            p[i].innerHTML = parseFloat(pr).toFixed(2);
+        else {
+            var n = 0;
+            p[i].innerHTML = n.toFixed(2);
+        }
+    }
+
+    var s = document.getElementsByClassName("shares");
+    for (i = 0; i < s.length; i++) {
+        var sh = s[i].innerHTML.trim();
+        if (sh)
+            s[i].innerHTML = parseFloat(sh).toFixed(3);
+        else {
+            var n = 0;
+            s[i].innerHTML = n.toFixed(3);
+        }
+    }
+</script>
 </body>
 </html>
