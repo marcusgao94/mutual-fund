@@ -57,14 +57,20 @@ public class ViewHistoryController {
     	if (userName != null) {
     		SearchForm searchForm = new SearchForm();
     		searchForm.setUserName(userName);
-            Customer c = customerService.getCustomerByUserName(searchForm.getUserName());
+            
+    		
+    		Customer c = customerService.getCustomerByUserName(searchForm.getUserName());
+    			
+    		/*
     		model.addAttribute("searchForm", searchForm);
-        	List<Transaction> pendingTransaction = transactionService.listPendingTransactionByCustomerId(c.getId());
+        */
+    		model.addAttribute("userName",userName);
+    		List<Transaction> pendingTransaction = transactionService.listPendingTransactionByCustomerId(c.getId());
         	model.addAttribute("employee_pendingTransaction", pendingTransaction);
         	System.out.println("1111111");
             List<Transaction> finishTransaction = transactionService.listFinishTransactionByCustomerId(c.getId());
             model.addAttribute("employee_finishTransaction", finishTransaction);
-    		return "employee_transaction";
+    		return "employee_transactionhistory_fast";
     	}
     	System.out.println("22222");
 		List<Customer> customerList = customerService.getCustomerList();
@@ -91,7 +97,6 @@ public class ViewHistoryController {
             result.rejectValue("userName", "", NOUSERNAME);
             return "employee_searchtransaction";
         }
-        System.out.println("3333333");
         model.addAttribute("customer", customer);
         model.addAttribute("searchForm", searchForm);
     	List<Transaction> pendingTransaction = transactionService.listPendingTransactionByCustomerId(customer.getId());
