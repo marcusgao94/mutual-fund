@@ -24,12 +24,17 @@
 	<form:form modelAttribute="depositCheckForm">
 		<table>
 			<tr>
-				<td>Customer User Name:</td>
-				<td><input type="text" name="userName"
-						   value="${depositCheckForm.getUserName()}" autofocus/>
-				</td>
-				<td><form:errors path="userName" cssClass="error"/></td>
-			</tr>
+			<td>Customer User Name:</td>
+			<td><select name="userName" class="form-control" id="sel1">
+			<option value="">Please select a name
+			</option>
+			<c:forEach var="customer" items="${customerList}">
+				<option>${customer.userName}</option>
+			</c:forEach>
+		</select>
+		<form:errors path="userName" cssClass="error"/>
+		</td>
+		</tr>
 
 			<tr>
 				<td>Amount:</td>

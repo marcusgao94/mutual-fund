@@ -28,6 +28,8 @@ import static com.team11.mutualfund.controller.LoginController.checkCustomer;
 import static com.team11.mutualfund.controller.LoginController.checkEmployee;
 import static com.team11.mutualfund.utils.Constant.*;
 
+import java.util.List;
+
 
 @Controller
 public class CheckController {
@@ -51,7 +53,8 @@ public class CheckController {
             model.addAttribute("depositCheckForm", dpf);
             return "deposit_check";
         }
-        
+        List<Customer> customerList = customerService.getCustomerList();
+        model.addAttribute("customerList", customerList);
         DepositCheckForm depositCheckForm = new DepositCheckForm();
         model.addAttribute("depositCheckForm", depositCheckForm);
         return "deposit_check_fast";
@@ -73,6 +76,8 @@ public class CheckController {
             result.rejectValue("customerId", "0", e.getMessage());
             return fast == null? "deposit_check": "deposit_check_fast";
         }
+        Customer c = customerService.getCustomerByUserName(depositCheckForm.getUserName());
+        model.addAttribute("customer", c);
         model.addAttribute("success", "You have successfully deposit check for " + depositCheckForm.getUserName());
         return "success";
     }

@@ -24,6 +24,7 @@ import com.team11.mutualfund.utils.User;
 import static com.team11.mutualfund.controller.LoginController.checkCustomer;
 import static com.team11.mutualfund.utils.Constant.*;
 
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -161,6 +162,8 @@ public class ChangePasswordController {
             model.addAttribute("changePasswordForm", cpf);
             return "employee_changecuspassword";
         }
+        List<Customer> customerList = customerService.getCustomerList();
+        model.addAttribute("customerList", customerList);
         model.addAttribute("changePasswordForm", new ChangePasswordForm());
         return "employee_changecuspassword_fast";
     }
@@ -181,6 +184,8 @@ public class ChangePasswordController {
 
         String userName = changePasswordForm.getUserName();
         String newPassword = changePasswordForm.getNewPassword();
+        Customer c = customerService.getCustomerByUserName(userName);
+        model.addAttribute("customer", c);
         try {
             customerService.updatePassword(userName, newPassword);
         } catch (RollbackException e) {
