@@ -5,7 +5,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.validation.DirectFieldBindingResult;
 import org.springframework.validation.Errors;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
