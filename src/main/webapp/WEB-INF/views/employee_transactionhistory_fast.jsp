@@ -25,7 +25,7 @@
 
 <div class="container">
 
-	<h3>Transaction History</h3>
+	<h3>Transaction History for ${customer.getUserName()}</h3>
 	
 	
 <h4> Pending </h4>

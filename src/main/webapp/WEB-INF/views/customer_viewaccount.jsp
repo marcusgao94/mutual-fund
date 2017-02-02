@@ -53,7 +53,7 @@
 									<td> ${customer_account.lastName}</td>
 								</tr>
 								<tr>
-									<td>UserName:</td>
+									<td>User Name:</td>
 									<td> ${customer_account.userName}</td>
 								</tr>
 								</tbody>
@@ -126,24 +126,22 @@
 								<td>Total Value</td>
 							</tr>
 							</thead>
-							<tbody>
-							<c:forEach var="customer_pv" items="${customerPosition}">
-
+							<c:forEach var="customer_cpv" items="${customerPosition}">
 								<tr>
 									<td>
-											${customer_pv.fund.name}
+											${customer_cpv.fund.name}
 									</td>
 									<td>
-									        ${customer_pv.fund.ticker}
+											${customer_cpv.fund.ticker}
 									</td>
 									<td class="shares">
-											${customer_pv.shares}
+											${customer_cpv.shares}
 									</td>
 									<td class="price">
-											${customer_pv.price}
+											${customer_cpv.price}
 									</td>
 									<td class="price">
-											${customer_pv.value}
+											${customer_cpv.value}
 									</td>
 								</tr>
 							</c:forEach>
@@ -209,6 +207,7 @@
             p[i].innerHTML = n.toFixed(2);
         }
     }
+    
     var s = document.getElementsByClassName("shares");
     for (i = 0; i < s.length; i++) {
         var sh = s[i].innerHTML.trim();
@@ -219,6 +218,7 @@
             s[i].innerHTML = n.toFixed(3);
         }
     }
+
 </script>
 
 </body>

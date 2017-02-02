@@ -1,10 +1,15 @@
 package com.team11.mutualfund.utils;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
+
 import com.team11.mutualfund.model.Fund;
 
 public class TransitionFund {
     private Fund fund;
     private String lastPrice;
+    
+    @Min(0)
     private Double newPrice;
 
     public Fund getFund() {

@@ -17,9 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,9 +28,11 @@ import static com.team11.mutualfund.controller.LoginController.checkCustomer;
 import static com.team11.mutualfund.controller.LoginController.checkEmployee;
 import static com.team11.mutualfund.utils.Constant.*;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @Controller
+@SessionAttributes("customerList")
 public class ViewHistoryController {
     @Autowired
     private TransactionService transactionService;
@@ -57,7 +57,7 @@ public class ViewHistoryController {
     	if (userName != null) {
     		SearchForm searchForm = new SearchForm();
     		searchForm.setUserName(userName);
-    		 Customer c = customerService.getCustomerByUserName(searchForm.getUserName());
+            Customer c = customerService.getCustomerByUserName(searchForm.getUserName());
     		model.addAttribute("searchForm", searchForm);
         	List<Transaction> pendingTransaction = transactionService.listPendingTransactionByCustomerId(c.getId());
         	model.addAttribute("employee_pendingTransaction", pendingTransaction);
@@ -67,44 +67,35 @@ public class ViewHistoryController {
     		return "employee_transactionhistory_fast";
     	}
 		List<Customer> customerList = customerService.getCustomerList();
-	    model.addAttribute("customerList",customerList);   
-        model.addAttribute("searchForm", new SearchForm());     
+	    model.addAttribute("customerList",customerList);
+	    //request.getSession().setAttribute("customerList", customerList);
+        model.addAttribute("searchForm", new SearchForm());
         return "employee_searchtransaction";
     }
     // employeeViewHistory
     @RequestMapping(value = "/employee_searchtransaction", method = RequestMethod.POST)
     public String employeeViewHistory(HttpServletRequest request, Model model,
+                                      @ModelAttribute("customerList") LinkedList<Customer> customerList,
                                  @Valid SearchForm searchForm, BindingResult result,
                                  RedirectAttributes redirectAttributes) {
     	if (!checkEmployee(request)) {
         	redirectAttributes.addFlashAttribute("loginError", NOTLOGIN);
             return "redirect:/employee_login";
         }
-    	
-    	if (result.hasErrors())
+    	if (result.hasErrors()) {
             return "employee_searchtransaction";
-        List<Customer> customerList = customerService.getCustomerList();
-	    model.addAttribute("customerList",customerList); 
-	    
+        }
 	    Customer customer = customerService.getCustomerByUserName(searchForm.getUserName());
-	    
         if (customer == null) {
-            FieldError userNameExistError = new FieldError("searchForm", "userName", NOUSERNAME);
-            result.addError(userNameExistError);
+            result.rejectValue("userName", "", NOUSERNAME);
             return "employee_searchtransaction";
         }
         model.addAttribute("customer", customer);
         model.addAttribute("searchForm", searchForm);
-        //request.setAttribute("user", c);
-        
     	List<Transaction> pendingTransaction = transactionService.listPendingTransactionByCustomerId(customer.getId());
     	model.addAttribute("employee_pendingTransaction", pendingTransaction);
-        
         List<Transaction> finishTransaction = transactionService.listFinishTransactionByCustomerId(customer.getId());
         model.addAttribute("employee_finishTransaction", finishTransaction);
-        
-         
-        
         return "employee_transactionhistory";
     }
 

@@ -15,8 +15,12 @@
 		.error {
 			color: red;
 		}
-		.shares {}
-		.price {}
+
+		.shares {
+		}
+
+		.price {
+		}
 	</style>
 </head>
 <body>
@@ -26,40 +30,29 @@
 
 <div class="container">
 	<div class="row">
-		<br>
-		<div class="col-xs-5">
-			<div class="input-group">
-				<div class="input-group-btn search-panel">
-					<form:form method="post" modelAttribute="searchForm">
-						<table class="table">
-							<tr>
-								<td>Search User Name:</td>
-								<td>
-									<input type="text" name="userName"
-										   value="${searchForm.userName}" autofocus/>
-								</td>
-								<td><form:errors path="userName" cssClass="error"/></td>
-								<td>
-				                <span class="input-group-btn">
-                    <button class="btn btn-default" type="submit"><span
-							class="glyphicon glyphicon-search"></span></button>
-                </span>
-								</td>
-							</tr>
-							<tr>
-							</tr>
-						</table>
-					</form:form>
-
-				</div>
+		<form:form method="post" modelAttribute="searchForm" cssClass="form-inline">
+			<div class="form-group">
+				<label for="sel1">Select User Name:</label>
+				<select name="userName" class="form-control" id="sel1">
+					<option value="">Please select a name and then press the
+						button
+					</option>
+					<c:forEach var="customer" items="${customerList}">
+						<option>${customer.userName}</option>
+					</c:forEach>
+				</select>
+				<form:errors path="userName" cssClass="error"/>
 			</div>
-		</div>
+			<button class="btn btn-default" type="submit">
+				<span class="glyphicon glyphicon-search"></span>
+			</button>
+		</form:form>
 	</div>
 </div>
 
 
 <div class="container">
-	<h3>Transaction History</h3>
+	<h3>Transaction History for ${customer.getUserName()}</h3>
 	<h4> Pending </h4>
 
 	<div class="row">
@@ -72,7 +65,7 @@
 					<th>Price</th>
 					<th>Quantity of Shares</th>
 					<th>Total Amount</th>
-          			<th>Operations</th>
+					<th>Operations</th>
 				</tr>
 				</thead>
 				<tbody>
@@ -84,8 +77,13 @@
 					<td>
 							${employee_pendingtransaction.fund.name}
 					</td>
+<<<<<<< HEAD
 					<td>
 	 						${employee_pendingtransaction.price}
+=======
+					<td class ="price">
+							${employee_finishtransaction.price}
+>>>>>>> 46ec50a33c755652e1c870d7a80298cdb1f17a82
 					</td>
 					<td class="shares">
 							${employee_pendingtransaction.shares}
@@ -110,12 +108,12 @@
 				<thead>
 				<tr>
 					<th>Transition Date</th>
-					<th>ID</th>
+					<th>Transition ID</th>
 					<th>Fund Name</th>
 					<th>Price</th>
 					<th>Quantity of Shares</th>
 					<th>Total Amount</th>
-          			<th>Operations</th>
+					<th>Operations</th>
 				</tr>
 				</thead>
 				<tbody>
@@ -125,13 +123,13 @@
 							${employee_finishtransaction.executeDate}
 					</td>
 					<td>
-	 						${employee_finishtransaction.id}
+							${employee_finishtransaction.id}
 					</td>
 					<td>
 							${employee_finishtransaction.fund.name}
 					</td>
-					<td>
-	 						${employee_finishtransaction.price}
+					<td class= "price">
+							${employee_finishtransaction.price}
 					</td>
 					<td class="shares">
 							${employee_finishtransaction.shares}
@@ -166,6 +164,7 @@
             p[i].innerHTML = n.toFixed(2);
         }
     }
+
     var s = document.getElementsByClassName("shares");
     for (i = 0; i < s.length; i++) {
         var sh = s[i].innerHTML.trim();

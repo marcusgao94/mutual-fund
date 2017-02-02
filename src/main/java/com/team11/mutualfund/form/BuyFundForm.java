@@ -21,8 +21,8 @@ public class BuyFundForm {
 
     public Errors getValidationError() {
         Errors errors = new DirectFieldBindingResult(this, "buyFundForm");
-        if (amount < 0.01) {
-            errors.rejectValue("amount", "0", TOOLITTLEAMOUNT);
+        if (amount != null && amount < 0.01) {
+            errors.rejectValue("amount", "", TOOLITTLEAMOUNT);
         }
         return errors;
     }

@@ -2,23 +2,17 @@ package com.team11.mutualfund.controller;
 
 import static com.team11.mutualfund.controller.LoginController.checkEmployee;
 import static com.team11.mutualfund.utils.Constant.NOTLOGIN;
+import static com.team11.mutualfund.utils.Constant.SETTRANSITIONDAY;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.TimeZone;
 
+import java.util.List;
 import javax.persistence.RollbackException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import com.team11.mutualfund.model.FundPriceHistory;
 import com.team11.mutualfund.service.TransactionService;
 import com.team11.mutualfund.service.TransitionService;
 import com.team11.mutualfund.utils.TransitionFund;
@@ -26,13 +20,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team11.mutualfund.form.TransitionForm;
 import com.team11.mutualfund.service.FundService;
+import com.team11.mutualfund.utils.Constant.*;
+import static com.team11.mutualfund.utils.Constant.*;
 
 
 @Controller
