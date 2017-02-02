@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.Digits;
 import java.io.Serializable;
 
 @Entity
@@ -37,10 +38,10 @@ public class Customer implements Serializable {
 	private Integer zip;
 
 	@Column(nullable=false, scale = 2)
-	private double cash = 0.0;
+	private double cash = 0d;
 
 	@Column(scale = 2)
-	private double pendingCashDecrease = 0.0;
+	private double pendingCashDecrease = 0d;
 
 	public Customer() {}
 	public Customer(CustomerRegisterForm cf) {

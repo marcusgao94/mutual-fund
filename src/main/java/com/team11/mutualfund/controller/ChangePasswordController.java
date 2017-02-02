@@ -136,11 +136,8 @@ public class ChangePasswordController {
         String newPassword = changePasswordForm.getNewPassword();
         try {
             customerService.updatePassword(cid, originPassword, newPassword);
-        } catch (RollbackException | LockAcquisitionException | CannotAcquireLockException e) {
-            if (e instanceof RollbackException)
+        } catch (RollbackException e) {
                 result.rejectValue("originPassword", "", e.getMessage());
-            else
-                result.rejectValue("originPassword", "", "others have changed the password");
             return "customer_changepassword";
         }
 

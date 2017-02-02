@@ -6,6 +6,7 @@ import com.team11.mutualfund.utils.TransactionType;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.LockModeType;
 import java.util.List;
 
 import static com.team11.mutualfund.utils.TransactionType.BUYFUND;
@@ -17,6 +18,14 @@ public class TransactionDao extends AbstractDao<Long, Transaction> {
     }
 
     @SuppressWarnings("unchecked")
+    public List<Transaction> listAllOrderByDate() {
+        Query query = getSession().createQuery(
+                "select t from Transaction t"
+        );
+        return (List<Transaction>) query.list();
+    }
+
+    @SuppressWarnings("unchecked")
     public List<Transaction> listPendingTransactionByType(TransactionType type) {
         Query query = getSession().createQuery(
                 "select t from Transaction t where " +
@@ -24,6 +33,17 @@ public class TransactionDao extends AbstractDao<Long, Transaction> {
                         "t.type = :type"
         )
                 .setParameter("type", type);
+        return (List<Transaction>) query.list();
+    }
+
+    public List<Transaction> listPendingTransactionByTypeForUpdate(TransactionType type) {
+        Query query = getSession().createQuery(
+                "select t from Transaction t where " +
+                        "t.executeDate is null and " +
+                        "t.type = :type"
+        )
+                .setParameter("type", type)
+                .setLockMode(LockModeType.PESSIMISTIC_WRITE);
         return (List<Transaction>) query.list();
     }
 

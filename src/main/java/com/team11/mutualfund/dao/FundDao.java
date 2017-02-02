@@ -33,13 +33,4 @@ public class FundDao extends AbstractDao<Long, Fund> {
         return (List<Fund>) query.list();
     }
     
-    @SuppressWarnings("unchecked")
-    public Fund listFund1() {
-        Query query = getSession().createQuery(
-                "select f from Fund f where f.id = 39"
-        );
-        return (Fund) query.uniqueResult();
-    }
-    
-
 }

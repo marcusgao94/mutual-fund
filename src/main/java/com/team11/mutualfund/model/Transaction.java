@@ -4,6 +4,7 @@ import com.team11.mutualfund.utils.TransactionType;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -23,16 +24,19 @@ public class Transaction implements Serializable {
     
 
     @Column(nullable = true)
-    private Date executeDate;
+    private LocalDate executeDate;
 
     @Enumerated
     private TransactionType type;
 
     @Column(scale = 3)
-    private Double shares = 0.0;
+    private Double shares = 0d;
 
     @Column(scale = 2)
-    private Double amount = 0.0;
+    private Double amount = 0d;
+
+    @Column(scale = 2)
+    private Double price = 0d;
 
     public Transaction() {}
     public Transaction(Customer customer, Fund fund, TransactionType type, Double shares, Double amount) {
@@ -42,16 +46,6 @@ public class Transaction implements Serializable {
         setShares(shares);
         setAmount(amount);
     }
-    /*
-    public Transaction(TransactionForm tf) {
-        setId(tf.getId());
-        setExectuteDate(tf.getExecuteDate());
-        setType(tf.getType());
-        setShares(tf.getShares());
-        setAmount(tf.getAmount());
-    }
-    */
-
 
     public long getId() {
         return id;
@@ -78,11 +72,15 @@ public class Transaction implements Serializable {
         this.fund = fund;
     }
 
-    public Date getExecuteDate(){
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public LocalDate getExecuteDate() {
         return executeDate;
     }
 
-    public void setExecuteDate(Date executeDate) {
+    public void setExecuteDate(LocalDate executeDate) {
         this.executeDate = executeDate;
     }
 
@@ -108,5 +106,13 @@ public class Transaction implements Serializable {
 
     public void setAmount(Double amount) {
         this.amount = amount;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 }

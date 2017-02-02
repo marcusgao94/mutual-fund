@@ -9,6 +9,8 @@ import java.util.List;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.LockModeType;
+
 @Repository
 public class CustomerDao extends AbstractDao<Long, Customer> {
 
@@ -18,6 +20,15 @@ public class CustomerDao extends AbstractDao<Long, Customer> {
 
     public Customer findById(Long customerId) {
         return getByKey(customerId);
+    }
+
+    public Customer findByIdForUpdate(Long customerId) {
+        Query query = getSession().createQuery(
+                "select c from Customer c where c.id = :cid"
+        )
+                .setParameter("cid", customerId)
+                .setLockMode(LockModeType.PESSIMISTIC_WRITE);
+        return (Customer) query.uniqueResult();
     }
 
     public User findUserByUserName(String userName) {

@@ -6,10 +6,7 @@ import com.team11.mutualfund.form.SearchForm;
 import com.team11.mutualfund.model.Customer;
 import com.team11.mutualfund.model.Employee;
 import com.team11.mutualfund.model.Transaction;
-import com.team11.mutualfund.service.CustomerService;
-import com.team11.mutualfund.service.EmployeeService;
-import com.team11.mutualfund.service.FundService;
-import com.team11.mutualfund.service.TransactionService;
+import com.team11.mutualfund.service.*;
 import com.team11.mutualfund.utils.Positionvalue;
 import com.team11.mutualfund.utils.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,13 +33,14 @@ import static com.team11.mutualfund.utils.Constant.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
 @Controller
 public class ViewAccountController {
     @Autowired
-    private TransactionService transactionService;
+    private TransitionService transitionService;
 
     @Autowired
     private CustomerService customerService;
@@ -90,9 +88,13 @@ public class ViewAccountController {
         model.addAttribute("employee_customeraccount", c);
         List<Positionvalue> pv = fundService.listPositionvalueByCustomerId(c.getId());
         model.addAttribute("employee_customerpositionvalue", pv);
-        Date d = fundService.getLastTransitionDay();
-        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-        model.addAttribute("date", df.format(d));
+        LocalDate d = transitionService.getLastTransitionDay();
+        if (d == null)
+            model.addAttribute("date", "no last transition day");
+        else {
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+            model.addAttribute("date", d.format(dtf));
+        }
         return "employee_viewaccount";
     }
 
@@ -109,10 +111,13 @@ public class ViewAccountController {
         Customer c = customerService.getCustomerById(user.getId());
         model.addAttribute("customer_account", c);
         
-        Date d = fundService.getLastTransitionDay();
-        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-        model.addAttribute("date", df.format(d)); 
-        
+        LocalDate d = transitionService.getLastTransitionDay();
+        if (d == null)
+            model.addAttribute("date", "no last transition day");
+        else {
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+            model.addAttribute("date", d.format(dtf));
+        }
         List<Positionvalue> pv = fundService.listPositionvalueByCustomerId(c.getId());
         model.addAttribute("customerPosition", pv);
         return "customer_viewaccount";

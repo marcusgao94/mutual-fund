@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.RollbackException;
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -69,15 +70,6 @@ public class TransactionService {
                     String.valueOf(fund.getTicker()));
         if (position.getShares() < position.getPendingShareDecrease() + shares)
             throw new RollbackException(NOENOUGHSHARE);
-        /*
-        // get other pending sell others
-        List<Transaction> pendingSellFund = transactionDao.listPendingTransactionByCustomerIdType(
-                customer.getId(), SELLFUND);
-        double pendingShare = 0;
-        for (Transaction t : pendingSellFund) {
-            pendingShare += t.getShares();
-        }
-        */
         position.setPendingShareDecrease(position.getPendingShareDecrease() + shares);
         transactionDao.saveTransaction(new Transaction(customer, fund, SELLFUND, shares, null));
     }

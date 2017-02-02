@@ -14,11 +14,13 @@ public class FundPriceHistoryDao extends AbstractDao<Long, FundPriceHistory> {
     }
 
     @SuppressWarnings("unchecked")
-    public List<FundPriceHistory> listAllOrderByDate() {
+    public FundPriceHistory findByFundDate(FundDate fundDate) {
         Query query = getSession().createQuery(
-                "select fph from FundPriceHistory fph order by fundDate.date desc "
-        );
-        return (List<FundPriceHistory>) query.list();
+                "select fph from FundPriceHistory fph where " +
+                        "fph.fundDate = :fd"
+        )
+                .setParameter("fd", fundDate);
+        return (FundPriceHistory) query.uniqueResult();
     }
 
     @SuppressWarnings("unchecked")
@@ -43,12 +45,20 @@ public class FundPriceHistoryDao extends AbstractDao<Long, FundPriceHistory> {
     }
 
     @SuppressWarnings("unchecked")
-    public FundPriceHistory findByFundDate(FundDate fundDate) {
+    public List<FundPriceHistory> listAllOrderByDate() {
         Query query = getSession().createQuery(
-                "select fph from FundPriceHistory fph where " +
-                        "fph.fundDate = :fd"
-        )
-                .setParameter("fd", fundDate);
-        return (FundPriceHistory) query.uniqueResult();
+                "select fph from FundPriceHistory fph order by fundDate.date desc"
+        );
+        return (List<FundPriceHistory>) query.list();
     }
+
+    @SuppressWarnings("unchecked")
+    public List<FundPriceHistory> listAllOrderByDateForUpdate() {
+        Query query = getSession().createQuery(
+                "select fph from FundPriceHistory fph"
+        );
+        return (List<FundPriceHistory>) query.list();
+    }
+
+
 }
