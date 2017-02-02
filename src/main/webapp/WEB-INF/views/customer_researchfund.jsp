@@ -54,11 +54,11 @@
 		              <table class="table bio-table">
 		                  <tbody>
 						<tr>
-							<td>FundTicker</td>
+							<td>Fund Ticker</td>
 							<td>${a_fund.ticker}</td>
 						</tr>
 						<tr>
-							<td>FundName</td>
+							<td>Fund Name</td>
 							<td>${a_fund.name}</td>
 						</tr>
 						</tbody>
