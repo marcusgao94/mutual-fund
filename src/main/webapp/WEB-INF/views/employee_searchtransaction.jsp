@@ -42,7 +42,7 @@
 			    <div class="form-group">
 			     <div class="col-sm-7">
 			      <label for="sel1">Select User Name:</label>    
-			      <select name="customer" class="form-control" id="sel1">
+			      <select name="userName" class="form-control" id="sel1">
 			      <option>Please select a name and then press the button</option>
 			      	<c:forEach var="customer" items="${customerList}">
 				        <option>${customer.userName}</option>				        
