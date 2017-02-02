@@ -77,18 +77,19 @@ public class ViewHistoryController {
     @RequestMapping(value = "/employee_searchtransaction", method = RequestMethod.POST)
     public String employeeViewHistory(HttpServletRequest request, Model model,
                                  @Valid SearchForm searchForm, BindingResult result,
-                                 RedirectAttributes redirectAttributes, @Valid Customer customer) {
-        if (result.hasErrors())
-            return "employee_searchtransaction";
-        
-        
-        if (!checkEmployee(request)) {
+                                 RedirectAttributes redirectAttributes) {
+    	if (!checkEmployee(request)) {
         	redirectAttributes.addFlashAttribute("loginError", NOTLOGIN);
             return "redirect:/employee_login";
         }
+    	
+    	if (result.hasErrors())
+            return "employee_searchtransaction";
         List<Customer> customerList = customerService.getCustomerList();
 	    model.addAttribute("customerList",customerList); 
-	
+	    
+	    Customer customer = customerService.getCustomerByUserName(searchForm.getUserName());
+	    
         if (customer == null) {
             FieldError userNameExistError = new FieldError("searchForm", "userName", NOUSERNAME);
             result.addError(userNameExistError);

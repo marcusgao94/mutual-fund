@@ -42,16 +42,16 @@
 			    <div class="form-group">
 			     <div class="col-sm-7">
 			      <label for="sel1">Select User Name:</label>    
-			      <select name="name" class="form-control" id="sel1">
+			      <select name="customer" class="form-control" id="sel1">
 			      <option>Please select a name and then press the button</option>
 			      	<c:forEach var="customer" items="${customerList}">
 				        <option>${customer.userName}</option>				        
 				     </c:forEach>
 			      </select>
 			   </div>
+			   <!--  <input type="submit" value="Submit"> -->
 			   
-			   
-			  <div class="col-sm-4">
+			 <div class="col-sm-4">
 			      <span class="input-group-btn">
                     <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
                 	</span>
