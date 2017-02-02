@@ -73,7 +73,7 @@ public class CheckController {
             result.rejectValue("customerId", "0", e.getMessage());
             return fast == null? "deposit_check": "deposit_check_fast";
         }
-        model.addAttribute("success", "You have successfully deposit check for" + depositCheckForm.getUserName());
+        model.addAttribute("success", "You have successfully deposit check for " + depositCheckForm.getUserName());
         return "success";
     }
 
