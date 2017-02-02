@@ -28,7 +28,7 @@
 						<tbody>
 						<tr>
 							<td>Fund Ticker:</td>
-							<td><input type="text" name="fundTicker" placeholder=""
+							<td><input type="text" name="fundTicker" placeholder="1-5 alphabets"
 									   value="${createFundForm.fundTicker}"/></td>
 							<td><form:errors path="fundTicker" cssClass="error" /></td>
 						</tr>

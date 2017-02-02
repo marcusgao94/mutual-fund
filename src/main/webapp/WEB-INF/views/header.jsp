@@ -195,7 +195,7 @@
 						<li class="dropdown">
 							<a data-toggle="dropdown" class="dropdown-toggle"
 							   href="#">
-								<span class="fa fa-area-chart"></span>
+								<span class="fa fa-address-card"></span>
 								My Account <b class="caret"></b>
 							</a>
 							<ul class="dropdown-menu">
