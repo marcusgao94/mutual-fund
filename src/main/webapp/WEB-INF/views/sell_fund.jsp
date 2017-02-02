@@ -81,7 +81,6 @@
 				</thead>
 				<tbody>
 				<c:forEach var="customer_pv" items="${customerPosition}">
-
 					<tr>
 					    <td>
 					            ${customer_pv.fund.name}
