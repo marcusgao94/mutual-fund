@@ -22,8 +22,10 @@ public class CustomerDao extends AbstractDao<Long, Customer> {
         return getByKey(customerId);
     }
 
-    public Customer findByIdForUpdate(Long customerId) {
-        Query query = getSession().createQuery(
+    @SuppressWarnings("deprecation")
+	public Customer findByIdForUpdate(Long customerId) {
+        @SuppressWarnings("rawtypes")
+		Query query = getSession().createQuery(
                 "select c from Customer c where c.id = :cid"
         )
                 .setParameter("cid", customerId)
@@ -31,24 +33,30 @@ public class CustomerDao extends AbstractDao<Long, Customer> {
         return (Customer) query.uniqueResult();
     }
 
-    public User findUserByUserName(String userName) {
-        Query query = getSession().createQuery(
+    @SuppressWarnings("deprecation")
+	public User findUserByUserName(String userName) {
+        @SuppressWarnings("rawtypes")
+		Query query = getSession().createQuery(
                 "select c from Customer c where c.userName = :name"
         )
                 .setParameter("name", userName);
         return (User) query.uniqueResult();
     }
     
-    public Customer findByUserName(String userName) {
-        Query query = getSession().createQuery(
+    @SuppressWarnings("deprecation")
+	public Customer findByUserName(String userName) {
+        @SuppressWarnings("rawtypes")
+		Query query = getSession().createQuery(
                 "select c from Customer c where c.userName = :name"
         )
                 .setParameter("name", userName);
         return (Customer) query.uniqueResult();
     }
 
-    public Customer findByUserNameForUpdate(String userName) {
-        Query query = getSession().createQuery(
+    @SuppressWarnings("deprecation")
+	public Customer findByUserNameForUpdate(String userName) {
+        @SuppressWarnings("rawtypes")
+		Query query = getSession().createQuery(
                 "select c from Customer c where c.userName = :name"
         )
                 .setParameter("name", userName)
@@ -61,8 +69,9 @@ public class CustomerDao extends AbstractDao<Long, Customer> {
     	
     }
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "deprecation" })
 	public List<Customer> getCustomerList() {
+		@SuppressWarnings("rawtypes")
 		Query query = getSession().createQuery(
                 "select c from Customer c"
         );

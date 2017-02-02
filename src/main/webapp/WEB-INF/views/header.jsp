@@ -96,7 +96,7 @@
 								</li>
 								<li class="">
 									<a href="<c:url value="/employee_searchemployee" />">
-										<span class="fa fa-user-license"></span>
+										<span class="fa fa-drivers-license"></span>
 										View Employee Account
 									</a>
 								</li>

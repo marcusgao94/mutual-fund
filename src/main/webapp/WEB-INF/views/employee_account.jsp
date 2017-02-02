@@ -20,7 +20,7 @@
 <div class="container">
 	<div class="row-fluid">
 		<div class="col-sm-12">
-			<h2>${employee.firstName} ${employee..lastName}</h2>
+			<h2>${employee.userName}</h2>
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<span itemscope itemtype="http://schema.org/Review">
@@ -48,7 +48,7 @@
 									<td> ${employee.userName}</td>
 								</tr>
 								<tr>
-									<td>Position: &nspb;</td>
+									<td>Position: &nbsp;</td>
 									<td> Employee </td>
 								</tr>
 								</tbody>

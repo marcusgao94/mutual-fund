@@ -11,6 +11,11 @@ import com.team11.mutualfund.form.EmployeeRegisterForm;
 @Entity
 public class Employee implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	private String userName;
 
