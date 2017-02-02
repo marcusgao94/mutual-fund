@@ -26,13 +26,16 @@ public class BuyFundForm {
         }
         return errors;
     }
+    public String sanitize(String s) {
+        return s.replace("&", "&qmp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;");
+    }
 
     public String getFundTicker() {
         return fundTicker;
     }
 
     public void setFundTicker(String fundTicker) {
-        this.fundTicker = fundTicker;
+        this.fundTicker = sanitize(fundTicker);
     }
 
     public Double getAmount() {
