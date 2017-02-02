@@ -95,13 +95,13 @@
 						<td>
 								${customer_pv.fund.ticker}
 						</td>
-						<td>
+						<td class="shares">
 								${customer_pv.shares}
 						</td>
-						<td>
+						<td class="price">
 								${customer_pv.price}
 						</td>
-						<td>
+						<td class="price">
 								${customer_pv.value}
 						</td>
 					</tr>

@@ -46,6 +46,15 @@ public class CustomerDao extends AbstractDao<Long, Customer> {
                 .setParameter("name", userName);
         return (Customer) query.uniqueResult();
     }
+
+    public Customer findByUserNameForUpdate(String userName) {
+        Query query = getSession().createQuery(
+                "select c from Customer c where c.userName = :name"
+        )
+                .setParameter("name", userName)
+                .setLockMode(LockModeType.PESSIMISTIC_WRITE);
+        return (Customer) query.uniqueResult();
+    }
     
     public Customer updatePassword(Customer c, String confirmPassword){
 		return c;

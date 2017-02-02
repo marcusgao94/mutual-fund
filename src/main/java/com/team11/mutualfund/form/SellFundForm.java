@@ -20,7 +20,7 @@ public class SellFundForm {
 
     public Errors getValidationError() {
         Errors errors = new DirectFieldBindingResult(this, "buyFundForm");
-        if (share < 0.001) {
+        if (share != null && share < 0.001) {
             errors.rejectValue("amount", "0", TOOLITTLESHARE);
         }
         return errors;

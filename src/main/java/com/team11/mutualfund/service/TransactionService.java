@@ -44,7 +44,7 @@ public class TransactionService {
     }
 
     public void buyFund(long cid, String ticker, double amount) throws RollbackException {
-        Customer customer = customerDao.findById(cid);
+        Customer customer = customerDao.findByIdForUpdate(cid);
         Fund fund = fundDao.findByTicker(ticker);
         if (customer == null)
             throw new RollbackException("customer id " + String.valueOf(cid) + " does not exist");

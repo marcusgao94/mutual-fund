@@ -17,21 +17,21 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.persistence.RollbackException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import static com.team11.mutualfund.controller.LoginController.checkCustomer;
 import static com.team11.mutualfund.utils.Constant.CUSTOMERNOTLOGIN;
 
 @Controller
+@SessionAttributes(value = {"customerPosition", "fundList"})
 public class FundController {
 
     @Autowired
@@ -52,8 +52,8 @@ public class FundController {
         User user = (User) request.getSession().getAttribute("user");
         Customer customer = customerService.getCustomerById(user.getId());
         List<Positionvalue> pv = fundService.listPositionvalueByCustomerId(customer.getId());
-        model.addAttribute("customerPosition", pv);
         List<Fund> fundList = fundService.listFund();
+        model.addAttribute("customerPosition", pv);
         model.addAttribute("fundList", fundList);
         BuyFundForm buyFundForm = new BuyFundForm();
         buyFundForm.setAvailable(customer.getCash() - customer.getPendingCashDecrease());
@@ -63,6 +63,8 @@ public class FundController {
 
     @RequestMapping(value = "buy_fund", method = RequestMethod.POST)
     public String buyFund(HttpServletRequest request, RedirectAttributes ra,
+                          @ModelAttribute("customerPosition") LinkedList<Positionvalue> pv,
+                          @ModelAttribute("fundList") LinkedList<Fund> fundList,
                           @Valid BuyFundForm buyFundForm, BindingResult result, Model model) {
         if (!checkCustomer(request)) {
             ra.addFlashAttribute("loginError", CUSTOMERNOTLOGIN);
@@ -73,10 +75,6 @@ public class FundController {
             return "buy_fund";
         User user = (User) request.getSession().getAttribute("user");
         Customer c = customerService.getCustomerByUserName(user.getUserName());
-        List<Positionvalue> pv = fundService.listPositionvalueByCustomerId(c.getId());
-        List<Fund> fundList = fundService.listFund();
-        model.addAttribute("customerPosition", pv);
-        model.addAttribute("fundList", fundList);
         try {
             transactionService.buyFund(user.getId(), buyFundForm.getFundTicker(),
                 buyFundForm.getAmount());
@@ -112,11 +110,12 @@ public class FundController {
     @RequestMapping(value = "sell_fund", method = RequestMethod.POST)
     public String sellFund(HttpServletRequest request, RedirectAttributes ra,
                            @Valid SellFundForm sellFundForm, BindingResult result, Model model,
-                           @ModelAttribute("customerPosition") List<Positionvalue> pv) {
+                           @ModelAttribute("customerPosition") LinkedList<Positionvalue> pv) {
         if (!checkCustomer(request)) {
             ra.addFlashAttribute("loginError", CUSTOMERNOTLOGIN);
             return "redirect:/customer_login";
         }
+        result.addAllErrors(sellFundForm.getValidationError());
         if (result.hasErrors())
             return "sell_fund";
         User user = (User) request.getSession().getAttribute("user");
