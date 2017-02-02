@@ -15,8 +15,12 @@
 		.error {
 			color: red;
 		}
-		.shares {}
-		.price {}
+
+		.shares {
+		}
+
+		.price {
+		}
 	</style>
 </head>
 <body>
@@ -26,38 +30,23 @@
 
 <div class="container">
 	<div class="row">
-		<br>
-		<div class="col-xs-8">
-			  <div class="input-group">
-                <div class="input-group-btn search-panel">
-	<form:form method="post" modelAttribute="searchForm">
-			    <%-- --%>
-			    <div class="form-group">
-			     <div class="col-sm-7">
-			      <label for="sel1">Select User Name:</label>    
-			      <select name="userName" class="form-control" id="sel1">
-			      <option>Please select a name and then press the button</option>
-			      	<c:forEach var="customer" items="${customerList}">
-				        <option>${customer.userName}</option>				        
-				     </c:forEach>
-			      </select>
-			   </div>
-		
-
-				<span class="input-group-btn">
-                    <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
-                </span>
-                </div>
-				<!-- </td>
-			</tr>
-			<tr>
-			</tr>
-		</table> --> 
-	</form:form>
-
-        </div>
-  </div>
-		</div>
+		<form:form method="post" modelAttribute="searchForm" cssClass="form-inline">
+			<div class="form-group">
+				<label for="sel1">Select User Name:</label>
+				<select name="userName" class="form-control" id="sel1">
+					<option value="">Please select a name and then press the
+						button
+					</option>
+					<c:forEach var="customer" items="${customerList}">
+						<option>${customer.userName}</option>
+					</c:forEach>
+				</select>
+				<form:errors path="userName" cssClass="error"/>
+			</div>
+			<button class="btn btn-default" type="submit">
+				<span class="glyphicon glyphicon-search"></span>
+			</button>
+		</form:form>
 	</div>
 </div>
 
@@ -76,7 +65,7 @@
 					<th>Price</th>
 					<th>Quantity of Shares</th>
 					<th>Total Amount</th>
-          			<th>Operations</th>
+					<th>Operations</th>
 				</tr>
 				</thead>
 				<tbody>
@@ -89,7 +78,7 @@
 							${employee_pendingtransaction.fund.name}
 					</td>
 					<td>
-	 						${employee_finishtransaction.price}
+							${employee_finishtransaction.price}
 					</td>
 					<td class="shares">
 							${employee_pendingtransaction.shares}
@@ -119,7 +108,7 @@
 					<th>Price</th>
 					<th>Quantity of Shares</th>
 					<th>Total Amount</th>
-          			<th>Operations</th>
+					<th>Operations</th>
 				</tr>
 				</thead>
 				<tbody>
@@ -129,13 +118,13 @@
 							${employee_finishtransaction.executeDate}
 					</td>
 					<td>
-	 						${employee_finishtransaction.id}
+							${employee_finishtransaction.id}
 					</td>
 					<td>
 							${employee_finishtransaction.fund.name}
 					</td>
 					<td>
-	 						${employee_finishtransaction.price}
+							${employee_finishtransaction.price}
 					</td>
 					<td class="shares">
 							${employee_finishtransaction.shares}
