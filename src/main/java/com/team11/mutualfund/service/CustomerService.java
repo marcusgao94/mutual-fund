@@ -43,23 +43,14 @@ public class CustomerService {
 		return customerDao.findByUserName(userName);
 	}
 
-	@Transactional(isolation = Isolation.REPEATABLE_READ)
+	@Transactional(isolation = Isolation.SERIALIZABLE)
 	public Customer updatePassword(Long cid, String originPassword, String newPassword)
 			throws RollbackException {
-		Customer c =  customerDao.findById(cid);
+		Customer c =  customerDao.findByIdForUpdate(cid);
 		if (c == null)
 			throw new RollbackException(NOCUSTOMER);
 		if (!c.getPassword().equals(originPassword))
 			throw new RollbackException(WRONGPASSWORD);
-		c.setPassword(newPassword);
-		return c;
-	}
-
-	public Customer updatePassword(Long cid, String newPassword) throws RollbackException {
-		Customer c =  customerDao.findById(cid);
-		if (c == null)
-			throw new RollbackException(NOCUSTOMER);
-		
 		c.setPassword(newPassword);
 		return c;
 	}
@@ -70,21 +61,6 @@ public class CustomerService {
 			throw new RollbackException(NOCUSTOMER);
 		c.setPassword(newPassword);
 		return c;
-	}
-	
-	public Customer findCustomerbyId(long id) {
-		return customerDao.findById(id);
-	}
-	
-	public boolean checkCustomerbyId(long id) {
-		
-		Customer c = customerDao.findById(id);
-		
-		if (c == null) {
-			return false;
-		}
-		
-		return true;
 	}
 
 }

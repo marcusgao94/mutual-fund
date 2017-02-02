@@ -6,6 +6,7 @@ import com.team11.mutualfund.model.Position;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.LockModeType;
 import java.util.List;
 
 @Repository
@@ -17,6 +18,16 @@ public class PositionDao extends AbstractDao<CustomerFund, Position> {
 
     public Position findByCustomerFund(CustomerFund cf) {
         return (Position) getByKey(cf);
+    }
+
+    public Position findByCustomerFundForUpdate(CustomerFund cf) {
+        Query query = getSession().createQuery(
+                "select p from Position p where " +
+                        "p.customerFund = :cf"
+        )
+                .setParameter("cf", cf)
+                .setLockMode(LockModeType.PESSIMISTIC_WRITE);
+        return (Position) query.uniqueResult();
     }
 
     public Position findByCustomerIdFundId(long cid, long fid) {

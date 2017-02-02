@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.RollbackException;
 import java.text.DecimalFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -46,7 +47,7 @@ public class FundService {
         return fundDao.findByTicker(ticker);
     }
 
-    public void updateFundPrice(long fid, Date date, double price)
+    public void updateFundPrice(long fid, LocalDate date, double price)
             throws RollbackException {
         Fund fund = fundDao.findById(fid);
         if (fund == null)
@@ -66,16 +67,9 @@ public class FundService {
         return fundPriceHistoryDao.listByFundTicker(ticker);
     }
 
-    // get last transition day
-    public Date getLastTransitionDay() {
-        List<FundPriceHistory> fundPriceHistoryList = fundPriceHistoryDao.listAllOrderByDate();
-        if (fundPriceHistoryList == null || fundPriceHistoryList.isEmpty())
-            return null;
-        return fundPriceHistoryList.get(0).getFundDate().getDate();
-    }
 
     // list all fund with price of last transition day
-    public List<TransitionFund> listFundPrice(Date date) {
+    public List<TransitionFund> listFundPrice(LocalDate date) {
         List<TransitionFund> transitionFundList = new LinkedList<>();
         List<Fund> fundList = fundDao.listFund();
         // cannot directly query fundPriceHistory, because new created fund does not have a price

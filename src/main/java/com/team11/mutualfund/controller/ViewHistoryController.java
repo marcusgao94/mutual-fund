@@ -43,8 +43,6 @@ public class ViewHistoryController {
     @Autowired
     private MessageSource messageSource;
 
-
-
     // employeeViewHistory
 
     @RequestMapping(value = "/employee_searchtransaction", method = RequestMethod.GET)

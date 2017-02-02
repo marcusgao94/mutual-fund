@@ -5,9 +5,13 @@ import com.team11.mutualfund.model.*;
 import com.team11.mutualfund.utils.TransitionFund;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.ExcludeDefaultListeners;
 import javax.persistence.RollbackException;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
@@ -19,10 +23,10 @@ import static com.team11.mutualfund.utils.TransactionType.*;
 public class TransitionService {
 
     @Autowired
-    private FundDao fundDao;
+    private TransactionDao transactionDao;
 
     @Autowired
-    private TransactionDao transactionDao;
+    private TransactionService transactionService;
 
     @Autowired
     private FundPriceHistoryDao fundPriceHistoryDao;
@@ -31,12 +35,16 @@ public class TransitionService {
     private PositionDao positionDao;
 
     @Autowired
-    private CustomerDao customerDao;
-
-    @Autowired
     private FundService fundService;
 
-    public void executeBuyFund(Date date) throws RollbackException {
+    public LocalDate getLastTransitionDay() {
+        List<FundPriceHistory> fundPriceHistoryList = fundPriceHistoryDao.listAllOrderByDate();
+        if (fundPriceHistoryList == null || fundPriceHistoryList.isEmpty())
+            return null;
+        return fundPriceHistoryList.get(0).getFundDate().getDate();
+    }
+
+    public void executeBuyFund(LocalDate date) throws RollbackException {
         List<Transaction> transactionList = transactionDao.listPendingTransactionByType(BUYFUND);
         for (Transaction t : transactionList) {
             // update execute date
@@ -53,11 +61,13 @@ public class TransitionService {
                 throw new RollbackException(NOFUNDPRICEHISTORY);
             double price = fundPriceHistory.getPrice();
             double shares = t.getAmount() / price;
+            t.setPrice(price);
+            t.setShares(shares);
             // add customer shares of this fund in position
             CustomerFund cf = new CustomerFund();
             cf.setCustomerId(customer.getId());
             cf.setFundId(fund.getId());
-            Position position = positionDao.findByCustomerFund(cf);
+            Position position = positionDao.findByCustomerFundForUpdate(cf);
             if (position == null) {
                 position = new Position();
                 position.setCustomerFund(cf);
@@ -72,7 +82,7 @@ public class TransitionService {
         }
     }
 
-    public void executeSellFund(Date date) throws RollbackException {
+    public void executeSellFund(LocalDate date) throws RollbackException {
         List<Transaction> transactionList = transactionDao.listPendingTransactionByType(SELLFUND);
         for (Transaction t : transactionList) {
             // update execute date
@@ -83,7 +93,7 @@ public class TransitionService {
             CustomerFund cf = new CustomerFund();
             cf.setCustomerId(customer.getId());
             cf.setFundId(fund.getId());
-            Position position = positionDao.findByCustomerFund(cf);
+            Position position = positionDao.findByCustomerFundForUpdate(cf);
             if (position == null)
                 throw new RollbackException(NOPOSITION);
             position.setShares(position.getShares() - t.getShares());
@@ -98,12 +108,14 @@ public class TransitionService {
                 throw new RollbackException(NOFUNDPRICEHISTORY);
             double price = fundPriceHistory.getPrice();
             double amount = price * t.getShares();
+            t.setPrice(price);
+            t.setAmount(amount);
             // add customer shares of this fund in position
             customer.setCash(customer.getCash() + amount);
         }
     }
 
-    public void executeDepositCheck(Date date) {
+    public void executeDepositCheck(LocalDate date) {
         List<Transaction> transactionList = transactionDao.listPendingTransactionByType(DEPOSITCHECK);
         for (Transaction t : transactionList) {
             t.setExecuteDate(date);
@@ -112,22 +124,26 @@ public class TransitionService {
         }
     }
 
-    public void executeRequestCheck(Date date) {
-        List<Transaction> transactionList = transactionDao.listPendingTransactionByType(REQUESTCHECK);
+    public void executeRequestCheck(LocalDate date) {
+        List<Transaction> transactionList = transactionDao.listPendingTransactionByTypeForUpdate(REQUESTCHECK);
         for (Transaction t : transactionList) {
             t.setExecuteDate(date);
             Customer customer = t.getCustomer();
             customer.setCash(customer.getCash() - t.getAmount());
-            customer.setPendingCashDecrease(0);
+            customer.setPendingCashDecrease(customer.getPendingCashDecrease() - t.getAmount());
         }
     }
 
-    public void transit(Date date, List<TransitionFund> fundList)
+    public synchronized void transit(LocalDate date, List<TransitionFund> fundList)
             throws RollbackException {
+        LocalDate lastDate = getLastTransitionDay();
+        if (lastDate != null && !date.isAfter(lastDate))
+            throw new RollbackException(WRONGTRANSITIONDAY);
         // execute request, deposit check
         executeRequestCheck(date);
         executeDepositCheck(date);
 
+        // check if new fund is created before transit
         if (fundList.size() != fundService.listFund().size())
             throw new RollbackException(NEWFUNDCREATED);
         // update all fund price

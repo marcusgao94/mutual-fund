@@ -32,4 +32,6 @@ public class Constant {
     public static final String NEWFUNDCREATED = "new fund has been created, please refresh";
 
 
+    public static final String WRONGTRANSITIONDAY = "transition day must after last transition day";
+
 }

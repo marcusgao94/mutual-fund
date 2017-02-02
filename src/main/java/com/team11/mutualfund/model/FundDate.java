@@ -14,12 +14,12 @@ public class FundDate implements Serializable {
 
     private Long fundId;
 
-    private Date date;
+    private LocalDate date;
 
     public FundDate() {
     }
 
-    public FundDate(long fid, Date d) {
+    public FundDate(long fid, LocalDate d) {
         fundId = fid;
         date = d;
     }
@@ -28,7 +28,7 @@ public class FundDate implements Serializable {
     public boolean equals(Object o) {
         FundDate fdp = (FundDate) o;
         double delta = 1e-10;
-        return fundId == fdp.getFundId() && date.equals(fdp.getDate());
+        return fundId.equals(fdp.getFundId()) && date.equals(fdp.getDate());
     }
 
     @Override
@@ -44,11 +44,11 @@ public class FundDate implements Serializable {
         this.fundId = fundId;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 }

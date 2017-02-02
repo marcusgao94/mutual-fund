@@ -28,9 +28,10 @@ public class TransitionForm {
         Errors errors = new DirectFieldBindingResult(this, "transitionForm");
         for (int i = 0; i < fundList.size(); i++) {
             TransitionFund tf = fundList.get(i);
-            if (tf.getNewPrice() == null) {
+            if (tf.getNewPrice() == null)
                 errors.rejectValue("fundList[" + i + "].newPrice", "", "new price of every fund must be filled");
-            }
+            else if (tf.getNewPrice() < 0.01)
+                errors.rejectValue("fundList[" + i + "].newPrice", "", "new price must >= 0.01");
         }
         return errors;
     }
