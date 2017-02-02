@@ -40,14 +40,7 @@
 			      </select>
 			   </div>
 		
-		<%-- <table class="table">
-			<tr>
-				<td>Search User Name:</td>
-				<td>
-					<input type="text" name="userName" value="${searchForm.userName}" autofocus/>
-				</td>
-				<td><form:errors path="userName" cssClass="error"/></td>
-				<td> --%>
+
 				<span class="input-group-btn">
                     <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
                 </span>
