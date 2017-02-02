@@ -38,10 +38,10 @@ public class Customer implements Serializable {
 	private Integer zip;
 
 	@Column(nullable=false, scale = 2)
-	private double cash = 0d;
+	private Double cash = 0d;
 
 	@Column(scale = 2)
-	private double pendingCashDecrease = 0d;
+	private Double pendingCashDecrease = 0d;
 
 	public Customer() {}
 	public Customer(CustomerRegisterForm cf) {
@@ -128,11 +128,11 @@ public class Customer implements Serializable {
 		this.zip = zip;
 	}
 
-	public double getCash() {
+	public Double getCash() {
 		return cash;
 	}
 
-	public void setCash(double cash) {
+	public void setCash(Double cash) {
 		this.cash = cash;
 	}
 
@@ -144,11 +144,11 @@ public class Customer implements Serializable {
 		this.id = id;
 	}
 
-	public double getPendingCashDecrease() {
+	public Double getPendingCashDecrease() {
 		return pendingCashDecrease;
 	}
 
-	public void setPendingCashDecrease(double pendingCashDecrease) {
+	public void setPendingCashDecrease(Double pendingCashDecrease) {
 		this.pendingCashDecrease = pendingCashDecrease;
 	}
 }

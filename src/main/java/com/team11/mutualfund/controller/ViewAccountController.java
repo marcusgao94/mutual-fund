@@ -17,8 +17,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.persistence.RollbackException;
@@ -35,9 +37,11 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 @Controller
+@SessionAttributes("customerList")
 public class ViewAccountController {
     @Autowired
     private TransitionService transitionService;
@@ -60,30 +64,28 @@ public class ViewAccountController {
         model.addAttribute("customerList", customerList);
         SearchForm searchForm = new SearchForm();
         model.addAttribute("searchForm", searchForm);
-       
-
         return "employee_searchcustomer";
     }
 
     @RequestMapping(value = "/employee_searchcustomer", method = RequestMethod.POST)
     public String employeeViewAccount(HttpServletRequest request, Model model,
+                                      @ModelAttribute("customerList") LinkedList<Customer> customerList,
                                       RedirectAttributes ra,
                                       @Valid SearchForm searchForm, BindingResult result) {
         if (!checkEmployee(request)) {
             ra.addFlashAttribute("loginError", NOTLOGIN);
             return "redirect:/employee_login";
         }
+        // model.addAttribute("customerList", customerList);
         if (result.hasErrors())
             return "employee_searchcustomer";
         Customer c = customerService.getCustomerByUserName(searchForm.getUserName());
-        List<Customer> customerList = customerService.getCustomerList();
-        model.addAttribute("customerList", customerList);
         model.addAttribute("customer", c);
         if (c == null) {
             result.rejectValue("userName", "", NOUSERNAME);
             return "employee_searchcustomer";
         }
-        searchForm.setUserName("");
+        // searchForm.setUserName("");
         model.addAttribute("searchForm", searchForm);
         model.addAttribute("employee_customeraccount", c);
         List<Positionvalue> pv = fundService.listPositionvalueByCustomerId(c.getId());

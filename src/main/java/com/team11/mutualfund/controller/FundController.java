@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -67,6 +68,7 @@ public class FundController {
             ra.addFlashAttribute("loginError", CUSTOMERNOTLOGIN);
             return "redirect:/customer_login";
         }
+        result.addAllErrors(buyFundForm.getValidationError());
         if (result.hasErrors())
             return "buy_fund";
         User user = (User) request.getSession().getAttribute("user");
@@ -109,7 +111,8 @@ public class FundController {
 
     @RequestMapping(value = "sell_fund", method = RequestMethod.POST)
     public String sellFund(HttpServletRequest request, RedirectAttributes ra,
-                           @Valid SellFundForm sellFundForm, BindingResult result, Model model) {
+                           @Valid SellFundForm sellFundForm, BindingResult result, Model model,
+                           @ModelAttribute("customerPosition") List<Positionvalue> pv) {
         if (!checkCustomer(request)) {
             ra.addFlashAttribute("loginError", CUSTOMERNOTLOGIN);
             return "redirect:/customer_login";

@@ -12,6 +12,11 @@
 		.error {
 			color: red;
 		}
+		.shares {
+		}
+
+		.price {
+		}
 	</style>
 </head>
 
@@ -36,7 +41,7 @@
 			</tr>
 
 			<tr>
-				<td>Quantity of Shares:</td>
+				<td>Enter Quantity of Shares:</td>
 				<td><input type="number" step="0.001" name="share"
 						   value="${sellFundForm.share}"/></td>
 				<td><form:errors path="share" cssClass="error"/></td>
@@ -83,13 +88,13 @@
 						<td>
 								${customer_pv.fund.ticker}
 						</td>
-						<td>
+						<td class="shares">
 								${customer_pv.shares}
 						</td>
-						<td>
+						<td class="price">
 								${customer_pv.price}
 						</td>
-						<td>
+						<td class="price">
 								${customer_pv.value}
 						</td>
 					</tr>
@@ -105,6 +110,29 @@
 <div>
 	<c:import url="bottom.jsp"/>
 </div>
+
+<script type="text/javascript">
+    var p = document.getElementsByClassName("price");
+    var i;
+    var n = 0;
+    for (i = 0; i < p.length; i++) {
+        var pr = p[i].innerHTML.trim();
+        if (pr)
+            p[i].innerHTML = parseFloat(pr).toFixed(2);
+        else {
+            p[i].innerHTML = n.toFixed(2);
+        }
+    }
+    var s = document.getElementsByClassName("shares");
+    for (i = 0; i < s.length; i++) {
+        var sh = s[i].innerHTML.trim();
+        if (sh)
+            s[i].innerHTML = parseFloat(sh).toFixed(3);
+        else {
+            s[i].innerHTML = n.toFixed(3);
+        }
+    }
+</script>
 
 </body>
 </html>
