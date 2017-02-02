@@ -6,12 +6,13 @@ public class Positionvalue {
 
     private Fund fund;
 
-    private double shares;
+    private Double shares;
 
-    private double price;
+    private Double price;
 
-    private double value;
+    private Double value;
 
+    private Double available;
 
     public Fund getFund() {
         return fund;
@@ -21,27 +22,35 @@ public class Positionvalue {
         this.fund = fund;
     }
 
-    public double getShares() {
+    public Double getShares() {
         return shares;
     }
 
-    public void setShares(double shares) {
+    public void setShares(Double shares) {
         this.shares = shares;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
-    public double getValue() {
+    public Double getValue() {
         return value;
     }
 
-    public void setValue(double value) {
+    public void setValue(Double value) {
         this.value = value;
+    }
+
+    public Double getAvailable() {
+        return available;
+    }
+
+    public void setAvailable(Double available) {
+        this.available = available;
     }
 }

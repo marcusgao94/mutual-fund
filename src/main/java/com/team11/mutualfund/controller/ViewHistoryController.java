@@ -57,13 +57,7 @@ public class ViewHistoryController {
     	if (userName != null) {
     		SearchForm searchForm = new SearchForm();
     		searchForm.setUserName(userName);
-            
-    		
     		Customer c = customerService.getCustomerByUserName(searchForm.getUserName());
-    			
-    		/*
-    		model.addAttribute("searchForm", searchForm);
-        */
     		model.addAttribute("userName",userName);
     		List<Transaction> pendingTransaction = transactionService.listPendingTransactionByCustomerId(c.getId());
         	model.addAttribute("employee_pendingTransaction", pendingTransaction);
@@ -74,10 +68,10 @@ public class ViewHistoryController {
     	}
 		List<Customer> customerList = customerService.getCustomerList();
 	    model.addAttribute("customerList",customerList);
-	    //request.getSession().setAttribute("customerList", customerList);
         model.addAttribute("searchForm", new SearchForm());
         return "employee_searchtransaction";
     }
+
     // employeeViewHistory
     @RequestMapping(value = "/employee_searchtransaction", method = RequestMethod.POST)
     public String employeeViewHistory(HttpServletRequest request, Model model,
@@ -128,6 +122,4 @@ public class ViewHistoryController {
         
         return "customer_transactionhistory";
     }
-
-
 }

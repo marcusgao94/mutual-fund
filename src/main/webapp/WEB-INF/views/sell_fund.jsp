@@ -74,6 +74,7 @@
 					<th>Fund Name</th>
 					<th>Fund Ticker</th>
 					<th>Quantity of Shares</th>
+					<th>Available Shares Quantity</th>
 					<th>Price per Share</th>
 					<th>Total Value</th>
 				</tr>
@@ -90,6 +91,9 @@
 						</td>
 						<td class="shares">
 								${customer_pv.shares}
+						</td>
+						<td class="shares">
+								${customer_pv.available}
 						</td>
 						<td class="price">
 								${customer_pv.price}

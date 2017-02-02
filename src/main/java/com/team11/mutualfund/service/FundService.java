@@ -107,6 +107,7 @@ public class FundService {
             pv.setShares(p.getShares());
             pv.setPrice(price);
             pv.setValue(p.getShares() * price);
+            pv.setAvailable(p.getShares() - p.getPendingShareDecrease());
             positionvalueList.add(pv);
         }
         return positionvalueList;
