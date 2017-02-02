@@ -5,7 +5,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.validation.DirectFieldBindingResult;
 import org.springframework.validation.Errors;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -20,7 +19,7 @@ public class CreateFundForm {
 
     @NotNull(message = "fund ticker may not be null")
     @Size(min = 1, max = 5, message = "ticker length must between 1 to 5")
-    @Pattern(regexp = "^[A-Za-z]*$*", message = "ticker must be alphabet")
+    @Pattern(regexp = "^[A-Z]*$*", message = "ticker must be Capitalized alphabet")
     private String fundTicker;
 
     public String sanitize(String s) {
