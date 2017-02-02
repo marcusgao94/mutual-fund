@@ -47,38 +47,23 @@
 
 <div class="container">
 	<div class="row">
-		<br>
-		<div class="col-xs-8">
-			  <div class="input-group">
-                <div class="input-group-btn search-panel">
-	<form:form method="post" modelAttribute="searchForm">
-			    <%-- --%>
-			    <div class="form-group">
-			     <div class="col-sm-7">
-			      <label for="sel1">Select User Name:</label>    
-			      <select name="userName" class="form-control" id="sel1">
-			      <option>Please select a name and then press the button</option>
-			      	<c:forEach var="customer" items="${customerList}">
-				        <option>${customer.userName}</option>				        
-				     </c:forEach>
-			      </select>
-			   </div>
-		
-
-				<span class="input-group-btn">
-                    <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
-                </span>
-                </div>
-				<!-- </td>
-			</tr>
-			<tr>
-			</tr>
-		</table> --> 
-	</form:form>
-
-        </div>
-  </div>
-		</div>
+		<form:form method="post" modelAttribute="searchForm" cssClass="form-inline">
+			<div class="form-group">
+				<label for="sel1">Select User Name:</label>
+				<select name="userName" class="form-control" id="sel1">
+					<option value="">Please select a name and then press the
+						button
+					</option>
+					<c:forEach var="customer" items="${customerList}">
+						<option>${customer.userName}</option>
+					</c:forEach>
+				</select>
+				<form:errors path="userName" cssClass="error"/>
+			</div>
+			<button class="btn btn-default" type="submit">
+				<span class="glyphicon glyphicon-search"></span>
+			</button>
+		</form:form>
 	</div>
 </div>
 
