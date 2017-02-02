@@ -7,6 +7,8 @@ import com.team11.mutualfund.utils.User;
 
 import static com.team11.mutualfund.utils.Constant.WRONGPASSWORD;
 
+import java.util.List;
+
 import javax.transaction.RollbackException;
 
 import org.hibernate.exception.LockAcquisitionException;
@@ -43,7 +45,12 @@ public class CustomerService {
 		return customerDao.findByUserName(userName);
 	}
 
-	@Transactional(isolation = Isolation.SERIALIZABLE)
+
+	public List<Customer> getCustomerList() {
+		return customerDao.getCustomerList();
+	}
+
+    @Transactional(isolation = Isolation.SERIALIZABLE)
 	public Customer updatePassword(Long cid, String originPassword, String newPassword)
 			throws RollbackException {
 		Customer c =  customerDao.findByIdForUpdate(cid);

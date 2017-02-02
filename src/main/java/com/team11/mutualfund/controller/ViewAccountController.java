@@ -47,9 +47,9 @@ public class ViewAccountController {
 
     @Autowired
     private FundService fundService;
+    
 
     // employeeViewHistory
-
     @RequestMapping(value = "/employee_searchcustomer", method = RequestMethod.GET)
     public String employeeViewAccount(HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) {
         if (!checkEmployee(request)) {
@@ -59,6 +59,7 @@ public class ViewAccountController {
 
         SearchForm searchForm = new SearchForm();
         model.addAttribute("searchForm", searchForm);
+       
 
         return "employee_searchcustomer";
     }
@@ -74,7 +75,7 @@ public class ViewAccountController {
         if (result.hasErrors())
             return "employee_searchcustomer";
         Customer c = customerService.getCustomerByUserName(searchForm.getUserName());
-
+       
         if (c == null) {
             result.rejectValue("userName", "", NOUSERNAME);
             return "employee_searchcustomer";

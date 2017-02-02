@@ -45,11 +45,11 @@
 									<td> ${customer_account.id}</td>
 								</tr>
 								<tr>
-									<td>FirstName:</td>
+									<td>First Name:</td>
 									<td> ${customer_account.firstName}</td>
 								</tr>
 								<tr>
-									<td>LastName:</td>
+									<td>Last Name:</td>
 									<td> ${customer_account.lastName}</td>
 								</tr>
 								<tr>
@@ -87,7 +87,7 @@
 								<!--   <button type="button" class="btn btn-primary">Edit</button> -->
 								<a href="<c:url value="/customer_changepassword" />">
 									<button class="btn btn-primary">
-										Change password
+										Change Password
 									</button>
 								</a>
 								<a href="<c:url value="/customer_transactionhistory" />">
@@ -112,17 +112,18 @@
 			</div><!--/panel-heading-->
 			<div class="panel-body" itemprop="reviewBody">
 				<h4>Date of the last trading day: ${date} </h4>
-				<h4>Cash balance: <span class="price"> ${customer_account.cash} </span></h4>
+				<h4>Cash Balance: <span class="price"> ${customer_account.cash} </span></h4>
 				<div class="col-md-6">
 
 					<div class="table-responsive responsiv-table">
 						<table class="table bio-table">
 							<thead>
 							<tr>
-								<td>Name of the fund</td>
-								<td>Shares</td>
-								<td>Price</td>
-								<td>Value</td>
+								<td>Fund Name</td>
+								<td>Fund Ticker</td>
+								<td>Quantity of Shares</td>
+								<td>Price per Share</td>
+								<td>Total Value</td>
 							</tr>
 							</thead>
 							<tbody>
@@ -131,6 +132,9 @@
 								<tr>
 									<td>
 											${customer_pv.fund.name}
+									</td>
+									<td>
+									        ${customer_pv.fund.ticker}
 									</td>
 									<td class="shares">
 											${customer_pv.shares}

@@ -44,6 +44,8 @@ public class ResearchFundController {
         model.addAttribute("researchFundForm", researchFundForm);
         List<Fund> funds = fundService.listFund();
         model.addAttribute("funds", funds);
+        boolean postMethod = false;
+        model.addAttribute("postMethod", postMethod);
         return "customer_researchfund";
        
     }
@@ -60,6 +62,9 @@ public class ResearchFundController {
         
         if (result.hasErrors())
             return "customer_researchfund";
+        
+        boolean postMethod = true;
+        model.addAttribute("postMethod", postMethod);
         
         List<Fund> funds = fundService.listFund();
         model.addAttribute("funds", funds);

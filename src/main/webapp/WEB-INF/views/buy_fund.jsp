@@ -7,7 +7,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Buy Fund</title>
+	<title>Buy Funds</title>
 	<style>
 		.error {
 			color: red;
@@ -21,7 +21,7 @@
 </div>
 
 <div class="container">
-	<h3>Buy Fund</h3>
+	<h3>Buy Funds</h3>
 	<form:form method="post" modelAttribute="buyFundForm">
 		<table>
 			<tr>
@@ -71,10 +71,11 @@
 			<table class="table">
 				<thead>
 				<tr>
+					<th>Fund Name</th>
 					<th>Fund Ticker</th>
-					<th>Shares</th>
-					<th>Price</th>
-					<th>Value</th>
+					<th>Quantity of Shares</th>
+					<th>Price per Share</th>
+					<th>Total Value</th>
 				</tr>
 				</thead>
 				<tbody>
@@ -82,6 +83,10 @@
 				<c:forEach var="customer_pv" items="${customerPosition}">
 
 					<tr>
+						
+						<td>
+						        ${customer_pv.fund.name}
+						</td>
 						<td>
 								${customer_pv.fund.ticker}
 						</td>

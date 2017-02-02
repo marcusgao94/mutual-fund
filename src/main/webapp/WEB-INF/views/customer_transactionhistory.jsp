@@ -34,10 +34,10 @@
 			<table class="table">
 					<thead>
 					<tr>
-			<th>ID</th>
-			<th>Name</th>
-			<th>Shares</th>
-			<th>Amount</th>
+			<th>Transaction ID</th>
+			<th>Fund Name</th>
+			<th>Quantity of Shares</th>
+			<th>Total Amount</th>
           	<th>Operations</th>
 					</tr>
 					</thead>
@@ -72,10 +72,10 @@
 			<table class="table">
 	<thead>
 		<tr>
-			<th>Date</th>
-			<th>Name</th>
-			<th>Shares</th>
-			<th>Amount</th>
+			<th>Transition Date</th>
+			<th>Fund Name</th>
+			<th>Quantity of Shares</th>
+			<th>Total Amount</th>
           	<th>Operations</th>
 		</tr>
 	</thead>

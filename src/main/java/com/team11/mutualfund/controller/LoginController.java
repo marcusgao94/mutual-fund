@@ -84,7 +84,7 @@ public class LoginController {
 
     // customer
 
-    @RequestMapping(value = "/customer_login", method = RequestMethod.GET)
+    @RequestMapping(value = "/customer_login" , method = RequestMethod.GET)
     public String customerLogin(HttpServletRequest request, Model model,
                                 @ModelAttribute("loginError") String lem) {
         if (!lem.isEmpty()) {

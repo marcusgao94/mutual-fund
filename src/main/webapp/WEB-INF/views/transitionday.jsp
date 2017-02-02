@@ -32,17 +32,17 @@
 			<table class="table">
 				<thead>
 				<tr>
-					<td>Fund Ticker</td>
 					<td>Fund Name</td>
+					<td>Fund Ticker</td>
 					<td>Current Price ($)</td>
 					<td>Enter New Price</td>
 				</tr>
 				</thead>
 				<tbody>
-				<c:forEach var="listFund" items="${transitionForm.fundList}" varStatus="status">
+				<c:forEach var="listFund" items="${transitionForm.fundList}" varStatus="status"> 
 					<tr>
-						<td>${listFund.fund.ticker}</td>
 						<td>${listFund.fund.name}</td>
+						<td>${listFund.fund.ticker}</td>						
 						<td>${listFund.lastPrice}</td>
 						<td>
 							<form:input path="fundList[${status.index}].newPrice" type="number"

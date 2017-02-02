@@ -1,5 +1,6 @@
 package com.team11.mutualfund.controller;
 
+import com.team11.mutualfund.form.ChangePasswordForm;
 import com.team11.mutualfund.form.DepositCheckForm;
 import com.team11.mutualfund.form.RequestCheckForm;
 import com.team11.mutualfund.model.Customer;
@@ -14,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.persistence.RollbackException;
@@ -21,10 +23,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 
+
 import static com.team11.mutualfund.controller.LoginController.checkCustomer;
 import static com.team11.mutualfund.controller.LoginController.checkEmployee;
-import static com.team11.mutualfund.utils.Constant.CUSTOMERNOTLOGIN;
-import static com.team11.mutualfund.utils.Constant.NOTLOGIN;
+import static com.team11.mutualfund.utils.Constant.*;
 
 
 @Controller
@@ -37,32 +39,41 @@ public class CheckController {
     private CustomerService customerService;
 
     @RequestMapping("/deposit_check")
-    public String depositCheck(HttpServletRequest request, RedirectAttributes ra, Model model) {
+    public String depositCheck(HttpServletRequest request, RedirectAttributes ra, Model model,
+    						@RequestParam(value = "un", required = false) String userName) {
         if (!checkEmployee(request)) {
             ra.addFlashAttribute("loginError", NOTLOGIN);
             return "redirect:/employee_login";
         }
+        if (userName != null) {
+            DepositCheckForm dpf = new DepositCheckForm();
+            dpf.setUserName(userName);
+            model.addAttribute("depositCheckForm", dpf);
+            return "deposit_check";
+        }
+        
         DepositCheckForm depositCheckForm = new DepositCheckForm();
         model.addAttribute("depositCheckForm", depositCheckForm);
-        return "deposit_check";
+        return "deposit_check_fast";
     }
 
     @RequestMapping(value = "/deposit_check", method = RequestMethod.POST)
     public String depositCheck(HttpServletRequest request, RedirectAttributes ra, Model model,
-                               @Valid DepositCheckForm depositCheckForm, BindingResult result) {
+    		 String fast, @Valid DepositCheckForm depositCheckForm, BindingResult result) {
         if (!checkEmployee(request)) {
             ra.addFlashAttribute("loginError", NOTLOGIN);
             return "redirect:/employee_login";
         }
         if (result.hasErrors())
-            return "deposit_check";
+        	return fast == null? "deposit_check": "deposit_check_fast";
         try {
             transactionService.depositCheck(
                 depositCheckForm.getUserName(), depositCheckForm.getAmount());
         } catch (RollbackException e) {
             result.rejectValue("customerId", "0", e.getMessage());
-            return "deposit_check";
+            return fast == null? "deposit_check": "deposit_check_fast";
         }
+        model.addAttribute("success", "You have successfully deposit check for" + depositCheckForm.getUserName());
         return "success";
     }
 
@@ -105,6 +116,7 @@ public class CheckController {
                 result.rejectValue("amount", "1", message);
             return "request_check";
         }
+        model.addAttribute("success", REQUESTCHECKSUCCESS);
         return "success";
     }
 

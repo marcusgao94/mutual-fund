@@ -49,7 +49,7 @@
 						
 						<tr>
 							<td>
-								<input type="submit" class="btn btn-primary" value="submit" />
+								<input type="submit" class="btn btn-primary" value="Submit" />
 
 							</td>
 

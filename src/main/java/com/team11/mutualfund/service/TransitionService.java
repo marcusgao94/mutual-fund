@@ -23,6 +23,9 @@ import static com.team11.mutualfund.utils.TransactionType.*;
 public class TransitionService {
 
     @Autowired
+    private FundDao fundDao;
+
+    @Autowired
     private TransactionDao transactionDao;
 
     @Autowired
@@ -33,6 +36,9 @@ public class TransitionService {
 
     @Autowired
     private PositionDao positionDao;
+
+    @Autowired
+    private CustomerDao customerDao;
 
     @Autowired
     private FundService fundService;

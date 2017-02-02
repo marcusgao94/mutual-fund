@@ -21,23 +21,22 @@
 </div>
 
 <div class="container">
-	<h1> Welcome to Singularity Mutual Fund </h1>
-	<P>
-		Current time is
-		<%
-			DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-			Date date = new Date();
-			out.println(df.format(date));
-		%>
-	</P>
-	<a><img src="<c:url value="https://techraptor.net/wp-content/uploads/2015/02/singularity.jpg" />" alt="TestDisplay"/></a>
 
-	<%--<a href="<c:url value="/request_check" />"><button>request check</button></a>--%>
-	<%--<a href="<c:url value="/deposit_check" />"><button>deposit check</button></a>--%>
-	<%--<a href="<c:url value="/employee_createfund" />"><button>create fund</button></a>--%>
-
-</div>
-
+			<h1> Welcome to Singularity Mutual Fund </h1>
+			<P>
+				<font style = "font-size: large">Current time</font> is
+				<%
+					DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+					Date date = new Date();
+					out.println(df.format(date));
+				%>
+			</P>
+	</div>
+	<div class= "container">
+		<a><img src="<c:url value="https://techraptor.net/wp-content/uploads/2015/02/singularity.jpg" />" alt="TestDisplay"/></a>
+	</div>
+	
+	
 
 <div>
 	<c:import url="bottom.jsp" />

@@ -1,7 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <link rel="stylesheet"
 	  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	  
 
 
 <body>
@@ -33,7 +35,24 @@
 							<span class="glyphicon glyphicon-home"></span> Home
 						</a>
 					</li>
-
+					
+					
+					<c:if test="${user.type == -1}">
+					<li class = "dropdown">	
+						<li class="">
+							<a href="<c:url value="/customer_login" />">
+								<span class="fa fa-user-circle"></span>
+								Customer Login
+							</a>
+						</li>
+						<li class="">
+							<a href="<c:url value="/employee_login" />">
+								<span class="fa fa-user-circle-o"></span>
+								Employee Login
+							</a>
+						</li>					
+					</li>
+					</c:if>
 
 					<li class="dropdown">
 
@@ -156,9 +175,8 @@
 
 					</c:if>
 
+				<c:if test="${user.type == 0}">
 					<li class="dropdown">
-
-						<c:if test="${user.type == 0}">
 							<a data-toggle="dropdown" class="dropdown-toggle"
 							   href="#">
 								<span class="fa fa-area-chart"></span>
@@ -172,8 +190,36 @@
 									</a>
 								</li>
 							</ul>
-						</c:if>
-					</li>
+						</li>
+						
+						<li class="dropdown">
+							<a data-toggle="dropdown" class="dropdown-toggle"
+							   href="#">
+								<span class="fa fa-area-chart"></span>
+								My Account <b class="caret"></b>
+							</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="<c:url value="/customer_viewaccount" />">
+										<i class="fa fa-drivers-license"></i>
+										View My Account
+									</a>
+									<a href="<c:url value="/customer_changepassword" />">
+										<i class="fa fa-key"></i>
+										Change Password
+									</a>
+									<a href="<c:url value="/request_check" />">
+										<i class="fa fa-credit-card"></i>
+										Request Check
+									</a>
+									<a href="<c:url value="/customer_transactionhistory" />">
+										<i class="fa fa-search"></i>
+										View Transaction History
+									</a>
+								</li>
+							</ul>
+						</li>
+					</c:if>
 				</ul>
 
 
@@ -199,7 +245,7 @@
 								</li>
 							</c:if>
 
-							<c:if test="${user.type == 0}">
+							<%-- <c:if test="${user.type == 0}">
 								<li>
 									<a href="<c:url value="/customer_viewaccount" />">
 										<i class="fa fa-drivers-license"></i>
@@ -218,7 +264,7 @@
 										View Transaction History
 									</a>
 								</li>
-							</c:if>
+							</c:if> --%>
 
 							<c:if test="${user.type == 1}">
 							<li>

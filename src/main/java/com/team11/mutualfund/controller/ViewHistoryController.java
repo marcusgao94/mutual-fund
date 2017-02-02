@@ -57,10 +57,17 @@ public class ViewHistoryController {
     	if (userName != null) {
     		SearchForm searchForm = new SearchForm();
     		searchForm.setUserName(userName);
+    		 Customer c = customerService.getCustomerByUserName(searchForm.getUserName());
     		model.addAttribute("searchForm", searchForm);
+        	List<Transaction> pendingTransaction = transactionService.listPendingTransactionByCustomerId(c.getId());
+        	model.addAttribute("employee_pendingTransaction", pendingTransaction);
+            
+            List<Transaction> finishTransaction = transactionService.listFinishTransactionByCustomerId(c.getId());
+            model.addAttribute("employee_finishTransaction", finishTransaction);
     		return "employee_transactionhistory_fast";
     	}
-    	   
+		List<Customer> customerList = customerService.getCustomerList();
+	    model.addAttribute("customerList",customerList);   
         model.addAttribute("searchForm", new SearchForm());     
         return "employee_searchtransaction";
     }
@@ -69,24 +76,35 @@ public class ViewHistoryController {
     public String employeeViewHistory(HttpServletRequest request, Model model,
                                  @Valid SearchForm searchForm, BindingResult result,
                                  RedirectAttributes redirectAttributes) {
-        if (result.hasErrors())
+    	if (!checkEmployee(request)) {
+        	redirectAttributes.addFlashAttribute("loginError", NOTLOGIN);
+            return "redirect:/employee_login";
+        }
+    	
+    	if (result.hasErrors())
             return "employee_searchtransaction";
-        Customer c = customerService.getCustomerByUserName(searchForm.getUserName());
-
-        if (c == null) {
+        List<Customer> customerList = customerService.getCustomerList();
+	    model.addAttribute("customerList",customerList); 
+	    
+	    Customer customer = customerService.getCustomerByUserName(searchForm.getUserName());
+	    
+        if (customer == null) {
             FieldError userNameExistError = new FieldError("searchForm", "userName", NOUSERNAME);
             result.addError(userNameExistError);
             return "employee_searchtransaction";
         }
-
+        model.addAttribute("customer", customer);
         model.addAttribute("searchForm", searchForm);
-
-    	List<Transaction> pendingTransaction = transactionService.listPendingTransactionByCustomerId(c.getId());
+        //request.setAttribute("user", c);
+        
+    	List<Transaction> pendingTransaction = transactionService.listPendingTransactionByCustomerId(customer.getId());
     	model.addAttribute("employee_pendingTransaction", pendingTransaction);
         
-        List<Transaction> finishTransaction = transactionService.listFinishTransactionByCustomerId(c.getId());
+        List<Transaction> finishTransaction = transactionService.listFinishTransactionByCustomerId(customer.getId());
         model.addAttribute("employee_finishTransaction", finishTransaction);
-
+        
+         
+        
         return "employee_transactionhistory";
     }
 
