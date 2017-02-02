@@ -29,7 +29,7 @@
 				</tr>
 			</c:if>
 			<tr>
-				<td>User Name:</td>
+				<td>User Name: &nbsp;</td>
 				<td><input type="text" name="userName"
 						   value="${loginForm.getUserName()}" autofocus/>
 				</td>

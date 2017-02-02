@@ -1,7 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <link rel="stylesheet"
 	  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	  
 
 
 <body>
@@ -33,7 +35,24 @@
 							<span class="glyphicon glyphicon-home"></span> Home
 						</a>
 					</li>
-
+					
+					
+					<c:if test="${user.type == -1}">
+					<li class = "dropdown">	
+						<li class="">
+							<a href="<c:url value="/customer_login" />">
+								<span class="fa fa-user-circle"></span>
+								Customer Login
+							</a>
+						</li>
+						<li class="">
+							<a href="<c:url value="/employee_login" />">
+								<span class="fa fa-user-circle-o"></span>
+								Employee Login
+							</a>
+						</li>					
+					</li>
+					</c:if>
 
 					<li class="dropdown">
 

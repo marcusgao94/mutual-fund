@@ -62,7 +62,8 @@ public class ViewHistoryController {
     		model.addAttribute("searchForm", searchForm);
     		return "employee_transactionhistory_fast";
     	}
-    	   
+		List<Customer> customerList = customerService.getCustomerList();
+	    model.addAttribute("customerList",customerList);   
         model.addAttribute("searchForm", new SearchForm());     
         return "employee_searchtransaction";
     }
@@ -70,25 +71,34 @@ public class ViewHistoryController {
     @RequestMapping(value = "/employee_searchtransaction", method = RequestMethod.POST)
     public String employeeViewHistory(HttpServletRequest request, Model model,
                                  @Valid SearchForm searchForm, BindingResult result,
-                                 RedirectAttributes redirectAttributes) {
+                                 RedirectAttributes redirectAttributes, @Valid Customer customer) {
         if (result.hasErrors())
             return "employee_searchtransaction";
-        Customer c = customerService.getCustomerByUserName(searchForm.getUserName());
-
-        if (c == null) {
+        
+        
+        if (!checkEmployee(request)) {
+        	redirectAttributes.addFlashAttribute("loginError", NOTLOGIN);
+            return "redirect:/employee_login";
+        }
+        List<Customer> customerList = customerService.getCustomerList();
+	    model.addAttribute("customerList",customerList); 
+	
+        if (customer == null) {
             FieldError userNameExistError = new FieldError("searchForm", "userName", NOUSERNAME);
             result.addError(userNameExistError);
             return "employee_searchtransaction";
         }
-
+        model.addAttribute("customer", customer);
         model.addAttribute("searchForm", searchForm);
 
-    	List<Transaction> pendingTransaction = transactionService.listPendingTransactionByCustomerId(c.getId());
+    	List<Transaction> pendingTransaction = transactionService.listPendingTransactionByCustomerId(customer.getId());
     	model.addAttribute("employee_pendingTransaction", pendingTransaction);
         
-        List<Transaction> finishTransaction = transactionService.listFinishTransactionByCustomerId(c.getId());
+        List<Transaction> finishTransaction = transactionService.listFinishTransactionByCustomerId(customer.getId());
         model.addAttribute("employee_finishTransaction", finishTransaction);
-
+        
+         
+        
         return "employee_transactionhistory";
     }
 

@@ -31,7 +31,7 @@
 				</tr>
 			</c:if>
 			<tr>
-				<td>User Name:</td>
+				<td>User Name: &nbsp;</td>
 				<td><input type="text" name="userName"
 						   value="${loginForm.getUserName()}" autofocus/>
 				</td>
@@ -43,13 +43,6 @@
 				<td><input type="password" name="password" value=""/></td>
 				<td><form:errors path="password" cssClass="error"/></td>
 			</tr>
-
-			<!-- <tr>
-				<td>
-					<label><input type="checkbox"> Remember me</label>
-				</td>
-
-			</tr> -->
 			<tr>
 			<td><br/><td>
 			<td><br/><td>

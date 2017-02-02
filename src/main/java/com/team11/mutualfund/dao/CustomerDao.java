@@ -1,7 +1,10 @@
 package com.team11.mutualfund.dao;
 
 import com.team11.mutualfund.model.Customer;
+import com.team11.mutualfund.model.Fund;
 import com.team11.mutualfund.utils.User;
+
+import java.util.List;
 
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
@@ -37,6 +40,14 @@ public class CustomerDao extends AbstractDao<Long, Customer> {
 		return c;
     	
     }
+
+	@SuppressWarnings("unchecked")
+	public List<Customer> getCustomerList() {
+		Query query = getSession().createQuery(
+                "select c from Customer c"
+        );
+        return (List<Customer>) query.list();
+	}
 
     /*
     public void decreaseCash(long cid, double amount) {
