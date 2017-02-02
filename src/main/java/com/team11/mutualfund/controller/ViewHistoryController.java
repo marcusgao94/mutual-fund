@@ -72,7 +72,6 @@ public class ViewHistoryController {
             model.addAttribute("employee_finishTransaction", finishTransaction);
     		return "employee_transactionhistory_fast";
     	}
-    	System.out.println("22222");
 		List<Customer> customerList = customerService.getCustomerList();
 	    model.addAttribute("customerList",customerList);
 	    //request.getSession().setAttribute("customerList", customerList);
@@ -82,7 +81,7 @@ public class ViewHistoryController {
     // employeeViewHistory
     @RequestMapping(value = "/employee_searchtransaction", method = RequestMethod.POST)
     public String employeeViewHistory(HttpServletRequest request, Model model,
-                                      @ModelAttribute("customerList") LinkedList<Customer> customerList,
+                                      // @ModelAttribute("customerList") LinkedList<Customer> customerList,
                                  @Valid SearchForm searchForm, BindingResult result,
                                  RedirectAttributes redirectAttributes) {
     	if (!checkEmployee(request)) {

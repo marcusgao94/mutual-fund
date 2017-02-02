@@ -72,7 +72,7 @@ public class ViewAccountController {
 
     @RequestMapping(value = "/employee_searchcustomer", method = RequestMethod.POST)
     public String employeeViewAccount(HttpServletRequest request, Model model,
-                                      @ModelAttribute("customerList") LinkedList<Customer> customerList,
+                                      // @ModelAttribute("customerList") LinkedList<Customer> customerList,
                                       RedirectAttributes ra,
                                       @Valid SearchForm searchForm, BindingResult result) {
         if (!checkEmployee(request)) {

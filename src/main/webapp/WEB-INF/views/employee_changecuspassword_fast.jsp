@@ -23,27 +23,28 @@
 	<table class="table">
 		<tr>
 			<td>Customer User Name:</td>
-			<td><select name="userName" class="form-control" id="sel1">
-			<option value="">Please select a name
-			</option>
-			<c:forEach var="customer" items="${customerList}">
-				<option>${customer.userName}</option>
-			</c:forEach>
-		</select>
-		<form:errors path="userName" cssClass="error"/>
-		</td>
+			<td>
+				<select name="userName" class="form-control" id="sel1">
+					<option value="">Please select a name
+					</option>
+					<c:forEach var="customer" items="${customerList}">
+						<option>${customer.userName}</option>
+					</c:forEach>
+				</select>
+			</td>
+			<td><form:errors path="userName" cssClass="error"/></td>
 		</tr>
 
 		<tr>
 			<td>New Password:</td>
 			<td><input type="password" name="newPassword" value=""/></td>
-			<td><form:errors path="newPassword" cssClass="error" /></td>
+			<td><form:errors path="newPassword" cssClass="error"/></td>
 		</tr>
 
 		<tr>
 			<td>Confirm Password:</td>
 			<td><input type="password" name="confirmNewPassword" value=""/></td>
-			<td><form:errors path="confirmNewPassword" cssClass="error" /></td>
+			<td><form:errors path="confirmNewPassword" cssClass="error"/></td>
 		</tr>
 
 		<tr>
@@ -51,7 +52,7 @@
 				<input type="submit" value="Reset Password"/>
 			</td>
 			<td>
-				<input type="hidden" name="fast" value="fast" />
+				<input type="hidden" name="fast" value="fast"/>
 			</td>
 		</tr>
 	</table>
