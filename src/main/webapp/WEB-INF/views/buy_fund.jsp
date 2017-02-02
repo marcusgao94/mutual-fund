@@ -12,6 +12,11 @@
 		.error {
 			color: red;
 		}
+		.shares {
+		}
+
+		.price {
+		}
 	</style>
 </head>
 
@@ -25,7 +30,7 @@
 	<form:form method="post" modelAttribute="buyFundForm">
 		<table>
 			<tr>
-				<td> <form:errors path="" cssClass="error" /> </td>
+				<td><form:errors path="" cssClass="error"/></td>
 			</tr>
 			<tr>
 				<td>Fund Ticker:</td>
@@ -36,15 +41,15 @@
 			</tr>
 
 			<tr>
-				<td>Available Amount:</td>
-				<td>${buyFundForm.available}</td>
-					<td><input type="hidden" step="0.01" name="Available"
+				<td>Available Cash Amount:</td>
+				<td class="price">${buyFundForm.available}</td>
+				<td><input type="hidden" step="0.01" name="Available"
 						   value="${buyFundForm.available}"/>
 				<td><form:errors path="available" cssClass="error"/></td>
 			</tr>
 
 			<tr>
-				<td>Amount:</td>
+				<td>Enter Buy Amount:</td>
 				<td><input type="number" step="0.01" name="Amount"
 						   value="${buyFundForm.amount}"/></td>
 				<td><form:errors path="amount" cssClass="error"/></td>
@@ -64,9 +69,9 @@
 		</table>
 	</form:form>
 
-				<h3>My Funds</h3>
+	<h3>My Funds</h3>
 
-<div class="row">
+	<div class="row">
 		<div class="col-md-6">
 			<table class="table">
 				<thead>
@@ -83,9 +88,9 @@
 				<c:forEach var="customer_pv" items="${customerPosition}">
 
 					<tr>
-						
+
 						<td>
-						        ${customer_pv.fund.name}
+								${customer_pv.fund.name}
 						</td>
 						<td>
 								${customer_pv.fund.ticker}
@@ -105,9 +110,9 @@
 			</table>
 		</div>
 	</div>
-	
+
 	<h3>Available Funds</h3>
-	
+
 	<div class="row">
 		<div class="col-md-6">
 			<table class="table">
@@ -135,19 +140,37 @@
 			</table>
 		</div>
 	</div>
-	
-	
-	
-	
-	
-	</div>
 
 
+</div>
 
 
 <div>
 	<c:import url="bottom.jsp"/>
 </div>
+
+<script type="text/javascript">
+    var p = document.getElementsByClassName("price");
+    var i;
+    var n = 0;
+    for (i = 0; i < p.length; i++) {
+        var pr = p[i].innerHTML.trim();
+        if (pr)
+            p[i].innerHTML = parseFloat(pr).toFixed(2);
+        else {
+            p[i].innerHTML = n.toFixed(2);
+        }
+    }
+    var s = document.getElementsByClassName("shares");
+    for (i = 0; i < s.length; i++) {
+        var sh = s[i].innerHTML.trim();
+        if (sh)
+            s[i].innerHTML = parseFloat(sh).toFixed(3);
+        else {
+            s[i].innerHTML = n.toFixed(3);
+        }
+    }
+</script>
 
 </body>
 </html>

@@ -83,28 +83,22 @@ public class ViewHistoryController {
     	
     	if (result.hasErrors())
             return "employee_searchtransaction";
-        List<Customer> customerList = customerService.getCustomerList();
-	    model.addAttribute("customerList",customerList); 
-	    
+
 	    Customer customer = customerService.getCustomerByUserName(searchForm.getUserName());
-	    
         if (customer == null) {
             FieldError userNameExistError = new FieldError("searchForm", "userName", NOUSERNAME);
             result.addError(userNameExistError);
+            List<Customer> customerList = customerService.getCustomerList();
+            model.addAttribute("customerList",customerList);
             return "employee_searchtransaction";
         }
         model.addAttribute("customer", customer);
         model.addAttribute("searchForm", searchForm);
-        //request.setAttribute("user", c);
-        
     	List<Transaction> pendingTransaction = transactionService.listPendingTransactionByCustomerId(customer.getId());
     	model.addAttribute("employee_pendingTransaction", pendingTransaction);
         
         List<Transaction> finishTransaction = transactionService.listFinishTransactionByCustomerId(customer.getId());
         model.addAttribute("employee_finishTransaction", finishTransaction);
-        
-         
-        
         return "employee_transactionhistory";
     }
 

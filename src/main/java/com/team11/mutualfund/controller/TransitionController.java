@@ -2,6 +2,7 @@ package com.team11.mutualfund.controller;
 
 import static com.team11.mutualfund.controller.LoginController.checkEmployee;
 import static com.team11.mutualfund.utils.Constant.NOTLOGIN;
+import static com.team11.mutualfund.utils.Constant.SETTRANSITIONDAY;
 
 import java.text.DateFormat;
 import java.text.ParseException;
