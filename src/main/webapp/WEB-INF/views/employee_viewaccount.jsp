@@ -183,16 +183,20 @@
 						<table class="table bio-table">
 							<thead>
 							<tr>
-								<td>Name of the fund</td>
-								<td>Shares</td>
-								<td>Price</td>
-								<td>Value</td>
+								<td>Fund Name</td>
+								<td>Fund Ticker</td>
+								<td>Quantity of Shares</td>
+								<td>Price per Share</td>
+								<td>Total Value</td>
 							</tr>
 							</thead>
 							<c:forEach var="employee_cpv" items="${employee_customerpositionvalue}">
 								<tr>
 									<td>
 											${employee_cpv.fund.name}
+									</td>
+									<td>
+											${employee_cpv.fund.ticker}
 									</td>
 									<td class="shares">
 											${employee_cpv.shares}

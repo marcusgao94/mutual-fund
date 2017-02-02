@@ -77,7 +77,7 @@
 	<thead>
 		<tr>
 			<th>Transition Date</th>
-			<th>ID</th>
+			<th>Transition ID</th>
 			<th>Fund Name</th>
 			<th>Price</th>
 			<th>Quantity of Shares</th>
