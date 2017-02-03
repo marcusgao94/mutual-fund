@@ -29,8 +29,9 @@ public class CustomerService {
 	@Autowired
 	private CustomerDao customerDao;
 
+	@Transactional(isolation = Isolation.SERIALIZABLE)
 	public boolean createCustomer(Customer customer) {
-		if (customerDao.findByUserName(customer.getUserName()) != null) {
+		if (customerDao.findByUserNameForUpdate(customer.getUserName()) != null) {
 			return false;
 		}
 		customerDao.saveCustomer(customer);
@@ -44,7 +45,6 @@ public class CustomerService {
 	public Customer getCustomerByUserName(String userName) {
 		return customerDao.findByUserName(userName);
 	}
-
 
 	public List<Customer> getCustomerList() {
 		return customerDao.getCustomerList();

@@ -15,6 +15,9 @@
 		.error {
 			color: red;
 		}
+		.red-star {
+    	color: red;
+		}
 	</style>
 </head>
 <body>
@@ -30,7 +33,7 @@
 
 
 			<tr>
-				<td>User Name:</td>
+				<td><span class="red-star">*</span>User Name:</td>
 				<td>
 					<input type="text" name="userName"
 						   value="${employeeRegisterForm.getUserName()}"/>
@@ -41,7 +44,7 @@
 			</tr>
 
 			<tr>
-				<td>Password:</td>
+				<td><span class="red-star">*</span>Password:</td>
 				<td>
 					<input type="password" name="password" value=""/>
 				</td>
@@ -51,7 +54,7 @@
 			</tr>
 
 			<tr>
-				<td>Confirm Password:</td>
+				<td><span class="red-star">*</span>Confirm Password:</td>
 				<td>
 					<input type="password" name="confirmPassword" value=""/>
 				</td>
@@ -61,7 +64,7 @@
 			</tr>
 
 			<tr>
-				<td>First Name:</td>
+				<td><span class="red-star">*</span>First Name:</td>
 				<td>
 					<input type="text" name="firstName"
 						   value="${employeeRegisterForm.getFirstName()}" autofocus/>
@@ -72,7 +75,7 @@
 			</tr>
 
 			<tr>
-				<td>Last Name:</td>
+				<td><span class="red-star">*</span>Last Name:</td>
 				<td>
 					<input type="text" name="lastName"
 						   value="${employeeRegisterForm.getLastName()}"/>
@@ -81,7 +84,17 @@
 					<form:errors path="lastName" cssClass="error"/>
 				</td>
 			</tr>
-
+			<tr>
+				<td><br/></td>
+				<td><br/></td>
+			</tr>
+			<tr>
+					<td><span class="red-star">*</span> is required</td>
+			</tr>
+			<tr>
+				<td><br/></td>
+				<td><br/></td>
+			</tr>
 			<tr>
 				<th colspan="2">
 					<input type="submit" name="button" value="Register"/>
