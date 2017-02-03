@@ -61,8 +61,11 @@ public class ChangePasswordController {
             redirectAttributes.addFlashAttribute("loginError", NOTLOGIN);
             return "redirect:/employee_login";
         }
-
-        model.addAttribute("changePasswordForm", new ChangePasswordForm());
+        
+        ChangePasswordForm changePasswordForm = new ChangePasswordForm();
+        User user = (User) request.getSession().getAttribute("user");
+        changePasswordForm.setUserName(user.getUserName());
+        model.addAttribute("changePasswordForm", changePasswordForm);
         return "employee_changepassword";
     }
 
