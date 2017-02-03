@@ -11,8 +11,8 @@ import java.util.List;
 
 import javax.transaction.RollbackException;
 
-import org.hibernate.exception.LockAcquisitionException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -29,13 +29,8 @@ public class CustomerService {
 	@Autowired
 	private CustomerDao customerDao;
 
-	@Transactional(isolation = Isolation.SERIALIZABLE)
-	public boolean createCustomer(Customer customer) {
-		if (customerDao.findByUserNameForUpdate(customer.getUserName()) != null) {
-			return false;
-		}
+	public void createCustomer(Customer customer) throws DataIntegrityViolationException {
 		customerDao.saveCustomer(customer);
-		return true;
 	}
 
 	public Customer getCustomerById(long id) {

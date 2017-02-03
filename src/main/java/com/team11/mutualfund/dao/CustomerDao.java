@@ -78,16 +78,5 @@ public class CustomerDao extends AbstractDao<Long, Customer> {
         return (List<Customer>) query.list();
 	}
 
-    /*
-    public void decreaseCash(long cid, double amount) {
-        Query query = getSession().createQuery(
-                "update Customer c " +
-                        "set c.cash = c.cash - :amount " +
-                        "where c.id = :cid"
-        )
-                .setParameter("amount", amount)
-                .setParameter("cid", cid);
-    }
-    */
 
 }

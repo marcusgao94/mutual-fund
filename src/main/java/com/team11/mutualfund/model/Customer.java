@@ -16,7 +16,7 @@ public class Customer implements Serializable {
 	@GeneratedValue
 	private long id;
 
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	private String userName;
 
 	@Column(nullable = false)

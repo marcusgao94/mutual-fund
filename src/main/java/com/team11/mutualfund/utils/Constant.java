@@ -10,6 +10,8 @@ public class Constant {
     public static final String EMPTYUSERNAME = "User name cannot be empty";
     public static final String NOUSERNAME = "User name does not exist";
     public static final String DUPLICATEUSERNAME = "User name already exists";
+    public static final String EMPTYFIRSTNAME = "First name cannot be empty";
+    public static final String EMPTYLASTNAME = "Last name cannot be empty";
 
     public static final String EMPTYPASSWORD = "Password cannot be empty";
     public static final String INCONSISTENTPASSWORD = "Password inconsistent";
@@ -38,6 +40,11 @@ public class Constant {
     		+ "Please wait for the next transition day!";
 
     public static final String SETTRANSITIONDAY = "New transition day has been set successfully!";
+
+    public static final String EMPTYADDR = "Address line cannot be empty";
+    public static final String EMPTYCITY = "City cannot be empty";
+    public static final String EMPTYSTATE = "State cannot be empty";
+    public static final String EMPTYZIP = "Zip cannot be empty";
 
     //public static final String DEPOSITCHECK = "Deposit check successfully";
 

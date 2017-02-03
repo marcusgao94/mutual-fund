@@ -9,6 +9,7 @@ import com.team11.mutualfund.service.EmployeeService;
 import com.team11.mutualfund.utils.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.transaction.RollbackException;
 import javax.validation.Valid;
 
 import static com.team11.mutualfund.controller.LoginController.checkEmployee;
@@ -66,12 +68,12 @@ public class RegisterController {
             return "employee_register";
         }
         Employee employee = new Employee(employeeRegisterForm);
-        if (!employeeService.createEmployee(employee)) {
-            FieldError userNameUniqueError = new FieldError("employeeRegisterForm", "userName", DUPLICATEUSERNAME);
-            result.addError(userNameUniqueError);
+        try {
+            employeeService.createEmployee(employee);
+        } catch (DataIntegrityViolationException e) {
+            result.rejectValue("userName", "", DUPLICATEUSERNAME);
             return "employee_register";
         }
-
         model.addAttribute("success", "Employee " + employee.getUserName() + " registered successfully");
         return "success";
     }
@@ -103,15 +105,14 @@ public class RegisterController {
         if (result.hasErrors())
             return "customer_register";
         Customer customer = new Customer(customerRegisterForm);
-        if (!customerService.createCustomer(customer)) {
-            FieldError userNameUniqueError = new FieldError("customerRegisterForm", "userName", DUPLICATEUSERNAME);
-            result.addError(userNameUniqueError);
+        try {
+            customerService.createCustomer(customer);
+        } catch (DataIntegrityViolationException e) {
+            result.rejectValue("userName", "", DUPLICATEUSERNAME);
             return "customer_register";
         }
 
         model.addAttribute("success", "customer " + customer.getUserName() + " registered successfully");
-        
-        /*include success in the page*/
         return "success";
     }
 

@@ -6,6 +6,7 @@ import javax.transaction.RollbackException;
 
 import com.team11.mutualfund.dao.EmployeeDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,19 +21,15 @@ public class EmployeeService {
 	@Autowired
 	private EmployeeDao employeeDao;
 
-	@Transactional(isolation = Isolation.SERIALIZABLE)
-	public boolean createEmployee(Employee employee) {
-		if (employeeDao.findByUserNameForUpdate(employee.getUserName()) != null) {
-			return false;
-		}
+	// @Transactional(isolation = Isolation.SERIALIZABLE)
+	public void createEmployee(Employee employee) throws DataIntegrityViolationException {
 		employeeDao.saveEmployee(employee);
-		return true;
 	}
 
 	public Employee getEmployeeByUserName(String userName) {
 		return employeeDao.findByUserName(userName);
 	}
-	
+
 	public List<Employee> getEmployeeList() {
 		return employeeDao.getEmployeeList();
 	}

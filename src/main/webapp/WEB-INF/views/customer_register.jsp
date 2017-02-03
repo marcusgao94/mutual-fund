@@ -95,7 +95,7 @@
 			</tr>
 
 			<tr>
-				<td><span class="red-star">*</span>Address Line2:</td>
+				<td>Address Line2:</td>
 				<td>
 					<input type="text" name="addr_line2"
 						   value="${customerRegisterForm.getAddr_line2()}"/>

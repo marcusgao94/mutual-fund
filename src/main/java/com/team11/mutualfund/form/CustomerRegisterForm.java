@@ -7,10 +7,7 @@ import org.springframework.validation.Errors;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import static com.team11.mutualfund.utils.Constant.EMPTYPASSWORD;
-import static com.team11.mutualfund.utils.Constant.EMPTYUSERNAME;
-import static com.team11.mutualfund.utils.Constant.INCONSISTENTPASSWORD;
-import static com.team11.mutualfund.utils.Constant.CANNOTEMPTY;
+import static com.team11.mutualfund.utils.Constant.*;
 
 
 public class CustomerRegisterForm {
@@ -23,25 +20,26 @@ public class CustomerRegisterForm {
 
     private String confirmPassword;
     
-    @Size(min = 1, message = CANNOTEMPTY)
+    @Size(min = 1, message = EMPTYFIRSTNAME)
     private String firstName;
     
-    @Size(min = 1, message = CANNOTEMPTY)
+    @Size(min = 1, message = EMPTYLASTNAME)
     private String lastName;
     
-    @Size(min = 1, message = CANNOTEMPTY)
+    @Size(min = 1, message = EMPTYADDR)
     private String addr_line1;
-    
-    @Size(min = 1, message = CANNOTEMPTY)
+
     private String addr_line2;
-    
-    @Size(min = 1, message = CANNOTEMPTY)
+
+    @NotNull
+    @Size(min = 1, message = EMPTYCITY)
     private String city;
-    
-    @Size(min = 1, message = CANNOTEMPTY)
+
+    @NotNull
+    @Size(min = 1, message = EMPTYSTATE)
     private String state;
     
-    @NotNull (message = CANNOTEMPTY)
+    @NotNull (message = EMPTYZIP)
     private Integer zip;
 
     public String sanitize(String s) {
