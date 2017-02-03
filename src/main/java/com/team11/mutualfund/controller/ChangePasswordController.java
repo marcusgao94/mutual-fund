@@ -94,7 +94,6 @@ public class ChangePasswordController {
             return "employee_changepassword";
         }
 
-		/*consider to separate the page*/
         model.addAttribute("success", "Employee " + name + " update password successfully");
         return "success";
     }
