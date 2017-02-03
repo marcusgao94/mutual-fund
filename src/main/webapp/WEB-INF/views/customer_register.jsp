@@ -38,7 +38,7 @@
 				<td><span class="red-star">*</span>User Name:</td>
 				<td>
 					<input type="text" name="userName"
-						   value="${customerRegisterForm.getUserName()}"/>
+						   value="${customerRegisterForm.userName}"/>
 				</td>
 				<td>
 					<form:errors path="userName" cssClass="error"/>
@@ -68,7 +68,7 @@
 				<td><span class="red-star">*</span>First Name:</td>
 				<td>
 					<input type="text" name="firstName"
-						   value="${customerRegisterForm.getFirstName()}" autofocus/>
+						   value="${customerRegisterForm.firstName}" autofocus/>
 				</td>
 				<td>
 					<form:errors path="firstName" cssClass="error"/>
@@ -79,7 +79,7 @@
 				<td><span class="red-star">*</span>Last Name:</td>
 				<td>
 					<input type="text" name="lastName"
-						   value="${customerRegisterForm.getLastName()}"/>
+						   value="${customerRegisterForm.lastName}"/>
 				</td>
 				<td>
 					<form:errors path="lastName" cssClass="error"/>
@@ -90,7 +90,10 @@
 				<td><span class="red-star">*</span>Address Line1:</td>
 				<td>
 					<input type="text" name="addr_line1"
-						   value="${customerRegisterForm.getAddr_line1()}"/>
+						   value="${customerRegisterForm.addr_line1}"/>
+				</td>
+				<td>
+					<form:errors path="addr_line1" cssClass="error"/>
 				</td>
 			</tr>
 
@@ -98,7 +101,7 @@
 				<td>Address Line2:</td>
 				<td>
 					<input type="text" name="addr_line2"
-						   value="${customerRegisterForm.getAddr_line2()}"/>
+						   value="${customerRegisterForm.addr_line2}"/>
 				</td>
 			</tr>
 
@@ -106,17 +109,30 @@
 				<td><span class="red-star">*</span>City:</td>
 				<td>
 					<input type="text" name="city"
-						   value="${customerRegisterForm.getCity()}"/>
+						   value="${customerRegisterForm.city}"/>
 				</td>
+				<td>
+					<form:errors path="city" cssClass="error"/>
+				</td>
+			</tr>
+			<tr>
 				<td><span class="red-star">*</span>State:</td>
 				<td>
 					<input type="text" name="state"
 						   value="${customerRegisterForm.getState()}"/>
 				</td>
+				<td>
+					<form:errors path="state" cssClass="error"/>
+				</td>
+			</tr>
+			<tr>
 				<td><span class="red-star">*</span>Zip code:</td>
 				<td>
-					<input type="number" name="zip"
-						   value="${customerRegisterForm.getZip()}"/>
+					<input type="number" name="zip" step="1"
+						   value="${customerRegisterForm.zip}"/>
+				</td>
+				<td>
+					<form:errors path="zip" cssClass="error"/>
 				</td>
 			</tr>
 			

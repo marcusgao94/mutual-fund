@@ -4,8 +4,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.validation.DirectFieldBindingResult;
 import org.springframework.validation.Errors;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 import static com.team11.mutualfund.utils.Constant.*;
 
@@ -40,6 +39,8 @@ public class CustomerRegisterForm {
     private String state;
     
     @NotNull (message = EMPTYZIP)
+    @Min(value = 10000, message = "zip need to between 10000 and 999999")
+    @Max(value = 1000000, message = "zip need to between 10000 and 999999")
     private Integer zip;
 
     public String sanitize(String s) {
