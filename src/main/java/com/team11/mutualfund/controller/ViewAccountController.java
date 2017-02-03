@@ -35,7 +35,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
-@SessionAttributes("customerList")
+@SessionAttributes(value = {"customerList", "employeeList"})
 public class ViewAccountController {
     @Autowired
     private TransitionService transitionService;
@@ -116,9 +116,6 @@ public class ViewAccountController {
         model.addAttribute("searchForm", searchForm);
         return "employee_searchemployee";
     }
-
-    
-    
 
     @RequestMapping(value = "/employee_searchemployee", method = RequestMethod.POST)
     public String employeeAccount(HttpServletRequest request, Model model,
