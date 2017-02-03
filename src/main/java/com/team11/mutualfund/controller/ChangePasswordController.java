@@ -141,7 +141,7 @@ public class ChangePasswordController {
             return "customer_changepassword";
         }
 
-        /*consider to separate the page*/
+
         model.addAttribute("success", "Customer " + ((User) session.getAttribute("user")).getUserName() + " update password successfully");
         return "success";
     }
