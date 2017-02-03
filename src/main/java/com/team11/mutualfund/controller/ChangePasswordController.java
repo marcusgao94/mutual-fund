@@ -61,7 +61,7 @@ public class ChangePasswordController {
             redirectAttributes.addFlashAttribute("loginError", NOTLOGIN);
             return "redirect:/employee_login";
         }
-        
+
         ChangePasswordForm changePasswordForm = new ChangePasswordForm();
         User user = (User) request.getSession().getAttribute("user");
         changePasswordForm.setUserName(user.getUserName());
@@ -138,7 +138,7 @@ public class ChangePasswordController {
         try {
             customerService.updatePassword(cid, originPassword, newPassword);
         } catch (RollbackException e) {
-                result.rejectValue("originPassword", "", e.getMessage());
+            result.rejectValue("originPassword", "", e.getMessage());
             return "customer_changepassword";
         }
         model.addAttribute("success", "Customer " + ((User) session.getAttribute("user")).getUserName() + " update password successfully");
@@ -146,31 +146,28 @@ public class ChangePasswordController {
     }
 
     //employee update customer's password
-    @RequestMapping(value = "/employee_changecuspassword", method = RequestMethod.GET)
+    @RequestMapping(value = "/employee_changecuspassword/{userName}", method = RequestMethod.GET)
     public String employeeChangeCusPassword(HttpServletRequest request, Model model,
                                             RedirectAttributes redirectAttributes,
-                                            @RequestParam(value = "un", required = false) String userName) {
+                                            @PathVariable String userName) {
         if (!checkEmployee(request)) {
             redirectAttributes.addFlashAttribute("loginError", NOTLOGIN);
             return "redirect:/employee_login";
         }
-        if (userName != null) {
-            Customer customer = customerService.getCustomerByUserName(userName);
-            ChangePasswordForm cpf = new ChangePasswordForm();
-            cpf.setUserName(userName);
-            cpf.setOriginPassword(customer.getPassword());
-            model.addAttribute("changePasswordForm", cpf);
-            return "employee_changecuspassword";
-        }
-        List<Customer> customerList = customerService.getCustomerList();
-        model.addAttribute("customerList", customerList);
-        model.addAttribute("changePasswordForm", new ChangePasswordForm());
-        return "employee_changecuspassword_fast";
+        Customer customer = customerService.getCustomerByUserName(userName);
+        if (customer == null)
+            return "redirect:/employee_searchcustomer";
+        ChangePasswordForm cpf = new ChangePasswordForm();
+        cpf.setUserName(userName);
+        cpf.setOriginPassword(customer.getPassword());
+        model.addAttribute("changePasswordForm", cpf);
+        return "employee_changecuspassword";
     }
 
 
-    @RequestMapping(value = "/employee_changecuspassword", method = RequestMethod.POST)
+    @RequestMapping(value = "/employee_changecuspassword/{un}", method = RequestMethod.POST)
     public String employeeChangeCusPassword(HttpServletRequest request, Model model,
+                                            @PathVariable String un,
                                             @Valid ChangePasswordForm changePasswordForm, BindingResult result,
                                             String fast, RedirectAttributes redirectAttributes) {
         if (!checkEmployee(request)) {
@@ -180,8 +177,8 @@ public class ChangePasswordController {
         // get the error from the form validation
         result.addAllErrors(changePasswordForm.getValidationErrors());
         if (result.hasErrors())
-            return fast == null? "employee_changecuspassword": "employee_changecuspassword_fast";
-        
+            return fast == null ? "employee_changecuspassword" : "employee_changecuspassword_fast";
+
         String userName = changePasswordForm.getUserName();
         String originPassword = changePasswordForm.getOriginPassword();
         String newPassword = changePasswordForm.getNewPassword();
@@ -196,7 +193,7 @@ public class ChangePasswordController {
                 result.rejectValue("originPassword", "", message);
             else
                 result.rejectValue("originPassword", "", WRONGPASSWORD);
-            return fast == null? "employee_changecuspassword": "employee_changecuspassword_fast";
+            return fast == null ? "employee_changecuspassword" : "employee_changecuspassword_fast";
         }
         model.addAttribute("success", "Customer " + userName + " password has been updated successfully");
         return "success";

@@ -129,7 +129,7 @@
 							</table>
 							<div class="text-right">
 								<!--   <button type="button" class="btn btn-primary">Edit</button> -->
-								<a href="<c:url value="/employee_changecuspassword?un=${employee_customeraccount.userName}" />">
+								<a href="<c:url value="/employee_changecuspassword/${employee_customeraccount.userName}" />">
 									<button class="btn btn-primary">
 										Reset password
 									</button>

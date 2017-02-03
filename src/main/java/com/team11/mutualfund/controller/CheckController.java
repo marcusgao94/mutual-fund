@@ -48,6 +48,9 @@ public class CheckController {
             return "redirect:/employee_login";
         }
         if (userName != null) {
+            Customer c = customerService.getCustomerByUserName(userName);
+            if (c == null)
+                return "redirect:/employee_searchcustomer";
             DepositCheckForm dpf = new DepositCheckForm();
             dpf.setUserName(userName);
             model.addAttribute("depositCheckForm", dpf);
@@ -73,11 +76,9 @@ public class CheckController {
             transactionService.depositCheck(
                 depositCheckForm.getUserName(), depositCheckForm.getAmount());
         } catch (RollbackException e) {
-            result.rejectValue("customerId", "0", e.getMessage());
+            result.rejectValue("userName", "0", e.getMessage());
             return fast == null? "deposit_check": "deposit_check_fast";
         }
-        Customer c = customerService.getCustomerByUserName(depositCheckForm.getUserName());
-        model.addAttribute("customer", c);
         model.addAttribute("success", "You have successfully deposit check for " + depositCheckForm.getUserName());
         return "success";
     }

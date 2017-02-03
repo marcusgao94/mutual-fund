@@ -55,13 +55,14 @@ public class ViewHistoryController {
             return "redirect:/employee_login";
         }
     	if (userName != null) {
+            Customer c = customerService.getCustomerByUserName(userName);
+            if (c == null)
+                return "redirect:/employee_searchcustomer";
     		SearchForm searchForm = new SearchForm();
     		searchForm.setUserName(userName);
-    		Customer c = customerService.getCustomerByUserName(searchForm.getUserName());
     		model.addAttribute("userName",userName);
     		List<Transaction> pendingTransaction = transactionService.listPendingTransactionByCustomerId(c.getId());
         	model.addAttribute("employee_pendingTransaction", pendingTransaction);
-        	System.out.println("1111111");
             List<Transaction> finishTransaction = transactionService.listFinishTransactionByCustomerId(c.getId());
             model.addAttribute("employee_finishTransaction", finishTransaction);
     		return "employee_transactionhistory_fast";
