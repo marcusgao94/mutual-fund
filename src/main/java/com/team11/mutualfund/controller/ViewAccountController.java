@@ -42,20 +42,20 @@ public class ViewAccountController {
 
     @Autowired
     private CustomerService customerService;
-    
+
     @Autowired
     private EmployeeService employeeService;
 
     @Autowired
     private FundService fundService;
-    
+
 
     // employeeViewCustomer
     @RequestMapping(value = "/employee_searchcustomer", method = RequestMethod.GET)
-    public String employeeViewAccount(HttpServletRequest request, Model model, RedirectAttributes ra, 
-    		@RequestParam(value = "un", required = false) String userName)  {
+    public String employeeViewAccount(HttpServletRequest request, Model model,
+                                      RedirectAttributes ra) {
 
-    		if (!checkEmployee(request)) {
+        if (!checkEmployee(request)) {
             ra.addFlashAttribute("loginError", NOTLOGIN);
             return "redirect:/employee_login";
         }
@@ -78,7 +78,7 @@ public class ViewAccountController {
         // model.addAttribute("customerList", customerList);
         if (result.hasErrors())
             return "employee_searchcustomer";
-        
+
         Customer c = customerService.getCustomerByUserName(searchForm.getUserName());
         model.addAttribute("customer", c);
         if (c == null) {
@@ -99,14 +99,12 @@ public class ViewAccountController {
         }
         return "employee_viewaccount";
     }
-    
-    
- // employee account
-    @RequestMapping(value = "/employee_searchemployee", method = RequestMethod.GET)
-    public String employeeAccount(HttpServletRequest request, Model model, RedirectAttributes ra, 
-    		@RequestParam(value = "un", required = false) String userName)  {
 
-    		if (!checkEmployee(request)) {
+
+    // employee account
+    @RequestMapping(value = "/employee_searchemployee", method = RequestMethod.GET)
+    public String employeeAccount(HttpServletRequest request, Model model, RedirectAttributes ra) {
+        if (!checkEmployee(request)) {
             ra.addFlashAttribute("loginError", NOTLOGIN);
             return "redirect:/employee_login";
         }
@@ -119,21 +117,21 @@ public class ViewAccountController {
 
     @RequestMapping(value = "/employee_searchemployee", method = RequestMethod.POST)
     public String employeeAccount(HttpServletRequest request, Model model,
-                                      RedirectAttributes ra,
-                                      @Valid SearchForm searchForm, BindingResult result) {
+                                  RedirectAttributes ra,
+                                  @Valid SearchForm searchForm, BindingResult result) {
         if (!checkEmployee(request)) {
             ra.addFlashAttribute("loginError", NOTLOGIN);
             return "redirect:/employee_login";
         }
-       
+
         if (result.hasErrors())
             return "employee_searchemployee";
-          Employee e = employeeService.getEmployeeByUserName(searchForm.getUserName());
-          
-       
-          model.addAttribute("employee", e);
-          
-          
+        Employee e = employeeService.getEmployeeByUserName(searchForm.getUserName());
+
+
+        model.addAttribute("employee", e);
+
+
         if (e == null) {
             result.rejectValue("userName", "", NOUSERNAME);
             return "employee_searchemployee";
@@ -141,13 +139,11 @@ public class ViewAccountController {
         searchForm.setUserName("");
         model.addAttribute("searchForm", searchForm);
         //model.addAttribute("employee_customeraccount", );
-  
+
         return "employee_account";
     }
 
-    
-    
-    
+
     // customer
     @RequestMapping(value = "customer_viewaccount", method = RequestMethod.GET)
     public String customerViewAccount(HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) {
@@ -159,7 +155,7 @@ public class ViewAccountController {
         User user = (User) session.getAttribute("user");
         Customer c = customerService.getCustomerById(user.getId());
         model.addAttribute("customer_account", c);
-        
+
         LocalDate d = transitionService.getLastTransitionDay();
         if (d == null)
             model.addAttribute("date", "no last transition day");

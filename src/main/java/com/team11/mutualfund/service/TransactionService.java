@@ -62,7 +62,7 @@ public class TransactionService {
         Fund fund = fundDao.findByTicker(ticker);
         if (customer == null)
             throw new RollbackException("customer id " + String.valueOf(cid) + " does not exist");
-        if (fund == null)
+        if (fund == null || !fund.getTicker().equals(ticker))
             throw new RollbackException("fund ticker " + String.valueOf(ticker) + " does not exist");
         CustomerFund cf = new CustomerFund();
         cf.setCustomerId(cid);

@@ -116,7 +116,7 @@ public class TransitionService {
             double amount = price * t.getShares();
             t.setPrice(price);
             t.setAmount(amount);
-            // add customer shares of this fund in position
+            // increase cash in customer account
             customer.setCash(customer.getCash() + amount);
         }
     }
