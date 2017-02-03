@@ -6,6 +6,7 @@ import org.springframework.validation.Errors;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import static com.team11.mutualfund.utils.Constant.NOENOUGHCASH;
 import static com.team11.mutualfund.utils.Constant.TOOLITTLEAMOUNT;
 
 public class BuyFundForm {
@@ -21,9 +22,10 @@ public class BuyFundForm {
 
     public Errors getValidationError() {
         Errors errors = new DirectFieldBindingResult(this, "buyFundForm");
-        if (amount != null && amount < 0.01) {
+        if (amount != null && amount < 0.01)
             errors.rejectValue("amount", "", TOOLITTLEAMOUNT);
-        }
+        if (amount != null && available != null && amount < available)
+            errors.rejectValue("amount", "", NOENOUGHCASH);
         return errors;
     }
     public String sanitize(String s) {
