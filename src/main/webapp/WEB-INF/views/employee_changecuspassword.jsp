@@ -19,33 +19,24 @@
 </div>
 
 <div class="container">
-	
-	
+
+
 	<h5>Reset Customer Password</h5>
 	<form:form modelAttribute="changePasswordForm">
-		<table>
+		<table class="table">
 			<tr>
 				<td>User Name:</td>
 				<td><h4>${changePasswordForm.userName}</h4></td>
 				<td><form:errors path="userName" cssClass="error"/></td>
 				<td>
-					<input type="hidden" name="userName" value="${changePasswordForm.userName}" />
+					<input type="hidden" name="userName" value="${changePasswordForm.userName}"/>
 				</td>
 			</tr>
-			
-			<tr>
-			
-			<td>
-				<input type="hidden" name="originPassword" value="${changePasswordForm.originPassword}">
-			</td>
-				<form:errors path="originPassword" cssClass="error" />
-			</tr>
 
-				
 			<tr>
 				<td>New Password:</td>
 				<td>
-					<input type="password" name="newPassword" value="" autofocus/>
+					<input type="password" name="newPassword" />
 				</td>
 				<td><form:errors path="newPassword" cssClass="error"/></td>
 			</tr>
@@ -57,18 +48,17 @@
 				</td>
 				<td><form:errors path="confirmNewPassword" cssClass="error"/></td>
 			</tr>
-			
 			<tr>
-				<th>
-				<br/>
-				<th>
-			<tr>
-				<th colspan="2">
-					<input type="submit" name="button" value="Change Password"/>
-				</th>
+				<td>
+					<input type="hidden" name="originPassword"
+						   value="${changePasswordForm.originPassword}">
+				</td>
+				<td>
+					<form:errors path="originPassword" cssClass="error"/>
+				</td>
 			</tr>
-
 		</table>
+		<input type="submit" name="button" value="Change Password"/>
 	</form:form>
 </div>
 

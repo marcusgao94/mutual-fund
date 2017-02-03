@@ -31,8 +31,8 @@ public class Constant {
     public static final String NOFUNDPRICEHISTORY = "Price of this fund on this date is not set";
     public static final String DUPLICATEFUNDPRICEHISTORY = "Price of this fund on this date " +
             "has set";
-    public static final String NEWFUNDCREATED = "new fund has been created, please refresh";
-    public static final String WRONGTRANSITIONDAY = "transition day must after last transition day";
+    public static final String NEWFUNDCREATED = "New fund has been created, please refresh";
+    public static final String WRONGTRANSITIONDAY = "Transition day must after last transition day";
 
     public static final String REQUESTCHECKSUCCESS = "Your request has been submitted successfully! "
     		+ "Please wait for the next transition day!";

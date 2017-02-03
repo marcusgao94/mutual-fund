@@ -62,10 +62,12 @@ public class CustomerService {
 		return c;
 	}
 
-	public Customer updatePassword(String userName, String newPassword) throws RollbackException {
+	public Customer updatePassword(String userName, String originPassword, String newPassword) throws RollbackException {
 		Customer c =  customerDao.findByUserNameForUpdate(userName);
 		if (c == null)
 			throw new RollbackException(NOCUSTOMER);
+		if (!c.getPassword().equals(originPassword))
+			throw new RollbackException("Password has been reset by other employees");
 		c.setPassword(newPassword);
 		return c;
 	}

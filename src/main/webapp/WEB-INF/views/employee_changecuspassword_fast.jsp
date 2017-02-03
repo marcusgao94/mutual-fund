@@ -19,66 +19,67 @@
 </div>
 
 <div class="container">
-<div class="col-sm-8">
-<h3>Reset Customer Password</h3>
-<form:form modelAttribute="changePasswordForm">
-	
-	<table class="table">
-		<tr>
-			<td>Customer User Name:</td>
-			<td>
-			<div class="col-sm-7">
-				<select name="userName" class="form-control" id="sel1">
-					<option value="">Please select a name
-					</option>
-					<c:forEach var="customer" items="${customerList}">
-						<option>${customer.userName}</option>
-					</c:forEach>
-				</select>
-				</div>
-			</td>
-			<td><form:errors path="userName" cssClass="error"/></td>
-		</tr>
-		
-		
-		<tr>
-		
-		<td>
-			<input type="hidden" name="originPassword" value="${changePasswordForm.originPassword}">
-		</td>
-			<form:errors path="originPassword" cssClass="error" />
-		</tr>
+	<div class="col-sm-8">
+		<h3>Reset Customer Password</h3>
+		<form:form modelAttribute="changePasswordForm">
 
-		<tr>
-			<td>New Password:</td>
-			<td><input type="password" name="newPassword" value=""/></td>
-			<td><form:errors path="newPassword" cssClass="error"/></td>
-		</tr>
+			<table class="table">
+				<tr>
+					<td>Customer User Name:</td>
+					<td>
+						<div class="col-sm-7">
+							<select name="userName" class="form-control" id="sel1">
+								<option value="">Please select a name
+								</option>
+								<c:forEach var="customer" items="${customerList}">
+									<option>${customer.userName}</option>
+								</c:forEach>
+							</select>
+						</div>
+					</td>
+					<td><form:errors path="userName" cssClass="error"/></td>
+				</tr>
 
-		<tr>
-			<td>Confirm Password:</td>
-			<td><input type="password" name="confirmNewPassword" value=""/></td>
-			<td><form:errors path="confirmNewPassword" cssClass="error"/></td>
-		</tr>
-		
-		<tr>
-			<td><br/><br/></td>
-		</tr>
-		<tr>
-			<td>
-				<input type="submit" value="Reset Password"/>
-			</td>
-			<td>
-				<input type="hidden" name="fast" value="fast"/>
-			</td>
-		</tr>
-	</table>
-	
-	
-</form:form>
+
+				<tr>
+					<td>
+						<input type="hidden" name="originPassword"
+							   value="${changePasswordForm.originPassword}">
+					</td>
+					<td>
+						<form:errors path="originPassword" cssClass="error"/>
+					</td>
+				</tr>
+
+				<tr>
+					<td>New Password:</td>
+					<td><input type="password" name="newPassword" value=""/></td>
+					<td><form:errors path="newPassword" cssClass="error"/></td>
+				</tr>
+
+				<tr>
+					<td>Confirm Password:</td>
+					<td><input type="password" name="confirmNewPassword" value=""/></td>
+					<td><form:errors path="confirmNewPassword" cssClass="error"/></td>
+				</tr>
+
+				<tr>
+					<td><br/><br/></td>
+				</tr>
+				<tr>
+					<td>
+						<input type="submit" value="Reset Password"/>
+					</td>
+					<td>
+						<input type="hidden" name="fast" value="fast"/>
+					</td>
+				</tr>
+			</table>
+
+
+		</form:form>
+	</div>
 </div>
-</div>
-
 
 
 <div>
