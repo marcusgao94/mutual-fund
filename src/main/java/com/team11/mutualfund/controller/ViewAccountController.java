@@ -78,6 +78,7 @@ public class ViewAccountController {
         // model.addAttribute("customerList", customerList);
         if (result.hasErrors())
             return "employee_searchcustomer";
+        
         Customer c = customerService.getCustomerByUserName(searchForm.getUserName());
         model.addAttribute("customer", c);
         if (c == null) {
@@ -140,7 +141,7 @@ public class ViewAccountController {
             result.rejectValue("userName", "", NOUSERNAME);
             return "employee_searchemployee";
         }
-        // searchForm.setUserName("");
+        searchForm.setUserName("");
         model.addAttribute("searchForm", searchForm);
         //model.addAttribute("employee_customeraccount", );
   
