@@ -64,8 +64,9 @@
 				<thead>
 				<tr>
 					<th>Transaction ID</th>
+					<th>Fund Ticker</th>
 					<th>Fund Name</th>
-					<th>Price</th>
+					<th>Price Per Share</th>
 					<th>Quantity of Shares</th>
 					<th>Total Amount</th>
 					<th>Operations</th>
@@ -76,6 +77,9 @@
 				<tr>
 					<td>
 							${employee_pendingtransaction.id}
+					</td>
+					<td>
+							${employee_pendingtransaction.fund.ticker}
 					</td>
 					<td>
 							${employee_pendingtransaction.fund.name}
@@ -107,8 +111,9 @@
 				<tr>
 					<th>Transition Date</th>
 					<th>Transition ID</th>
+					<th>Fund Ticker</th>
 					<th>Fund Name</th>
-					<th>Price</th>
+					<th>Price Per Share</th>
 					<th>Quantity of Shares</th>
 					<th>Total Amount</th>
 					<th>Operations</th>
@@ -122,6 +127,9 @@
 					</td>
 					<td>
 							${employee_finishtransaction.id}
+					</td>
+					<td>
+							${employee_finishtransaction.fund.ticker}
 					</td>
 					<td>
 							${employee_finishtransaction.fund.name}
