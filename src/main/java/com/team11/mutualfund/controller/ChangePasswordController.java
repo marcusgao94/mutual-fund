@@ -171,7 +171,7 @@ public class ChangePasswordController {
 
     @RequestMapping(value = "/employee_changecuspassword", method = RequestMethod.POST)
     public String employeeChangeCusPassword(HttpServletRequest request, Model model,
-                                            //@ModelAttribute("customerList") LinkedList<Customer> customerList,
+                                           
                                             @Valid ChangePasswordForm changePasswordForm, BindingResult result,
                                             String fast, RedirectAttributes redirectAttributes) {
         if (!checkEmployee(request)) {
