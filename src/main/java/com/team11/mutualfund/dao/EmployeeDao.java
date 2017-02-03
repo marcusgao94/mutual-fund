@@ -5,7 +5,7 @@ import java.util.List;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
-import com.team11.mutualfund.model.Customer;
+
 import com.team11.mutualfund.model.Employee;
 
 import javax.persistence.LockModeType;
