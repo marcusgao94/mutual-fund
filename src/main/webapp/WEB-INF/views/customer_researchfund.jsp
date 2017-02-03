@@ -54,11 +54,11 @@
 		              <table class="table bio-table">
 		                  <tbody>
 						<tr>
-							<td>Fund Ticker</td>
+							<td>Fund Ticker You Selected: </td>
 							<td>${a_fund.ticker}</td>
 						</tr>
 						<tr>
-							<td>Fund Name</td>
+							<td>Fund Name You Selected:</td>
 							<td>${a_fund.name}</td>
 						</tr>
 						</tbody>
@@ -90,10 +90,17 @@
 	</div>
 </div>
 
-<c:if test="${fundPriceHistory.price}">
 
+
+<c:if test="${(postMethod) &&  (empty fundPriceHistory)}">
+This is a new fund, there is no price history to display.
 </c:if>
-<c:if test="${postMethod}">
+
+
+
+<%-- --%>
+<c:if test="${(postMethod) && (not empty fundPriceHistory)}">
+
 <div class="container">
 	<div class="row-fluid">
 		<div class="col-sm-12">
@@ -145,7 +152,7 @@
 	</div>
 </div>
 
-</c:if>
+</c:if> 
 <div>
 	<c:import url="bottom.jsp"/>
 </div>

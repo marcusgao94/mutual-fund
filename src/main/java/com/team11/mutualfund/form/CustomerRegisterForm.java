@@ -1,8 +1,10 @@
 package com.team11.mutualfund.form;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.validation.DirectFieldBindingResult;
 import org.springframework.validation.Errors;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import static com.team11.mutualfund.utils.Constant.EMPTYPASSWORD;
@@ -39,7 +41,7 @@ public class CustomerRegisterForm {
     @Size(min = 1, message = CANNOTEMPTY)
     private String state;
     
-    @Size(min = 1, message = CANNOTEMPTY)
+    @NotNull (message = CANNOTEMPTY)
     private Integer zip;
 
     public String sanitize(String s) {
