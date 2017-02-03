@@ -101,7 +101,9 @@ public class FundService {
         List<Position> positionList = positionDao.listByCustomerId(cid);
         for (Position p : positionList) {
             List<FundPriceHistory> fph = fundPriceHistoryDao.listByFundId(p.getFund().getId());
-            double price = fph.get(0).getPrice();
+            double price = 0d;
+            if (fph != null & !fph.isEmpty())
+                price = fph.get(0).getPrice();
             Positionvalue pv = new Positionvalue();
             pv.setFund(p.getFund());
             pv.setShares(p.getShares());

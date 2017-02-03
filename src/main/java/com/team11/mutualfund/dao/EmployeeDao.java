@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 import com.team11.mutualfund.model.Customer;
 import com.team11.mutualfund.model.Employee;
 
+import javax.persistence.LockModeType;
+
 @Repository
 public class EmployeeDao extends AbstractDao<Integer, Employee> {
 
@@ -21,6 +23,16 @@ public class EmployeeDao extends AbstractDao<Integer, Employee> {
 		Query query = getSession().createQuery(
 				"select e from Employee e where e.userName = :name")
 				.setParameter("name", userName);
+		return (Employee) query.uniqueResult();
+	}
+
+	@SuppressWarnings("deprecation")
+	public Employee findByUserNameForUpdate(String userName) {
+		@SuppressWarnings("rawtypes")
+		Query query = getSession().createQuery(
+				"select e from Employee e where e.userName = :name")
+				.setParameter("name", userName)
+				.setLockMode(LockModeType.PESSIMISTIC_WRITE);
 		return (Employee) query.uniqueResult();
 	}
 	

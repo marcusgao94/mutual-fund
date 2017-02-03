@@ -58,13 +58,16 @@ public class TransactionService {
     }
 
     public void sellFund(long cid, String ticker, double shares) throws RollbackException {
-        Customer customer = customerDao.findById(cid);
+        Customer customer = customerDao.findByIdForUpdate(cid);
         Fund fund = fundDao.findByTicker(ticker);
         if (customer == null)
             throw new RollbackException("customer id " + String.valueOf(cid) + " does not exist");
         if (fund == null)
             throw new RollbackException("fund ticker " + String.valueOf(ticker) + " does not exist");
-        Position position = positionDao.findByCustomerIdFundId(cid, fund.getId());
+        CustomerFund cf = new CustomerFund();
+        cf.setCustomerId(cid);
+        cf.setFundId(fund.getId());
+        Position position = positionDao.findByCustomerFundForUpdate(cf);
         if (position == null)
             throw new RollbackException("customer does not have fund " +
                     String.valueOf(fund.getTicker()));
@@ -75,7 +78,7 @@ public class TransactionService {
     }
 
     public void requestCheck(String userName, double amount) throws RollbackException {
-        Customer customer = customerDao.findByUserName(userName);
+        Customer customer = customerDao.findByUserNameForUpdate(userName);
         if (customer == null)
             throw new RollbackException("customer username " + String.valueOf(userName) + " does not exist");
 
