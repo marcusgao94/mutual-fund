@@ -40,7 +40,7 @@ public class EmployeeDao extends AbstractDao<Integer, Employee> {
 	public List<Employee> getEmployeeList() {
 		@SuppressWarnings("rawtypes")
 		Query query = getSession().createQuery(
-                "select c from Customer c"
+                "select c from Employee c"
         );
         return (List<Employee>) query.list();
 	}
