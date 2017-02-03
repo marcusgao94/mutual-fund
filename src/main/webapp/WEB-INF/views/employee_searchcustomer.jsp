@@ -25,7 +25,7 @@
 	<div class="row">
 		<form:form method="post" modelAttribute="searchForm" cssClass="form-inline">
 			<div class="form-group">
-				<label for="sel1">Select User Name:</label>
+				<label for="sel1">Select a Customer:</label>
 				<select name="userName" class="form-control" id="sel1">
 					<option value="">Please select a name and then press the
 						button
