@@ -131,13 +131,6 @@
 								</li>
 
 								<li>
-									<a href="<c:url value="/employee_changecuspassword" />">
-										<i class="fa fa-key"></i>
-										Reset Customer Password
-									</a>
-								</li>
-
-								<li>
 									<a href="<c:url value="/deposit_check" />">
 										<i class="fa fa-credit-card"></i>
 										Deposit Check
