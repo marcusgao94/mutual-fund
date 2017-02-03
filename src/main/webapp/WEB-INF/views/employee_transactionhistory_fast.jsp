@@ -27,7 +27,7 @@
 
 	<h3>Transaction History for ${userName}</h3>
 	
-	
+	<br/><br/>
 <h4> Pending </h4>
 
 	<div class="row">

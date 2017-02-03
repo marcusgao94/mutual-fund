@@ -26,13 +26,22 @@
 		<table>
 			<tr>
 				<td>User Name:</td>
-				<td>${changePasswordForm.userName}</td>
+				<td><h4>${changePasswordForm.userName}</h4></td>
 				<td><form:errors path="userName" cssClass="error"/></td>
 				<td>
 					<input type="hidden" name="userName" value="${changePasswordForm.userName}" />
 				</td>
 			</tr>
+			
+			<tr>
+			
+			<td>
+				<input type="hidden" name="originPassword" value="${changePasswordForm.originPassword}">
+			</td>
+				<form:errors path="originPassword" cssClass="error" />
+			</tr>
 
+				
 			<tr>
 				<td>New Password:</td>
 				<td>

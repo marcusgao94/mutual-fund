@@ -161,6 +161,7 @@ public class ChangePasswordController {
             model.addAttribute("changePasswordForm", cpf);
             return "employee_changecuspassword";
         }
+        
         List<Customer> customerList = customerService.getCustomerList();
         model.addAttribute("customerList", customerList);
         model.addAttribute("changePasswordForm", new ChangePasswordForm());
@@ -181,11 +182,21 @@ public class ChangePasswordController {
         result.addAllErrors(changePasswordForm.getValidationErrors());
         if (result.hasErrors())
             return fast == null? "employee_changecuspassword": "employee_changecuspassword_fast";
-
+        
         String userName = changePasswordForm.getUserName();
-        String newPassword = changePasswordForm.getNewPassword();
         Customer c = customerService.getCustomerByUserName(userName);
+
+        String originPassword = changePasswordForm.getOriginPassword();
+        String newPassword = changePasswordForm.getNewPassword();
         model.addAttribute("customer", c);
+        
+        try {
+            customerService.updatePassword(c.getId(), originPassword, newPassword);
+        } catch (RollbackException e) {
+                result.rejectValue("originPassword", "", e.getMessage());
+                return fast == null? "employee_changecuspassword": "employee_changecuspassword_fast";
+        }
+       
         try {
             customerService.updatePassword(userName, newPassword);
         } catch (RollbackException e) {

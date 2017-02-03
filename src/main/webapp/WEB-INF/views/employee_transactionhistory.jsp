@@ -52,7 +52,10 @@
 
 
 <div class="container">
+	
 	<h3>Transaction History for ${customer.getUserName()}</h3>
+	<br/>
+	<br/>
 	<h4> Pending </h4>
 
 	<div class="row">
