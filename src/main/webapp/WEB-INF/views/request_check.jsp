@@ -51,7 +51,7 @@
 
 			<tr>
 				<th colspan="2">
-					<input type="submit" name="button" value="Request"/>
+					<input class="btn btn-default" type="submit" name="button" value="Request"/>
 				</th>
 			</tr>
 

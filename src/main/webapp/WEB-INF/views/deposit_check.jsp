@@ -42,7 +42,7 @@
 			</tr>
 			<tr>
 				<th colspan="2">
-					<input type="submit" name="button" value="Deposit"/>
+					<input class="btn btn-default" type="submit" name="button" value="Deposit"/>
 				</th>
 			</tr>
 

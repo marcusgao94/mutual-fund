@@ -162,6 +162,11 @@
 			<div class="panel-body" itemprop="reviewBody">
 				<h4>Date of the last trading day: ${date} </h4>
 				<h4>Cash Balance: <span class="price">${employee_customeraccount.cash}</span></h4>
+				<h4>Available Cash:
+					<span class="price">
+						${employee_customeraccount.cash - employee_customeraccount.pendingCashDecrease}
+					</span>
+				</h4>
 				<div class="col-md-6">
 
 					<div class="table-responsive responsiv-table">
@@ -200,32 +205,32 @@
 				</div><!--col-md-6 close-->
 				<!-- pie chart -->
 				<div class="col-md-4">
-				
-						<script type="text/javascript"
-								src="https://www.gstatic.com/charts/loader.js"></script>
-						<script type="text/javascript">
-                            google.charts.load('current', {'packages': ['corechart']});
-                            google.charts.setOnLoadCallback(drawChart);
-                            function drawChart() {
-                                // Define the chart to be drawn.
-                                var data = new google.visualization.DataTable();
-                                data.addColumn('string', 'Element');
-                                data.addColumn('number', 'Percentage');
-                                <c:forEach var="employee_cpv" items="${employee_customerpositionvalue}">
-                                data.addRows([
-                                    ['${employee_cpv.fund.name}', ${employee_cpv.shares}]
-                                ]);
-                                </c:forEach>
-                                var options = {
-                                    title: 'My Fund Collection'
-                                };
-                                // Instantiate and draw the chart.
-                                var chart = new google.visualization.PieChart(document.getElementById('pieChart'));
-                                chart.draw(data, options);
-                            }
 
-						</script>
-				
+					<script type="text/javascript"
+							src="https://www.gstatic.com/charts/loader.js"></script>
+					<script type="text/javascript">
+                        google.charts.load('current', {'packages': ['corechart']});
+                        google.charts.setOnLoadCallback(drawChart);
+                        function drawChart() {
+                            // Define the chart to be drawn.
+                            var data = new google.visualization.DataTable();
+                            data.addColumn('string', 'Element');
+                            data.addColumn('number', 'Percentage');
+                            <c:forEach var="employee_cpv" items="${employee_customerpositionvalue}">
+                            data.addRows([
+                                ['${employee_cpv.fund.name}', ${employee_cpv.shares}]
+                            ]);
+                            </c:forEach>
+                            var options = {
+                                title: 'My Fund Collection'
+                            };
+                            // Instantiate and draw the chart.
+                            var chart = new google.visualization.PieChart(document.getElementById('pieChart'));
+                            chart.draw(data, options);
+                        }
+
+					</script>
+
 					<body>
 					<div id="pieChart" style="width: 530px; height: 300px;"></div>
 					</body>
@@ -240,32 +245,32 @@
 </div>
 
 <script type="text/javascript">
-var p = document.getElementsByClassName("price");
-var i;
-for (i = 0; i < p.length; i++) {
-    var pr = p[i].innerHTML.trim();
-    if (pr)
-        p[i].innerHTML = parseFloat(pr).toFixed(2);
-    /*
-    else {
-        var n = 0;
-        p[i].innerHTML = n.toFixed(2);
+    var p = document.getElementsByClassName("price");
+    var i;
+    for (i = 0; i < p.length; i++) {
+        var pr = p[i].innerHTML.trim();
+        if (pr)
+            p[i].innerHTML = parseFloat(pr).toFixed(2);
+		/*
+		 else {
+		 var n = 0;
+		 p[i].innerHTML = n.toFixed(2);
+		 }
+		 */
     }
-    */
-}
 
-var s = document.getElementsByClassName("shares");
-for (i = 0; i < s.length; i++) {
-    var sh = s[i].innerHTML.trim();
-    if (sh)
-        s[i].innerHTML = parseFloat(sh).toFixed(3);
-    /*
-    else {
-        var n = 0;
-        s[i].innerHTML = n.toFixed(3);
+    var s = document.getElementsByClassName("shares");
+    for (i = 0; i < s.length; i++) {
+        var sh = s[i].innerHTML.trim();
+        if (sh)
+            s[i].innerHTML = parseFloat(sh).toFixed(3);
+		/*
+		 else {
+		 var n = 0;
+		 s[i].innerHTML = n.toFixed(3);
+		 }
+		 */
     }
-    */
-}
 </script>
 
 </body>

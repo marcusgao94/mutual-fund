@@ -30,46 +30,40 @@
 							<td>Fund Ticker:</td>
 							<td><input type="text" name="fundTicker" placeholder="1-5 alphabets"
 									   value="${createFundForm.fundTicker}"/></td>
-							<td><form:errors path="fundTicker" cssClass="error" /></td>
+							<td><form:errors path="fundTicker" cssClass="error"/></td>
 						</tr>
 						<tr>
 							<td>Fund Name:</td>
 							<td><input type="text" name="fundName"
 									   value="${createFundForm.fundName}"/>
 							</td>
-							<td><form:errors path="fundName" cssClass="error" /></td>
+							<td><form:errors path="fundName" cssClass="error"/></td>
 						</tr>
-						
+
 						<tr>
 							<td>
 
-							<br/>
+								<br/>
 							</td>
 						</tr>
-						
+
 						<tr>
 							<td>
-								<input type="submit" class="btn btn-primary" value="Submit" />
+								<input type="submit" class="btn btn-default" value="Submit"/>
 
 							</td>
-
-							<td>
-								<a href="<c:url value="/home" />">
-									<button class="btn btn-default">Cancel</button>
-								</a>
-							</td>
-				</tr>
+						</tr>
 						</tbody>
 					</table>
 				</form:form>
 			</div>
 		</div>
 	</div>
-	</div>
-	
-	<div>
+</div>
+
+<div>
 	<c:import url="bottom.jsp"/>
-	</div>
-	
+</div>
+
 </body>
 </html>

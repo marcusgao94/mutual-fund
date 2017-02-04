@@ -14,8 +14,12 @@
 		.error {
 			color: red;
 		}
-		.shares {}
-		.price {}
+
+		.shares {
+		}
+
+		.price {
+		}
 	</style>
 </head>
 <body>
@@ -113,8 +117,13 @@
 			<div class="panel-body" itemprop="reviewBody">
 				<h4>Date of the last trading day: ${date} </h4>
 				<h4>Cash Balance: <span class="price"> ${customer_account.cash} </span></h4>
-				<div class="col-md-6">
+				<h4>Available Cash:
+					<span class="price">
+						${customer_account.cash - customer_account.pendingCashDecrease}
+					</span>
+				</h4>
 
+				<div class="col-md-6">
 					<div class="table-responsive responsiv-table">
 						<table class="table bio-table">
 							<thead>
@@ -202,25 +211,25 @@
         var pr = p[i].innerHTML.trim();
         if (pr)
             p[i].innerHTML = parseFloat(pr).toFixed(2);
-        /*
-        else {
-            var n = 0;
-            p[i].innerHTML = n.toFixed(2);
-        }
-        */
+		/*
+		 else {
+		 var n = 0;
+		 p[i].innerHTML = n.toFixed(2);
+		 }
+		 */
     }
-    
+
     var s = document.getElementsByClassName("shares");
     for (i = 0; i < s.length; i++) {
         var sh = s[i].innerHTML.trim();
         if (sh)
             s[i].innerHTML = parseFloat(sh).toFixed(3);
-        /*
-        else {
-            var n = 0;
-            s[i].innerHTML = n.toFixed(3);
-        }
-        */
+		/*
+		 else {
+		 var n = 0;
+		 s[i].innerHTML = n.toFixed(3);
+		 }
+		 */
     }
 
 </script>

@@ -63,7 +63,7 @@
 				<th>
 			<tr>
 				<th colspan="2">
-					<input type="submit" name="button" value="Change Password"/>
+					<input class="btn btn-default" type="submit" name="button" value="Change Password"/>
 				</th>
 			</tr>
 

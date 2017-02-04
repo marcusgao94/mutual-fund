@@ -34,8 +34,8 @@
 			</tr>
 			<tr>
 				<td>Fund Ticker:</td>
-				<td><input type="text" name="fundTicker"
-						   value="${buyFundForm.fundTicker}" autofocus/>
+				<td><input type="text" name="fundTicker" value="${buyFundForm.fundTicker}"
+						   placeholder="1-5 alphabets" />
 				</td>
 				<td><form:errors path="fundTicker" cssClass="error"/></td>
 			</tr>
@@ -43,21 +43,21 @@
 			<tr>
 				<td>Available Cash Amount:</td>
 				<td class="price">${buyFundForm.available}</td>
-				<td><input type="hidden" step="0.01" name="Available"
+				<td><input type="hidden" step="0.01" name="available"
 						   value="${buyFundForm.available}"/>
 				<td><form:errors path="available" cssClass="error"/></td>
 			</tr>
 
 			<tr>
 				<td>Enter Buy Amount:</td>
-				<td><input type="number" step="0.01" name="Amount"
+				<td><input type="number" step="0.01" name="amount"
 						   value="${buyFundForm.amount}"/></td>
 				<td><form:errors path="amount" cssClass="error"/></td>
 			</tr>
 
 			<tr>
 				<th colspan="2">
-					<input type="submit" name="button" value="Buy"/>
+					<input class="btn btn-default" type="submit" name="button" value="Buy"/>
 				</th>
 			</tr>
 			<tr>

@@ -39,8 +39,6 @@ public class RegisterController {
     @Autowired
     private MessageSource messageSource;
 
-
-
     // employee
 
     @RequestMapping(value = "/employee_register", method = RequestMethod.GET)
@@ -111,7 +109,6 @@ public class RegisterController {
             result.rejectValue("userName", "", DUPLICATEUSERNAME);
             return "customer_register";
         }
-
         model.addAttribute("success", "customer " + customer.getUserName() + " registered successfully");
         return "success";
     }

@@ -58,7 +58,7 @@
 				</td>
 			</tr>
 		</table>
-		<input type="submit" name="button" value="Change Password"/>
+		<input class="btn btn-default" type="submit" name="button" value="Change Password"/>
 	</form:form>
 </div>
 

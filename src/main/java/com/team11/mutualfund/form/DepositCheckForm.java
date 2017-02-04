@@ -6,10 +6,10 @@ import javax.validation.constraints.Size;
 
 public class DepositCheckForm {
 
-    @NotNull(message = "customer username cannot be null")
+    @NotNull(message = "customer username cannot be empty")
     private String userName;
 
-    @NotNull(message = "amount cannot be null")
+    @NotNull(message = "amount cannot be empty")
     @Min(1)
     private Double amount;
 
